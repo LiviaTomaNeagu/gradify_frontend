@@ -30,7 +30,7 @@ export enum Topic {
   WebDevelopment = 290,
 }
 
-const TopicCustomMapping: { [key: number]: string } = {
+export const TopicCustomMapping: { [key: number]: string } = {
   10: 'Artificial Intelligence',
   20: 'Angular Framework',
   30: 'Big Data Analytics',

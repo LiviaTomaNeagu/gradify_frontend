@@ -5,4 +5,17 @@
     justify-content: center; /* Center cards horizontally */
     padding: 16px; /* Add padding around the container */
   }
+  .dropdown-container {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #topic-select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    max-width: 300px;
+  }
   

@@ -1,3 +1,40 @@
+<mat-card-content>
+  <button
+    mat-flat-button
+    color="primary"
+    class="m-t-8"
+    [matMenuTriggerFor]="menu"
+  >
+    Selectează Topic
+  </button>
+  <mat-menu #menu="matMenu" class="cardWithShadow">
+    <button
+      mat-menu-item
+      *ngFor="let topic of topicsList"
+      (click)="addTopic(topic)"
+    >
+      {{ topic.value }}
+    </button>
+  </mat-menu>
+
+  <mat-chip-grid #chipGrid aria-label="Selected topics">
+    <mat-chip-row
+      *ngFor="let topic of selectedTopics"
+      (removed)="removeTopic(topic)"
+      [editable]="false"
+      class="f-s-14"
+    >
+      {{ topic.value }}
+      <button
+        matChipRemove
+        [attr.aria-label]="'Remove ' + topic.value"
+      >
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip-row>
+  </mat-chip-grid>
+</mat-card-content>
+
 <p class="app-forum-title">Forum</p>
 <div class="app-forum-card">
   <app-forum-card
