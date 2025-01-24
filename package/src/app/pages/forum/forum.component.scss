@@ -1,0 +1,8 @@
+.forum-cards-container {
+    display: flex; /* Use Flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping for multiple rows */
+    gap: 16px; /* Space between cards */
+    justify-content: center; /* Center cards horizontally */
+    padding: 16px; /* Add padding around the container */
+  }
+  

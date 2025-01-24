@@ -1,0 +1,8 @@
+<p class="app-forum-title">Forum</p>
+<div class="app-forum-card">
+  <app-forum-card
+    *ngFor="let question of questionsResponse?.questions"
+    [question]="question"
+  ></app-forum-card>
+</div>
+  

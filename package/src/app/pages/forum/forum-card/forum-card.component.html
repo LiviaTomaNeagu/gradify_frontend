@@ -1,0 +1,31 @@
+   <mat-card class="forum-card">
+    <!-- Image at the top of the card
+    <img mat-card-image [src]="post.imageUrl" alt="Forum Post Image" /> -->
+  
+    <!-- Card Content -->
+    <mat-card-content>
+      <div class="forum-card-header">
+        <span class="forum-tag">{{ topicsList[0] }}</span>
+        <span class="forum-date">{{ question.createdAt }}</span>
+      </div>
+      <mat-card-title>{{ question.title }}</mat-card-title>
+      <mat-card-subtitle>{{ question.content }}</mat-card-subtitle>
+    </mat-card-content>
+  
+    <!-- Card Actions -->
+    <mat-card-actions>
+      <div class="forum-card-footer">
+        <div class="forum-author">
+          <img [src]="question.userId" alt="Author Avatar" class="author-avatar" />
+          <div>
+            <p class="forum-author-name">{{ question.name }} {{ question.surname }}</p>
+            <p class="forum-author-role">{{ question.userId }}</p>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" class="read-more-btn">
+          Read more →
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+  
