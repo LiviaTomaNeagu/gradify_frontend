@@ -15,6 +15,7 @@ export interface GetQuestionsResponseDTO {
     topic: Topic;
     name: string;
     surname: string;
+    occupationName: string;
     answers: GetAnswerResponseDTO[];
   }  
   

@@ -6,7 +6,7 @@
     <mat-card-content>
       <div class="forum-card-header">
         <span class="forum-tag">{{ topicsList[0] }}</span>
-        <span class="forum-date">{{ question.createdAt }}</span>
+        <span class="forum-date">{{ formattedDate }}</span>
       </div>
       <mat-card-title>{{ question.title }}</mat-card-title>
       <mat-card-subtitle>{{ question.content }}</mat-card-subtitle>
@@ -19,7 +19,7 @@
           <img [src]="question.userId" alt="Author Avatar" class="author-avatar" />
           <div>
             <p class="forum-author-name">{{ question.name }} {{ question.surname }}</p>
-            <p class="forum-author-role">{{ question.userId }}</p>
+            <p class="forum-author-role">{{ question.occupationName }}</p>
           </div>
         </div>
         <button mat-raised-button color="primary" class="read-more-btn">
