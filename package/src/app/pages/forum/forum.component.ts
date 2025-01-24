@@ -20,6 +20,9 @@ export class ForumComponent implements OnInit {
   filteredQuestions: any[] = [];
   topicsList: { key: number; value: string }[] = [];
   selectedTopics: { key: number; value: string }[] = [];
+  searchText: string = '';
+
+
   constructor(private forumService: ForumService) {}
 
   ngOnInit(): void {
@@ -57,6 +60,13 @@ export class ForumComponent implements OnInit {
     this.selectedTopics = this.selectedTopics.filter((t) => t.key !== topic.key);
     this.filterQuestions();
   }
+
+  onSearchChange(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    this.searchText = target.value.toLowerCase();
+    this.filterQuestions();
+  }
+  
 
   private filterQuestions(): void {
     if (this.selectedTopics.length === 0) {

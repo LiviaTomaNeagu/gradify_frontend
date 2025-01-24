@@ -1,21 +1,30 @@
 <mat-card-content>
-  <button
-    mat-flat-button
-    color="primary"
-    class="m-t-8"
-    [matMenuTriggerFor]="menu"
-  >
-    Selectează Topic
-  </button>
-  <mat-menu #menu="matMenu" class="cardWithShadow">
+
+  <div class="search-container">
+    <mat-form-field appearance="outline" class="search-bar">
+      <mat-label>Search question</mat-label>
+      <input matInput type="text" (input)="onSearchChange($event)" placeholder="Introduceți textul">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
     <button
-      mat-menu-item
-      *ngFor="let topic of topicsList"
-      (click)="addTopic(topic)"
+      mat-flat-button
+      color="primary"
+      class="dropdown-button"
+      [matMenuTriggerFor]="menu"
     >
-      {{ topic.value }}
+      Select Topic
     </button>
-  </mat-menu>
+    <mat-menu #menu="matMenu" class="cardWithShadow">
+      <button
+        mat-menu-item
+        *ngFor="let topic of topicsList"
+        (click)="addTopic(topic)"
+      >
+        {{ topic.value }}
+      </button>
+    </mat-menu>
+  </div>
 
   <mat-chip-grid #chipGrid aria-label="Selected topics">
     <mat-chip-row
