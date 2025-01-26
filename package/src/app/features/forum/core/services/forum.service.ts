@@ -20,7 +20,7 @@ export class ForumService {
       search: payload.search ?? '',
       page: payload.page,
       pageSize: payload.pageSize,
-      topic: payload.topic ?? null
+      topics: payload.topics
     };
     return this.http.post<GetQuestionsResponseDTO>(this.baseUrl, body);
   }

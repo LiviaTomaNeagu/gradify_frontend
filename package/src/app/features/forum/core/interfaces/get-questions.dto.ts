@@ -30,6 +30,6 @@ export interface GetQuestionsResponseDTO {
     search: string | null;
     page: number;
     pageSize: number;
-    topic: Topic | null;
+    topics: Topic[] | null
   }
   

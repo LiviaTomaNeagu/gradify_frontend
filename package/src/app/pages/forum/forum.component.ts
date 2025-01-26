@@ -47,14 +47,13 @@ export class ForumComponent implements OnInit {
       search: this.searchText || null,
       page: this.currentPage + 1,
       pageSize: this.pageSize,
-      topic: selectedTopicIds.length > 0 ? selectedTopicIds[0] : null,
+      topics: selectedTopicIds.length > 0 ? selectedTopicIds : null,
     };
 
     this.forumService.getQuestions(payload).subscribe({
       next: (response) => {
         this.questionsResponse = response;
         this.totalQuestions = response.totalQuestions;
-        console.log('Questions loaded:', this.questionsResponse);
       },
       error: (err) => {
         console.error('Failed to load questions:', err);
