@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MaterialModule } from '../../material.module';
 import { ForumCardComponent } from './forum-card/forum-card.component';
 import { JsonPipe } from '@angular/common';
@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { GetQuestionsResponseDTO } from 'src/app/features/forum/core/interfaces/get-questions.dto';
 import { ForumService } from 'src/app/features/forum/core/services/forum.service';
 import { TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-forum',
@@ -17,11 +18,14 @@ import { TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
 
 export class ForumComponent implements OnInit {
   questionsResponse: GetQuestionsResponseDTO | null = null;
-  filteredQuestions: any[] = [];
   topicsList: { key: number; value: string }[] = [];
   selectedTopics: { key: number; value: string }[] = [];
   searchText: string = '';
+  pageSize: number = 5;
+  currentPage: number = 0;
+  totalQuestions: number = 0; 
 
+  @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
   constructor(private forumService: ForumService) {}
 
@@ -38,9 +42,18 @@ export class ForumComponent implements OnInit {
   }
 
   private loadQuestions(): void {
-    this.forumService.getQuestions().subscribe({
+    const selectedTopicIds = this.selectedTopics.map((topic) => topic.key);
+    const payload = {
+      search: this.searchText || null,
+      page: this.currentPage + 1,
+      pageSize: this.pageSize,
+      topic: selectedTopicIds.length > 0 ? selectedTopicIds[0] : null,
+    };
+
+    this.forumService.getQuestions(payload).subscribe({
       next: (response) => {
         this.questionsResponse = response;
+        this.totalQuestions = response.totalQuestions;
         console.log('Questions loaded:', this.questionsResponse);
       },
       error: (err) => {
@@ -49,34 +62,38 @@ export class ForumComponent implements OnInit {
       },
     });
   }
+
   addTopic(topic: { key: number; value: string }): void {
     if (!this.selectedTopics.find((t) => t.key === topic.key)) {
       this.selectedTopics.push(topic);
-      this.filterQuestions();
+      this.resetPagination(); 
+      this.loadQuestions();
     }
   }
 
   removeTopic(topic: { key: number; value: string }): void {
     this.selectedTopics = this.selectedTopics.filter((t) => t.key !== topic.key);
-    this.filterQuestions();
+    this.resetPagination();
+    this.loadQuestions();
   }
 
   onSearchChange(event: Event): void {
     const target = event.target as HTMLInputElement;
     this.searchText = target.value.toLowerCase();
-    this.filterQuestions();
+    this.resetPagination();
+    this.loadQuestions();
   }
-  
 
-  private filterQuestions(): void {
-    if (this.selectedTopics.length === 0) {
-      this.filteredQuestions = this.questionsResponse?.questions || [];
-    } else {
-      const selectedKeys = this.selectedTopics.map((t) => t.key);
-      this.filteredQuestions =
-        this.questionsResponse?.questions.filter((q) =>
-          selectedKeys.includes(q.topic)
-        ) || [];
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.loadQuestions();
+  }
+
+  private resetPagination(): void {
+    this.currentPage = 0;
+    if (this.paginator) {
+      this.paginator.firstPage();
     }
   }
 }

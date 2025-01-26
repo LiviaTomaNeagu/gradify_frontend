@@ -26,4 +26,11 @@ export interface GetQuestionsResponseDTO {
     createdAt: string;
     userId: string;
   }
+
+  export interface GetQuestionsRequestDTO {
+    search: string | null;
+    page: number;
+    pageSize: number;
+    topic: Topic | null;
+  }
   
