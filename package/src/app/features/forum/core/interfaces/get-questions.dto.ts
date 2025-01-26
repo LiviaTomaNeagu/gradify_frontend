@@ -3,7 +3,6 @@ import { Topic } from '../../../../shared/enums/topic.enum';
 export interface GetQuestionsResponseDTO {
     questions: GetQuestionResponseDTO[];
     totalQuestions: number;
-    totalFilteredQuestions: number;
   }
   
   export interface GetQuestionResponseDTO {
