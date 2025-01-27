@@ -24,6 +24,7 @@ export class ForumComponent implements OnInit {
   pageSize: number = 5;
   currentPage: number = 0;
   totalQuestions: number = 0; 
+  isLoading: boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
@@ -42,6 +43,8 @@ export class ForumComponent implements OnInit {
   }
 
   private loadQuestions(): void {
+    this.isLoading = true;
+
     const selectedTopicIds = this.selectedTopics.map((topic) => topic.key);
     const payload = {
       search: this.searchText || null,
@@ -54,6 +57,7 @@ export class ForumComponent implements OnInit {
       next: (response) => {
         this.questionsResponse = response;
         this.totalQuestions = response.totalQuestions;
+        this.isLoading = false;
       },
       error: (err) => {
         console.error('Failed to load questions:', err);

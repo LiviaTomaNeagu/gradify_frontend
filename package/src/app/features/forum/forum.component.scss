@@ -62,8 +62,13 @@
     }
   }
 
-  .topic-menu{
-    
+  .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    max-height: 60rem;
+    overflow: auto;
   }
 }
 

@@ -46,11 +46,15 @@
   </mat-chip-grid>
 </mat-card-content>
 
-<div class="app-forum-card">
+<div *ngIf="!isLoading" class="app-forum-card">
   <app-forum-card
     *ngFor="let question of questionsResponse?.questions"
     [question]="question"
   ></app-forum-card>
+</div>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
 </div>
 
 <mat-paginator
