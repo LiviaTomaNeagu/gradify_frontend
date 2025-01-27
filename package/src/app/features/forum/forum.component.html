@@ -46,7 +46,7 @@
   </mat-chip-grid>
 </mat-card-content>
 
-<div *ngIf="!isLoading" class="app-forum-card">
+<div *ngIf="!isLoading && (questionsResponse?.questions && questionsResponse?.questions?.length != 0)" class="app-forum-card">
   <app-forum-card
     *ngFor="let question of questionsResponse?.questions"
     [question]="question"
@@ -55,6 +55,11 @@
 
 <div class="spinner-container" *ngIf="isLoading">
   <mat-spinner></mat-spinner>
+</div>
+
+<div class="empty-view" *ngIf="!isLoading && (!questionsResponse?.questions || questionsResponse?.questions?.length === 0)">
+  <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
+  <p class="empty-text">No questions found. Try changing the search or adding a topic filter.</p>
 </div>
 
 <mat-paginator
