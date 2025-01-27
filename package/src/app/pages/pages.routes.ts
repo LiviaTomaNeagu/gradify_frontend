@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { StarterComponent } from './starter/starter.component';
-import { ForumComponent } from './forum/forum.component';
+import { ForumComponent } from '../features/forum/forum.component';
 
 export const PagesRoutes: Routes = [
   {

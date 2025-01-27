@@ -3,7 +3,6 @@ import { Topic } from '../../../../shared/enums/topic.enum';
 export interface GetQuestionsResponseDTO {
     questions: GetQuestionResponseDTO[];
     totalQuestions: number;
-    totalFilteredQuestions: number;
   }
   
   export interface GetQuestionResponseDTO {
@@ -15,6 +14,7 @@ export interface GetQuestionsResponseDTO {
     topic: Topic;
     name: string;
     surname: string;
+    occupationName: string;
     answers: GetAnswerResponseDTO[];
   }  
   
@@ -24,5 +24,12 @@ export interface GetQuestionsResponseDTO {
     content: string;
     createdAt: string;
     userId: string;
+  }
+
+  export interface GetQuestionsRequestDTO {
+    search: string | null;
+    page: number;
+    pageSize: number;
+    topics: Topic[] | null
   }
   

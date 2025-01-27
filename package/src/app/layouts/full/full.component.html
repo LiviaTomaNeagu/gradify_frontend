@@ -31,7 +31,7 @@
   <!-- ============================================================== -->
   <mat-sidenav-content class="contentWrapper p-l-24 p-r-24" #content>
 
-    <main class="pageWrapper maxWidth">
+    <main>
       <!-- ============================================================== -->
       <!-- VerticalHeader -->
       <!-- ============================================================== -->
@@ -41,14 +41,9 @@
           (toggleMobileNav)="sidenav.toggle()"></app-header>
       </ng-container>
 
+<div>
+      <router-outlet></router-outlet></div>
 
-      <div class="m-t-30">
-
-        <!-- ============================================================== -->
-        <!-- Outlet -->
-        <!-- ============================================================== -->
-        <router-outlet></router-outlet>
-      </div>
 
     </main>
   </mat-sidenav-content>

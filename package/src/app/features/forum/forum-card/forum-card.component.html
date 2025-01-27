@@ -1,0 +1,31 @@
+<mat-card class="forum-card">
+  <!-- Card Content -->
+  <mat-card-content>
+    <div class="forum-card-header">
+      <span 
+        class="forum-tag" 
+        [ngStyle]="{ 'background-color': topicColor }">
+        {{ topicName }}
+      </span>
+      <span class="forum-date">{{ formattedDate }}</span>
+    </div>
+    
+    <mat-card-title class="forum-title">{{ question.title }}</mat-card-title>
+    <mat-card-subtitle class="forum-content">{{ question.content }}</mat-card-subtitle>
+  </mat-card-content>
+
+  <!-- Card Actions -->
+  <mat-card-actions>
+    <div class="forum-card-footer">
+      <div class="forum-author">
+        <div class="forum-author-details">
+          <p class="forum-author-name">{{ question.name }} {{ question.surname }}</p>
+          <p class="forum-author-role">{{ question.occupationName }}</p>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" class="read-more-btn">
+        Read more →
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

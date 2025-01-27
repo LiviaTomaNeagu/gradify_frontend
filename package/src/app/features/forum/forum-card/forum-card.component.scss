@@ -1,0 +1,73 @@
+.forum-card {
+  width: 100%; /* Make the card as wide as its container */
+  margin: 16px 0; /* Add vertical spacing between cards */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+
+  .forum-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #757575; /* Light gray for secondary text */
+  }
+
+  .forum-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 8px 0;
+    color: #333; /* Darker color for visibility */
+  }
+
+  .forum-content {
+    font-size: 16px;
+    color: #555; /* Medium gray for content text */
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .forum-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .forum-author {
+      display: flex;
+      align-items: center;
+
+      .forum-author-details {
+        display: flex;
+        flex-direction: column;
+
+        .forum-author-name {
+          font-weight: 500;
+          font-size: 14px;
+          margin: 0;
+        }
+
+        .forum-author-role {
+          font-size: 12px;
+          color: #757575; /* Light gray */
+          margin: 0;
+        }
+      }
+    }
+
+    .read-more-btn {
+      font-size: 14px;
+      font-weight: 500;
+      margin-left: auto;
+      margin-right: 16px;
+    }
+  }
+}
+.forum-tag {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff; /* White text */
+  text-transform: uppercase;
+}

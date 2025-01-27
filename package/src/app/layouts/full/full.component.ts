@@ -34,7 +34,7 @@ const BELOWMONITOR = 'screen and (max-width: 1023px)';
     HeaderComponent,
   ],
   templateUrl: './full.component.html',
-  styleUrls: [],
+  styleUrls: ['./full.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 
