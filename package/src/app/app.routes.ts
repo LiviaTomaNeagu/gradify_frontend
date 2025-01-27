@@ -20,7 +20,7 @@ export const routes: Routes = [
       {
         path: 'forum', // Add Forum here as a separate route
         loadChildren: () =>
-          import('./pages/forum/forum.routes').then((m) => m.ForumRoutes),
+          import('./features/forum/forum.routes').then((m) => m.ForumRoutes),
       },
       {
         path: 'ui-components',

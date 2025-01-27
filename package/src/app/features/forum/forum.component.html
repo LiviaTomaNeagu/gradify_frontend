@@ -1,3 +1,5 @@
+<div class="forum-page-container">
+
 <mat-card-content>
 
   <div class="search-container">
@@ -15,7 +17,7 @@
     >
       Select Topic
     </button>
-    <mat-menu #menu="matMenu" class="cardWithShadow">
+    <mat-menu #menu="matMenu" overlayPanelClass="topic-menu" yPosition="below">
       <button
         mat-menu-item
         *ngFor="let topic of topicsList"
@@ -44,7 +46,6 @@
   </mat-chip-grid>
 </mat-card-content>
 
-<p class="app-forum-title">Forum</p>
 <div class="app-forum-card">
   <app-forum-card
     *ngFor="let question of questionsResponse?.questions"
@@ -53,9 +54,10 @@
 </div>
 
 <mat-paginator
+id="forum-page-paginator"
   [pageSize]="pageSize"
   [pageSizeOptions]="[5, 10, 20]"
   [length]="totalQuestions"
   (page)="onPageChange($event)">
 </mat-paginator>
-  
+</div>

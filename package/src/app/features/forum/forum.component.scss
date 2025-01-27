@@ -1,4 +1,14 @@
-.forum-cards-container {
+.forum-page-container{
+
+
+      gap: 0.5rem;
+  
+      height: 100%;
+      display: grid
+  ;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+
+  .forum-cards-container {
     display: flex; /* Use Flexbox for layout */
     flex-wrap: wrap; /* Allow wrapping for multiple rows */
     gap: 16px; /* Space between cards */
@@ -41,5 +51,19 @@
     margin-bottom: 20px;
   }
   
+  .app-forum-card{
+    max-height: 60rem;
+    overflow: auto;
+  }
   
-  
+  #forum-page-paginator{
+    ::ng-deep &.mat-mdc-paginator{
+      border-radius: 18px;
+    }
+  }
+
+  .topic-menu{
+    
+  }
+}
+
