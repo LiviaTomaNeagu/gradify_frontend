@@ -15,7 +15,6 @@ export interface GetQuestionsResponseDTO {
     name: string;
     surname: string;
     occupationName: string;
-    answers: GetAnswerResponseDTO[];
   }  
   
   export interface GetAnswerResponseDTO {
