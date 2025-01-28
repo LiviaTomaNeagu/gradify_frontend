@@ -23,7 +23,7 @@
           <p class="forum-author-role">{{ question.occupationName }}</p>
         </div>
       </div>
-      <button mat-raised-button color="primary" class="read-more-btn">
+      <button mat-raised-button color="primary" class="read-more-btn" [routerLink]="['/forum/details', question.id]"> 
         Read more →
       </button>
     </div>
