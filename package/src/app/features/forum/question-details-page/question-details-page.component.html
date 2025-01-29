@@ -1,4 +1,39 @@
-<p>question-details-page works!</p>
 <div class="container">
     <app-forum-card *ngIf="questionAsResponse" [question]="questionAsResponse" [showReadMore]="false"></app-forum-card>
+
+  <!-- Secțiunea de răspunsuri -->
+  <div class="answers-container">
+    <h3 class="section-title">Răspunsuri</h3>
+
+    <!-- Lista răspunsurilor -->
+    <mat-card class="answer-card" *ngFor="let answer of questionDetails?.answers">
+      <mat-card-content>
+        <div class="answer-header">
+          <strong>{{ answer.name }} {{ answer.surname }}</strong>
+          <span class="occupation">{{ answer.occupationName }}</span>
+        </div>
+        <p class="answer-content">{{ answer.content }}</p>
+      </mat-card-content>
+    </mat-card>
+    
+    <!-- Linie de separare între răspunsuri -->
+    <div class="answer-divider" *ngIf="(questionDetails?.answers?.length ?? 0) > 1"></div>
+
+  </div>
+
+  <!-- Formular pentru adăugarea unui răspuns -->
+  <mat-card class="response-form">
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Adaugă un răspuns</mat-label>
+        <textarea matInput [(ngModel)]="newAnswer"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="submitAnswer()">Trimite răspuns</button>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Loader -->
+  <div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
 </div>
