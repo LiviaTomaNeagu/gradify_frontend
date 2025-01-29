@@ -2,7 +2,7 @@ import { NavItem } from './nav-item/nav-item';
 
 export const navItems: NavItem[] = [
   {
-    navCap: 'Home',
+    navCap: 'Personal Management',
   },
   {
     displayName: 'Dashboard',
@@ -11,72 +11,29 @@ export const navItems: NavItem[] = [
     route: '/dashboard',
   },
   {
-    displayName: 'Forum',
-    iconName: 'message-circle',
-    bgcolor: 'primary',
-    route: '/forum',
-  },
-  {
-    navCap: 'Ui Components',
-  },
-  {
-    displayName: 'Badge',
+    displayName: 'My Profile',
+    iconName: 'layout-navbar-expand',
+    bgcolor: 'error',
+    route: '/ui-components/badge',
+  }, {
+    displayName: 'My Progress',
     iconName: 'rosette',
-    bgcolor: 'accent',
+    bgcolor: 'warning',
     route: '/ui-components/badge',
   },
   {
-    displayName: 'Chips',
-    iconName: 'poker-chip',
-    bgcolor: 'warning',
-    route: '/ui-components/chips',
+    navCap: 'Community',
   },
   {
-    displayName: 'Lists',
+    displayName: 'Forum',
     iconName: 'list',
     bgcolor: 'success',
-    route: '/ui-components/lists',
+    route: '/forum',
   },
   {
-    displayName: 'Menu',
-    iconName: 'layout-navbar-expand',
-    bgcolor: 'error',
-    route: '/ui-components/menu',
-  },
-  {
-    displayName: 'Tooltips',
-    iconName: 'tooltip',
-    bgcolor: 'primary',
-    route: '/ui-components/tooltips',
-  },
-  {
-    navCap: 'Auth',
-  },
-  {
-    displayName: 'Login',
-    iconName: 'lock',
-    bgcolor: 'accent',
-    route: '/authentication/login',
-  },
-  {
-    displayName: 'Register',
-    iconName: 'user-plus',
+    displayName: 'Chat',
+    iconName: 'message-circle',
     bgcolor: 'warning',
-    route: '/authentication/register',
-  },
-  {
-    navCap: 'Extra',
-  },
-  {
-    displayName: 'Icons',
-    iconName: 'mood-smile',
-    bgcolor: 'success',
-    route: '/extra/icons',
-  },
-  {
-    displayName: 'Sample Page',
-    iconName: 'aperture',
-    bgcolor: 'error',
-    route: '/extra/sample-page',
-  },
+    route: '/ui-components/chips',
+  }
 ];
