@@ -20,12 +20,16 @@
     <div class="answer-divider" *ngIf="(questionDetails?.answers?.length ?? 0) > 1"></div>
 
   </div>
+  <div class="empty-view" *ngIf="!isLoading && (!questionDetails?.answers || questionDetails?.answers?.length === 0)">
+    <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
+    <p class="empty-text">Be the first to answer the question</p>
+  </div>
 
   <!-- Formular pentru adăugarea unui răspuns -->
   <mat-card class="response-form">
     <mat-card-content>
       <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Adaugă un răspuns</mat-label>
+        <mat-label>Add answer</mat-label>
         <textarea matInput [(ngModel)]="newAnswer"></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" (click)="submitAnswer()">Trimite răspuns</button>
@@ -36,4 +40,5 @@
   <div class="spinner-container" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>
+
 </div>
