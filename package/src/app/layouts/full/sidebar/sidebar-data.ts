@@ -14,7 +14,7 @@ export const navItems: NavItem[] = [
     displayName: 'My Profile',
     iconName: 'layout-navbar-expand',
     bgcolor: 'error',
-    route: '/forum',
+    route: '/ui-components/badge',
   }, {
     displayName: 'My Progress',
     iconName: 'rosette',
