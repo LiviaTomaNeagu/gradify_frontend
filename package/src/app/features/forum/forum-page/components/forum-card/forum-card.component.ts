@@ -35,4 +35,5 @@ export class ForumCardComponent {
     }
   }
   @Input() question!: GetQuestionResponseDTO;
+  @Input() showReadMore: boolean = false;
 }

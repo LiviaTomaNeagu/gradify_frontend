@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { GetQuestionsResponseDTO } from '../interfaces/get-questions.dto';
+import { GetQuestionDetailsResponseDTO } from '../interfaces/get-questions.dto';
 import { GetQuestionsRequestDTO } from '../interfaces/get-questions.dto';
 import { environment } from '../../../../../environments/environment';
 
@@ -23,6 +24,10 @@ export class ForumService {
       topics: payload.topics
     };
     return this.http.post<GetQuestionsResponseDTO>(this.baseUrl, body);
+  }
+
+  getQuestionDetails(questionId: string): Observable<GetQuestionDetailsResponseDTO> {
+    return this.http.get<GetQuestionDetailsResponseDTO>(`${this.baseUrl}/${questionId}/details`);
   }
   
 }

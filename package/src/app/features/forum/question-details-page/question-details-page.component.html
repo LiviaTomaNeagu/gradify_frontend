@@ -1,1 +1,4 @@
 <p>question-details-page works!</p>
+<div class="container">
+    <app-forum-card *ngIf="questionAsResponse" [question]="questionAsResponse" [showReadMore]="false"></app-forum-card>
+</div>

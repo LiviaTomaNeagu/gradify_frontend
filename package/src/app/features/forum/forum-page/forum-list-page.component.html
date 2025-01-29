@@ -49,7 +49,7 @@
     <div *ngIf="!isLoading && (questionsResponse?.questions && questionsResponse?.questions?.length != 0)" class="app-forum-card">
       <app-forum-card
         *ngFor="let question of questionsResponse?.questions"
-        [question]="question"
+        [question]="question" [showReadMore]="true"
       ></app-forum-card>
     </div>
     
