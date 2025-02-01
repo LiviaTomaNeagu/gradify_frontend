@@ -1,22 +1,21 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MaterialModule } from '../../material.module';
-import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { GetQuestionsResponseDTO } from 'src/app/features/forum/core/interfaces/get-questions.dto';
 import { ForumService } from 'src/app/features/forum/core/services/forum.service';
 import { TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ForumCardComponent } from './forum-card/forum-card.component';
+import { ForumCardComponent } from './components/forum-card/forum-card.component';
+import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-forum',
-  templateUrl: './forum.component.html',
+  templateUrl: './forum-list-page.component.html',
   standalone: true,
-  imports: [MaterialModule, JsonPipe, CommonModule, ForumCardComponent],
-  styleUrls: ['./forum.component.scss'],
+  imports: [MaterialModule, CommonModule, ForumCardComponent],
+  styleUrls: ['./forum-list-page.component.scss'],
 })
 
-export class ForumComponent implements OnInit {
+export class ForumPageComponent implements OnInit {
   questionsResponse: GetQuestionsResponseDTO | null = null;
   topicsList: { key: number; value: string }[] = [];
   selectedTopics: { key: number; value: string }[] = [];

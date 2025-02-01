@@ -22,8 +22,8 @@
           <p class="forum-author-name">{{ question.name }} {{ question.surname }}</p>
           <p class="forum-author-role">{{ question.occupationName }}</p>
         </div>
-      </div>
-      <button mat-raised-button color="primary" class="read-more-btn">
+      </div>    
+      <button *ngIf="showReadMore" mat-raised-button color="primary" class="read-more-btn" [routerLink]="['/forum/details', question.id]"> 
         Read more →
       </button>
     </div>

@@ -15,38 +15,14 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () =>
-          import('./pages/pages.routes').then((m) => m.PagesRoutes),
+          import('./features/dashboard/dashboard.routes').then((m) => m.DashboardRoutes),
       },
       {
         path: 'forum', // Add Forum here as a separate route
         loadChildren: () =>
           import('./features/forum/forum.routes').then((m) => m.ForumRoutes),
       },
-      {
-        path: 'ui-components',
-        loadChildren: () =>
-          import('./pages/ui-components/ui-components.routes').then(
-            (m) => m.UiComponentsRoutes
-          ),
-      },
-      {
-        path: 'extra',
-        loadChildren: () =>
-          import('./pages/extra/extra.routes').then((m) => m.ExtraRoutes),
-      },
-    ],
-  },
-  {
-    path: '',
-    component: BlankComponent,
-    children: [
-      {
-        path: 'authentication',
-        loadChildren: () =>
-          import('./pages/authentication/authentication.routes').then(
-            (m) => m.AuthenticationRoutes
-          ),
-      },
+      // todo: add more routes here
     ],
   },
   {

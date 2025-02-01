@@ -22,7 +22,9 @@ export interface GetQuestionsResponseDTO {
     questionId: string;
     content: string;
     createdAt: string;
-    userId: string;
+    name : string;
+    surname : string;
+    occupationName : string;
   }
 
   export interface GetQuestionsRequestDTO {
@@ -31,4 +33,9 @@ export interface GetQuestionsResponseDTO {
     pageSize: number;
     topics: Topic[] | null
   }
+
+  export interface GetQuestionDetailsResponseDTO extends GetQuestionResponseDTO {
+    answers: GetAnswerResponseDTO[];
+}
+
   
