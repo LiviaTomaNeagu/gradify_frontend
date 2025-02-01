@@ -1,1 +1,63 @@
 <h2 mat-dialog-title>Add a New Question</h2>
+
+<mat-dialog-content class="mat-typography">
+  <mat-horizontal-stepper #stepper [linear]="true">
+    
+    <!-- Step 1: Title -->
+    <mat-step [stepControl]="titleFormGroup">
+      <form [formGroup]="titleFormGroup">
+        <ng-template matStepLabel>Title</ng-template>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Question Title</mat-label>
+          <input matInput formControlName="title" placeholder="Enter your question title">
+          <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-dialog-actions class="step-actions">
+            <button mat-flat-button class="next-button" matStepperNext>Next</button>
+          </mat-dialog-actions>
+          
+      </form>
+    </mat-step>
+
+    <!-- Step 2: Details -->
+    <mat-step [stepControl]="detailsFormGroup">
+      <form [formGroup]="detailsFormGroup">
+        <ng-template matStepLabel>Details</ng-template>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Question Details</mat-label>
+          <textarea matInput formControlName="details" placeholder="Provide more details"></textarea>
+          <mat-error *ngIf="detailsFormGroup.get('details')?.hasError('required')">
+            Details are required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-dialog-actions class="step-actions">
+            <button mat-button class="back-button" matStepperPrevious>Back</button>
+            <button mat-flat-button class="next-button" matStepperNext>Next</button>
+          </mat-dialog-actions>          
+      </form>
+    </mat-step>
+
+    <!-- Step 3: Confirmation -->
+    <mat-step>
+      <ng-template matStepLabel>Confirm</ng-template>
+      <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
+      <p><strong>Details:</strong> {{ detailsFormGroup.value.details }}</p>
+
+      <mat-dialog-actions class="step-actions">
+        <button mat-button class="back-button" matStepperPrevious>Back</button>
+        <button mat-flat-button class="next-button" matStepperNext>Next</button>
+      </mat-dialog-actions>      
+    </mat-step>
+
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button class="cancel-button" (click)="onCancel()">Cancel</button>
+</mat-dialog-actions>

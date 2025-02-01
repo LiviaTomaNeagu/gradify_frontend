@@ -1,0 +1,51 @@
+.full-width {
+    width: 100%;
+  }
+  
+  .step-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+  }
+  
+  .back-button {
+    background-color: #bad9f7 !important; /* Red background */
+    color: #1976d2 !important; /* White text */
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #4ea2f5 !important; /* Darker red on hover */
+    }
+  }
+  
+  .next-button {
+    background-color: #1976d2 !important; /* Blue color */
+    color: white !important;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #1565c0 !important; /* Darker blue */
+    }
+  }
+
+  .cancel-button {
+    background-color: #fceeea !important; /* Blue color */
+    color: #e87e5d !important;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+  
+    &:hover {
+      background-color: #e87e5d !important; /* Darker blue */
+      color: #fceeea !important; 
+    }
+  }
+  
+  

@@ -103,7 +103,8 @@ export class ForumPageComponent implements OnInit {
 
   openQuestionModal(): void {
     const dialogRef = this.dialog.open(AddQuestionModalComponent, {
-      width: '500px',
+      width: '700px',
+      maxWidth: '90vw',
       disableClose: true
     });
 
