@@ -6,7 +6,6 @@ import { JsonPipe } from '@angular/common';
 import { GetQuestionResponseDTO } from 'src/app/features/forum/core/interfaces/get-questions.dto';
 import { getTopicName, Topic, topicColors } from 'src/app/shared/enums/topic.enum';
 import { DatePipe } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 @Component({

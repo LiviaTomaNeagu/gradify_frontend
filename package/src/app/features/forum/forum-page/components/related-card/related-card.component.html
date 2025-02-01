@@ -1,0 +1,24 @@
+<mat-card class="forum-card-related">
+    <!-- Card Content -->
+    <mat-card-content>
+      <div class="forum-card-header">
+        <span 
+          class="forum-tag" 
+          [ngStyle]="{ 'background-color': topicColor }">
+          {{ topicName }}
+        </span>
+      </div>
+      
+      <mat-card-title class="forum-title">{{ question.title }}</mat-card-title>
+  
+      <div class="forum-footer">
+        <span class="answers-count">
+          <mat-icon>question_answer</mat-icon> {{ question.answersCount }} Answers
+        </span>
+        <button *ngIf="showReadMore" mat-stroked-button color="primary" class="read-more-btn" [routerLink]="['/forum/details', question.id]"> 
+          Read more →
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  

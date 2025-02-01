@@ -5,43 +5,47 @@
     
     <!-- Step 1: Title -->
     <mat-step [stepControl]="titleFormGroup">
-      <form [formGroup]="titleFormGroup">
+        <form [formGroup]="titleFormGroup">
         <ng-template matStepLabel>Title</ng-template>
         
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Question Title</mat-label>
-          <input matInput formControlName="title" placeholder="Enter your question title">
-          <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
+            <mat-label>Question Title</mat-label>
+            <input matInput formControlName="title" placeholder="Enter your question title">
+            <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
             Title is required
-          </mat-error>
+            </mat-error>
         </mat-form-field>
-
+    
         <mat-dialog-actions class="step-actions">
-            <button mat-flat-button class="next-button" matStepperNext>Next</button>
-          </mat-dialog-actions>
-          
-      </form>
+            <button mat-button matStepperNext class="next-button" (click)="onFirstNext()">Next</button>
+        </mat-dialog-actions>
+        </form>
     </mat-step>
-
-    <!-- Step 2: Details -->
+  
+  <!-- Step 2: Related Questions + Details -->
     <mat-step [stepControl]="detailsFormGroup">
-      <form [formGroup]="detailsFormGroup">
+        <form [formGroup]="detailsFormGroup">
         <ng-template matStepLabel>Details</ng-template>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Question Details</mat-label>
-          <textarea matInput formControlName="details" placeholder="Provide more details"></textarea>
-          <mat-error *ngIf="detailsFormGroup.get('details')?.hasError('required')">
-            Details are required
-          </mat-error>
-        </mat-form-field>
-
+    
+        <div *ngIf="isLoadingRelatedQuestions" class="loading-container">
+            <mat-spinner></mat-spinner>
+        </div>
+    
+        <div *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length > 0" class="related-questions">
+            <app-related-card 
+            *ngFor="let relatedQuestion of relatedQuestions"
+            [question]="relatedQuestion"
+            [showReadMore]="true">
+            </app-related-card>
+        </div>
+    
         <mat-dialog-actions class="step-actions">
             <button mat-button class="back-button" matStepperPrevious>Back</button>
             <button mat-flat-button class="next-button" matStepperNext>Next</button>
-          </mat-dialog-actions>          
-      </form>
+        </mat-dialog-actions>          
+        </form>
     </mat-step>
+  
 
     <!-- Step 3: Confirmation -->
     <mat-step>
