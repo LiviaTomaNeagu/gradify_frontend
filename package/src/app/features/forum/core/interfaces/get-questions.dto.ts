@@ -38,4 +38,9 @@ export interface GetQuestionsResponseDTO {
     answers: GetAnswerResponseDTO[];
 }
 
+export interface AddAnswerRequestDTO {
+  userId: string;
+  content: string;
+}
+
   

@@ -26,15 +26,17 @@
   </div>
 
   <!-- Formular pentru adăugarea unui răspuns -->
-  <mat-card class="response-form">
-    <mat-card-content>
-      <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Add answer</mat-label>
-        <textarea matInput [(ngModel)]="newAnswer"></textarea>
-      </mat-form-field>
-      <button mat-raised-button color="primary" (click)="submitAnswer()">Trimite răspuns</button>
-    </mat-card-content>
-  </mat-card>
+  <div *ngIf="!isLoading"> 
+    <mat-card class="response-form">
+      <mat-card-content>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Add answer</mat-label>
+          <textarea matInput [(ngModel)]="newAnswer"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitAnswer()">Trimite răspuns</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
   <!-- Loader -->
   <div class="spinner-container" *ngIf="isLoading">
