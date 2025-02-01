@@ -74,4 +74,9 @@ export class AddQuestionModalComponent {
       });
     }
   }
+
+  onSecondNext(): void {
+    console.log('Second next');
+  }
+  
 }

@@ -23,8 +23,7 @@
     </mat-step>
   
   <!-- Step 2: Related Questions + Details -->
-    <mat-step [stepControl]="detailsFormGroup">
-        <form [formGroup]="detailsFormGroup">
+    <mat-step>
         <ng-template matStepLabel>Related questions</ng-template>
     
         <div *ngIf="relatedQuestions.length > 0" class="related-questions-header">
@@ -42,12 +41,16 @@
             [showReadMore]="true">
             </app-related-card>
         </div>
+
+        <div *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length === 0" class="empty-view">
+            <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
+            <p class="empty-text">No related questions found.</p>
+        </div>
     
         <mat-dialog-actions class="step-actions">
             <button mat-button class="back-button" matStepperPrevious>Back</button>
-            <button mat-flat-button class="next-button" matStepperNext>Still need help? Continue</button>
+            <button mat-flat-button class="next-button" matStepperNext (click)="onSecondNext()">Still need help? Continue</button>
         </mat-dialog-actions>          
-        </form>
     </mat-step>
   
 
@@ -55,7 +58,6 @@
     <mat-step>
       <ng-template matStepLabel>Confirm</ng-template>
       <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
-      <p><strong>Details:</strong> {{ detailsFormGroup.value.details }}</p>
 
       <mat-dialog-actions class="step-actions">
         <button mat-button class="back-button" matStepperPrevious>Back</button>
