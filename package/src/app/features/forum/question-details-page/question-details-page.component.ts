@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ForumService } from '../core/services/forum.service';
-import { GetAnswerResponseDTO, GetQuestionDetailsResponseDTO, GetQuestionResponseDTO } from '../core/interfaces/get-questions.dto';
+import { AddAnswerRequestDTO, GetAnswerResponseDTO, GetQuestionDetailsResponseDTO, GetQuestionResponseDTO } from '../core/interfaces/get-questions.dto';
 import { CommonModule, DatePipe } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { FormsModule } from '@angular/forms';
 import { getTopicName, topicColors } from 'src/app/shared/enums/topic.enum';
 import { ForumCardComponent } from "../forum-page/components/forum-card/forum-card.component";
+import { getMatAutocompleteMissingPanelError } from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-question-details-page',
@@ -31,6 +32,11 @@ export class QuestionDetailsPageComponent {
   }
 
   ngOnInit(): void {
+    this.getAnswersForQuestion();
+  }
+
+  getAnswersForQuestion(): void{
+    this.isLoading = true;
     const questionId = this.activeRoute.snapshot.paramMap.get('id');
     if (questionId) {
       this.forumService.getQuestionDetails(questionId).subscribe({
@@ -49,24 +55,35 @@ export class QuestionDetailsPageComponent {
   }
 
   submitAnswer(): void {
+    this.isLoading = true;
+  
     if (!this.newAnswer.trim()) {
+      this.isLoading = false;
       return;
     }
-
-    const newAnswer: GetAnswerResponseDTO = {
-      id: Math.random().toString(36).substr(2, 9),
-      questionId: this.questionDetails?.id ?? '',
-      content: this.newAnswer,
-      createdAt: new Date().toISOString(),
-      name: 'currentUserId',
-      surname: '',
-      occupationName: ''
+  
+    const newAnswerRequest: AddAnswerRequestDTO = {
+      userId: '01947998-22be-7e4d-ae86-e7e73e1fa9f2',
+      content: this.newAnswer.trim(),
     };
-
-    // Simulăm adăugarea răspunsului (de obicei, ar trebui să fie apel API)
-    this.questionDetails?.answers.push(newAnswer);
+  
     this.newAnswer = '';
+  
+    const questionId = this.activeRoute.snapshot.paramMap.get('id');
+    if (questionId) {
+      this.forumService.addAnswer(questionId, newAnswerRequest).subscribe({
+        next: () => {
+          this.getAnswersForQuestion();
+        },
+        error: () => {
+          this.isLoading = false;
+        }
+      });
+    } else {
+      this.isLoading = false;
+    }
   }
+  
   
   get questionAsResponse(): GetQuestionResponseDTO | null {
     return this.questionDetails;
