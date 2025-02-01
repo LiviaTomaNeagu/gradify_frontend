@@ -6,6 +6,8 @@ import { TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ForumCardComponent } from './components/forum-card/forum-card.component';
 import { MaterialModule } from 'src/app/material.module';
+import { AddQuestionModalComponent } from './components/add-question-modal/add-question-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-forum',
@@ -27,7 +29,7 @@ export class ForumPageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private forumService: ForumService) {}
+  constructor(private dialog: MatDialog,private forumService: ForumService) {}
 
   ngOnInit(): void {
     this.initializeTopics();
@@ -97,5 +99,18 @@ export class ForumPageComponent implements OnInit {
     if (this.paginator) {
       this.paginator.firstPage();
     }
+  }
+
+  openQuestionModal(): void {
+    const dialogRef = this.dialog.open(AddQuestionModalComponent, {
+      width: '500px',
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Question submitted:', result);
+      }
+    });
   }
 }
