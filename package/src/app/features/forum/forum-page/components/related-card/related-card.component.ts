@@ -1,10 +1,11 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { GetRelatedQuestionResponseDto } from '../../../core/interfaces/get-related-questions.dto';
 import { getTopicName, Topic, topicColors } from 'src/app/shared/enums/topic.enum';
 import { RouterModule } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-related-card',
@@ -19,6 +20,10 @@ export class RelatedCardComponent {
   topicColor: string;
   topicName: string;
 
+  constructor(
+    private dialogRef: MatDialogRef<any>
+  ) {}
+
   ngOnInit(): void {
     if (this.question.topic) {
       this.topicName = getTopicName(this.question.topic);
@@ -26,6 +31,10 @@ export class RelatedCardComponent {
     } else {
       console.error('Question topic is not defined or invalid');
     }
+  }
+
+  closeModal(): void {
+    this.dialogRef.close(); // Close modal before navigating
   }
 
 }
