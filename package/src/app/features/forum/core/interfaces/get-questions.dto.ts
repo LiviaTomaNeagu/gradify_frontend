@@ -43,4 +43,3 @@ export interface AddAnswerRequestDTO {
   content: string;
 }
 
-  

@@ -5,6 +5,7 @@ import { AddAnswerRequestDTO, GetQuestionsResponseDTO } from '../interfaces/get-
 import { GetQuestionDetailsResponseDTO } from '../interfaces/get-questions.dto';
 import { GetQuestionsRequestDTO } from '../interfaces/get-questions.dto';
 import { environment } from '../../../../../environments/environment';
+import { GetRelatedQuestionResponseDto, GetRelatedQuestionsRequestDto } from '../interfaces/get-related-questions.dto';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class ForumService {
   addAnswer(questionId: string, payload: AddAnswerRequestDTO): Observable<void> {
     return this.http.post<void>(`${this.baseUrl}/${questionId}/details`, payload);
   }
-  
+
+  getRelatedQuestions(payload: GetRelatedQuestionsRequestDto): Observable<GetRelatedQuestionResponseDto[]> {
+    console.log('Payload:', payload);
+    return this.http.post<GetRelatedQuestionResponseDto[]>(`${environment.apiUrl}/forum/get-related-questions`, payload);
+  }
 }
