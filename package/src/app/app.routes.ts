@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { BlankComponent } from './layouts/blank/blank.component';
 import { FullComponent } from './layouts/full/full.component';
+import { AuthenticationRoutes } from './pages/authentication/authentication.routes';
 
 export const routes: Routes = [
   {
@@ -24,6 +25,11 @@ export const routes: Routes = [
       },
       // todo: add more routes here
     ],
+  },
+  {
+    path: 'auth',
+    component: BlankComponent,
+    children: AuthenticationRoutes,
   },
   {
     path: '**',

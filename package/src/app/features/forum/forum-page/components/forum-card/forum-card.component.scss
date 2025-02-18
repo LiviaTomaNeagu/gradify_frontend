@@ -3,6 +3,10 @@
   margin: 10px 0; /* Add vertical spacing between cards */
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
 
+  ::ng-deep .mat-mdc-card-content{
+    padding: 30px 30px 5px 30px;
+  }
+
   .forum-card-header {
     display: flex;
     justify-content: space-between;

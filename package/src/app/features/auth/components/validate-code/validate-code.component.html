@@ -1,0 +1,21 @@
+<div class="validate-code-container">
+    <h2>Validate Your Account</h2>
+    <p>Please enter the validation code sent to your email.</p>
+  
+    <form [formGroup]="validateForm" (ngSubmit)="validateCode()">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Validation Code</mat-label>
+        <input matInput formControlName="code" type="text" />
+        <mat-error *ngIf="validateForm.get('code')?.hasError('required')">
+          Code is required.
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-flat-button color="primary" class="w-100" [disabled]="!validateForm.valid">
+        Validate
+      </button>
+    </form>
+  
+    <p class="m-t-10">Didn't receive a code? <a href="#" (click)="resendCode()">Resend Code</a></p>
+  </div>
+  

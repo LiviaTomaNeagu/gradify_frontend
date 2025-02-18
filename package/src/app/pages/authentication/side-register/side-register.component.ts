@@ -16,7 +16,9 @@ import { MaterialModule } from '../../../material.module';
   templateUrl: './side-register.component.html',
 })
 export class AppSideRegisterComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    console.log('AppSideRegisterComponent');
+  }
 
   form = new FormGroup({
     uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -28,8 +30,16 @@ export class AppSideRegisterComponent {
     return this.form.controls;
   }
 
-  submit() {
-    // console.log(this.form.value);
-    this.router.navigate(['/']);
+  submit(role: string) {
+    if (!this.form.valid) {
+      return;
+    }
+  
+    if (role === 'student') {
+      this.router.navigate(['/auth/validate-code']);
+    } else if (role === 'mentor' || role === 'teacher') {
+      this.router.navigate(['/auth/pending-approval']);
+    }
   }
+  
 }
