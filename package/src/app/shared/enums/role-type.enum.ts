@@ -6,3 +6,17 @@ export enum RoleTypeEnum {
     COORDINATOR = 40
   }
   
+  export function toRoleTypeEnum(value: string): RoleTypeEnum {
+    switch (value) {
+      case 'ADMIN':
+        return RoleTypeEnum.ADMIN;
+      case 'STUDENT':
+        return RoleTypeEnum.STUDENT;
+      case 'MENTOR':
+        return RoleTypeEnum.MENTOR;
+      case 'COORDINATOR':
+        return RoleTypeEnum.COORDINATOR;
+      default:
+        return RoleTypeEnum.UNKNOWN;
+    }
+  }

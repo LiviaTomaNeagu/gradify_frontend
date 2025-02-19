@@ -40,17 +40,38 @@
                         </mat-hint>
                         }
                       </mat-form-field>
+
+
+                      <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Surname</mat-label>
+                      <mat-form-field appearance="outline" class="w-100" color="primary">
+                        <input matInput formControlName="surname" />
+                        @if(f['surname'].touched && f['surname'].invalid) {
+                        <mat-hint class="m-b-16 error-msg">
+                          @if( f['surname'].errors &&
+                          f['surname'].errors['required']) {
+                          <div class="text-error">Surname is required.</div>
+                          } @if(f['surname'].errors &&
+                          f['surname'].errors['minlength']) {
+                          <div class="text-error">
+                            Surname should be 6 character.
+                          </div>
+                          }
+                        </mat-hint>
+                        }
+                      </mat-form-field>
                       <!-- email -->
                       <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Email Address</mat-label>
                       <mat-form-field appearance="outline" class="w-100" color="primary">
                         <input matInput type="email" formControlName="email" />
-                        @if(f['email'].touched && f['email'].invalid) {
-                        <mat-hint class="m-b-16 error-msg">
-                          @if(f['email'].errors &&
-                          f['email'].errors['required']) {
-                          <div class="text-error">Email is required.</div>
-                          }
-                        </mat-hint>
+                        @if((f['email'].touched && f['email'].invalid) || errorMessage) {
+                          <mat-hint class="m-b-16 error-msg">
+                            @if(f['email'].errors && f['email'].errors['required']) {
+                              <div class="text-error">Email is required.</div>
+                            }
+                            @if(errorMessage) {
+                              <div class="text-error">{{ errorMessage }}</div>
+                            }
+                          </mat-hint>
                         }
                       </mat-form-field>
                       <!-- password -->
@@ -68,15 +89,15 @@
                       </mat-form-field>
 
                       <div>
-                        <button mat-flat-button color="primary" class="w-100" (click)="submit('student')">
+                        <button mat-flat-button color="primary" class="w-100" (click)="submit('STUDENT', $event)">
                           Sign Up as Student
                         </button>
                       
-                        <button mat-flat-button color="accent" class="w-100 m-t-10" (click)="submit('mentor')">
+                        <button mat-flat-button color="accent" class="w-100 m-t-10" (click)="submit('MENTOR', $event)">
                           Sign Up as Mentor
                         </button>
                       
-                        <button mat-flat-button color="warn" class="w-100 m-t-10" (click)="submit('teacher')">
+                        <button mat-flat-button color="warn" class="w-100 m-t-10" (click)="submit('COORDINATOR', $event)">
                           Sign Up as Teacher
                         </button>
                       </div>

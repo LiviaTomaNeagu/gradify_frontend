@@ -17,7 +17,9 @@ export const AuthInterceptor: HttpInterceptorFn = (
   const router = inject(Router);
 
   // Nu interceptăm request-ul de refresh token
-  if (req.url.includes('/api/auth/refresh-token')) {
+  if (req.url.includes('/api/auth/refresh-token')|| // Skip refresh token endpoint
+  req.url.includes('/api/auth/register') || 
+  req.url.includes('/api/auth/verify-activation-code') ) {
     return next(req);
   }
 
