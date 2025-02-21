@@ -1,0 +1,84 @@
+/* ✅ Stilizare Generală a tabelului */
+table.mat-table {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ✅ Header-ul tabelului */
+.mat-header-row {
+  background-color: #343a40;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* ✅ Celulele de antet */
+.mat-header-cell {
+  padding: 12px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* ✅ Rândurile tabelului */
+.mat-row:nth-child(even) {
+  background-color: #f8f9fa; /* Alternare de culori */
+}
+
+/* ✅ Celulele */
+.mat-cell {
+  padding: 14px;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ✅ Badge pentru Approved */
+.badge-success {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* ✅ Badge pentru Pending */
+.badge-warning {
+  background-color: #ffc107;
+  color: black;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* ✅ Stilizare butoane Accept / Decline */
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+/* ✅ Efect Hover pe Rânduri */
+.mat-row:hover {
+  background-color: #e9ecef;
+  transition: background 0.3s ease-in-out;
+}
+
+/* ✅ Avatar în tabel */
+.rounded-circle {
+  border: 2px solid #dee2e6;
+  padding: 2px;
+}

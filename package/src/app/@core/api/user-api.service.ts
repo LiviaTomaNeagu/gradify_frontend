@@ -5,13 +5,14 @@ import { URLS } from 'src/app/shared/enums/url.enum';
 import { LocalStorageHelper } from '../helpers/local-storage.helper';
 import { CurrentUserResponseInterfaceDTO } from '../interfaces/user.interface';
 import { GetRefreshTokenPayload } from '../interfaces/refresh-token.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserApi {
-  private readonly userPath = '/api/users';
-  private readonly authPath = '/api/auth';
+  private readonly userPath = `${environment.apiUrl}/users`;
+  private readonly authPath = `${environment.apiUrl}/auth`;
   private readonly urls = URLS;
 
   constructor(private http: HttpClient, private router: Router) {}

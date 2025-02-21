@@ -23,7 +23,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/forum/forum.routes').then((m) => m.ForumRoutes),
       },
-      // todo: add more routes here
+      {
+        path: 'users', // Add Forum here as a separate route
+        loadChildren: () =>
+          import('./features/users/users.routes').then((m) => m.UsersRoutes),
+      },
     ],
   },
   {

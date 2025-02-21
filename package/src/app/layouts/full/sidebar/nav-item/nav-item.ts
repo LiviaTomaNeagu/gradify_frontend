@@ -1,3 +1,5 @@
+import { RoleTypeEnum } from "src/app/shared/enums/role-type.enum";
+
 export interface NavItem {
     displayName?: string;
     disabled?: boolean;
@@ -13,4 +15,5 @@ export interface NavItem {
     children?: NavItem[];
     ddType?: string;
     bgcolor?:string;
+    roles?: RoleTypeEnum[];
 }

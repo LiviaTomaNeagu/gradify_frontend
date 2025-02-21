@@ -14,6 +14,7 @@ export class UserService {
 
   setCurrentUserInfo(user: CurrentUserResponseInterfaceDTO): void {
     this.currentUser$.next(user);
+
   }
 
   async initializeCurrentUser(): Promise<CurrentUserResponseInterfaceDTO | null> {
@@ -21,6 +22,7 @@ export class UserService {
       return this.currentUser$.value;
     } else {
       const response = await this.userApi.getCurrentUserDetails();
+      console.log("Initialize current user", response);
       if (response === null) return null;
       this.setCurrentUserInfo(response);
       return response;

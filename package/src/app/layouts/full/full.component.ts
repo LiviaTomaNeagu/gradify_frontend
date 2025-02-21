@@ -13,6 +13,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -56,7 +58,7 @@ export class FullComponent implements OnInit {
     return this.isMobileScreen;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService) {
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: UserService) {
 
     this.htmlElement = document.querySelector('html')!;
     this.htmlElement.classList.add('light-theme');
@@ -69,9 +71,14 @@ export class FullComponent implements OnInit {
 
         this.isContentWidthFixed = state.breakpoints[MONITOR_VIEW];
       });
+
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.userService.initializeCurrentUser().then(() => {
+      this.filterNavItems(); // Execute only after user is ready
+    });
+  }
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe(); 
@@ -88,4 +95,13 @@ export class FullComponent implements OnInit {
   onSidenavOpenedChange(isOpened: boolean) {
     this.isCollapsedWidthFixed = !this.isOver;
   }
+
+  filterNavItems() {
+    const userRole = this.userService.getCurrentUserInfo()?.role;
+
+    this.navItems = this.navItems.filter(item => 
+      !item.roles || (userRole && item.roles.includes(userRole))
+    );
+  }
+  
 }
