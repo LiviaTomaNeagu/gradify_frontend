@@ -19,14 +19,19 @@ export const routes: Routes = [
           import('./features/dashboard/dashboard.routes').then((m) => m.DashboardRoutes),
       },
       {
-        path: 'forum', // Add Forum here as a separate route
+        path: 'forum',
         loadChildren: () =>
           import('./features/forum/forum.routes').then((m) => m.ForumRoutes),
       },
       {
-        path: 'users', // Add Forum here as a separate route
+        path: 'users',
         loadChildren: () =>
           import('./features/users/users.routes').then((m) => m.UsersRoutes),
+      },
+      {
+        path: 'my-company', // Add Forum here as a separate route
+        loadChildren: () =>
+          import('./features/company/company.routes').then((m) => m.CompanyRoutes),
       },
     ],
   },

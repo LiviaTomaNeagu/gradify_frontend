@@ -11,7 +11,7 @@ export const navItems: NavItem[] = [
     displayName: 'My Company',
     iconName: 'layout-dashboard',
     bgcolor: 'primary',
-    route: '/dashboard',
+    route: '/my-company',
     roles: [RoleTypeEnum.ADMIN_CORPORATE],
   },
   

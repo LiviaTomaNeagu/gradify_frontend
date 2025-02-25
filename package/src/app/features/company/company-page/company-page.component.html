@@ -1,1 +1,129 @@
-<p>company-page works!</p>
+<div class="company-page-container">
+
+  <!-- Left Side: Editable Company Details -->
+  <mat-card class="company-card">
+      <mat-card-header class="company-header">
+          <div class="company-title-container">
+              <mat-icon class="company-icon text-primary">business</mat-icon>
+              <mat-card-title>{{ company?.name }}</mat-card-title>
+          </div>
+      </mat-card-header>
+
+      <mat-card-content>
+          <div class="company-info-container">
+            
+            <div class="company-info-section">
+              <mat-icon class="info-icon text-primary">home</mat-icon>
+              <mat-form-field appearance="outline">
+                  <mat-label>Company Name</mat-label>
+                  <input matInput [(ngModel)]="company.name">
+              </mat-form-field>
+          </div>
+
+            <!-- Admin Name & Surname -->
+            <div class="company-info-section">
+                <mat-icon class="info-icon text-primary">person</mat-icon>
+                <mat-form-field appearance="outline">
+                    <mat-label>Admin Name</mat-label>
+                    <input matInput [(ngModel)]="company.adminName">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Admin Surname</mat-label>
+                    <input matInput [(ngModel)]="company.adminSurname">
+                </mat-form-field>
+            </div>
+
+            <!-- Address -->
+            <div class="company-info-section">
+                <mat-icon class="info-icon text-primary">place</mat-icon>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Address</mat-label>
+                    <input matInput [(ngModel)]="company.address">
+                </mat-form-field>
+            </div>
+
+            <!-- City & Country -->
+            <div class="company-info-section">
+                <mat-icon class="info-icon text-primary">location_city</mat-icon>
+                <mat-form-field appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput [(ngModel)]="company.city">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput [(ngModel)]="company.country">
+                </mat-form-field>
+            </div>
+
+        </div>
+      </mat-card-content>
+
+      <div class="spinner-container" *ngIf="isLoading">
+          <mat-spinner></mat-spinner>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">
+          <mat-icon class="error-icon">error_outline</mat-icon>
+          <p>{{ errorMessage }}</p>
+      </div>
+
+      <div class="save-button-container">
+    <button mat-flat-button class="save-button" color="primary" (click)="saveCompanyDetails()">
+        <mat-icon>save</mat-icon> Save
+    </button>
+</div>
+
+  </mat-card>
+
+  <!-- Right Side: Stats Cards -->
+  <div class="company-stats-container">
+
+      <!-- Total Users Card -->
+      <mat-card class="cardWithShadow overflow-hidden">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+              <mat-card-title>Total Users</mat-card-title>
+              <div class="m-l-auto">
+                  <button mat-fab color="primary" class="shadow-none icon-48">
+                      <mat-icon class="text-white">groups</mat-icon>
+                  </button>
+              </div>
+          </mat-card-header>
+          <div class="m-b-32 p-x-24 m-t-20">
+              <h4 class="mat-headline-5 f-s-24">{{ company?.totalUsers }}</h4>
+          </div>
+      </mat-card>
+
+      <!-- Total Responses Card -->
+      <mat-card class="cardWithShadow overflow-hidden">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+              <mat-card-title>Total Responses</mat-card-title>
+              <div class="m-l-auto">
+                  <button mat-fab color="accent" class="shadow-none icon-48">
+                      <mat-icon class="text-white">chat</mat-icon>
+                  </button>
+              </div>
+          </mat-card-header>
+          <div class="m-b-32 p-x-24 m-t-20">
+              <h4 class="mat-headline-5 f-s-24">{{ company?.totalResponses }}</h4>
+          </div>
+      </mat-card>
+
+      <!-- Domain Card -->
+      <mat-card class="cardWithShadow overflow-hidden">
+          <mat-card-header class="d-flex align-items-center p-x-24">
+              <mat-card-title>Industry</mat-card-title>
+              <div class="m-l-auto">
+                  <button mat-fab color="warn" class="shadow-none icon-48">
+                      <mat-icon class="text-white">business_center</mat-icon>
+                  </button>
+              </div>
+          </mat-card-header>
+          <div class="m-b-32 p-x-24 m-t-20">
+              <h4 class="mat-headline-5 f-s-24">{{ company?.domain }}</h4>
+          </div>
+      </mat-card>
+
+
+  </div>
+
+</div>

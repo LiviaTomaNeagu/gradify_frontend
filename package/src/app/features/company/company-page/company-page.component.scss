@@ -1,0 +1,133 @@
+.company-page-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  padding: 20px;
+  height: calc(100vh - 109px);
+}
+
+.company-stats-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+
+  ::ng-deep .mat-mdc-card{
+    margin-bottom: 0;
+  }
+}
+
+.cardWithShadow {
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.company-card {
+  width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+}
+
+.company-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.company-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+
+  ::ng-deep
+  .mat-mdc-card-title {
+    font-size: 28px;
+  }
+}
+
+.company-icon {
+  font-size: 36px;
+  margin-right: 10px;
+  color: #007bff;
+}
+
+.company-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px 0;
+}
+
+.company-info-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.location-fields {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-form-field {
+  flex: 1;
+  min-width: 120px;
+}
+
+.info-icon {
+  font-size: 28px;
+  color: #007bff;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d32f2f;
+  font-size: 16px;
+  padding: 15px;
+}
+
+.error-icon {
+  margin-right: 10px;
+  color: #d32f2f;
+}
+
+.save-button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.save-button {
+  width: 40%;
+  margin-top: 10px;
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center; /* Ensures text stays centered inside the button */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centers text inside */
+  margin-right: 30px;
+}
