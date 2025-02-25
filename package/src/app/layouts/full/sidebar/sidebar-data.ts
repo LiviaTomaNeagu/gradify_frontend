@@ -18,7 +18,7 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Users',
     iconName: 'layout-navbar-expand',
-    bgcolor: 'error',
+    bgcolor: 'success',
     route: '/users',
     roles: [RoleTypeEnum.ADMIN_CORPORATE],
   },

@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs";
-import { GetCompanyResponseDTO } from "../interfaces/get-company.interface";
+import { GetCompanyResponseDTO, UpdateCompanyRequestDTO } from "../interfaces/get-company.interface";
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +17,10 @@ export class CompanyService {
 
       getMyCompany(): Observable<GetCompanyResponseDTO> {
         return this.http.get<GetCompanyResponseDTO>(`${this.baseUrl}/get-my-company`);
+      }
+
+      updateCompanyDetails(company: UpdateCompanyRequestDTO) {
+        return this.http.put(`${this.baseUrl}/update-occupation`, company);
       }
 
 }

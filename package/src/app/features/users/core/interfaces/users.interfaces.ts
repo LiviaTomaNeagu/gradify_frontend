@@ -43,7 +43,7 @@ export interface GetMentorsRequestDTO
 
 export interface GetMentorsResponseDTO
 {
-    mentors: GetUsersResponseDTO[]
+    users: GetUsersResponseDTO[]
     totalUsers: number
 }
 

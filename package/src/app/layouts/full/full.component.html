@@ -1,4 +1,4 @@
-<mat-sidenav-container class="mainWrapper blue_theme  light-theme" autosize autoFocus dir="ltr">
+<mat-sidenav-container *ngIf="!isLoading" class="mainWrapper blue_theme  light-theme" autosize autoFocus dir="ltr">
   <!-- ============================================================== -->
   <!-- Vertical Sidebar -->
   <!-- ============================================================== -->
@@ -41,3 +41,7 @@
     </main>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

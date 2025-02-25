@@ -4,6 +4,8 @@ import { CompanyService } from '../core/services/company.service';
 import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule } from '@angular/forms';
+import { UpdateCompanyRequestDTO } from '../core/interfaces/get-company.interface';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-company-page',
@@ -18,7 +20,7 @@ export class CompanyPageComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private companyService: CompanyService) {}
+  constructor(private companyService: CompanyService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.fetchCompanyData();
@@ -40,6 +42,33 @@ export class CompanyPageComponent implements OnInit {
 
   saveCompanyDetails(): void {
     console.log("Saving:", this.company);
-    // Implement save logic here, calling a service to update company data
+    const payload: UpdateCompanyRequestDTO = {
+      occupationId: this.company.id,
+      name: this.company.name,
+      address: this.company.address,
+      city: this.company.city,
+      country: this.company.country,
+      domain: this.company.domain,
+      adminName: this.company.adminName,
+      adminSurname: this.company.adminSurname
+    }
+
+    this.companyService.updateCompanyDetails(payload).subscribe({
+      complete: () => {
+        console.log("Company details successfully updated.");
+        this.showSuccessSnackBar("Company details successfully updated.");
+      },
+      error: (error) => {
+        console.error("Error updating company details:", error);
+      }
+    });
+    
+  }
+
+  showSuccessSnackBar(message: string) {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      panelClass: 'snackbar-success'
+    });
   }
 }

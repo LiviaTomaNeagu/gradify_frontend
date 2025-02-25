@@ -14,7 +14,6 @@ export class UserService {
 
   setCurrentUserInfo(user: CurrentUserResponseInterfaceDTO): void {
     this.currentUser$.next(user);
-
   }
 
   async initializeCurrentUser(): Promise<CurrentUserResponseInterfaceDTO | null> {

@@ -5,11 +5,12 @@ import { UserMapper } from 'src/app/@core/interfaces/user-mapper';
 import { CommonModule } from '@angular/common';
 import { GetMentorsRequestDTO, GetUsersResponseDTO } from '../core/interfaces/users.interfaces';
 import { MatTableModule } from '@angular/material/table';
+import {MaterialModule} from 'src/app/material.module';
 
 @Component({
   selector: 'app-users-page',
   standalone: true,
-  imports: [CommonModule, MatTableModule],
+  imports: [CommonModule, MatTableModule, MaterialModule],
   templateUrl: './users-page.component.html',
   styleUrls: ['./users-page.component.scss']
 })
@@ -19,7 +20,7 @@ export class UsersPageComponent {
   constructor(private usersService: UsersService, private userService: UserService) {
   }
 
-  displayedColumns: string[] = ['assigned', 'role', 'status', 'actions'];
+  displayedColumns: string[] = ['assigned', 'email', 'actions'];
 
   ngOnInit(): void {
     this.loadMentors();
@@ -40,7 +41,8 @@ export class UsersPageComponent {
       console.log("Payload", payload);
       this.usersService.getMentors(payload).subscribe({
         next: (response) => {
-          this.users = response.mentors
+          this.users = response.users;
+          console.log("Mentors", this.users);
         },
         error: (err) => {
           console.error(err);

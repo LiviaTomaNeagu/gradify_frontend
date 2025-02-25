@@ -20,31 +20,18 @@ import { CurrentUserResponseInterfaceDTO } from 'src/app/@core/interfaces/user.i
   imports: [BrandingComponent, TablerIconsModule, MaterialModule],
   templateUrl: './sidebar.component.html',
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   @Input() showToggle = true;
   @Output() toggleMobileNav = new EventEmitter<void>();
   @Output() toggleCollapsed = new EventEmitter<void>();
 
   userDataIsLoading: boolean = true;
-  private readonly subscription: Subscription = new Subscription();
+  
 
-  constructor(private userService: UserService) {
-    this.subscription.add(
-      this.userService.currentUser$.subscribe({
-        next: (user: CurrentUserResponseInterfaceDTO | null) => {
-          if (user) {
-            this.userDataIsLoading = false;
-          }
-        },
-        error: () => {
-          this.userDataIsLoading = false;
-        },
-      })
-    );
-  }
+  constructor(private userService: UserService) {}
 
-  async ngOnInit(): Promise<void> {
-    this.userService.initializeCurrentUser();
-  }
+  // async ngOnInit(): Promise<void> {
+  //   this.userService.initializeCurrentUser();
+  // }
 
 }

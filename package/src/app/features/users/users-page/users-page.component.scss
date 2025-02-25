@@ -1,84 +1,46 @@
-/* ✅ Stilizare Generală a tabelului */
-table.mat-table {
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.cardWithShadow {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
 }
 
-/* ✅ Header-ul tabelului */
-.mat-header-row {
-  background-color: #343a40;
-  color: white;
+.table-responsive {
+  overflow-x: auto;
+}
+
+.mat-chip {
   font-size: 14px;
   font-weight: bold;
-}
-
-/* ✅ Celulele de antet */
-.mat-header-cell {
-  padding: 12px;
-  text-transform: uppercase;
-  border-bottom: 2px solid #e0e0e0;
-}
-
-/* ✅ Rândurile tabelului */
-.mat-row:nth-child(even) {
-  background-color: #f8f9fa; /* Alternare de culori */
-}
-
-/* ✅ Celulele */
-.mat-cell {
-  padding: 14px;
-  font-size: 14px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-/* ✅ Badge pentru Approved */
-.badge-success {
-  background-color: #28a745;
-  color: white;
-  padding: 6px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-/* ✅ Badge pentru Pending */
-.badge-warning {
-  background-color: #ffc107;
-  color: black;
-  padding: 6px 10px;
-  border-radius: 5px;
-  font-weight: bold;
-}
-
-/* ✅ Stilizare butoane Accept / Decline */
-.btn-sm {
   padding: 6px 12px;
-  font-size: 0.85rem;
-  border-radius: 5px;
-  font-weight: bold;
+  border-radius: 8px;
 }
 
-.btn-success {
-  background-color: #28a745;
-  color: white;
-  border: none;
+/* Target ONLY the Approved chip */
+.status-approved {
+  --mdc-chip-elevated-container-color: #52be89 !important;
+  --mdc-chip-label-text-color: white !important;
 }
 
-.btn-danger {
-  background-color: #dc3545;
-  color: white;
-  border: none;
+
+.btn-sm {
+  font-size: 13px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
 }
 
-/* ✅ Efect Hover pe Rânduri */
-.mat-row:hover {
-  background-color: #e9ecef;
-  transition: background 0.3s ease-in-out;
+.m-r-8 {
+  margin-right: 8px;
 }
 
-/* ✅ Avatar în tabel */
+.m-l-8 {
+  margin-left: 8px;
+}
+
 .rounded-circle {
-  border: 2px solid #dee2e6;
-  padding: 2px;
+  border-radius: 50%;
+}
+
+.text-muted {
+  color: #6c757d;
 }
