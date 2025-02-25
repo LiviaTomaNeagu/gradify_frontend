@@ -12,7 +12,6 @@
       <div class="table-responsive">
           <table mat-table [dataSource]="users" class="w-100 mat-elevation-z2">
               
-              <!-- User Profile Column -->
               <ng-container matColumnDef="assigned">
                   <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
                       User
@@ -29,7 +28,6 @@
                   </td>
               </ng-container>
 
-              <!-- Email Column -->
               <ng-container matColumnDef="email">
                   <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
                       Email
@@ -39,7 +37,6 @@
                   </td>
               </ng-container>
 
-              <!-- Actions Column (Includes Status Badge) -->
               <ng-container matColumnDef="actions">
                   <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
                       Actions
@@ -47,17 +44,15 @@
                   <td mat-cell *matCellDef="let user" class="text-center">
                       <div class="d-flex align-items-center justify-content-start">
                           
-                          <!-- Approved Badge -->
                           <mat-chip *ngIf="user.isApproved" class="status-approved">
                               Approved
                           </mat-chip>
 
-                          <!-- If Approved: Show Only Check & X Buttons -->
                           <ng-container *ngIf="!user.isApproved">
-                            <button mat-icon-button color="primary" class="m-l-8">
+                            <button mat-icon-button color="primary" class="m-l-8" (click)="approveUser(user)">
                                 <mat-icon>check</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn">
+                            <button mat-icon-button color="warn" (click)="declineUser(user)">
                                 <mat-icon>close</mat-icon>
                             </button>
                         </ng-container>
@@ -66,7 +61,6 @@
                   </td>
               </ng-container>
 
-              <!-- Header and Row Definitions -->
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 

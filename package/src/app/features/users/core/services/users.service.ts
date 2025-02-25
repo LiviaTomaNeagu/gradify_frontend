@@ -19,4 +19,12 @@ export class UsersService {
         return this.http.post<GetMentorsResponseDTO>(`${this.baseUrl}/get-mentors`, payload);
       }
 
+      approveUser(userId: string) {
+        return this.http.put<string>(`${this.baseUrl}/approve-user/${userId}`, {});
+      }
+
+      declineUser(userId: string) {
+        return this.http.delete<string>(`${this.baseUrl}/decline-user/${userId}`, {});
+      }
+
 }

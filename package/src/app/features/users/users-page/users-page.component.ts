@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { GetMentorsRequestDTO, GetUsersResponseDTO } from '../core/interfaces/users.interfaces';
 import { MatTableModule } from '@angular/material/table';
 import {MaterialModule} from 'src/app/material.module';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-users-page',
@@ -17,7 +18,7 @@ import {MaterialModule} from 'src/app/material.module';
 export class UsersPageComponent {
 
   users: GetUsersResponseDTO[] = [];
-  constructor(private usersService: UsersService, private userService: UserService) {
+  constructor(private usersService: UsersService, private userService: UserService, private snackBar: MatSnackBar) {
   }
 
   displayedColumns: string[] = ['assigned', 'email', 'actions'];
@@ -49,5 +50,35 @@ export class UsersPageComponent {
         }
       });
     }
+  }
+
+  approveUser(user: GetUsersResponseDTO): void {
+    this.usersService.approveUser(user.id).subscribe({
+      next: () => {
+        console.log("User approved");
+        this.loadMentors();
+        this.snackBar.open("User approved!", 'OK', {
+          duration: 3000,
+          panelClass: 'snackbar-success'
+        });
+      }
+    });
+  }
+
+  declineUser(user: GetUsersResponseDTO): void {
+    this.usersService.declineUser(user.id).subscribe({
+      next: () => {
+        console.log("User declined");
+        this.loadMentors();
+        this.snackBar.open("User declined!", 'OK', {
+          duration: 3000,
+          panelClass: 'snackbar-error'
+        });
+      }
+    });
+  }
+
+  showSuccessSnackBar(message: string) {
+    
   }
 }
