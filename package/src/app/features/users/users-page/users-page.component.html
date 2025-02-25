@@ -1,0 +1,70 @@
+<mat-card class="cardWithShadow">
+  <mat-card-header class="p-t-24">
+      <div class="d-flex align-items-center justify-content-between w-100">
+          <mat-card-title>Users Management</mat-card-title>
+          <button mat-icon-button color="inherit" aria-label="More options">
+              <mat-icon class="f-s-24 d-flex align-items-center justify-content-center">more_vert</mat-icon>
+          </button>
+      </div>
+  </mat-card-header>
+
+  <mat-card-content class="p-t-0">
+      <div class="table-responsive">
+          <table mat-table [dataSource]="users" class="w-100 mat-elevation-z2">
+              
+              <ng-container matColumnDef="assigned">
+                  <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
+                      User
+                  </th>
+                  <td mat-cell *matCellDef="let user">
+                      <div class="d-flex align-items-center">
+                          <img *ngIf="user.imagePath" [src]="user.imagePath" alt="user" width="40" class="rounded-circle" />
+                          <div class="m-l-16">
+                              <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                                  {{ user.name }} {{ user.surname }}
+                              </h6>
+                          </div>
+                      </div>
+                  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
+                      Email
+                  </th>
+                  <td mat-cell *matCellDef="let user">
+                      <span class="f-s-14 text-muted">{{ user.email }}</span>
+                  </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
+                      Actions
+                  </th>
+                  <td mat-cell *matCellDef="let user" class="text-center">
+                      <div class="d-flex align-items-center justify-content-start">
+                          
+                          <mat-chip *ngIf="user.isApproved" class="status-approved">
+                              Approved
+                          </mat-chip>
+
+                          <ng-container *ngIf="!user.isApproved">
+                            <button mat-icon-button color="primary" class="m-l-8" (click)="approveUser(user)">
+                                <mat-icon>check</mat-icon>
+                            </button>
+                            <button mat-icon-button color="warn" (click)="declineUser(user)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </ng-container>
+
+                      </div>
+                  </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          </table>
+      </div>
+  </mat-card-content>
+</mat-card>

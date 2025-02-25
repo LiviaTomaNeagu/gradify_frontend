@@ -1,0 +1,46 @@
+.cardWithShadow {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.mat-chip {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* Target ONLY the Approved chip */
+.status-approved {
+  --mdc-chip-elevated-container-color: #52be89 !important;
+  --mdc-chip-label-text-color: white !important;
+}
+
+
+.btn-sm {
+  font-size: 13px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+}
+
+.m-r-8 {
+  margin-right: 8px;
+}
+
+.m-l-8 {
+  margin-left: 8px;
+}
+
+.rounded-circle {
+  border-radius: 50%;
+}
+
+.text-muted {
+  color: #6c757d;
+}

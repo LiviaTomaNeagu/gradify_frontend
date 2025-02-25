@@ -4,8 +4,10 @@ import {
   importProvidersFrom,
 } from '@angular/core';
 import {
+  HTTP_INTERCEPTORS,
   HttpClient,
   provideHttpClient,
+  withInterceptors,
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -29,6 +31,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 //Import all material modules
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
+import { GlobalInterceptor } from './@core/interceptors/global.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,7 +49,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withComponentInputBinding()
     ),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptors([AuthInterceptor, GlobalInterceptor])),
     provideClientHydration(),
     provideAnimationsAsync(),
     importProvidersFrom(

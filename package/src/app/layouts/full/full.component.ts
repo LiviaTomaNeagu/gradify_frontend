@@ -13,6 +13,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { HeaderComponent } from './header/header.component';
+import { UserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
+import { CurrentUserResponseInterfaceDTO } from 'src/app/@core/interfaces/user.interface';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -52,11 +55,14 @@ export class FullComponent implements OnInit {
   private isCollapsedWidthFixed = false;
   private htmlElement!: HTMLHtmlElement;
 
+  isLoading: boolean = true;
+  private readonly subscription: Subscription = new Subscription();
+
   get isOver(): boolean {
     return this.isMobileScreen;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService) {
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: UserService) {
 
     this.htmlElement = document.querySelector('html')!;
     this.htmlElement.classList.add('light-theme');
@@ -69,9 +75,25 @@ export class FullComponent implements OnInit {
 
         this.isContentWidthFixed = state.breakpoints[MONITOR_VIEW];
       });
+
+    this.initializeUserAndLayout();
+    this.subscription.add(
+      this.userService.currentUser$.subscribe({
+        next: (user: CurrentUserResponseInterfaceDTO | null) => {
+          if (user) {
+            this.isLoading = false;
+          }
+        },
+        error: () => {
+          this.isLoading = false;
+        },
+      })
+    );
+
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
 
   ngOnDestroy() {
     this.layoutChangesSubscription.unsubscribe(); 
@@ -88,4 +110,18 @@ export class FullComponent implements OnInit {
   onSidenavOpenedChange(isOpened: boolean) {
     this.isCollapsedWidthFixed = !this.isOver;
   }
+
+  async initializeUserAndLayout() {
+    await this.userService.initializeCurrentUser();
+    this.filterNavItems();
+  }
+
+  filterNavItems() {
+    const userRole = this.userService.getCurrentUserInfo()?.role;
+
+    this.navItems = this.navItems.filter(item => 
+      !item.roles || (userRole && item.roles.includes(userRole))
+    );
+  }
+  
 }
