@@ -5,7 +5,21 @@ import { R } from '@angular/cdk/keycodes';
 export const navItems: NavItem[] = [
   {
     navCap: 'Personal Management',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.ADMIN_CORPORATE],
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.ADMIN_CORPORATE, RoleTypeEnum.ADMIN],
+  },
+  {
+    displayName: 'Students List',
+    iconName: 'list',
+    bgcolor: 'primary',
+    route: '/lists/students',
+    roles: [RoleTypeEnum.ADMIN],
+  },
+  {
+    displayName: 'Teachers List',
+    iconName: 'list-details',
+    bgcolor: 'primary',
+    route: '/lists/teachers',
+    roles: [RoleTypeEnum.ADMIN],
   },
   {
     displayName: 'My Company',

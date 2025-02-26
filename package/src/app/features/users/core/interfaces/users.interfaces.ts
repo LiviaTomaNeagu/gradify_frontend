@@ -23,7 +23,7 @@ export interface UserDTO
     occupation: OccupationDTO
 }
 
-export interface GetUsersResponseDTO{
+export interface GetUserResponseDTO{
     id: string;
     name: string;
     surname: string;
@@ -31,6 +31,7 @@ export interface GetUsersResponseDTO{
     role: RoleTypeEnum;
     completedSteps: number;
     occupationName: string;
+    createdAt: Date;
     isApproved: boolean;
 }
 
@@ -43,7 +44,7 @@ export interface GetMentorsRequestDTO
 
 export interface GetMentorsResponseDTO
 {
-    users: GetUsersResponseDTO[]
+    users: GetUserResponseDTO[]
     totalUsers: number
 }
 

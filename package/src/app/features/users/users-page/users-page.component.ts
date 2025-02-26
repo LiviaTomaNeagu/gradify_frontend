@@ -3,7 +3,7 @@ import { UsersService } from '../core/services/users.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import { UserMapper } from 'src/app/@core/interfaces/user-mapper';
 import { CommonModule } from '@angular/common';
-import { GetMentorsRequestDTO, GetUsersResponseDTO } from '../core/interfaces/users.interfaces';
+import { GetMentorsRequestDTO, GetUserResponseDTO } from '../core/interfaces/users.interfaces';
 import { MatTableModule } from '@angular/material/table';
 import {MaterialModule} from 'src/app/material.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UsersPageComponent {
 
-  users: GetUsersResponseDTO[] = [];
+  users: GetUserResponseDTO[] = [];
   constructor(private usersService: UsersService, private userService: UserService, private snackBar: MatSnackBar) {
   }
 
@@ -52,7 +52,7 @@ export class UsersPageComponent {
     }
   }
 
-  approveUser(user: GetUsersResponseDTO): void {
+  approveUser(user: GetUserResponseDTO): void {
     this.usersService.approveUser(user.id).subscribe({
       next: () => {
         console.log("User approved");
@@ -65,7 +65,7 @@ export class UsersPageComponent {
     });
   }
 
-  declineUser(user: GetUsersResponseDTO): void {
+  declineUser(user: GetUserResponseDTO): void {
     this.usersService.declineUser(user.id).subscribe({
       next: () => {
         console.log("User declined");
