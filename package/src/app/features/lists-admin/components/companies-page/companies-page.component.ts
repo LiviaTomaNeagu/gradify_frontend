@@ -19,6 +19,7 @@ export class CompaniesPageComponent implements OnInit {
   pageSize: number = 10;
   currentPage: number = 0;
   totalCompanies: number = 0;
+  totalActiveCompanies: number = 0;
   isLoading: boolean = false;
   searchTerm: string = '';
 
@@ -41,6 +42,7 @@ export class CompaniesPageComponent implements OnInit {
     this.listsService.getCompanies(payload).subscribe((response: GetCompaniesResponseDTO) => {
       this.companies = new MatTableDataSource(response.occupations);
       this.totalCompanies = response.totalNumber;
+      this.totalActiveCompanies = response.totalActive;
       this.isLoading = false;
     });
   }
@@ -54,5 +56,8 @@ export class CompaniesPageComponent implements OnInit {
   onSearchChange(event: any): void {
     this.searchTerm = event.target.value;
     this.fetchCompanies();
+  }
+
+  createCompany(): void { 
   }
 }

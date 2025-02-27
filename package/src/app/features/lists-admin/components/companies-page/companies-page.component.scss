@@ -2,115 +2,118 @@
     height: calc(100vh - 150px);
     display: flex;
     flex-direction: column;
-    background: #F8F9FA; /* Light background to make it stand out */
   }
   
-  /* 🔹 Unique Header Styling */
-  .cardWithShadow {
-    flex-grow: 1;
+  /* 🔹 Stats Cards */
+  .stats-container {
     display: flex;
-    flex-direction: column;
-    border-radius: 12px;
+    justify-content: space-evenly; /* Ensures spacing is even */
+    gap: 15px; /* Adjusted for better spacing */
   }
   
-  .header-container {
-    padding: 12px 20px;
-    background-color: #1E1E2F; /* Darker header for a unique feel */
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .total-companies-card {
-    background-color: #673AB7; /* Purple accent color */
-    color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
+  .stats-card {
+    flex: 1;
     text-align: center;
-  }
-  
-  /* 🔹 Table Styling */
-  .table {
-    flex-grow: 1;
+    border-radius: 14px; /* Softer edges */
+    padding: 10px 10px 0px 10px;
+    color: white;
     display: flex;
     flex-direction: column;
-    overflow: auto;
-    padding: 16px;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    max-width: 320px; /* Increased size */
+    min-width: 270px; /* Slightly larger minimum */
   }
   
-  /* 🔹 Search Bar Styling */
-  .search-container {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 10px;
+  .stats-card h3 {
+    font-size: 20px; /* Increased for readability */
   }
   
-  .search-container mat-form-field {
-    width: 250px;
-  }
-  
-  /* 🔹 Table Responsive Styling */
-  .table-responsive {
-    flex-grow: 1;
-    overflow-y: auto;
-    background-color: white;
-    border-radius: 12px; /* Rounded corners for uniqueness */
-    padding: 16px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 🔹 Table Header (Darker Background) */
-  .mat-mdc-table thead {
-    background-color: #1E1E2F !important;
-  }
-  
-  th.mat-mdc-header-cell {
-    color: white !important;
+  .stats-card p {
+    font-size: 30px; /* Made numbers larger */
     font-weight: bold;
-    padding: 12px;
-    text-transform: uppercase;
   }
   
-  /* 🔹 Table Row Styling */
-  .mat-mdc-table tbody tr {
-    transition: background-color 0.3s ease;
-  }
-  
-  .mat-mdc-table tbody tr:hover {
-    background-color: #F0F0F5; /* Soft hover effect */
-  }
-  
-  /* 🔹 Table Cell Padding */
-  .mat-mdc-cell {
-    padding: 12px;
-    font-size: 14px;
-  }
-  
-  /* 🔹 Paginator Styling */
-  .custom-paginator {
-    background-color: #eeeeee;
+  /* 🔹 Card Icon */
+  .stats-icon {
+    font-size: 34px; /* Bigger icon */
+    background: rgba(255, 255, 255, 0.2);
     padding: 10px;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
+    border-radius: 50%;
   }
+  
+  /* 🔹 Bottom Bar Effect */
+  .stats-bar {
+    width: 100%;
+    height: 18px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 14px 14px;
+  }
+  
+  /* 🔹 Unique Colors */
+  .total-companies {
+    background: #3498db;
+  }
+  .total-companies-bar {
+    background: #2980b9;
+  }
+  
+  .active-companies {
+    background: #2ecc71;
+  }
+  .active-companies-bar {
+    background: #27ae60;
+  }
+  
+  .new-company {
+    background: #f39c12;
+  }
+  .new-company-bar {
+    background: #e67e22;
+  }
+  
+  .new-company button {
+    margin-top: 10px;
+    background: white;
+    color: #f39c12;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 16px; /* Bigger button */
+  }
+
   
   /* 🔹 Status Chip Styling */
   .status-active {
-    background-color: #28A745; /* Green */
+    background-color: #28A745;
     color: white;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 20px;
     font-weight: bold;
   }
   
   .status-inactive {
-    background-color: #DC3545; /* Red */
+    background-color: #DC3545;
     color: white;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 20px;
     font-weight: bold;
   }
+
+  .table-header-container
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+   
+  }
   
+  .header-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
