@@ -1,1 +1,85 @@
-<p>companies-page works!</p>
+<div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  
+  <div class="company-page" *ngIf="!isLoading">
+  
+    <mat-card class="cardWithShadow">
+        <mat-card-header class="header-container">
+          <div class="d-flex align-items-center justify-content-between w-100">
+            <mat-card-title class="header-title">Companies Management</mat-card-title>
+            
+            <mat-card class="total-companies-card">
+              <mat-card-content class="total-companies-content">
+                <h3 class="total-companies-text">Total Companies: {{ totalCompanies }}</h3>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-header>
+  
+        <div class="table">
+          
+        <mat-card-content class="p-t-0">
+          <div class="search-container">
+            <mat-form-field appearance="outline">
+              <mat-label>Search by Company Name or Admin</mat-label>
+              <input matInput (keyup)="onSearchChange($event)" placeholder="Type a company name or admin..." />
+            </mat-form-field>
+          </div>
+  
+          <div class="table-responsive">
+            <table mat-table [dataSource]="companies" class="w-100 mat-elevation-z2">
+  
+              <!-- 🔹 Company Name -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef class="table-header"> Company Name </th>
+                <td mat-cell *matCellDef="let company"> {{ company.name }} </td>
+              </ng-container>
+  
+              <!-- 🔹 Admin Name -->
+              <ng-container matColumnDef="adminName">
+                <th mat-header-cell *matHeaderCellDef class="table-header"> Admin Name </th>
+                <td mat-cell *matCellDef="let company"> {{ company.adminName }} </td>
+              </ng-container>
+  
+              <!-- 🔹 Admin Surname -->
+              <ng-container matColumnDef="adminSurname">
+                <th mat-header-cell *matHeaderCellDef class="table-header"> Admin Surname </th>
+                <td mat-cell *matCellDef="let company"> {{ company.adminSurname }} </td>
+              </ng-container>
+  
+              <!-- 🔹 Admin Email -->
+              <ng-container matColumnDef="adminEmail">
+                <th mat-header-cell *matHeaderCellDef class="table-header"> Admin Email </th>
+                <td mat-cell *matCellDef="let company"> <span class="f-s-14 text-muted">{{ company.adminEmail }}</span> </td>
+              </ng-container>
+  
+              <!-- 🔹 Status -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef class="table-header"> Status </th>
+                <td mat-cell *matCellDef="let company">
+                  <mat-chip [ngClass]="company.isActive ? 'status-active' : 'status-inactive'">
+                    {{ company.isActive ? 'Active' : 'Inactive' }}
+                  </mat-chip>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+            </table>
+          </div>
+  
+          <mat-paginator
+            class="custom-paginator"
+            [pageSize]="pageSize"
+            [length]="totalCompanies"
+            (page)="onPageChange($event)">
+          </mat-paginator>
+        </mat-card-content>
+        
+      </div>
+    </mat-card>
+  
+  </div>
+  

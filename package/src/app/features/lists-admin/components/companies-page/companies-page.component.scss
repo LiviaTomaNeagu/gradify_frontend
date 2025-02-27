@@ -1,0 +1,116 @@
+.company-page {
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+    background: #F8F9FA; /* Light background to make it stand out */
+  }
+  
+  /* 🔹 Unique Header Styling */
+  .cardWithShadow {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    border-radius: 12px;
+  }
+  
+  .header-container {
+    padding: 12px 20px;
+    background-color: #1E1E2F; /* Darker header for a unique feel */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .total-companies-card {
+    background-color: #673AB7; /* Purple accent color */
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* 🔹 Table Styling */
+  .table {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding: 16px;
+  }
+  
+  /* 🔹 Search Bar Styling */
+  .search-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .search-container mat-form-field {
+    width: 250px;
+  }
+  
+  /* 🔹 Table Responsive Styling */
+  .table-responsive {
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: white;
+    border-radius: 12px; /* Rounded corners for uniqueness */
+    padding: 16px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 🔹 Table Header (Darker Background) */
+  .mat-mdc-table thead {
+    background-color: #1E1E2F !important;
+  }
+  
+  th.mat-mdc-header-cell {
+    color: white !important;
+    font-weight: bold;
+    padding: 12px;
+    text-transform: uppercase;
+  }
+  
+  /* 🔹 Table Row Styling */
+  .mat-mdc-table tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .mat-mdc-table tbody tr:hover {
+    background-color: #F0F0F5; /* Soft hover effect */
+  }
+  
+  /* 🔹 Table Cell Padding */
+  .mat-mdc-cell {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  /* 🔹 Paginator Styling */
+  .custom-paginator {
+    background-color: #eeeeee;
+    padding: 10px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* 🔹 Status Chip Styling */
+  .status-active {
+    background-color: #28A745; /* Green */
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  
+  .status-inactive {
+    background-color: #DC3545; /* Red */
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+  

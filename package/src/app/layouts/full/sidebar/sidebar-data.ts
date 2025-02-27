@@ -22,6 +22,13 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.ADMIN],
   },
   {
+    displayName: 'Companies List',
+    iconName: 'layout-dashboard',
+    bgcolor: 'success',
+    route: '/lists/companies',
+    roles: [RoleTypeEnum.ADMIN],
+  },
+  {
     displayName: 'My Company',
     iconName: 'layout-dashboard',
     bgcolor: 'primary',

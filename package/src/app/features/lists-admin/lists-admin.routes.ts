@@ -15,4 +15,8 @@ export const ListsAdminRoutes: Routes = [
     path:'students',
     loadComponent:()=>import('./components/students-page/students-page.component').then(c => c.StudentsPageComponent)
   },
+  {
+    path:'companies',
+    loadComponent:()=>import('./components/companies-page/companies-page.component').then(c => c.CompaniesPageComponent)
+  },
 ];
