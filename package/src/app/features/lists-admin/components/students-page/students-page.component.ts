@@ -67,6 +67,7 @@ export class StudentsPageComponent implements OnInit {
   onPageChange(event: any): void {
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
+    console.log(event);
     this.fetchStudents();
   }
 
@@ -76,5 +77,15 @@ export class StudentsPageComponent implements OnInit {
 
   onSearchChange(event: any): void {
     this.searchSubject.next(event.target.value);
+    this.resetPagination();
+    this.fetchStudents();
   }
+
+  private resetPagination(): void {
+    this.currentPage = 0;
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
+  }
+
 }

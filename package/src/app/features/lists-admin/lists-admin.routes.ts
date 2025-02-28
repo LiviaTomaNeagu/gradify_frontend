@@ -19,4 +19,8 @@ export const ListsAdminRoutes: Routes = [
     path:'companies',
     loadComponent:()=>import('./components/companies-page/companies-page.component').then(c => c.CompaniesPageComponent)
   },
+  {
+    path:'companies/:id',
+    loadComponent:()=>import('./components/company-details/company-details.component').then(c => c.CompanyDetailsComponent)
+  }
 ];

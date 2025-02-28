@@ -5,6 +5,7 @@ import { ListsService } from '../../core/services/lists.service';
 import { ShortCompanyDTO, GetCompaniesResponseDTO } from '../../core/interfaces/get-companies.interface';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-companies-page',
@@ -16,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class CompaniesPageComponent implements OnInit {
   companies: MatTableDataSource<ShortCompanyDTO>;
   displayedColumns: string[] = ['name', 'adminName', 'adminSurname', 'adminEmail', 'status'];
-  pageSize: number = 10;
+  pageSize: number = 5;
   currentPage: number = 0;
   totalCompanies: number = 0;
   totalActiveCompanies: number = 0;
@@ -25,7 +26,7 @@ export class CompaniesPageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private listsService: ListsService) {}
+  constructor(private listsService: ListsService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchCompanies();
@@ -59,5 +60,9 @@ export class CompaniesPageComponent implements OnInit {
   }
 
   createCompany(): void { 
+  }
+
+  goToCompanyDetails(companyId: number): void {
+    this.router.navigate([`/lists/companies/${companyId}`]);
   }
 }

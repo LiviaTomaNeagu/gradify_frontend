@@ -86,6 +86,7 @@
           class="custom-paginator"
           [pageSize]="pageSize"
           [length]="totalTeachers"
+          [pageIndex]="currentPage"
           (page)="onPageChange($event)">
         </mat-paginator>
       </mat-card-content>

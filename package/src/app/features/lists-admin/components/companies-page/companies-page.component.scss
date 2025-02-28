@@ -28,11 +28,13 @@
   
   .stats-card h3 {
     font-size: 20px; /* Increased for readability */
+    margin: 20px 0px 5px 0px
   }
   
   .stats-card p {
     font-size: 30px; /* Made numbers larger */
     font-weight: bold;
+    margin: 25px 0px 10px 0px; /* Adjusted spacing */
   }
   
   /* 🔹 Card Icon */
@@ -81,7 +83,7 @@
     color: #f39c12;
     font-size: 16px;
     font-weight: 600;
-    padding: 10px 16px; /* Bigger button */
+    padding: 16px 10px; /* Bigger button */
   }
 
   
@@ -92,6 +94,7 @@
     padding: 7px 16px;
     border-radius: 20px;
     font-weight: bold;
+  
   }
   
   .status-inactive {
@@ -117,3 +120,31 @@
     font-weight: bold;
     color: #333;
   }
+  :host ::ng-deep .header-container {
+    padding: 20px 20px 0 20px !important; 
+}
+.table {
+  max-height: calc(100vh - 450px);
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+.table-responsive td, .table-responsive mat-cell {
+  white-space: nowrap;
+  padding: 13px 15px;
+}
+
+:host ::ng-deep .mat-mdc-header-cell {
+  font-weight: bold !important;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
+  background-color: #f5f5f5;
+}

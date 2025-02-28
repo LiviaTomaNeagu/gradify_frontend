@@ -63,6 +63,7 @@ export class TeachersPageComponent implements OnInit {
 
   onSearchChange(event: any): void {
     this.searchTerm = event.target.value;
+    this.resetPagination();
     this.fetchTeachers();
   }
 
@@ -94,5 +95,12 @@ export class TeachersPageComponent implements OnInit {
       duration: 3000,
       panelClass: 'snackbar-success'
     });
+  }
+
+  resetPagination(): void {
+    this.currentPage = 0;
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
   }
 }

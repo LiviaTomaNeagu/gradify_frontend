@@ -10,7 +10,7 @@ export interface ShortCompanyDTO {
 export interface CompanyDetailsDTO {
     id: number;
     name: string;
-    adminEMail: string;
+    adminEmail: string;
     adminName: string;
     adminSurname: string;
     isActive: boolean;
@@ -18,8 +18,9 @@ export interface CompanyDetailsDTO {
     city: string;
     country: string;
     createdAt: string;
-    domanin: string;
-    }
+    domain: string;
+    numberOfResponses: number;
+}
 
 export interface GetCompaniesResponseDTO {
     occupations: ShortCompanyDTO[];
