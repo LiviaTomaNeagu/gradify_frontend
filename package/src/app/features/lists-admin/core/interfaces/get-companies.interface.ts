@@ -33,3 +33,15 @@ export interface GetCompaniesRequestDTO {
     pageSize: number;
     searchTerm: string;
 }
+
+export interface AddCompanyRequestDTO {
+    name: string;
+    domain: string;
+    adminEmail: string;
+    adminName: string;
+    adminSurname: string;
+}
+
+export interface AddCompanyResponseDTO {
+    id: string;
+}

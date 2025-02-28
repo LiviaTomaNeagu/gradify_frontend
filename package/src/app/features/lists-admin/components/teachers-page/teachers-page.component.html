@@ -21,7 +21,7 @@
         <div class="search-container">
           <mat-form-field appearance="outline">
             <mat-label>Search by Name or Surname</mat-label>
-            <input matInput (keyup)="onSearchChange($event)" placeholder="Type a name or surname..." />
+            <input matInput [(ngModel)]="searchTerm" (keyup)="onSearchChange($event)" placeholder="Type a name or surname..." />
           </mat-form-field>
         </div>
 
@@ -85,7 +85,7 @@
         <mat-paginator
           class="custom-paginator"
           [pageSize]="pageSize"
-          [length]="totalTeachers"
+          [length]="filteredTeachers"
           [pageIndex]="currentPage"
           (page)="onPageChange($event)">
         </mat-paginator>

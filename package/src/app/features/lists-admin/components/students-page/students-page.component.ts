@@ -10,11 +10,12 @@ import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { DatePipe } from '@angular/common';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-students-page',
   standalone: true,
-  imports: [MaterialModule, CommonModule],
+  imports: [MaterialModule, CommonModule, FormsModule],
   providers: [DatePipe],
   templateUrl: './students-page.component.html',
   styleUrls: ['./students-page.component.scss']
@@ -26,6 +27,7 @@ export class StudentsPageComponent implements OnInit {
   pageSize: number = 7;
   currentPage: number = 0;
   totalStudents: number = 0;
+  filteredStudents: number = 0;
   searchTerm: string = '';
   isLoading: boolean = false;
 
@@ -60,6 +62,7 @@ export class StudentsPageComponent implements OnInit {
     this.listsService.getUsersByRole(payload).subscribe((response) => {
       this.students = new MatTableDataSource(response.users); 
       this.totalStudents = response.totalUsers;
+      this.filteredStudents = response.filteredUsers;
       this.isLoading = false;
     });
   }
@@ -76,10 +79,11 @@ export class StudentsPageComponent implements OnInit {
   }
 
   onSearchChange(event: any): void {
-    this.searchSubject.next(event.target.value);
+    this.searchTerm = event.target.value;  // Salvează valoarea în searchTerm
+    this.searchSubject.next(this.searchTerm);
     this.resetPagination();
-    this.fetchStudents();
-  }
+}
+
 
   private resetPagination(): void {
     this.currentPage = 0;

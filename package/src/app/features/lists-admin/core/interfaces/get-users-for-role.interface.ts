@@ -11,4 +11,5 @@ export interface GetUsersForRoleRequestDTO {
 export interface GetUsersResponseDTO {
     users: GetUserResponseDTO[];
     totalUsers: number;
+    filteredUsers: number;
 }

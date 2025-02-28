@@ -6,13 +6,15 @@ import { ShortCompanyDTO, GetCompaniesResponseDTO } from '../../core/interfaces/
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-companies-page',
   standalone: true,
   templateUrl: './companies-page.component.html',
   styleUrls: ['./companies-page.component.scss'],
-  imports: [MaterialModule, CommonModule]
+  imports: [MaterialModule, CommonModule, FormsModule]
 })
 export class CompaniesPageComponent implements OnInit {
   companies: MatTableDataSource<ShortCompanyDTO>;
@@ -25,11 +27,20 @@ export class CompaniesPageComponent implements OnInit {
   searchTerm: string = '';
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
-
+  private searchSubject = new Subject<string>();
   constructor(private listsService: ListsService, private router: Router) {}
 
   ngOnInit(): void {
     this.fetchCompanies();
+
+    this.searchSubject.pipe(
+          debounceTime(300),
+          distinctUntilChanged()
+        ).subscribe((search) => {
+          console.log(search); 
+          this.searchTerm = search;
+          this.fetchCompanies();
+        });
   }
 
   fetchCompanies(): void {
@@ -55,14 +66,24 @@ export class CompaniesPageComponent implements OnInit {
   }
 
   onSearchChange(event: any): void {
-    this.searchTerm = event.target.value;
-    this.fetchCompanies();
-  }
+    this.searchTerm = event.target.value;  // Salvează valoarea în searchTerm
+    this.searchSubject.next(this.searchTerm);
+    this.resetPagination();
+}
 
   createCompany(): void { 
+    console.log('navigating to createCompany');
+    this.router.navigate(['/lists/companies/add']);
   }
 
   goToCompanyDetails(companyId: number): void {
     this.router.navigate([`/lists/companies/${companyId}`]);
+  }
+
+  private resetPagination(): void {
+    this.currentPage = 0;
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
   }
 }

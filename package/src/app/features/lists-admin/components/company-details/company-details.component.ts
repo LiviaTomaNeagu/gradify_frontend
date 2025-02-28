@@ -34,4 +34,15 @@ export class CompanyDetailsComponent implements OnInit {
     });
   }
 
+  get adminAvatar(): string {
+    const avatars = [
+      '/assets/images/profile/user-2.jpg',
+      '/assets/images/profile/user-3.jpg'
+    ];
+
+    // Ensure we don't get errors if adminName is empty
+    const index = this.company.name ? this.company.name.length % 2 : 0;
+    return avatars[index];
+  }
+
 }

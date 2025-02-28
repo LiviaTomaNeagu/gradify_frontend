@@ -9,11 +9,13 @@ import { UsersService } from 'src/app/features/users/core/services/users.service
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-teachers-page',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, FormsModule],
   templateUrl: './teachers-page.component.html',
   styleUrls: ['./teachers-page.component.scss'],
   providers: [DatePipe]
@@ -24,6 +26,7 @@ export class TeachersPageComponent implements OnInit {
   pageSize: number = 5;
   currentPage: number = 0;
   totalTeachers: number = 0;
+  filteredTeachers: number = 0; 
   searchTerm: string = '';
   isLoading: boolean = false;
 
@@ -31,8 +34,20 @@ export class TeachersPageComponent implements OnInit {
 
   constructor(private listsService: ListsService, private datePipe: DatePipe, private usersService: UsersService, private snackBar: MatSnackBar) {}
 
+  
+    private searchSubject = new Subject<string>();
+    
   ngOnInit(): void {
     this.fetchTeachers();
+
+    this.searchSubject.pipe(
+          debounceTime(300),
+          distinctUntilChanged()
+        ).subscribe((search) => {
+          console.log(search); 
+          this.searchTerm = search;
+          this.fetchTeachers();
+        });
   }
 
   fetchTeachers(): void {
@@ -47,6 +62,7 @@ export class TeachersPageComponent implements OnInit {
     this.listsService.getUsersByRole(payload).subscribe((response) => {
       this.teachers = new MatTableDataSource(response.users);
       this.totalTeachers = response.totalUsers;
+      this.filteredTeachers = response.filteredUsers;
       this.isLoading = false;
     });
   }
@@ -63,9 +79,10 @@ export class TeachersPageComponent implements OnInit {
 
   onSearchChange(event: any): void {
     this.searchTerm = event.target.value;
+    this.searchSubject.next(this.searchTerm);
     this.resetPagination();
-    this.fetchTeachers();
-  }
+}
+
 
   approveTeacher(teacher: any): void {
     this.usersService.approveUser(teacher.id).subscribe(() => {
