@@ -1,0 +1,98 @@
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1400px;  /* ✅ Increased max width */
+  margin: auto;
+}
+
+/* 🔹 First Row: Swap Columns (Right -> Left, Left -> Right) */
+.first-row {
+  display: grid;
+  grid-template-columns: 1.5fr 2.5fr; /* ✅ Swapped: Right column is now bigger */
+  align-items: start;
+  gap: 20px;
+}
+
+/* 🔹 Swap Order of Elements */
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  order: -1; /* ✅ Moves the right column to the left */
+}
+
+/* 🔹 Latest Questions */
+.latest-questions-card {
+  max-height: 450px;
+  min-height: 400px;
+  overflow-y: auto;
+  background-color: #ff9900ab;
+}
+
+
+/* 🔹 Second Row: Graph + Users */
+.second-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Equal width for graph & users */
+  gap: 20px;
+}
+
+/* 🔹 Titles Alignment */
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* ✅ Centered titles */
+  padding: 10px;
+  font-weight: bold;
+}
+
+/* 🔹 Scroll Container for Questions */
+.scroll-container {
+  max-height: 350px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+/* 🔹 Total Answers */
+.stat-card {
+  text-align: center;
+  background-color: #007bff;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 20px;
+
+  h2 {
+    font-size: 40px;
+    margin: 10px 0;
+  }
+}
+
+/* 🔹 Favorite Technology */
+.fav-tech-card {
+  text-align: center;
+  padding: 20px;
+}
+
+/* 🔹 Activity Graph */
+.activity-graph-card {
+  padding: 20px;
+}
+
+/* 🔹 Users Table */
+.cardWithShadow {
+  padding: 20px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* 🔹 Responsive Design */
+@media (max-width: 768px) {
+  .first-row, .second-row {
+    grid-template-columns: 1fr; /* Stack elements on smaller screens */
+  }
+}

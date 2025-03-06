@@ -39,7 +39,6 @@ export interface GetQuestionsResponseDTO {
 }
 
 export interface AddAnswerRequestDTO {
-  userId: string;
   content: string;
 }
 

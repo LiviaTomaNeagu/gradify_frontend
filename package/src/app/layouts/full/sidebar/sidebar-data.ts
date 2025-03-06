@@ -5,7 +5,7 @@ import { R } from '@angular/cdk/keycodes';
 export const navItems: NavItem[] = [
   {
     navCap: 'Personal Management',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.ADMIN_CORPORATE, RoleTypeEnum.ADMIN],
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.ADMIN_CORPORATE, RoleTypeEnum.ADMIN, RoleTypeEnum.MENTOR],
   },
   {
     displayName: 'Students List',
@@ -48,7 +48,14 @@ export const navItems: NavItem[] = [
     iconName: 'layout-dashboard',
     bgcolor: 'primary',
     route: '/dashboard',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR],
+    roles: [RoleTypeEnum.STUDENT],
+  },
+  {
+    displayName: 'Dashboard',
+    iconName: 'layout-dashboard',
+    bgcolor: 'primary',
+    route: '/dashboard/mentor',
+    roles: [RoleTypeEnum.MENTOR],
   },
   {
     displayName: 'My Progress',
@@ -56,6 +63,13 @@ export const navItems: NavItem[] = [
     bgcolor: 'warning',
     route: '/ui-components/badge',
     roles: [RoleTypeEnum.STUDENT],
+  },
+  {
+    displayName: 'My Company',
+    iconName: 'rosette',
+    bgcolor: 'warning',
+    route: 'lists/companies',
+    roles: [RoleTypeEnum.MENTOR],
   },
   {
     navCap: 'Community',

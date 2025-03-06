@@ -1,0 +1,102 @@
+<div class="dashboard-layout">
+
+  <!-- 🔹 First Row (Swapped Columns) -->
+  <div class="row first-row">
+
+    <!-- 🔹 Right Column (Now on the Left) -->
+    <div class="right-column">
+      <!-- 🔹 Total Answers -->
+      <mat-card class="stat-card">
+        <mat-card-header class="card-header">
+          <mat-card-title>Total Answers</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <h2>{{ totalAnswers }}</h2>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- 🔹 Favorite Technology -->
+      <mat-card class="fav-tech-card">
+        <mat-card-header class="card-header">
+          <mat-card-title>Favorite Technology</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Based on your latest interactions, you frequently discuss:</p>
+          <h3>{{ favoriteTech }}</h3>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- 🔹 Latest Questions (Now on the Right) -->
+    <mat-card class="latest-questions-card">
+      <mat-card-header class="card-header">
+        <mat-card-title>Latest Questions You Answered</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="scroll-container">
+          <app-related-card *ngFor="let question of mapLatestQuestionsToRelatedCard(latestQuestions)" [question]="question"></app-related-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <!-- 🔹 Second Row (Unchanged) -->
+  <div class="row second-row">
+    <mat-card class="activity-graph-card">
+      <mat-card-header class="card-header">
+        <mat-card-title>Weekly Activity</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <apx-chart
+        *ngIf="chartOptions" 
+          [series]="chartOptions.series" 
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [yaxis]="chartOptions?.yaxis"
+          [dataLabels]="chartOptions.dataLabels"
+          [tooltip]="chartOptions.tooltip"
+          [stroke]="chartOptions.stroke"
+          [legend]="chartOptions.legend"
+          [grid]="chartOptions.grid"
+          [plotOptions]="chartOptions.plotOptions">
+        </apx-chart>
+      </mat-card-content>
+    </mat-card>
+    
+
+    <mat-card class="cardWithShadow">
+      <mat-card-header class="card-header">
+        <mat-card-title>Users You Interacted With</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="table-responsive">
+          <table mat-table [dataSource]="topUsers" class="w-100">
+            <ng-container matColumnDef="profile">
+              <td mat-cell *matCellDef="let user">
+                <div class="d-flex align-items-center">
+                  <img [src]="getDefaultAvatar(user.name)" alt="user-avatar" width="50" class="rounded-circle" />
+                  <div class="m-l-16">
+                    <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 f-w-600">
+                      {{ user.name }} {{ user.surname }}
+                    </h6>
+                    <span class="f-s-14">{{ user.occupation?.name || 'N/A' }}</span>
+                  </div>
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <td mat-cell *matCellDef="let user" class="mat-body-1">
+                <span class="f-s-14">{{ user.email }}</span>
+              </td>
+            </ng-container>
+
+            <tr mat-row *matRowDef="let row; columns: ['profile', 'email']"></tr>
+          </table>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</div>

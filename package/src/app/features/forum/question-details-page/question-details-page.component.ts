@@ -63,7 +63,6 @@ export class QuestionDetailsPageComponent {
     }
   
     const newAnswerRequest: AddAnswerRequestDTO = {
-      userId: '01947998-22be-7e4d-ae86-e7e73e1fa9f2',
       content: this.newAnswer.trim(),
     };
   
