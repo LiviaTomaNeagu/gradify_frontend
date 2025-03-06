@@ -1,0 +1,119 @@
+<div class="company-details-container" *ngIf="company">
+  
+    <!-- 🔹 Title -->
+    <h1 class="company-title">
+      <mat-icon class="company-icon">business</mat-icon>
+      {{ company.name }}
+    </h1>
+    <p class="company-subtitle">Joined on {{ company.createdAt | date }}</p>
+  
+    <!-- 🔹 Grid Layout for Main Content -->
+    <div class="details-grid">
+      
+        <mat-card class="admin-card">
+            <div class="admin-avatar-container">
+              <img
+                class="admin-avatar"
+                matChipAvatar
+                [src]="adminAvatar"
+                alt="Administrator Photo"
+              />
+            </div>
+            
+            <mat-card-title>Administrator</mat-card-title>
+            
+            <mat-card-content class="admin-card-content">
+                <p><strong>Name:</strong> <span>{{ company.adminName }} {{ company.adminSurname }}</span></p>
+                <p><strong>Email:</strong> <a [href]="'mailto:' + company.adminEmail">{{ company.adminEmail }}</a></p>
+              </mat-card-content>
+              
+          </mat-card>
+          
+  
+      <!-- 🔹 Right Section (Domain & Status - Stacked) -->
+      <div class="right-section">
+        <!-- 🔹 Domain Section -->
+        <mat-card class="domain-card">
+            <mat-card-title>Domain</mat-card-title>
+            <mat-card-content>
+              <p>{{ company.domain }}</p>
+            </mat-card-content>
+          
+            <!-- Decorative Shape at Bottom -->
+            <div class="domain-decorative"></div>
+          </mat-card>
+          
+  
+        <!-- 🔹 Status Section -->
+        <mat-card class="status-card" [ngClass]="company.isActive ? 'status-active-card' : 'status-inactive-card'">
+          <mat-card-title>Status</mat-card-title>
+          <mat-card-content>
+            <mat-chip class="status-chip" [ngClass]="company.isActive ? 'status-active' : 'status-inactive'">
+              {{ company.isActive ? 'Active' : 'Inactive' }}
+            </mat-chip>
+  
+            <p *ngIf="!company.isActive" class="inactive-message">
+              Currently, there are no interactions between company employees and students.
+            </p>
+  
+            <!-- Show Total Responses only if Active -->
+            <div *ngIf="company.isActive" class="responses-section">
+              <mat-icon class="responses-icon">message</mat-icon>
+              <span class="responses-count">
+                {{ company.numberOfResponses }} responses from employees.
+              </span>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+  
+    </div>
+  
+    <!-- 🔹 Address Section (Full-Width Card at Bottom) -->
+    <mat-card class="address-card">
+        <mat-card-title>Company Location</mat-card-title>
+        
+        <div class="timeline-container">
+          <!-- Address -->
+          <div class="timeline-item">
+            <div class="icon-container">
+              <mat-icon class="location-icon">location_on</mat-icon>
+            </div>
+            <div class="timeline-desc">
+              <span class="timeline-title">Address</span>
+              <p>{{ company.address }}</p>
+            </div>
+          </div>
+      
+          <!-- City -->
+          <div class="timeline-item">
+            <div class="icon-container">
+              <mat-icon class="location-icon">location_city</mat-icon>
+            </div>
+            <div class="timeline-desc">
+              <span class="timeline-title">City</span>
+              <p>{{ company.city }}</p>
+            </div>
+          </div>
+      
+          <!-- Country -->
+          <div class="timeline-item">
+            <div class="icon-container">
+              <mat-icon class="location-icon">public</mat-icon>
+            </div>
+            <div class="timeline-desc">
+              <span class="timeline-title">Country</span>
+              <p>{{ company.country }}</p>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      
+  
+  </div>
+  
+  <!-- 🔹 Loading Spinner -->
+  <div class="loading-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+  

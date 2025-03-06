@@ -1,0 +1,95 @@
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="teachers-page" *ngIf="!isLoading">
+  <mat-card class="cardWithShadow">
+    <mat-card-header class="header-container">
+      <div class="d-flex align-items-center justify-content-between w-100">
+        <mat-card-title class="header-title">Teachers Management</mat-card-title>
+
+        <mat-card class="total-teachers-card">
+          <mat-card-content class="total-teachers-content">
+            <h3 class="total-teachers-text">Total Teachers: {{ totalTeachers }}</h3>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </mat-card-header>
+
+    <div class="table">
+      <mat-card-content class="p-t-0">
+        <div class="search-container">
+          <mat-form-field appearance="outline">
+            <mat-label>Search by Name or Surname</mat-label>
+            <input matInput [(ngModel)]="searchTerm" (keyup)="onSearchChange($event)" placeholder="Type a name or surname..." />
+          </mat-form-field>
+        </div>
+
+        <div class="table-responsive">
+          <table mat-table [dataSource]="teachers" class="w-100 mat-elevation-z2">
+
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef class="table-header"> Name </th>
+              <td mat-cell *matCellDef="let teacher"> {{ teacher.name }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="surname">
+              <th mat-header-cell *matHeaderCellDef class="table-header"> Surname </th>
+              <td mat-cell *matCellDef="let teacher"> {{ teacher.surname }} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef class="table-header"> Email </th>
+              <td mat-cell *matCellDef="let teacher"> <span class="f-s-14 text-muted">{{ teacher.email }}</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="joinedDate">
+              <th mat-header-cell *matHeaderCellDef class="table-header"> Joined Date </th>
+              <td mat-cell *matCellDef="let teacher"> <span class="f-s-14 text-muted">{{ formatDate(teacher.createdAt) }}</span> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef class="f-w-600 mat-subtitle-1 f-s-16">
+                Actions
+              </th>
+              <td mat-cell *matCellDef="let teacher" class="text-center">
+                <div class="d-flex align-items-center justify-content-start">
+                  
+                  <mat-chip *ngIf="teacher.isApproved" class="status-approved">
+                    Approved
+                  </mat-chip>
+
+                  <ng-container *ngIf="!teacher.isApproved">
+                    <button mat-icon-button color="primary" class="m-l-8" (click)="approveTeacher(teacher)">
+                      <mat-icon>check</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="declineTeacher(teacher)">
+                      <mat-icon>close</mat-icon>
+                    </button>
+                  </ng-container>
+
+                  <button *ngIf="teacher.isApproved" mat-icon-button color="warn" class="m-l-8" (click)="deleteTeacher(teacher)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          </table>
+        </div>
+
+        <mat-paginator
+          class="custom-paginator"
+          [pageSize]="pageSize"
+          [length]="filteredTeachers"
+          [pageIndex]="currentPage"
+          (page)="onPageChange($event)">
+        </mat-paginator>
+      </mat-card-content>
+    </div>
+  </mat-card>
+</div>

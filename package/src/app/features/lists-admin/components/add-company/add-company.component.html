@@ -1,0 +1,66 @@
+<mat-card class="add-company-card">
+    <mat-card-title>Create a New Company</mat-card-title>
+    <p class="form-message">Please fill in the details below to register a new company.</p>
+  
+    <mat-card-content>
+      <form [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+        
+        <!-- Company Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Company Name</mat-label>
+          <mat-icon matPrefix>business</mat-icon> <!-- 🔹 Icon Added -->
+          <input matInput formControlName="name" required>
+          <mat-error *ngIf="companyForm.get('name')?.invalid && companyForm.get('name')?.touched">
+            Name is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Domain -->
+        <mat-form-field appearance="outline">
+          <mat-label>Domain</mat-label>
+          <mat-icon matPrefix>language</mat-icon> <!-- 🔹 Icon Added -->
+          <input matInput formControlName="domain" required>
+          <mat-error *ngIf="companyForm.get('domain')?.invalid && companyForm.get('domain')?.touched">
+            Domain is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Admin Email -->
+        <mat-form-field appearance="outline">
+          <mat-label>Admin Email</mat-label>
+          <mat-icon matPrefix>email</mat-icon> <!-- 🔹 Icon Added -->
+          <input matInput formControlName="adminEmail" required type="email">
+          <mat-error *ngIf="companyForm.get('adminEmail')?.invalid && companyForm.get('adminEmail')?.touched">
+            Enter a valid email.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Admin Name -->
+        <mat-form-field appearance="outline">
+          <mat-label>Admin First Name</mat-label>
+          <mat-icon matPrefix>person</mat-icon> <!-- 🔹 Icon Added -->
+          <input matInput formControlName="adminName" required>
+          <mat-error *ngIf="companyForm.get('adminName')?.invalid && companyForm.get('adminName')?.touched">
+            First name is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Admin Surname -->
+        <mat-form-field appearance="outline">
+          <mat-label>Admin Last Name</mat-label>
+          <mat-icon matPrefix>person_outline</mat-icon> <!-- 🔹 Icon Added -->
+          <input matInput formControlName="adminSurname" required>
+          <mat-error *ngIf="companyForm.get('adminSurname')?.invalid && companyForm.get('adminSurname')?.touched">
+            Last name is required.
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <button mat-raised-button color="primary" type="submit" [disabled]="companyForm.invalid">
+          Create Company
+        </button>
+  
+      </form>
+    </mat-card-content>
+  </mat-card>
+  

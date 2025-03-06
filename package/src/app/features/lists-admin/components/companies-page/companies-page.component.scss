@@ -1,0 +1,150 @@
+.company-page {
+    height: calc(100vh - 150px);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 🔹 Stats Cards */
+  .stats-container {
+    display: flex;
+    justify-content: space-evenly; /* Ensures spacing is even */
+    gap: 15px; /* Adjusted for better spacing */
+  }
+  
+  .stats-card {
+    flex: 1;
+    text-align: center;
+    border-radius: 14px; /* Softer edges */
+    padding: 10px 10px 0px 10px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    max-width: 320px; /* Increased size */
+    min-width: 270px; /* Slightly larger minimum */
+  }
+  
+  .stats-card h3 {
+    font-size: 20px; /* Increased for readability */
+    margin: 20px 0px 5px 0px
+  }
+  
+  .stats-card p {
+    font-size: 30px; /* Made numbers larger */
+    font-weight: bold;
+    margin: 25px 0px 10px 0px; /* Adjusted spacing */
+  }
+  
+  /* 🔹 Card Icon */
+  .stats-icon {
+    font-size: 34px; /* Bigger icon */
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 50%;
+  }
+  
+  /* 🔹 Bottom Bar Effect */
+  .stats-bar {
+    width: 100%;
+    height: 18px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 14px 14px;
+  }
+  
+  /* 🔹 Unique Colors */
+  .total-companies {
+    background: #3498db;
+  }
+  .total-companies-bar {
+    background: #2980b9;
+  }
+  
+  .active-companies {
+    background: #2ecc71;
+  }
+  .active-companies-bar {
+    background: #27ae60;
+  }
+  
+  .new-company {
+    background: #f39c12;
+  }
+  .new-company-bar {
+    background: #e67e22;
+  }
+  
+  .new-company button {
+    margin-top: 10px;
+    background: white;
+    color: #f39c12;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 10px; /* Bigger button */
+  }
+
+  
+  /* 🔹 Status Chip Styling */
+  .status-active {
+    background-color: #28A745;
+    color: white;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+  
+  }
+  
+  .status-inactive {
+    background-color: #DC3545;
+    color: white;
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+  }
+
+  .table-header-container
+  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 10px;
+   
+  }
+  
+  .header-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+  }
+  :host ::ng-deep .header-container {
+    padding: 20px 20px 0 20px !important; 
+}
+.table {
+  max-height: calc(100vh - 450px);
+}
+
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none !important;
+}
+
+.table-responsive td, .table-responsive mat-cell {
+  white-space: nowrap;
+  padding: 13px 15px;
+}
+
+:host ::ng-deep .mat-mdc-header-cell {
+  font-weight: bold !important;
+}
+
+.clickable-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickable-row:hover {
+  background-color: #f5f5f5;
+}

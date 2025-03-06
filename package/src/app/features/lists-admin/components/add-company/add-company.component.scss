@@ -1,0 +1,44 @@
+/* 🔹 Main Card */
+.add-company-card {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* 🔹 Message Above the Form */
+  .form-message {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* 🔹 Form Fields */
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  /* 🔹 Icon Styling */
+  mat-icon {
+    color: #1e88e5;
+    margin-right: 5px;
+  }
+  
+  /* 🔹 Submit Button */
+  button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  /* 🔹 Responsive Design */
+  @media (max-width: 600px) {
+    .add-company-card {
+      width: 90%;
+    }
+  }
+  

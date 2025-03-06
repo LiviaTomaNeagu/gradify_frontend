@@ -1,0 +1,306 @@
+.company-details-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* 🔹 Title & Subtitle */
+  .company-title {
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .company-icon {
+    font-size: 32px;
+    color: #3f51b5;
+  }
+  
+  .company-subtitle {
+    font-size: 18px;
+    color: #666;
+    margin-top: -5px;
+  }
+  
+  /* 🔹 Grid Layout */
+  .details-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  
+  /* 🔹 Right Section (Stacked Domain & Status) */
+  .right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 40%;
+  }
+  
+  .domain-card, .status-card {
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+
+  /* 🔹 Domain Card */
+.domain-card {
+    border-left: 5px solid #1e88e5;
+    text-align: right;
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 30px; /* Keep padding balanced */
+    font-size: 20px;
+
+    ::ng-deep .mat-mdc-card-title
+    {
+        font-size: 26px;
+        margin-right: 25px;
+    }
+  }
+  
+  /* 🔹 Decorative Wave Effect */
+  .domain-decorative {
+    position: absolute;
+    bottom: 0px; /* Moves the wave UP */
+    left: 0;
+    width: 100%;
+    height: 100px; /* Increased height slightly for more visibility */
+    background: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231e88e5' fill-opacity='1' d='M0,192L48,170.7C96,149,192,107,288,128C384,149,480,235,576,266.7C672,299,768,277,864,261.3C960,245,1056,235,1152,234.7C1248,235,1344,245,1392,250.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover;
+  }
+  
+
+  
+  
+  /* 🔹 Status Section (Square Shape) */
+  .status-card {
+    flex: 1;
+    min-width: 200px;
+    height: 180px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .status-active-card {
+    background-color: #e8f5e9;
+    border-left: 5px solid #4caf50;
+
+    ::ng-deep .mat-mdc-card-title
+    {
+        font-size: 24px;
+    }
+  }
+  
+  .status-inactive-card {
+    background-color: #ff9800;
+    color: white;
+
+    ::ng-deep .mat-mdc-card-title
+    {
+        font-size: 24px;
+    }
+  }
+  
+  /* 🔹 Status Chip */
+  .status-chip {
+    font-size: 26px;
+    padding: 8px 12px;
+    border-radius: 16px;
+    color: white;
+  }
+  
+  .status-active {
+    background-color: #4caf50;
+  }
+  
+  .status-inactive {
+    background-color: #ffdeab;
+    color: #ff9800;
+  }
+  
+  /* 🔹 Inactive Message */
+  .inactive-message {
+    font-size: 18px;
+    margin-top: 10px;
+    color: white;
+  }
+  
+  /* 🔹 Responses Section */
+  .responses-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    background: rgba(33, 150, 243, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    width: 90%;
+  }
+  
+  .responses-icon {
+    font-size: 28px;
+    margin-right: 6px;
+    color: #1e88e5;
+  }
+  
+  .responses-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #1e88e5;
+  }
+  
+/* 🔹 Admin Card */
+.admin-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    position: relative; /* Needed for animation */
+    overflow: hidden; /* Prevents overflow of animated elements */
+  }
+  
+  /* 🔹 Admin Avatar */
+  .admin-avatar-container {
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .admin-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* 🔹 Styling Title & Content */
+  ::ng-deep .mat-mdc-card-content {
+    font-size: 20px;
+  }
+  
+  ::ng-deep .mat-mdc-card-title {
+    font-size: 26px;
+  }
+  
+  /* 🔹 Floating Bubbles Animation */
+  .admin-card::before,
+  .admin-card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: rgba(33, 150, 243, 0.15); /* Light Blue Bubbles */
+    border-radius: 50%;
+    z-index: 0;
+    animation: floatBubbles 6s infinite ease-in-out alternate;
+  }
+  
+  .admin-card::before {
+    top: 10%;
+    left: -10%;
+  }
+  
+  .admin-card::after {
+    bottom: 10%;
+    right: -10%;
+    animation-delay: 3s; /* Makes the bubbles move at different times */
+  }
+  
+  /* 🔹 Floating Animation */
+  @keyframes floatBubbles {
+    0% {
+      transform: translateY(0px) scale(1);
+    }
+    100% {
+      transform: translateY(20px) scale(1.1);
+    }
+  }
+  
+  /* 🔹 Admin Card Content - Increased Spacing */
+.admin-card-content p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 20px;
+  }
+  
+  .admin-card-content p strong {
+    min-width: 100px; /* Ensures the label ("Name:", "Email:") has enough space */
+    display: inline-block;
+  }
+  
+  .admin-card-content a {
+    text-decoration: none;
+    color: #1e88e5;
+  }
+  
+
+  /* 🔹 Address Card */
+.address-card {
+    width: 100%;
+    padding: 0 20px 20px 20px;
+    border-left: 5px solid #3f51b5;
+    text-align: center;
+    margin: 0px;
+  }
+  
+  /* 🔹 Timeline Container - Horizontal Layout */
+  .timeline-container {
+    display: flex;
+    justify-content: space-around; /* Increased spacing */
+    gap: 60px; /* Increased gap for more spacing */
+    margin-top: 15px;
+  }
+  
+  /* 🔹 Timeline Item */
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* More spacing between icon and text */
+    position: relative;
+  }
+  
+  /* 🔹 Icons for Address, City, Country */
+  .icon-container {
+    background: #e3f2fd;
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .location-icon {
+    font-size: 28px; /* Slightly bigger icon */
+    color: #1e88e5;
+  }
+  
+  /* 🔹 Timeline Text */
+  .timeline-desc {
+    text-align: left;
+  }
+  
+  .timeline-title {
+    font-weight: bold;
+    display: block;
+    font-size: 18px;
+  }
+  
+  .timeline-desc p {
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  

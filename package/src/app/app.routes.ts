@@ -33,6 +33,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/company/company.routes').then((m) => m.CompanyRoutes),
       },
+      {
+        path: 'lists', // Add Forum here as a separate route
+        loadChildren: () =>
+          import('./features/lists-admin/lists-admin.routes').then((m) => m.ListsAdminRoutes),
+      },
     ],
   },
   {
