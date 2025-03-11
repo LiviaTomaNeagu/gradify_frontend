@@ -118,10 +118,15 @@ export class FullComponent implements OnInit {
 
   filterNavItems() {
     const userRole = this.userService.getCurrentUserInfo()?.role;
+    const userCompanyId = this.userService.getCurrentUserInfo()?.occupationId;
 
-    this.navItems = this.navItems.filter(item => 
-      !item.roles || (userRole && item.roles.includes(userRole))
-    );
-  }
+    this.navItems = this.navItems.map(item => {
+        if (item.route === 'lists/companies' && item.displayName === 'My Company' && userCompanyId) {
+            return { ...item, route: `lists/companies/${userCompanyId}` };
+        }
+        return item;
+    }).filter(item => !item.roles || (userRole && item.roles.includes(userRole)));
+}
+
   
 }

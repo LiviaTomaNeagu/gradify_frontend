@@ -1,5 +1,5 @@
 
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { GetRelatedQuestionResponseDto } from '../../../core/interfaces/get-related-questions.dto';
@@ -21,7 +21,7 @@ export class RelatedCardComponent {
   topicName: string;
 
   constructor(
-    private dialogRef: MatDialogRef<any>
+    @Optional() private dialogRef: MatDialogRef<any>
   ) {}
 
   ngOnInit(): void {
