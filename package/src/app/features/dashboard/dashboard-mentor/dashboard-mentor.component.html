@@ -1,45 +1,52 @@
 <div class="dashboard-layout">
 
-  <!-- 🔹 First Row (Swapped Columns) -->
+  <!-- 🔹 First Row (Stats in Left Column, Latest Questions in Right Column) -->
   <div class="row first-row">
 
-    <!-- 🔹 Right Column (Now on the Left) -->
-    <div class="right-column">
-      <!-- 🔹 Total Answers -->
-      <mat-card class="stat-card">
-        <mat-card-header class="card-header">
-          <mat-card-title>Total Answers</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <h2>{{ totalAnswers }}</h2>
-        </mat-card-content>
-      </mat-card>
+    <!-- Left Column (Total Answers + Users Interacted With) -->
+    <div class="left-column">
+      <div class="stats-container">
+        
+        <!-- 🔹 Total Answers Card -->
+        <mat-card class="stat-card full-height">
+          <mat-card-header class="card-header">
+            <mat-card-title>Total Answers</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h2>{{ totalAnswers }}</h2>
+          </mat-card-content>
+        </mat-card>
 
-      <!-- 🔹 Favorite Technology -->
-      <mat-card class="fav-tech-card">
+        <!-- 🔹 Total Users Interacted With Card -->
+        <mat-card class="community-impact-card full-height">
+          <mat-card-header class="card-header">
+            <mat-card-title>Total Users Interacted With</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h2>{{ totalUsersInteracted }}</h2>
+            <p>You've engaged with this many users through discussions, replies, and comments.</p>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+
+    <!-- Right Column (Latest Questions) -->
+    <div class="right-column">
+      <mat-card class="latest-questions-card">
         <mat-card-header class="card-header">
-          <mat-card-title>Favorite Technology</mat-card-title>
+          <mat-card-title>Latest Questions You Answered</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p>Based on your latest interactions, you frequently discuss:</p>
-          <h3>{{ favoriteTech }}</h3>
+          <div class="scroll-container">
+            <app-related-card *ngFor="let question of mapLatestQuestionsToRelatedCard(latestQuestions)" [question]="question"></app-related-card>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>
 
-    <!-- 🔹 Latest Questions (Now on the Right) -->
-    <mat-card class="latest-questions-card">
-      <mat-card-header class="card-header">
-        <mat-card-title>Latest Questions You Answered</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="scroll-container">
-          <app-related-card *ngFor="let question of mapLatestQuestionsToRelatedCard(latestQuestions)" [question]="question"></app-related-card>
-        </div>
-      </mat-card-content>
-    </mat-card>
-
   </div>
+
 
   <!-- 🔹 Second Row (Unchanged) -->
   <div class="row second-row">
@@ -64,14 +71,13 @@
       </mat-card-content>
     </mat-card>
     
-
     <mat-card class="cardWithShadow">
       <mat-card-header class="card-header">
         <mat-card-title>Users You Interacted With</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="table-responsive">
-          <table mat-table [dataSource]="topUsers" class="w-100">
+          <table mat-table [dataSource]="getLimitedUsers(topUsers)" class="w-100">
             <ng-container matColumnDef="profile">
               <td mat-cell *matCellDef="let user">
                 <div class="d-flex align-items-center">
@@ -98,5 +104,35 @@
       </mat-card-content>
     </mat-card>
   </div>
+
+  <!-- 🔹 Favorite Topics Section -->
+<div class="third-row">
+  <h2 class="section-title">Your Most Engaged Topics</h2>
+
+  <mat-card *ngFor="let topic of getLimitedTopics(favoriteTopics)" class="tech-card" 
+            [ngStyle]="{ 'background-color': getTopicColor(topic), 'color': 'white' }">
+    <mat-card-header class="card-header">
+      <mat-card-title>{{ getTopicName(topic) }}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+
+    <mat-card *ngIf="favoriteTopics.length < 5" class="tech-card discover-more" (click)="redirectToForum()">
+      <mat-card-header class="card-header">
+        <mat-card-title>Discover More</mat-card-title>
+      </mat-card-header>
+
+      <!-- Plus Icon Positioned Separately -->
+      <div class="plus-icon-container">
+        <mat-icon class="plus-icon">add</mat-icon>
+      </div>
+
+      <mat-card-content>
+        <p>Explore new topics and discussions</p>
+      </mat-card-content>
+    </mat-card>
+
+
+</div>
+
 
 </div>

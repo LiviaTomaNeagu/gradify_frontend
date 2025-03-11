@@ -8,6 +8,7 @@ export interface MentorResponseDTO {
     topUsers: ShortUserDto[];
     latestQuestions: LatestQuestionDTO[];
     activityGraph: GraphDataPoint[];
+    favoriteTopics: Topic[];
 }
 
 export interface GraphDataPoint {

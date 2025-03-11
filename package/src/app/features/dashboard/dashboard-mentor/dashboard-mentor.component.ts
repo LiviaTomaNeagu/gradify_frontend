@@ -9,7 +9,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { GetRelatedQuestionResponseDto } from '../../forum/core/interfaces/get-related-questions.dto';
 import { RelatedCardComponent } from '../../forum/forum-page/components/related-card/related-card.component';
-import { Topic } from 'src/app/shared/enums/topic.enum';
+import { Topic, topicColors, getTopicName } from 'src/app/shared/enums/topic.enum';
 import { ApexChart, ApexXAxis, ApexYAxis, ApexDataLabels, ApexTooltip, ApexStroke, ApexLegend, ApexPlotOptions, ApexGrid, ApexAxisChartSeries } from 'ng-apexcharts'; // ✅ Import ApexCharts types
 
 export type ChartOptions = {
@@ -45,8 +45,9 @@ export class DashboardMentorComponent implements OnInit {
   activityGraph: GraphDataPoint[] = [];
   mentorId: string | null = null;
   latestQuestionsRelatedCard: GetRelatedQuestionResponseDto[] = [];
-  favoriteTech: Topic = Topic.AI;
+  favoriteTopics: Topic[];
   weekDaysOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  totalUsersInteracted: number = 0;
 
 
   public chartOptions: any;
@@ -74,7 +75,9 @@ export class DashboardMentorComponent implements OnInit {
       this.topUsers = stats.topUsers;
       this.latestQuestions = stats.latestQuestions;
       this.activityGraph = stats.activityGraph;
-      
+      this.favoriteTopics = stats.favoriteTopics;
+      this.totalUsersInteracted = this.topUsers.length;
+
       this.updateChart();
     });
   }
@@ -172,4 +175,25 @@ export class DashboardMentorComponent implements OnInit {
       topic: question.topic
     }));
   }
+
+  getTopicColor(topic: Topic): string {
+    return topicColors[topic];
+  }
+
+  getTopicName(topic: Topic): string {
+    return getTopicName(topic);
+  }
+
+  getLimitedTopics(favoriteTopics: Topic[]): Topic[] {
+    return favoriteTopics.length >= 5 ? favoriteTopics.slice(0, 5) : favoriteTopics;
+  }
+
+  getLimitedUsers(users: ShortUserDto[]): ShortUserDto[] {
+    return users.length >= 5 ? users.slice(0, 5) : users;
+  }
+  
+  redirectToForum(): void {
+    // Redirect
+  }
+  
 }
