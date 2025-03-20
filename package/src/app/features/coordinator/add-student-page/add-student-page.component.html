@@ -1,31 +1,46 @@
-<div class="container">
-    <mat-card class="search-card" [@searchBarAnimation]="searchBarState">
-      <mat-form-field appearance="outline">
-        <mat-label>Caută un student</mat-label>
-        <input type="text" matInput [formControl]="studentControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-optgroup *ngFor="let group of groupedStudents" [label]="group.group">
-            <mat-option *ngFor="let student of group.students" (click)="selectStudent(student)">
-              {{ student.name }} {{ student.surname }}
-            </mat-option>
-          </mat-optgroup>
-        </mat-autocomplete>
-      </mat-form-field>
-    </mat-card>
+<div class="background">
+    <div class="content">
+      <!-- Cardul de căutare -->
+      <mat-card class="search-card" [@searchBarAnimation]="searchBarState">
+        <mat-form-field appearance="outline">
+          <mat-label>Caută un student</mat-label>
+          <input type="text" matInput [formControl]="studentControl" [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-optgroup *ngFor="let group of groupedStudents" [label]="group.group">
+              <mat-option *ngFor="let student of group.students" (click)="selectStudent(student)">
+                {{ student.name }} {{ student.surname }}
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+        </mat-form-field>
+      </mat-card>
   
-    <mat-card class="student-card" *ngIf="selectedStudent">
-      <mat-card-header>
+      <mat-card class="student-card" *ngIf="selectedStudent">
+        <!-- Poza de profil în partea de sus -->
+        <div class="profile-pic">
+          <img [src]="'assets/images/profile/user-2.jpg'" alt="Profile Picture">
+        </div>
+      
         <mat-card-title>{{ selectedStudent.name }} {{ selectedStudent.surname }}</mat-card-title>
         <mat-card-subtitle>{{ selectedStudent.email }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p><strong>Faculty:</strong> {{ selectedStudent.faculty }}</p>
-        <p><strong>Specialization:</strong> {{ selectedStudent.specialization }}</p>
-        <p><strong>Group:</strong> {{ selectedStudent.group }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="addStudent()">Adaugă student</button>
-      </mat-card-actions>
-    </mat-card>
+      
+        <mat-card-content>
+          <div class="student-info">
+            <p><mat-icon>school</mat-icon> <strong>Facultate:</strong> {{ selectedStudent.faculty }}</p>
+            <p><mat-icon>science</mat-icon> <strong>Specializare:</strong> {{ selectedStudent.specialization }}</p>
+            <p><mat-icon>group</mat-icon> <strong>Grupa:</strong> {{ selectedStudent.group }}</p>
+            <p><mat-icon>calendar_today</mat-icon> <strong>Data înscrierii:</strong> {{ selectedStudent.enrollmentDate | date }}</p>
+          </div>
+        </mat-card-content>
+      
+        <!-- Butonul de adăugare mai mare -->
+        <mat-card-actions class="student-card-actions">
+          <button mat-raised-button color="primary" class="add-student-button" (click)="addStudent()">
+            Adaugă student
+          </button>
+        </mat-card-actions>
+      </mat-card>
+      
+    </div>
   </div>
   
