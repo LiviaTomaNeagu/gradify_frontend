@@ -1,1 +1,12 @@
-<p>add-student-page works!</p>
+<mat-form-field appearance="outline">
+    <mat-label>Student</mat-label>
+    <input type="text" matInput [formControl]="studentControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-optgroup *ngFor="let group of groupedStudents" [label]="group.group">
+        <mat-option *ngFor="let student of group.students" [value]="student.name + ' ' + student.surname">
+          {{ student.name }} {{ student.surname }}
+        </mat-option>
+      </mat-optgroup>
+    </mat-autocomplete>
+  </mat-form-field>
+  

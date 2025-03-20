@@ -1,5 +1,6 @@
 export interface UserFullNameDTO
 {
+    id: string;
     name: string;
     surname: string;
 }
