@@ -1,12 +1,31 @@
-<mat-form-field appearance="outline">
-    <mat-label>Student</mat-label>
-    <input type="text" matInput [formControl]="studentControl" [matAutocomplete]="auto">
-    <mat-autocomplete #auto="matAutocomplete">
-      <mat-optgroup *ngFor="let group of groupedStudents" [label]="group.group">
-        <mat-option *ngFor="let student of group.students" [value]="student.name + ' ' + student.surname">
-          {{ student.name }} {{ student.surname }}
-        </mat-option>
-      </mat-optgroup>
-    </mat-autocomplete>
-  </mat-form-field>
+<div class="container">
+    <mat-card class="search-card" [@searchBarAnimation]="searchBarState">
+      <mat-form-field appearance="outline">
+        <mat-label>Caută un student</mat-label>
+        <input type="text" matInput [formControl]="studentControl" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-optgroup *ngFor="let group of groupedStudents" [label]="group.group">
+            <mat-option *ngFor="let student of group.students" (click)="selectStudent(student)">
+              {{ student.name }} {{ student.surname }}
+            </mat-option>
+          </mat-optgroup>
+        </mat-autocomplete>
+      </mat-form-field>
+    </mat-card>
+  
+    <mat-card class="student-card" *ngIf="selectedStudent">
+      <mat-card-header>
+        <mat-card-title>{{ selectedStudent.name }} {{ selectedStudent.surname }}</mat-card-title>
+        <mat-card-subtitle>{{ selectedStudent.email }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>Faculty:</strong> {{ selectedStudent.faculty }}</p>
+        <p><strong>Specialization:</strong> {{ selectedStudent.specialization }}</p>
+        <p><strong>Group:</strong> {{ selectedStudent.group }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="addStudent()">Adaugă student</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
   

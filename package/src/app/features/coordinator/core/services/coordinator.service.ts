@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable } from "rxjs"; 
-import { GetAvailableStudentsResponseDTO } from "../interfaces/coordinator.interface";
+import { GetAvailableStudentsResponseDTO, GetStudentResponseDTO } from "../interfaces/coordinator.interface";
 import { GetUsersForRoleRequestDTO, GetUsersResponseDTO } from "src/app/features/lists-admin/core/interfaces/get-users-for-role.interface";
 import { ShortUserDto } from "src/app/features/users/core/interfaces/users.interfaces";
 
@@ -25,8 +25,12 @@ export class CoordinatorService {
         return this.http.post<GetUsersResponseDTO>(`${this.baseUrl}/get-my-students`, company);
       }
 
-      getStudent(studentId: string): Observable<ShortUserDto> {
-        return this.http.get<ShortUserDto>(`${this.baseUrl}/get-student/${studentId}`);
+      getStudent(studentId: string): Observable<GetStudentResponseDTO> {
+        return this.http.get<GetStudentResponseDTO>(`${this.baseUrl}/get-student/${studentId}`);
+      }
+
+      addStudent(studentId: string): Observable<void> {
+        return this.http.get<void>(`${this.baseUrl}/add-student/${studentId}`);
       }
 
 }
