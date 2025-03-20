@@ -1,4 +1,5 @@
 import { SubscriptionLoggable } from "rxjs/internal/testing/SubscriptionLoggable";
+import { StudentDetails } from "src/app/features/coordinator/core/interfaces/coordinator.interface";
 import { RoleTypeEnum } from "src/app/shared/enums/role-type.enum";
 
 export interface OccupationDTO{
@@ -33,6 +34,15 @@ export interface GetUserResponseDTO{
     occupationName: string;
     createdAt: Date;
     isApproved: boolean;
+    studentDetails: GetStudentDetailsResponse; 
+}
+
+export interface GetStudentDetailsResponse
+{
+    faculty: string;
+    specialization: string;
+    group: string;
+    enrollmentDate: Date;
 }
 
 export interface GetMentorsRequestDTO

@@ -65,6 +65,13 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.COORDINATOR],
   },
   {
+    displayName: 'My Students',
+    iconName: 'list',
+    bgcolor: 'success',
+    route: '/coordinator/my-students',
+    roles: [RoleTypeEnum.COORDINATOR],
+  },
+  {
     displayName: 'My Progress',
     iconName: 'rosette',
     bgcolor: 'warning',
