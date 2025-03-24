@@ -30,7 +30,10 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
               "src/styles.scss",
-              "src/assets/scss/style.scss"
+              "src/assets/scss/style.scss",
+              "src/assets/scss/pages/_toast.scss",
+              "src/assets/scss/pages/_dialog.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },

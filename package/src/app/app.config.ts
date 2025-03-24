@@ -34,6 +34,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
 import { GlobalInterceptor } from './@core/interceptors/global.interceptor';
 
+import { provideToastr } from 'ngx-toastr';
+
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -52,6 +54,11 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([AuthInterceptor, GlobalInterceptor])),
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideToastr({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      preventDuplicates: true,
+    }),
     importProvidersFrom(
       FormsModule,
       ReactiveFormsModule,

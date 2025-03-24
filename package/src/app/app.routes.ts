@@ -38,6 +38,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/lists-admin/lists-admin.routes').then((m) => m.ListsAdminRoutes),
       },
+      {
+        path: 'coordinator',
+        loadChildren: () =>
+          import('./features/coordinator/coordinator.routes').then((m) => m.CoordinatorRoutes),
+      },
     ],
   },
   {
