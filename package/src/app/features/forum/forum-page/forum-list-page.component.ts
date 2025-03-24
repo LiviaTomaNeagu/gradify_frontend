@@ -8,6 +8,8 @@ import { ForumCardComponent } from './components/forum-card/forum-card.component
 import { MaterialModule } from 'src/app/material.module';
 import { AddQuestionModalComponent } from './components/add-question-modal/add-question-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 @Component({
   selector: 'app-forum',
@@ -26,14 +28,19 @@ export class ForumPageComponent implements OnInit {
   currentPage: number = 0;
   totalQuestions: number = 0; 
   isLoading: boolean = false;
+  isButtonVisible = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private dialog: MatDialog,private forumService: ForumService) {}
+  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: UserService) {}
 
   ngOnInit(): void {
     this.initializeTopics();
     this.loadQuestions();
+
+    const currentUser = this.userService.getCurrentUserInfo();
+
+    this.isButtonVisible = currentUser?.role === RoleTypeEnum.STUDENT;
   }
 
   private initializeTopics(): void {

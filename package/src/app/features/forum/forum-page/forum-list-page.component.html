@@ -2,7 +2,7 @@
 
   <div class="forum-header">
     <p class="forum-page-title">Forum: Learn & Grow Together</p>
-    <button mat-flat-button color="primary" class="add-question-btn" (click)="openQuestionModal()">
+    <button *ngIf="isButtonVisible" mat-flat-button color="primary" class="add-question-btn" (click)="openQuestionModal()" >
       + Add Question
     </button>
   </div>
