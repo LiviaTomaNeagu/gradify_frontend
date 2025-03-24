@@ -32,7 +32,7 @@ export type ChartOptions = {
     CommonModule,
     MaterialModule,
     RelatedCardComponent,
-    NgApexchartsModule  // ✅ Make sure it's imported
+    NgApexchartsModule
   ],
   templateUrl: './dashboard-mentor.component.html',
   styleUrls: ['./dashboard-mentor.component.scss']
@@ -62,7 +62,7 @@ export class DashboardMentorComponent implements OnInit {
 
   getCurrentUserId() {
     this.userService.currentUser$.subscribe(user => {
-      if (user && user.role === RoleTypeEnum.MENTOR) {
+      if (user && (user.role === RoleTypeEnum.MENTOR || user.role === RoleTypeEnum.ADMIN_CORPORATE)) {
         this.mentorId = user.id;
         this.loadMentorStats(this.mentorId);
       }

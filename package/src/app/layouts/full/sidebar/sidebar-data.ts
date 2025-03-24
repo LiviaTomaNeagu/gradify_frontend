@@ -7,6 +7,14 @@ export const navItems: NavItem[] = [
     navCap: 'Personal Management',
     roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.ADMIN_CORPORATE, RoleTypeEnum.ADMIN, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR],
   },
+  
+  {
+    displayName: 'Dashboard',
+    iconName: 'layout-dashboard',
+    bgcolor: 'primary',
+    route: '/dashboard',
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.COORDINATOR, RoleTypeEnum.MENTOR, RoleTypeEnum.ADMIN_CORPORATE],
+  },
   {
     displayName: 'Students List',
     iconName: 'list',
@@ -44,20 +52,6 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.ADMIN_CORPORATE],
   },
   {
-    displayName: 'Dashboard',
-    iconName: 'layout-dashboard',
-    bgcolor: 'primary',
-    route: '/dashboard',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.COORDINATOR],
-  },
-  {
-    displayName: 'Dashboard',
-    iconName: 'layout-dashboard',
-    bgcolor: 'primary',
-    route: '/dashboard/mentor',
-    roles: [RoleTypeEnum.MENTOR],
-  },
-  {
     displayName: 'Add Student',
     iconName: 'layout-dashboard',
     bgcolor: 'primary',
@@ -87,7 +81,7 @@ export const navItems: NavItem[] = [
   },
   {
     navCap: 'Community',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR],
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   },
   {
     displayName: 'Forum',
