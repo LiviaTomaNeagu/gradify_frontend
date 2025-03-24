@@ -94,13 +94,13 @@ export const navItems: NavItem[] = [
     iconName: 'list',
     bgcolor: 'success',
     route: '/forum',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR],
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   },
   {
     displayName: 'Chat',
     iconName: 'message-circle',
     bgcolor: 'warning',
     route: '/ui-components/chips',
-    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR],
+    roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   }
 ];
