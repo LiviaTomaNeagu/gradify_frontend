@@ -400,17 +400,6 @@
     text-align: center;
   }
 
-  .plus-icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0; // Adds spacing between title and subtitle
-  }
-
-  .plus-icon {
-    font-size: 24px;
-  }
-
   ::ng-deep .mat-mdc-card-content {
     display: flex;
     justify-content: center;
