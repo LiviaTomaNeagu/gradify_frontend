@@ -12,6 +12,9 @@ import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { ActivatedRoute, Route } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-my-students',
@@ -21,14 +24,14 @@ import { ActivatedRoute, Route } from '@angular/router';
   styleUrls: ['./my-students.component.scss']
 })
 export class MyStudentsComponent implements OnInit {
-  displayedColumns: string[] = ['assigned', 'faculty', 'specialization', 'group', 'email'];
+  displayedColumns: string[] = ['assigned', 'faculty', 'specialization', 'group', 'email', 'delete'];
   dataSource = new MatTableDataSource<UserFullNameDTO>([]);
   searchControl = new FormControl('');
   isLoading: boolean = false;
   
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private coordinatorService: CoordinatorService, private route: ActivatedRoute) {}
+  constructor(private coordinatorService: CoordinatorService, private route: ActivatedRoute, private toastr: ToastrService, private dialog: MatDialog) {}
 
   ngOnInit() {
     this.loadStudents();
@@ -65,6 +68,30 @@ export class MyStudentsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+
+  deleteStudent(student: UserFullNameDTO) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        title: 'Confirm Deletion',
+        message: `Are you sure you want to remove ${student.name} ${student.surname}?`,
+        confirmText: 'Yes',
+        cancelText: 'No'
+      },
+      disableClose: true,
+      autoFocus: false,
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.coordinatorService.removeStudent(student.id).subscribe(() => {
+          this.dataSource.data = this.dataSource.data.filter(s => s.id !== student.id);
+          this.toastr.success(`Student deleted!`, 'Success');
+        });
+      }
+    });
   }
 
   getDefaultAvatar(name: string): string {

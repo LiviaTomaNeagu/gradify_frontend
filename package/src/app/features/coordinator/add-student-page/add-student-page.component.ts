@@ -94,7 +94,7 @@ export class AddStudentPageComponent implements OnInit {
   addStudent() {
     if (this.selectedStudent) {
       this.coordinatorService.addStudent(this.selectedStudent.id).subscribe(() => {
-        this.toastr.success(`${this.selectedStudent?.name} a fost adăugat cu succes!`, 'Succes');
+        this.toastr.success(`${this.selectedStudent?.name} successfully added!`, 'Succes');
 
         this.selectedStudent = null;
         this.searchBarState = 'center';

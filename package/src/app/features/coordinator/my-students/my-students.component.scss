@@ -1,10 +1,9 @@
-// Container general al tabelului
 .my-students-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
+  width: 100%; // Se adaptează la dimensiunea ecranului
+  margin: 0 auto;
+  padding: 0 0 20px 0;
+  text-align: center;
+}
   
   // Titlu stilizat
   h4 {
@@ -121,3 +120,17 @@
     color: #777;
   }
   
+  // Micșorăm lățimea coloanei Faculty
+.faculty-cell {
+  max-width: 120px;  // Poți ajusta lățimea dacă e nevoie
+  word-wrap: break-word;
+  font-size: 12px;  // Font mai mic
+  line-height: 1.2;  // Permite text pe 2 rânduri
+  text-align: center;
+  padding: 8px;
+}
+
+// Ajustăm header-ul să fie centrat
+th.mat-header-cell {
+  text-align: center;
+}

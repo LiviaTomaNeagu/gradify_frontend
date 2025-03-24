@@ -33,4 +33,8 @@ export class CoordinatorService {
         return this.http.get<void>(`${this.baseUrl}/add-my-student/${studentId}`);
       }
 
+      removeStudent(studentId: string): Observable<void> {
+        return this.http.get<void>(`${this.baseUrl}/remove-my-student/${studentId}`);
+      }
+
 }
