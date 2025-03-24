@@ -12,7 +12,7 @@
         
         <mat-card-title class="forum-title">{{ question.title }}</mat-card-title>
     
-        <div class="forum-footer">
+        <div *ngIf="isAnswerCountVisible" class="forum-footer">
           <span class="answers-count">
             <mat-icon>question_answer</mat-icon> {{ question.answersCount }} Answers
           </span>

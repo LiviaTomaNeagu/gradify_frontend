@@ -19,6 +19,7 @@ export class RelatedCardComponent {
   @Input() showReadMore: boolean = true;
   topicColor: string;
   topicName: string;
+  isAnswerCountVisible: boolean = false;;
 
   constructor(
     @Optional() private dialogRef: MatDialogRef<any>
@@ -30,6 +31,10 @@ export class RelatedCardComponent {
       this.topicColor = topicColors[this.question.topic];
     } else {
       console.error('Question topic is not defined or invalid');
+    }
+
+    if (this.question.answersCount && this.question.answersCount > 0) {
+      this.isAnswerCountVisible = true;
     }
   }
 
