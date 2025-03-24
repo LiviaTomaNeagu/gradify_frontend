@@ -89,7 +89,7 @@
   
   /* 🔹 Status Chip Styling */
   .status-active {
-    background-color: #28A745;
+    background-color: #28A745 !important;
     color: white;
     padding: 7px 16px;
     border-radius: 20px;
@@ -98,7 +98,7 @@
   }
   
   .status-inactive {
-    background-color: #DC3545;
+    background-color: #f39c12 !important;
     color: white;
     padding: 7px 16px;
     border-radius: 20px;
