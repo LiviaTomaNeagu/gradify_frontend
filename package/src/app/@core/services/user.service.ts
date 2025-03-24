@@ -6,7 +6,7 @@ import { CurrentUserResponseInterfaceDTO } from '../interfaces/user.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class CurrentUserService {
   currentUser$: BehaviorSubject<CurrentUserResponseInterfaceDTO | null> =
     new BehaviorSubject<CurrentUserResponseInterfaceDTO | null>(null);
 

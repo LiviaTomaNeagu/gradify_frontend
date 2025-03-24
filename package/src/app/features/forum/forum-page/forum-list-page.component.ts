@@ -8,7 +8,7 @@ import { ForumCardComponent } from './components/forum-card/forum-card.component
 import { MaterialModule } from 'src/app/material.module';
 import { AddQuestionModalComponent } from './components/add-question-modal/add-question-modal.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 @Component({
@@ -32,7 +32,7 @@ export class ForumPageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: UserService) {}
+  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: CurrentUserService) {}
 
   ngOnInit(): void {
     this.initializeTopics();

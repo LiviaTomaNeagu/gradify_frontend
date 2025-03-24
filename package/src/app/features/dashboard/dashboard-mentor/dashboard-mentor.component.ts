@@ -5,7 +5,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { MentorService } from '../core/mentor.service';
 import { MentorResponseDTO, GraphDataPoint, LatestQuestionDTO } from '../core/mentor.interfaces';
 import { ShortUserDto } from '../../users/core/interfaces/users.interfaces';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { GetRelatedQuestionResponseDto } from '../../forum/core/interfaces/get-related-questions.dto';
 import { RelatedCardComponent } from '../../forum/forum-page/components/related-card/related-card.component';
@@ -53,7 +53,7 @@ export class DashboardMentorComponent implements OnInit {
   public chartOptions: any;
   
 
-  constructor(private mentorService: MentorService, private userService: UserService) {}
+  constructor(private mentorService: MentorService, private userService: CurrentUserService) {}
 
   ngOnInit(): void {
     this.getCurrentUserId();

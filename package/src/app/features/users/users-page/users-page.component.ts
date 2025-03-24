@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../core/services/users.service';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { UserMapper } from 'src/app/@core/interfaces/user-mapper';
 import { CommonModule } from '@angular/common';
 import { GetMentorsRequestDTO, GetUserResponseDTO } from '../core/interfaces/users.interfaces';
@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UsersPageComponent {
 
   users: GetUserResponseDTO[] = [];
-  constructor(private usersService: UsersService, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private usersService: UsersService, private userService: CurrentUserService, private snackBar: MatSnackBar) {
   }
 
   displayedColumns: string[] = ['assigned', 'email', 'actions'];

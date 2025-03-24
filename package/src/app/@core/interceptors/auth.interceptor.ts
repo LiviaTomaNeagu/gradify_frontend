@@ -6,14 +6,14 @@ import { URLS } from 'src/app/shared/enums/url.enum';
 import { UserApi } from '../api/user-api.service';
 import { LocalStorageHelper } from '../helpers/local-storage.helper';
 import { GetRefreshTokenPayload } from '../interfaces/refresh-token.interface';
-import { UserService } from '../services/user.service';
+import { CurrentUserService } from '../services/user.service';
 
 export const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
   const userApi = inject(UserApi);
-  const userService = inject(UserService);
+  const userService = inject(CurrentUserService);
   const router = inject(Router);
 
   // Nu interceptăm request-ul de refresh token
@@ -31,7 +31,7 @@ export const AuthInterceptor: HttpInterceptorFn = (
 async function handleRequestToken(
   request: HttpRequest<any>,
   userApi: UserApi,
-  userService: UserService,
+  userService: CurrentUserService,
   router: Router
 ) {
   if (LocalStorageHelper.isJwtTokenValid()) {

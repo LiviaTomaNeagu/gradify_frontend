@@ -13,7 +13,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { HeaderComponent } from './header/header.component';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { CurrentUserResponseInterfaceDTO } from 'src/app/@core/interfaces/user.interface';
 
@@ -62,7 +62,7 @@ export class FullComponent implements OnInit {
     return this.isMobileScreen;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: UserService) {
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: CurrentUserService) {
 
     this.htmlElement = document.querySelector('html')!;
     this.htmlElement.classList.add('light-theme');

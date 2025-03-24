@@ -10,7 +10,7 @@ import { BrandingComponent } from './branding.component';
 import { NgIf } from '@angular/common';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
-import { UserService } from 'src/app/@core/services/user.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { Subscription } from 'rxjs';
 import { CurrentUserResponseInterfaceDTO } from 'src/app/@core/interfaces/user.interface';
 
@@ -28,7 +28,7 @@ export class SidebarComponent {
   userDataIsLoading: boolean = true;
   
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: CurrentUserService) {}
 
   // async ngOnInit(): Promise<void> {
   //   this.userService.initializeCurrentUser();
