@@ -30,7 +30,7 @@ export class CoordinatorService {
       }
 
       addStudent(studentId: string): Observable<void> {
-        return this.http.get<void>(`${this.baseUrl}/add-student/${studentId}`);
+        return this.http.get<void>(`${this.baseUrl}/add-my-student/${studentId}`);
       }
 
 }

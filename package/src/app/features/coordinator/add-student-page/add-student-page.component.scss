@@ -2,7 +2,7 @@
 .background {
     height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     position: relative;
     overflow: hidden;
@@ -28,6 +28,17 @@
     position: relative;
     z-index: 1;
   }
+
+  .no-student-title {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    color: #1e3c72;
+    opacity: 0.9;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
   
   // Card de căutare
   .search-card {
@@ -37,6 +48,7 @@
     background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(8px);
     border-radius: 12px;
+    overflow: auto !important;
   }
   
   // Card de student - mai mare, aliniat cu search bar-ul

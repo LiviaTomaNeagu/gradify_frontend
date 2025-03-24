@@ -8,6 +8,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ShortUserDto } from '../../users/core/interfaces/users.interfaces';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { AppFormToastrComponent } from 'src/app/components/form-toastr/form-toastr.component';
 
 @Component({
   selector: 'app-add-student-page',
@@ -39,7 +42,7 @@ export class AddStudentPageComponent implements OnInit {
   selectedStudent: GetStudentResponseDTO | null = null;
   searchBarState: 'center' | 'top' = 'center';
 
-  constructor(private coordinatorService: CoordinatorService) {}
+  constructor(private coordinatorService: CoordinatorService, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.coordinatorService.getAvailableStudents().subscribe(response => {
@@ -91,11 +94,13 @@ export class AddStudentPageComponent implements OnInit {
   addStudent() {
     if (this.selectedStudent) {
       this.coordinatorService.addStudent(this.selectedStudent.id).subscribe(() => {
-        alert(`${this.selectedStudent?.name} a fost adăugat cu succes!`);
+        this.toastr.success(`${this.selectedStudent?.name} a fost adăugat cu succes!`, 'Succes');
+
         this.selectedStudent = null;
         this.searchBarState = 'center';
         this.studentControl.setValue('');
       });
     }
+    this.router.navigate(['/coordinator/my-students']);
   }
 }

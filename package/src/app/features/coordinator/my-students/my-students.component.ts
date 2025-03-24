@@ -11,6 +11,7 @@ import { GetUsersForRoleRequestDTO } from '../../lists-admin/core/interfaces/get
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-my-students',
@@ -23,15 +24,21 @@ export class MyStudentsComponent implements OnInit {
   displayedColumns: string[] = ['assigned', 'faculty', 'specialization', 'group', 'email'];
   dataSource = new MatTableDataSource<UserFullNameDTO>([]);
   searchControl = new FormControl('');
+  isLoading: boolean = false;
   
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private coordinatorService: CoordinatorService) {}
+  constructor(private coordinatorService: CoordinatorService, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.loadStudents();
 
-    // Aplicăm filtrarea atunci când utilizatorul tastează în căutare
+    this.route.params.subscribe(() => {
+      this.isLoading = true;
+      console.log('Route params changed');
+      this.loadStudents();
+    });
+
     this.searchControl.valueChanges.pipe(
       debounceTime(300),
       distinctUntilChanged()
@@ -41,6 +48,7 @@ export class MyStudentsComponent implements OnInit {
   }
 
   loadStudents() {
+    this.isLoading = true;
     const request: GetUsersForRoleRequestDTO = { role: RoleTypeEnum.STUDENT, page: 1, pageSize: 100, searchTerm: '' };
 
     this.coordinatorService.getMyStudents(request).subscribe(response => {
@@ -49,7 +57,9 @@ export class MyStudentsComponent implements OnInit {
         photoUrl: this.getDefaultAvatar(student.name) // Aplicăm avatar implicit
       }));
       this.dataSource.sort = this.sort;
+      this.isLoading = false;
     });
+    this.isLoading = false;
   }
 
   applyFilter(event: Event) {
