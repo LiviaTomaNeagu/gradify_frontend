@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Student Details</h2>
+<mat-dialog-content [formGroup]="studentForm" class="dialog-content">
+
+  <!-- Facultatea este afișată ca text, nu ca input -->
+  <div class="faculty-container">
+    <strong>Faculty:</strong> Facultatea de Matematică și Informatică
+  </div>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Specialization</mat-label>
+    <mat-select formControlName="specialization">
+      <mat-option *ngFor="let spec of specializations" [value]="spec">{{ spec }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Group</mat-label>
+    <input matInput formControlName="group" placeholder="Enter group">
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" (click)="save()" [disabled]="studentForm.invalid">Save</button>
+</mat-dialog-actions>
