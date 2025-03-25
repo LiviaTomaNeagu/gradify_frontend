@@ -74,12 +74,32 @@
   <div class="col-lg-4">
     <app-steps-achieved></app-steps-achieved>
   </div>
+  
   <div class="col-lg-8">
     <app-profile-settings></app-profile-settings>
     </div>
 
-    <div class="col-lg-6">
-      <app-my-topics [topics]="userDetails?.topics || []"></app-my-topics>
+      <div class="col-lg-6 d-flex justify-content-center align-items-center">
+        <div class="quote-container">
+          <p class="quote-text">
+            "Alone we can do so little; together we can do so much."
+          </p>
+          <span class="quote-author">- Helen Keller</span>
+    
+          <!-- Bule în fundal -->
+          <div class="bubble-bg">
+            <img src="assets/images/backgrounds/bubble-1.svg" class="bubble bubble-1" />
+            <img src="assets/images/backgrounds/bubble-2.svg" class="bubble bubble-2" />
+            <img src="assets/images/backgrounds/bubble-3.svg" class="bubble bubble-3" />
+          </div>
+        </div>
       </div>
+    
+      <div class="col-lg-6 d-flex justify-content-center">
+        <div class="my-topics-container w-100"> 
+          <app-my-topics [topics]="userDetails?.topics || []"></app-my-topics>
+        </div>
+      </div>
+    
 </div>
   

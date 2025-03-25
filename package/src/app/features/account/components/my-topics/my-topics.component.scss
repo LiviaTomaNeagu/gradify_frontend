@@ -5,7 +5,8 @@
   }
   
   .topics-card {
-    width: 250px; /* Dimensiune fixă pentru card */
+    width:100%;
+    max-width: 500px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -23,10 +24,9 @@
     text-align: center;
     padding: 10px;
     font-size: 14px;
-    color: #888;
+    color: #888;  
   }
   
-  /* Lista de topicuri - permite scroll vertical */
   .topics-list {
     display: flex;
     flex-direction: column; /* 👈 Face ca elementele să fie pe verticală */
