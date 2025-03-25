@@ -1,7 +1,12 @@
 <h2>Select a topic</h2>
-<select [(ngModel)]="selectedTopic">
-  <option *ngFor="let topic of topics" [value]="topic">{{ topic }}</option>
-</select>
+<div class="dropdown-container">
+  <select [(ngModel)]="selectedTopic">
+    <option *ngFor="let topic of topics" [value]="topic">
+      {{ topic }}
+    </option>
+  </select>
+</div>
+
 <div class="buttons">
   <button (click)="close()">Cancel</button>
   <button (click)="addTopic()">Add</button>

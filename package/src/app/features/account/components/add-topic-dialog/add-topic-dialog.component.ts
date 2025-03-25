@@ -1,8 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Topic } from 'src/app/shared/enums/topic.enum';
+import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-topic-dialog',
@@ -12,9 +13,12 @@ import { MaterialModule } from 'src/app/material.module';
   styleUrls: ['./add-topic-dialog.component.scss']
 })
 export class AddTopicDialogComponent {
-  selectedTopic: string = '';
+  selectedTopic: string | null = null;
 
-  topics = ['React', 'Vue', 'Django', 'Spring Boot', 'Python', 'C++'];
+  // Generăm lista de topicuri folosind cheile enum-ului
+  topics = Object.keys(Topic)
+    .filter(key => isNaN(Number(key))) // Excludem valorile numerice
+    .map(key => key); // Luăm doar cheile ca string
 
   constructor(public dialogRef: MatDialogRef<AddTopicDialogComponent>) {}
 
@@ -23,8 +27,9 @@ export class AddTopicDialogComponent {
   }
 
   addTopic(): void {
-    if (this.selectedTopic) {
-      this.dialogRef.close(this.selectedTopic);
+    if (this.selectedTopic !== null) {
+      const topicEnumValue = Topic[this.selectedTopic as keyof typeof Topic]; 
+      this.dialogRef.close(topicEnumValue);
     }
   }
 }

@@ -1,41 +1,69 @@
-.topics-container {
-    width: 100%;
-    max-width: 400px;
-    margin: auto;
+.topics-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .topics-card {
+    width: 250px; /* Dimensiune fixă pentru card */
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+  }
+  
+  h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
   }
   
   .empty-state {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     font-size: 14px;
     color: #888;
   }
   
+  /* Lista de topicuri - permite scroll vertical */
   .topics-list {
     display: flex;
-    overflow-x: auto;
-    padding: 10px;
+    flex-direction: column; /* 👈 Face ca elementele să fie pe verticală */
     gap: 10px;
-    white-space: nowrap;
+    max-height: 150px; /* 👈 Permite doar 3 carduri vizibile */
+    overflow-y: auto; /* 👈 Scroll vertical */
+    padding-right: 5px;
+  }
+  
+  .topics-list::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  .topics-list::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 5px;
   }
   
   .topic-card {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    min-width: 100px;
     text-align: center;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
   
   .topic-card:hover {
-    background: #e2e6ea;
+    opacity: 0.8;
   }
   
+  /* Butonul "+" */
   .add-topic {
-    background: #007bff;
+    background: #d4d4d4;
     color: white;
     font-size: 20px;
     font-weight: bold;
@@ -44,6 +72,6 @@
     align-items: center;
     min-width: 40px;
     height: 40px;
-    border-radius: 50%;
+    border-radius: 30px;
   }
   
