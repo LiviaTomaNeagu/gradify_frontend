@@ -1,0 +1,32 @@
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-y-24">
+        <mat-card-title>Steps Achieved</mat-card-title>
+
+        <div class="timeline m-t-24">
+            @for(step of steps; track step.subtext) {
+            <div class="timeline-item d-flex overflow-hidden">
+                <div class="time text-right mat-body-1">{{ step.time }}</div>
+                <div class="point d-flex align-items-center">
+                    <span class="timeline-badge border-{{ step.color }} m-y-8"></span>
+                    <span class="timline-border d-block"></span>
+                </div>
+                <div class="desc">
+                    @if(step.subtext) {
+                    <span class="mat-body-1 lh-20">{{ step.subtext }}</span>
+                    }
+
+                    @if(step.title) {
+                    <span class="mat-body-1 lh-20 f-w-600 d-block">{{
+                        step.title
+                        }}</span>
+                    }
+
+                    @if(step.link) {
+                    <a href="#" class="text-primary text-decoration-none mat-body-1">#ML-3467</a>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+    </mat-card-content>
+</mat-card>

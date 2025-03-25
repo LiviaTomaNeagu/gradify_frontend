@@ -1,0 +1,79 @@
+<div class="row">
+    <!-- Welcome Card (My Profile) -->
+    <div class="col-lg-6">
+      <mat-card class="cardWithShadow welcome-card">
+            <mat-card-content class="welcome-text">
+            <h2>Welcome, {{ userDetails?.firstName }}!</h2>
+            <p>Start exploring you proile now!</p>
+            </mat-card-content>
+            <img
+            src="assets/images/backgrounds/welcome-bg.png"
+            alt="welcome"
+            class="welcome-img"
+            />
+      </mat-card>
+    </div>
+  
+    <!-- Top Cards (Cele 3 carduri mici) -->
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img
+                  src="assets/images/backgrounds/top-warning-shape.png"
+                  class="top-img"
+                />
+                <mat-card-content>
+                  <i-tabler name="calendar" class="icon-30 d-flex"></i-tabler>
+          
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{userDetails?.totalDays}}
+                    </h5>
+                    <span class="f-s-14">Days Together</span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img
+                  src="assets/images/backgrounds/top-error-shape.png"
+                  class="top-img"
+                />
+                <mat-card-content>
+                  <i-tabler name="users" class="icon-30 d-flex"></i-tabler>
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{userDetails?.usersInteractedWith}}<span class="f-s-12 f-w-400 m-l-4">users</span>
+                    </h5>
+                    <span class="f-s-14">Interacted with</span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img src="assets/images/backgrounds/top-info-shape.png" class="top-img" />
+                <mat-card-content>
+                  <i-tabler name="currency-dollar" class="icon-30 d-flex"></i-tabler>
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{ userDetails?.interactions}}
+                    </h5>
+                    <span class="f-s-14">Interactions</span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+    
+  </div>
+  <div class="col-lg-4">
+    <app-steps-achieved></app-steps-achieved>
+  </div>
+  <div class="col-lg-8">
+    <app-profile-settings></app-profile-settings>
+    </div>
+</div>
+  

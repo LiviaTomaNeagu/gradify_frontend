@@ -29,12 +29,17 @@ export const routes: Routes = [
           import('./features/users/users.routes').then((m) => m.UsersRoutes),
       },
       {
-        path: 'my-company', // Add Forum here as a separate route
+        path: 'my-company',
         loadChildren: () =>
           import('./features/company/company.routes').then((m) => m.CompanyRoutes),
       },
       {
-        path: 'lists', // Add Forum here as a separate route
+        path: 'my-profile',
+        loadChildren: () =>
+          import('./features/account/account.routes').then((m) => m.AccountRoutes),
+      },
+      {
+        path: 'lists',
         loadChildren: () =>
           import('./features/lists-admin/lists-admin.routes').then((m) => m.ListsAdminRoutes),
       },

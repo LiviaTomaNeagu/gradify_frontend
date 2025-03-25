@@ -1,0 +1,40 @@
+<mat-card class="cardWithShadow">
+    <mat-card-content class="p-y-24">
+      <div class="row">
+        <!-- Col Stânga - Schimbare Poză -->
+        <div class="col-sm-6 text-center">
+          <mat-card-title>Change Profile</mat-card-title>
+          <mat-card-subtitle class="f-s-14">Change your profile picture from here</mat-card-subtitle>
+          <div class="m-t-24">
+            <img [src]="user.profileImage" class="rounded-circle" width="120" />
+            <div class="m-t-24">
+              <!-- Input File Hidden -->
+              <input type="file" #fileInput hidden (change)="uploadImage($event)" accept="image/*">
+              
+              <!-- Buton Upload -->
+              <button mat-flat-button color="primary" class="m-r-8" (click)="triggerFileInput()">Upload</button>
+              
+              <!-- Buton Reset -->
+              <button mat-stroked-button color="warn" (click)="resetImage()">Reset</button>
+            </div>
+            <span class="f-s-14 m-t-24 d-block">Allowed JPG, GIF or PNG. Max size of 800K</span>
+          </div>
+        </div>
+  
+        <!-- Linie de separare -->
+        <div class="col-sm-1 text-center">
+          <div class="vertical-line"></div>
+        </div>
+  
+        <!-- Col Dreapta - Informații Utilizator -->
+        <div class="col-sm-5">
+          <mat-card-title>User Information</mat-card-title>
+          <div class="user-info">
+            <p><strong>Full Name:</strong> {{ user.fullName }}</p>
+            <p><strong>Occupation:</strong> {{ user.occupation }}</p>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  
