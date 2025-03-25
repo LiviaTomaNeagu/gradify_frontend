@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
 
 @Component({
   selector: 'app-profile-settings',
   standalone: true,
-  imports:[CommonModule, MaterialModule],
+  imports:[CommonModule, MaterialModule, TablerIconsModule],
   templateUrl: './profile-settings.component.html',
   styleUrls: ['./profile-settings.component.scss']
 })
@@ -15,8 +16,8 @@ export class ProfileSettingsComponent {
   user = {
     fullName: 'John Doe',
     occupation: 'Software Engineer',
-    profileImage: '/assets/images/profile/user-1.jpg',
-    defaultImage: '/assets/images/profile/user-1.jpg'
+    profileImage: '/assets/images/profile/user-2.jpg',
+    defaultImage: '/assets/images/profile/user-2.jpg'
   };
 
   triggerFileInput() {
