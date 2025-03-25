@@ -6,11 +6,12 @@ import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { StepsAchievedComponent } from "../components/steps-achieved/steps-achieved.component";
 import { ProfileSettingsComponent } from '../components/profile-settings/profile-settings.component';
+import { MyTopicsComponent } from '../components/my-topics/my-topics.component';
 
 @Component({
   selector: 'app-my-profile',
   standalone: true,
-  imports: [CommonModule, MaterialModule, TablerIconsModule, StepsAchievedComponent, ProfileSettingsComponent],
+  imports: [CommonModule, MaterialModule, TablerIconsModule, StepsAchievedComponent, ProfileSettingsComponent, MyTopicsComponent],
   templateUrl: './my-profile.component.html',
   styleUrls: ['./my-profile.component.scss']
 })

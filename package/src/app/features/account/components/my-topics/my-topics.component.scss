@@ -1,0 +1,49 @@
+.topics-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .empty-state {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #888;
+  }
+  
+  .topics-list {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    gap: 10px;
+    white-space: nowrap;
+  }
+  
+  .topic-card {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .topic-card:hover {
+    background: #e2e6ea;
+  }
+  
+  .add-topic {
+    background: #007bff;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  

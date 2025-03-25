@@ -3,8 +3,8 @@
     <div class="col-lg-6">
       <mat-card class="cardWithShadow welcome-card">
             <mat-card-content class="welcome-text">
-            <h2>Welcome, {{ userDetails?.firstName }}!</h2>
-            <p>Start exploring you proile now!</p>
+            <h2>Welcome, {{ userDetails?.name }} {{userDetails?.surname}}!</h2>
+            <p>Start exploring you profile now!</p>
             </mat-card-content>
             <img
             src="assets/images/backgrounds/welcome-bg.png"
@@ -61,7 +61,9 @@
                     <h5 class="f-w-600 f-s-21 m-0">
                       {{ userDetails?.interactions}}
                     </h5>
-                    <span class="f-s-14">Interactions</span>
+                    <span class="f-s-14" *ngIf="(userDetails?.interactions ?? 0) > 0">
+                        {{ userDetails?.interactions === 1 ? 'Interaction' : 'Interactions' }}
+                      </span>
                   </div>
                 </mat-card-content>
               </mat-card>
@@ -75,5 +77,9 @@
   <div class="col-lg-8">
     <app-profile-settings></app-profile-settings>
     </div>
+
+    <div class="col-lg-4">
+      <app-my-topics [topics]="userDetails?.topics || []"></app-my-topics>
+      </div>
 </div>
   

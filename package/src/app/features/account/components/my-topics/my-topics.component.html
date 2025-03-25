@@ -1,0 +1,13 @@
+<div class="topics-container">
+    <div *ngIf="topics.length === 0" class="empty-state">
+      <p>No topics added yet. Click "+" to add a new topic.</p>
+    </div>
+    
+    <div class="topics-list">
+      <div class="topic-card" *ngFor="let topic of topics">
+        {{ topic }}
+      </div>
+      <div class="topic-card add-topic" (click)="openAddTopicDialog()">+</div>
+    </div>
+  </div>
+  
