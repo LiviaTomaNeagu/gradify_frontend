@@ -2,6 +2,9 @@ import { Injectable, inject, signal } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { Message } from '../components/chat/chat';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { GetUserConversationsResponse, mapToMessages } from './chat.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +16,9 @@ export class ChatService {
   private messagesSignal = signal<Message[]>([]);
   private selectedMessageSignal = signal<Message | null>(null);
 
-  constructor() {
+  private readonly baseUrl = `${environment.apiUrl}/chat`;
+
+  constructor(private http: HttpClient) {
     this.startConnection();
   }
 
@@ -30,27 +35,45 @@ export class ChatService {
   }
 
   private startConnection(): void {
+    const currentUser = this.currentUserService.getCurrentUserInfo();
+    this.loadMessagesFromDatabase();
+
+    if(currentUser === null) return;
+
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7176/chatHub', {
-        withCredentials: true,
+      .withUrl(`https://localhost:7176/chatHub?userId=${currentUser.id}`, {
+        withCredentials: true
       })
+      .configureLogging(signalR.LogLevel.Debug) 
       .build();
+
+    console.log(localStorage.getItem('accessToken'));
 
     this.hubConnection
       .start()
       .then(() => console.log('✅ SignalR connected'))
       .catch((err) => console.error('❌ SignalR connection error:', err));
 
+      
     this.hubConnection.on('ReceiveMessage', (message: Message) => {
       const current = this.messagesSignal();
-      const matched = current.find((m) => m.id === message.id);
-
+      const currentUser = this.currentUserService.getCurrentUserInfo();
+      
+      if (!currentUser) return;
+      
+      const senderIsCurrentUser = message.id === currentUser.id;
+      const otherUserId = senderIsCurrentUser
+        ? this.selectedMessage()?.id || ''
+        : message.id || '';
+      
+      const matched = current.find((m) => m.id === otherUserId);
+      
       const newChatEntry = {
         type: 'even',
         msg: message.chat[0].msg,
         date: new Date(message.chat[0].date),
       };
-
+      
       if (matched) {
         matched.chat.push(newChatEntry);
         this.messagesSignal.set([...current]);
@@ -58,12 +81,16 @@ export class ChatService {
         this.messagesSignal.set([
           ...current,
           {
-            ...message,
+            id: otherUserId,
+            from: 'Unknown user', // completează dacă ai un fallback
+            subject: '',
+            photo: 'assets/images/profile/default.jpg',
             chat: [newChatEntry],
           },
         ]);
       }
     });
+      
   }
 
   public sendMessage(to: Message, content: string): void {
@@ -110,5 +137,23 @@ export class ChatService {
   public overrideMessages(newMessages: Message[]): void {
     this.messagesSignal.set(newMessages);
   }
+  
+
+  private loadMessagesFromDatabase(): void {
+    const currentUser = this.currentUserService.getCurrentUserInfo();
+    if (!currentUser) return;
+  
+    this.http.get<GetUserConversationsResponse>(`${this.baseUrl}/get-messages`)
+      .subscribe({
+        next: (response) => {
+          const messages = mapToMessages(response);
+          this.messagesSignal.set(messages);
+        },
+        error: (err) => {
+          console.error('❌ Eroare la încărcarea mesajelor din DB:', err);
+        }
+      });
+  }
+
   
 }

@@ -64,6 +64,7 @@ export class AppChatComponent {
   selectMessage(message: Message): void {
     this.selectedMessage.set(message);
     this.chatService.setSelectedMessage(message);
+    console.log('Selected message:', message);
 
     if (this.isOver()) {
       this.sidePanelOpened = false;
