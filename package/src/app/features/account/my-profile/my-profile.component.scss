@@ -1,0 +1,68 @@
+.quote-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 50px 20px;
+  }
+  
+  .quote-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2597E0;
+    text-shadow: 2px 2px 8px rgba(2, 0, 0, 0.4);
+    z-index: 2;
+    position: relative;
+    max-width: 600px;
+  }
+  .quote-author {
+    font-size: 18px;
+    font-weight: bold;
+    color: #F7BEAE;
+    margin-top: 10px;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .bubble-bg {
+    position: absolute;
+    bottom: -30px;
+    left: -50px;
+    width: 400px;
+    height: 300px;
+    z-index: 1;
+  }
+  
+  .bubble {
+    position: absolute;
+    opacity: 0.6;
+  }
+  
+  .bubble-1 {
+    width: 120px;
+    height: 120px;
+    background: #FFD8A5;
+    border-radius: 50%;
+    left: 20px;
+    bottom: 40px;
+  }
+  
+  .bubble-2 {
+    width: 150px;
+    height: 150px;
+    background: #FFD8A5;
+    border-radius: 50%;
+    left: 80px;
+    bottom: 10px;
+  }
+  
+  .bubble-3 {
+    width: 90px;
+    height: 90px;
+    background: #ffb3c1;
+    border-radius: 50%;
+    left: 150px;
+    bottom: 70px;
+  }

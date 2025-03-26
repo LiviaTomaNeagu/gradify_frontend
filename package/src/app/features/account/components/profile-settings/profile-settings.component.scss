@@ -1,0 +1,81 @@
+.cardWithShadow {
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    min-height: 450px; /* Ajustat pentru aliniere perfectă */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, #f9f9f9, #ffffff);
+    overflow: hidden;
+  }
+  
+  .cardWithShadow .bubble {
+    position: absolute;
+    bottom: 50px;
+    right: 60px;
+    border-radius: 100%;
+    opacity: 1;
+}
+
+.cardWithShadow .bubble-1 {
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.6) 80%, rgba(0, 123, 255, 0) 70%);
+}
+
+.cardWithShadow .bubble-2 {
+    width: 50px;
+    height: 50px;
+    background: radial-gradient(circle, rgba(0, 180, 255, 0.6) 80%, rgba(0, 180, 255, 0) 70%);
+    bottom: 80px;
+    right: 100px;
+}
+
+.cardWithShadow .bubble-3 {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(0, 200, 200, 0.6) 80%, rgba(0, 200, 200, 0) 70%);
+    bottom: 30px;
+    right: 30px;
+}
+
+  
+  .row {
+    display: flex;
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .rounded-circle {
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  .vertical-line {
+    width: 2px;
+    height: 100px;
+    background: #ccc;
+    margin: auto;
+  }
+  
+  .user-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 10px 0;
+  }
+  
+  /* Asigurăm că ambele carduri au aceeași dimensiune */
+  .equal-height {
+    display: flex;
+    align-items: stretch;
+  }
+  
+  .equal-height > div {
+    flex: 1;
+  }
+  

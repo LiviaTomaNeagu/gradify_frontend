@@ -1,0 +1,48 @@
+.cardWithShadow {
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .timeline-border {
+    padding: 16px;
+    border-left: 5px solid;
+    position: relative;
+  }
+  
+  .timeline-border-success {
+    border-color: #28a745;
+  }
+  
+  .timeline-border-error {
+    border-color: #dc3545;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+  
+  .col-2 {
+    width: 15%;
+  }
+  
+  .col-10 {
+    width: 85%;
+  }
+  
+  .mat-tab-label {
+    font-weight: bold;
+  }
+  
+  .ng-scrollbar {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .mat-icon {
+    font-size: 20px;
+    margin-right: 4px;
+  }
+  

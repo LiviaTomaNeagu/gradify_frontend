@@ -1,0 +1,105 @@
+<div class="row">
+    <!-- Welcome Card (My Profile) -->
+    <div class="col-lg-6">
+      <mat-card class="cardWithShadow welcome-card">
+            <mat-card-content class="welcome-text">
+            <h2>Welcome, {{ userDetails?.name }} {{userDetails?.surname}}!</h2>
+            <p>Start exploring you profile now!</p>
+            </mat-card-content>
+            <img
+            src="assets/images/backgrounds/welcome-bg.png"
+            alt="welcome"
+            class="welcome-img"
+            />
+      </mat-card>
+    </div>
+  
+    <!-- Top Cards (Cele 3 carduri mici) -->
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img
+                  src="assets/images/backgrounds/top-warning-shape.png"
+                  class="top-img"
+                />
+                <mat-card-content>
+                  <i-tabler name="calendar" class="icon-30 d-flex"></i-tabler>
+          
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{userDetails?.totalDays}}
+                    </h5>
+                    <span class="f-s-14">Days Together</span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img
+                  src="assets/images/backgrounds/top-error-shape.png"
+                  class="top-img"
+                />
+                <mat-card-content>
+                  <i-tabler name="users" class="icon-30 d-flex"></i-tabler>
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{userDetails?.usersInteractedWith}}<span class="f-s-12 f-w-400 m-l-4">users</span>
+                    </h5>
+                    <span class="f-s-14">Interacted with</span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            <div class="col-lg-4">
+              <mat-card class="cardWithShadow bg-primary text-white overflow-hidden">
+                <img src="assets/images/backgrounds/top-info-shape.png" class="top-img" />
+                <mat-card-content>
+                  <i-tabler name="currency-dollar" class="icon-30 d-flex"></i-tabler>
+                  <div class="m-t-30 p-t-10">
+                    <h5 class="f-w-600 f-s-21 m-0">
+                      {{ userDetails?.interactions}}
+                    </h5>
+                    <span class="f-s-14" *ngIf="(userDetails?.interactions ?? 0) > 0">
+                        {{ userDetails?.interactions === 1 ? 'Interaction' : 'Interactions' }}
+                      </span>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
+          </div>
+    
+  </div>
+  <div class="col-lg-4">
+    <app-steps-achieved></app-steps-achieved>
+  </div>
+  
+  <div class="col-lg-8">
+    <app-profile-settings></app-profile-settings>
+    </div>
+
+      <div class="col-lg-6 d-flex justify-content-center align-items-center">
+        <div class="quote-container">
+          <p class="quote-text">
+            "Alone we can do so little; together we can do so much."
+          </p>
+          <span class="quote-author">- Helen Keller</span>
+    
+          <!-- Bule în fundal -->
+          <div class="bubble-bg">
+            <img src="assets/images/backgrounds/bubble-1.svg" class="bubble bubble-1" />
+            <img src="assets/images/backgrounds/bubble-2.svg" class="bubble bubble-2" />
+            <img src="assets/images/backgrounds/bubble-3.svg" class="bubble bubble-3" />
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-lg-6 d-flex justify-content-center">
+        <div class="my-topics-container w-100"> 
+          <app-my-topics [topics]="userDetails?.topics || []"></app-my-topics>
+        </div>
+      </div>
+    
+</div>
+  
