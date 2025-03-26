@@ -1,10 +1,12 @@
-import { Component, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
 import { ChatService } from '../../core/chat.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { UsersService } from 'src/app/features/users/core/services/users.service';
 import { Message } from './chat';
 
 @Component({
@@ -21,48 +23,50 @@ import { Message } from './chat';
   templateUrl: './chat.component.html',
 })
 export class AppChatComponent {
-  sidePanelOpened = true;
-  //input feild for  new msg
-  msg = signal('');
+  private chatService = inject(ChatService);
+  private userService = inject(UsersService);
+  private currentUserService = inject(CurrentUserService);
 
-  // MESSAGE
+  sidePanelOpened = true;
+  msg = signal('');
+  searchTerm = signal('');
   selectedMessage = signal<Message | null>(null);
 
-  messages = signal<Message[]>([]);
+  constructor() {
+    this.loadExtraUsersIfNeeded();
+  }
 
-  filteredMessages = signal<Message[]>([]);
+  // 🔁 Computed messages din service
+  messages = computed(() => this.chatService.messages());
 
-  searchTerm = signal('');
+  // 🔍 Computed pentru filtrare
+  filteredMessages = computed(() => {
+    const term = this.searchTerm().trim().toLowerCase();
+    return term
+      ? this.messages().filter((m) =>
+          m.from.toLowerCase().includes(term)
+        )
+      : this.messages();
+  });
 
-  // tslint:disable-next-line - Disables all
+  ngOnInit() {
+    this.selectedMessage.set(this.chatService.selectedMessage());
 
-  constructor(private chatService: ChatService) {}
+    if (this.isOver()) {
+      this.sidePanelOpened = false;
+    }
+  }
 
   isOver(): boolean {
     return window.matchMedia(`(max-width: 960px)`).matches;
   }
-  
-  ngOnInit() {
-    this.messages.set(this.chatService.messages());
 
-    this.filteredMessages.set(this.messages());
-    this.selectedMessage.set(this.chatService.selectedMessage());
-
-    if (this.isOver()) {
-      // Check if the screen is small
-      this.sidePanelOpened = false; // Close the sidebar
-    }
-  }
-
-
-
-  // tslint:disable-next-line - Disables all
   selectMessage(message: Message): void {
     this.selectedMessage.set(message);
+    this.chatService.setSelectedMessage(message);
 
     if (this.isOver()) {
-      // Check if the screen is small
-      this.sidePanelOpened = false; // Close the sidebar
+      this.sidePanelOpened = false;
     }
   }
 
@@ -75,12 +79,31 @@ export class AppChatComponent {
   }
 
   searchMessages(): void {
-    this.filteredMessages.set(
-      this.searchTerm().trim()
-        ? this.messages().filter((message) =>
-            message.from.toLowerCase().includes(this.searchTerm().toLowerCase())
-          )
-        : this.messages()
-    );
+    // Nu mai trebuie logică explicită, se face prin computed
+  }
+
+  private loadExtraUsersIfNeeded(): void {
+    const currentUser = this.currentUserService.getCurrentUserInfo();
+    if (!currentUser) return;
+
+    this.userService.getAllShortUsers().subscribe((users) => {
+      const baseMessages = this.chatService.messages();
+      const existingIds = baseMessages.map((m) => m.id);
+
+      const newMessages = users.users
+        .filter((u) => u.id !== currentUser.id && !existingIds.includes(u.id))
+        .map((u) => ({
+          id: u.id,
+          from: `${u.name} ${u.surname}`,
+          subject: '...',
+          photo: 'assets/images/profile/user-1.jpg',
+          chat: [],
+        }));
+
+      if (newMessages.length > 0) {
+        const merged = [...baseMessages, ...newMessages];
+        this.chatService.overrideMessages(merged);
+      }
+    });
   }
 }
