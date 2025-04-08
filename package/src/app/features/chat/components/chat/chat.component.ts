@@ -1,6 +1,6 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { AfterViewInit, Component, computed, ElementRef, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NgScrollbar, NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
@@ -22,7 +22,9 @@ import { Message } from './chat';
   ],
   templateUrl: './chat.component.html',
 })
-export class AppChatComponent {
+export class AppChatComponent implements AfterViewInit {
+  @ViewChild('scrollViewport', { read: ElementRef }) scrollViewport?: ElementRef;
+  
   private chatService = inject(ChatService);
   private userService = inject(UsersService);
   private currentUserService = inject(CurrentUserService);
@@ -36,10 +38,8 @@ export class AppChatComponent {
     this.loadExtraUsersIfNeeded();
    }
 
-  // 🔁 Computed messages din service
   messages = computed(() => this.chatService.messages());
 
-  // 🔍 Computed pentru filtrare
   filteredMessages = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
     return term
@@ -56,6 +56,19 @@ export class AppChatComponent {
       this.sidePanelOpened = false;
     }
     this.loadExtraUsersIfNeeded();
+    this.scrollToBottom();
+  }
+
+  ngAfterViewInit() {
+    this.scrollToBottom();
+  }
+  private scrollToBottom(): void {
+    setTimeout(() => {
+      const scrollContainer = this.scrollViewport?.nativeElement?.querySelector('.ng-scroll-viewport');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      }
+    }, 100);
   }
 
   isOver(): boolean {
@@ -70,6 +83,7 @@ export class AppChatComponent {
     if (this.isOver()) {
       this.sidePanelOpened = false;
     }
+    this.scrollToBottom();
   }
 
   sendMessage(): void {
@@ -77,6 +91,7 @@ export class AppChatComponent {
     if (currentSelectedMessage) {
       this.chatService.sendMessage(currentSelectedMessage, this.msg());
       this.msg.set('');
+      this.scrollToBottom();
     }
   }
 
