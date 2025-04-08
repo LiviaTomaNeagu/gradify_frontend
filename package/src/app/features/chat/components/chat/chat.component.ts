@@ -57,6 +57,14 @@ export class AppChatComponent implements AfterViewInit {
     }
     this.loadExtraUsersIfNeeded();
     this.scrollToBottom();
+
+    setTimeout(() => {
+      const allMessages = this.chatService.messages();
+      if (allMessages.length > 0) {
+        const first = allMessages[0];
+        this.selectMessage(first);
+      }
+    }, 100);
   }
 
   ngAfterViewInit() {
