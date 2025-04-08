@@ -32,9 +32,9 @@ export class AppChatComponent {
   searchTerm = signal('');
   selectedMessage = signal<Message | null>(null);
 
-  constructor() {
+  constructor() { 
     this.loadExtraUsersIfNeeded();
-  }
+   }
 
   // 🔁 Computed messages din service
   messages = computed(() => this.chatService.messages());
@@ -55,6 +55,7 @@ export class AppChatComponent {
     if (this.isOver()) {
       this.sidePanelOpened = false;
     }
+    this.loadExtraUsersIfNeeded();
   }
 
   isOver(): boolean {
@@ -96,7 +97,7 @@ export class AppChatComponent {
         .map((u) => ({
           id: u.id,
           from: `${u.name} ${u.surname}`,
-          subject: '...',
+          subject: 'No messages yet',
           photo: 'assets/images/profile/user-1.jpg',
           chat: [],
         }));
