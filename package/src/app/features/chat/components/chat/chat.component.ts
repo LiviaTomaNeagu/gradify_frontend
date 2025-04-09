@@ -38,7 +38,17 @@ export class AppChatComponent implements AfterViewInit {
     this.loadExtraUsersIfNeeded();
    }
 
-  messages = computed(() => this.chatService.messages());
+  messages = computed(() => 
+    {
+      const msgs = this.chatService.messages();
+      return msgs.map(m => {
+        if (!m.photo) {
+          const firstName = m.from.split(' ')[0];
+          m.photo = this.getDefaultAvatar(firstName);
+        }
+        return m;
+      });
+    });
 
   filteredMessages = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
@@ -84,6 +94,8 @@ export class AppChatComponent implements AfterViewInit {
   }
 
   selectMessage(message: Message): void {
+    const firstName = message.from.split(' ')[0];
+    message.photo = this.getDefaultAvatar(firstName);
     this.selectedMessage.set(message);
     this.chatService.setSelectedMessage(message);
     console.log('Selected message:', message);
@@ -121,7 +133,7 @@ export class AppChatComponent implements AfterViewInit {
           id: u.id,
           from: `${u.name} ${u.surname}`,
           subject: 'No messages yet',
-          photo: 'assets/images/profile/user-1.jpg',
+          photo: this.getDefaultAvatar(u.name),
           chat: [],
         }));
 
@@ -131,4 +143,21 @@ export class AppChatComponent implements AfterViewInit {
       }
     });
   }
+
+  getDefaultAvatar(name: string): string {
+      const avatars = [
+        '/assets/images/profile/user-1.jpg',
+        '/assets/images/profile/user-2.jpg',
+        '/assets/images/profile/user-3.jpg',
+        '/assets/images/profile/user-4.jpg',
+      ];
+  
+      let hash = 0;
+      for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+      }
+    
+      const index = Math.abs(hash) % avatars.length;
+      return avatars[index]; 
+    }
 }

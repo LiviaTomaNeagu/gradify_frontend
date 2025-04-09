@@ -5,6 +5,7 @@ import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { GetUserConversationsResponse, mapToMessages } from './chat.interfaces';
+import { first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -111,11 +112,12 @@ export class ChatService {
       matched.chat.push(localChatEntry);
       this.messagesSignal.set([...current]);
     } else {
+      const firstName = to.from.split(' ')[0];
       const newLocalMessage: Message = {
         id: to.id,
         from: to.from,
-        subject: to.subject,
-        photo: to.photo,
+        subject: 'Conversation',
+        photo: this.getDefaultAvatar(firstName),
         chat: [localChatEntry],
       };
       this.messagesSignal.set([...current, newLocalMessage]);
@@ -124,8 +126,8 @@ export class ChatService {
     const payload: Message = {
       id: to.id,
       from: currentUser.name,
-      subject: 'Licenta Chat',
-      photo: 'assets/images/profile/user-1.jpg',
+      subject: 'Conversation',
+      photo: this.getDefaultAvatar(currentUser.name),
       chat: [localChatEntry],
     };
 
@@ -155,5 +157,21 @@ export class ChatService {
       });
   }
 
+  getDefaultAvatar(name: string): string {
+    const avatars = [
+      '/assets/images/profile/user-1.jpg',
+      '/assets/images/profile/user-2.jpg',
+      '/assets/images/profile/user-3.jpg',
+      '/assets/images/profile/user-4.jpg',
+    ];
+
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+      hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    }
+  
+    const index = Math.abs(hash) % avatars.length;
+    return avatars[index]; 
+  }
   
 }
