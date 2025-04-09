@@ -25,6 +25,8 @@ export class DashboardStudentComponent {
   totalQuestionsAsked = 12;
   totalMentorsAnswered = 5;
   currentStep = 3;
+  displayedColumns: string[] = ['profile', 'email'];
+
 
   latestQuestions: LatestQuestionDTO[] = [
     {
