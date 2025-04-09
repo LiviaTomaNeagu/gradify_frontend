@@ -8,6 +8,7 @@ import { ChatService } from '../../core/chat.service';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { UsersService } from 'src/app/features/users/core/services/users.service';
 import { Message } from './chat';
+import {CurrentUserResponseInterfaceDTO} from 'src/app/@core/interfaces/user.interface';
 
 @Component({
   selector: 'app-chat',
@@ -33,9 +34,11 @@ export class AppChatComponent implements AfterViewInit {
   msg = signal('');
   searchTerm = signal('');
   selectedMessage = signal<Message | null>(null);
+  currentUser:  CurrentUserResponseInterfaceDTO | null = null;
 
   constructor() { 
     this.loadExtraUsersIfNeeded();
+    this.currentUser = this.currentUserService.getCurrentUserInfo();
    }
 
   messages = computed(() => 
