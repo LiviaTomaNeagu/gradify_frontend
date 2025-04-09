@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
-import { StudentDetailsDialogComponent } from 'src/app/features/dashboard/student-details-dialog/student-details-dialog.component';
+import { StudentDetailsDialogComponent } from 'src/app/features/dashboard/components/student-details-dialog/student-details-dialog.component';
 
 export enum Specialization {
   INFORMATICA = 'Informatica',

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { MentorService } from '../core/mentor.service';
-import { MentorResponseDTO, GraphDataPoint, LatestQuestionDTO } from '../core/mentor.interfaces';
-import { ShortUserDto } from '../../users/core/interfaces/users.interfaces';
+import { MentorService } from '../../core/mentor.service';
+import { MentorResponseDTO, GraphDataPoint, LatestQuestionDTO } from '../../core/mentor.interfaces';
+import { ShortUserDto } from '../../../users/core/interfaces/users.interfaces';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
-import { GetRelatedQuestionResponseDto } from '../../forum/core/interfaces/get-related-questions.dto';
-import { RelatedCardComponent } from '../../forum/forum-page/components/related-card/related-card.component';
+import { GetRelatedQuestionResponseDto } from '../../../forum/core/interfaces/get-related-questions.dto';
+import { RelatedCardComponent } from '../../../forum/forum-page/components/related-card/related-card.component';
 import { Topic, topicColors, getTopicName } from 'src/app/shared/enums/topic.enum';
 import { ApexChart, ApexXAxis, ApexYAxis, ApexDataLabels, ApexTooltip, ApexStroke, ApexLegend, ApexPlotOptions, ApexGrid, ApexAxisChartSeries } from 'ng-apexcharts'; // ✅ Import ApexCharts types
 
