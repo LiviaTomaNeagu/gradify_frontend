@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { GetMentorsRequestDTO, GetMentorsResponseDTO } from "../interfaces/users.interfaces";
+import { GetMentorsRequestDTO, GetMentorsResponseDTO, GetShortUsersResponseDTO } from "../interfaces/users.interfaces";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -9,6 +9,7 @@ import { Observable } from "rxjs";
 })
 
 export class UsersService {
+  
     private readonly baseUrl = `${environment.apiUrl}/users`;
     
       constructor(private http: HttpClient) {
@@ -25,6 +26,10 @@ export class UsersService {
 
       declineUser(userId: string) {
         return this.http.delete<string>(`${this.baseUrl}/decline-user/${userId}`, {});
+      }
+
+      getAllShortUsers(): Observable<GetShortUsersResponseDTO> {
+        return this.http.get<GetShortUsersResponseDTO>(`${this.baseUrl}/get-all-short-users`);
       }
 
 }

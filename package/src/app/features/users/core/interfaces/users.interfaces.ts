@@ -69,3 +69,8 @@ export interface ShortUserDto
     occupationId: string;
     occupation: OccupationDTO
 }
+
+export interface GetShortUsersResponseDTO
+{
+    users: ShortUserDto[]
+}

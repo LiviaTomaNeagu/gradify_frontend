@@ -94,7 +94,7 @@ export const navItems: NavItem[] = [
     displayName: 'Chat',
     iconName: 'message-circle',
     bgcolor: 'warning',
-    route: '/ui-components/chips',
+    route: '/chat',
     roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   }
 ];

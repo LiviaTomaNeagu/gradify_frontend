@@ -1,13 +1,19 @@
-<h2>Select a topic</h2>
-<div class="dropdown-container">
-  <select [(ngModel)]="selectedTopic">
-    <option *ngFor="let topic of topics" [value]="topic">
-      {{ topic }}
-    </option>
-  </select>
-</div>
+  <h2 mat-dialog-title>Select a topic</h2>
 
-<div class="buttons">
-  <button (click)="close()">Cancel</button>
-  <button (click)="addTopic()">Add</button>
-</div>
+
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-select  [(ngModel)]="selectedTopic">
+      <mat-option *ngFor="let topic of topics" [value]="topic">
+        {{ topic }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  
+  <div class="buttons">
+    <button mat-flat-button (click)="close()">Cancel</button>
+    <button mat-flat-button color="primary" (click)="addTopic()">Add</button>
+  </div>
+  
+</mat-dialog-content>
