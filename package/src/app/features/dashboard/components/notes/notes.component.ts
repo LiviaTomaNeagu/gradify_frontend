@@ -1,5 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { Note } from './note';
+import { Component, effect, OnInit, signal } from '@angular/core';
+import { NoteDto, CreateNoteDto } from  './note.interfaces';
 import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -9,29 +9,27 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoteService } from '../notes/note.service';
 
 @Component({
-    selector: 'app-notes',
-    templateUrl: './notes.component.html',
-    styleUrls: ['./notes.component.scss'],
-    standalone: true,
-    imports: [
-        CommonModule,
-        NgScrollbarModule,
-        TablerIconsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule,
-    ]
+  selector: 'app-notes',
+  templateUrl: './notes.component.html',
+  styleUrls: ['./notes.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    NgScrollbarModule,
+    TablerIconsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaterialModule,
+  ]
 })
 export class AppNotesComponent implements OnInit {
   sidePanelOpened = signal(true);
 
-  notes = signal<Note[]>([]);
-
-  selectedNote = signal<Note | null>(null);
+  notes = signal<NoteDto[]>([]);
+  selectedNote = signal<NoteDto | null>(null);
 
   active = signal<boolean>(false);
-
-  searchText = signal<any>('');
+  searchText = signal<string>('');
 
   clrName = signal<string>('warning');
 
@@ -48,18 +46,25 @@ export class AppNotesComponent implements OnInit {
 
   constructor(public noteService: NoteService, private snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {
-    this.notes.set(this.noteService.getNotes());
-    this.selectedNote.set(this.notes()[0]);
-    const currentNote = this.selectedNote();
+  readonly notesEffect = effect(() => {
+    const notes = this.noteService.getNotes();
+    this.notes.set(notes);
+  
+    const currentNote = notes[0];
     if (currentNote) {
-      this.selectedColor.set(currentNote.color);
+      this.selectedNote.set(currentNote);
       this.clrName.set(currentNote.color);
+      this.selectedColor.set(currentNote.color);
       this.currentNoteTitle.set(currentNote.title);
     }
+  }, { allowSignalWrites: true });
+  
+  ngOnInit(): void {
+    this.noteService.fetchNotes();
   }
+  
 
-  get currentNote(): Note | null {
+  get currentNote(): NoteDto | null {
     return this.selectedNote();
   }
 
@@ -68,7 +73,7 @@ export class AppNotesComponent implements OnInit {
     this.notes.set(this.filter(filterValue));
   }
 
-  filter(v: string): Note[] {
+  filter(v: string): NoteDto[] {
     return this.noteService
       .getNotes()
       .filter((x) => x.title.toLowerCase().includes(v.toLowerCase()));
@@ -78,7 +83,7 @@ export class AppNotesComponent implements OnInit {
     return window.matchMedia(`(max-width: 960px)`).matches;
   }
 
-  onSelect(note: Note): void {
+  onSelect(note: NoteDto): void {
     this.selectedNote.set(note);
     this.clrName.set(note.color);
     this.currentNoteTitle.set(note.title);
@@ -96,10 +101,8 @@ export class AppNotesComponent implements OnInit {
     this.active.set(!this.active());
   }
 
-  removenote(note: Note): void {
-    this.noteService.removeNote(note);
-    this.notes.set(this.noteService.getNotes());
-
+  removenote(note: NoteDto): void {
+    this.noteService.removeNote(note.id);
     if (this.selectedNote() === note) {
       this.selectedNote.set(null);
       this.currentNoteTitle.set('');
@@ -108,14 +111,12 @@ export class AppNotesComponent implements OnInit {
   }
 
   addNoteClick(): void {
-    const newNote: Note = {
+    const newNote: CreateNoteDto = {
       color: this.clrName(),
       title: 'This is a new note',
       datef: new Date(),
     };
     this.noteService.addNote(newNote);
-    this.notes.set(this.noteService.getNotes());
-
     this.openSnackBar('Note added successfully!');
   }
 
@@ -124,10 +125,10 @@ export class AppNotesComponent implements OnInit {
     if (currentNote) {
       currentNote.title = newTitle;
       this.noteService.updateNote(currentNote);
-      this.notes.set(this.noteService.getNotes());
     }
   }
 
+  //TODO ADD TOASTR MESSAGES HERE
   openSnackBar(
     message: string,
     action: string = 'Close',

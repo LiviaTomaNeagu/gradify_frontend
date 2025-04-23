@@ -1,4 +1,4 @@
-import { Note } from './note';
+import { Note } from './note.interfaces';
 
 export const notes: Note[] = [
   {
