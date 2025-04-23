@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AddStudentDetailsDTO, HasDetailsResponseDTO } from './student.interfaces';
+import { AddStudentDetailsDTO, GetStudentDashboardDTO, HasDetailsResponseDTO } from './student.interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,9 @@ export class StudentService {
 
   addStudentDetails(details: AddStudentDetailsDTO): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/add-student-details`, details);
+  }
+
+  getStudentDashboard(): Observable<GetStudentDashboardDTO> {
+    return this.http.get<GetStudentDashboardDTO>(`${this.apiUrl}/student-dashboard`);
   }
 }
