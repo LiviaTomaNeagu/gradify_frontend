@@ -133,12 +133,9 @@ export class AppFullcalendarComponent {
         {
           label: '<span class="text-danger m-l-5">Delete</span>',
           onClick: ({ event }: { event: CalendarEvent }): void => {
-            this.events.set(
-              this.events().filter((iEvent: CalendarEvent<any>) => iEvent !== event)
-            );
-            this.handleEvent('Deleted', event);
+            this.handleEvent('Deleted', event); // ✅ doar trimite către dialog
           },
-        },
+        }
       ];
     
       this.events.set([
