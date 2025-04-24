@@ -2,12 +2,12 @@ import { SubscriptionLoggable } from "rxjs/internal/testing/SubscriptionLoggable
 import { StudentDetails } from "src/app/features/coordinator/core/interfaces/coordinator.interface";
 import { RoleTypeEnum } from "src/app/shared/enums/role-type.enum";
 
-export interface OccupationDTO{
-    id: string;
-    name: string;
-    domain: string;
-    createdAt: Date;    
-}
+    export interface OccupationDTO{
+        id: string;
+        name: string;
+        domain: string;
+        createdAt: Date;    
+    }
 
 export interface UserDTO
 {

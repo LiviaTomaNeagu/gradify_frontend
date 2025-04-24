@@ -4,8 +4,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Specialization, StudentDetailsService, StudentDetails } from 'src/app/@core/services/student-details.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
-import { StudentService } from '../core/student.service';
-import { AddStudentDetailsDTO } from '../core/student.interfaces';
+import { StudentService } from '../../core/student.service';
+import { AddStudentDetailsDTO } from '../../core/student.interfaces';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

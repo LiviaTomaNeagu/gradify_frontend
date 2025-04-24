@@ -1,0 +1,77 @@
+<div class="dashboard-layout">
+  <!-- 🔸 First row: Questions + Mentors -->
+  <mat-card class="stat-card card-questions">
+    <div class="stat-content">
+      <mat-card-title>Questions Asked</mat-card-title>
+      <mat-card-content>
+        <h2>{{ totalQuestionsAsked }}</h2>
+      </mat-card-content>
+    </div>
+
+    <!-- Optional animated bubbles -->
+    <div class="bubble bubble-1"></div>
+    <div class="bubble bubble-2"></div>
+    <div class="bubble bubble-3"></div>
+  </mat-card>
+
+  <mat-card class="stat-card card-mentors">
+    <mat-card-title>Mentors Who Answered You</mat-card-title>
+    <h2>{{ totalMentorsAnswered }}</h2>
+    <p>Mentors and peers who helped you with answers or comments.</p>
+  </mat-card>
+
+  <!-- 🔸 First + Second row: Latest Questions (2x2) -->
+  <mat-card class="latest-questions-card card-latest-questions">
+    <mat-card-title>Latest Questions You Answered</mat-card-title>
+    <div class="scroll-container">
+      <app-related-card
+        *ngFor="let question of latestQuestions"
+        [question]="question"
+      ></app-related-card>
+    </div>
+  </mat-card>
+
+  <!-- 🔸 Second row: Interactions -->
+  <mat-card class="cardWithShadow interactions-card">
+    <mat-card-title>Mentors You Interacted With</mat-card-title>
+    <div class="table-responsive">
+      <table mat-table [dataSource]="getLimitedUsers(topMentors)">
+        <!-- table columns -->
+        <!-- Column: profile -->
+        <ng-container matColumnDef="profile">
+          <td mat-cell *matCellDef="let user">
+            <div class="d-flex align-items-center">
+              <img
+                [src]="getDefaultAvatar(user.name)"
+                alt="user-avatar"
+                width="50"
+                class="rounded-circle"
+              />
+              <div class="m-l-16">
+                <h6 class="mat-subtitle-1 f-s-14 f-w-600">
+                  {{ user.name }} {{ user.surname }}
+                </h6>
+                <span class="f-s-14">{{ user.occupation?.name || "N/A" }}</span>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- Column: email -->
+        <ng-container matColumnDef="email">
+          <td mat-cell *matCellDef="let user" class="mat-body-1">
+            <span class="f-s-14">{{ user.email }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Define row structure -->
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+  </mat-card>
+
+  <!-- 🔸 Third row: Notes -->
+  <div class="notes-area">
+    <app-notes></app-notes>
+  </div>
+</div>

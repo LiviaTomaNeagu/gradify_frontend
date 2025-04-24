@@ -53,6 +53,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/chat/chat.routes').then((m) => m.ChatRoutes),
       },
+      {
+        path: 'progress',
+        loadChildren: () =>
+          import('./features/progress/progress.routes').then((m) => m.ProgressRoutes),
+      },
     ],
   },
   {

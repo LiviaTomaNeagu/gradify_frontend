@@ -1,0 +1,22 @@
+<h2 class="section-title">My Progress</h2>
+<div class="my-progress-container">
+  
+    <div class="horizontal-timeline">
+        <div
+          class="timeline-step"
+          *ngFor="let step of steps; let i = index"
+          [class.completed]="i <= selectedStep"
+          (click)="selectStep(i)"
+        >
+          <div class="circle">{{ i + 1 }}</div>
+          <div class="label">{{ step }}</div>
+        </div>
+      </div>
+  
+    <h3 class="calendar-title">Upcoming Events</h3>
+    <div class="calendar-box">
+        <app-fullcalendar></app-fullcalendar>
+      </div>
+      
+  </div>
+  

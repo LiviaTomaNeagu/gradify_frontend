@@ -69,7 +69,7 @@ export const navItems: NavItem[] = [
     displayName: 'My Progress',
     iconName: 'rosette',
     bgcolor: 'warning',
-    route: '/ui-components/badge',
+    route: '/progress',
     roles: [RoleTypeEnum.STUDENT],
   },
   {
