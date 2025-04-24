@@ -147,13 +147,13 @@ export class AppFullcalendarComponent {
           end: addDays(new Date(), 1),
           title: 'A 3 day event',
           color: colors.red,
-          actions: this.currentUser?.role === 'ADMIN' ? this.actions : []
+          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : []
         },
         {
           start: startOfDay(new Date()),
           title: 'An event with no end date',
           color: colors.blue,
-          actions: this.currentUser?.role === 'ADMIN' ? this.actions : []
+          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : []
         },
         {
           start: subDays(endOfMonth(new Date()), 3),
@@ -166,7 +166,7 @@ export class AppFullcalendarComponent {
           end: new Date(),
           title: 'A draggable and resizable event',
           color: colors.yellow,
-          actions: this.currentUser?.role === 'ADMIN' ? this.actions : [],
+          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : [],
           resizable: {
             beforeStart: true,
             afterEnd: true,
@@ -239,31 +239,42 @@ export class AppFullcalendarComponent {
     const isStudent = this.currentUser?.role === RoleTypeEnum.STUDENT;
     const isAdmin = this.currentUser?.role === RoleTypeEnum.ADMIN;
   
-    const dialogMode = isStudent ? 'view' : 'edit';
-    console.log('Dialog mode:', dialogMode);
+    const dialogMode = isStudent ? 'view' : action;
   
     this.config.data = {
       event,
       action: dialogMode
     };
-
-    console.log('HANDLE EVENT - sending to dialog:', this.config.data);
   
-    if (dialogMode === 'edit') {
-      this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
-    
-      this.dialogRef()
-        .afterClosed()
-        .subscribe((result: string) => {
-          this.lastCloseResult.set(result);
-          this.dialogRef.set(null);
-          this.refresh.next(result);
-        });
-    } else {
+    if (dialogMode === 'view') {
       console.log('Student clicked event – view mode only, no dialog opened.');
+      return;
     }
+  
+    this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
+  
+    this.dialogRef()
+      .afterClosed()
+      .subscribe((result: string) => {
+        if (dialogMode === 'Deleted' && result === 'confirm') {
+          this.deleteEvent(event);
+        } else if (dialogMode === 'Edit' && typeof result === 'object') {
+          const updatedEvent = result as CalendarEvent;
+          updatedEvent.actions = this.actions;
+        
+          this.events.set(
+            this.events().map((e: CalendarEvent) => (e === event ? updatedEvent : e))
+          );
+        
+          this.refresh.next(result);
+        }
     
+  
+        this.dialogRef.set(null);
+      });
   }
+  
+  
   
   
 

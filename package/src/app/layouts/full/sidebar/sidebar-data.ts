@@ -96,5 +96,17 @@ export const navItems: NavItem[] = [
     bgcolor: 'warning',
     route: '/chat',
     roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
-  }
+  },
+
+  {
+    navCap: 'Groups & Events',
+    roles: [RoleTypeEnum.ADMIN],
+  },
+  {
+    displayName: 'Calendar',
+    iconName: 'calendar',
+    bgcolor: 'primary',
+    route: '/calendar',
+    roles: [RoleTypeEnum.ADMIN],
+  },
 ];
