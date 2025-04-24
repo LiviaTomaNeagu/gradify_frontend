@@ -249,15 +249,20 @@ export class AppFullcalendarComponent {
 
     console.log('HANDLE EVENT - sending to dialog:', this.config.data);
   
-    this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
-  
-    this.dialogRef()
-      .afterClosed()
-      .subscribe((result: string) => {
-        this.lastCloseResult.set(result);
-        this.dialogRef.set(null);
-        this.refresh.next(result);
-      });
+    if (dialogMode === 'edit') {
+      this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
+    
+      this.dialogRef()
+        .afterClosed()
+        .subscribe((result: string) => {
+          this.lastCloseResult.set(result);
+          this.dialogRef.set(null);
+          this.refresh.next(result);
+        });
+    } else {
+      console.log('Student clicked event – view mode only, no dialog opened.');
+    }
+    
   }
   
   
