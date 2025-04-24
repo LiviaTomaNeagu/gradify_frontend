@@ -247,6 +247,8 @@ export class AppFullcalendarComponent {
       console.log('Student clicked event – view mode only, no dialog opened.');
       return;
     }
+
+    if(dialogMode === 'Deleted' || dialogMode === 'Edit') {
   
     this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
   
@@ -269,6 +271,7 @@ export class AppFullcalendarComponent {
   
         this.dialogRef.set(null);
       });
+    }
   }
   
   
