@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CalendarA11y, CalendarEvent, CalendarEventTitleFormatter, CalendarModule, CalendarUtils, DateAdapter } from 'angular-calendar';
 import { MaterialModule } from 'src/app/material.module';
 import { AppFullcalendarComponent } from '../components/fullcalendar/fullcalendar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { GetMyProgressDataResponseDTO } from '../core/progress.interfaces';
+import { ProgressService } from '../core/progres.service';
 
 @Component({
   selector: 'app-my-progress',
@@ -21,7 +23,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     CalendarEventTitleFormatter
   ]
 })
-export class MyProgressComponent {
+export class MyProgressComponent implements OnInit {
   viewDate: Date = new Date();
 
   steps: string[] = [
@@ -36,10 +38,6 @@ export class MyProgressComponent {
 
   selectedStep = 0;
 
-  selectStep(index: number): void {
-    this.selectedStep = index;
-  }
-
   events: CalendarEvent[] = [
     {
       start: new Date(2025, 4, 5),
@@ -53,4 +51,31 @@ export class MyProgressComponent {
       color: { primary: '#ad2121', secondary: '#FAE3E3' }
     }
   ];
+
+  constructor(private progressService: ProgressService) {} 
+
+  ngOnInit(): void {
+    this.progressService.getMyProgress().subscribe({
+      next: (data: GetMyProgressDataResponseDTO) => {
+        this.selectedStep = data.currentStep ?? 0;
+        console.log('Current step:', this.selectedStep);
+      },
+      error: (err) => {
+        console.error('Failed to fetch progress', err);
+      }
+    });
+  }
+
+  selectStep(index: number): void {
+    this.selectedStep = index;
+    this.progressService.addMyProgress({ currentStep: index }).subscribe({
+      next: () => {
+        console.log('Progress updated successfully');
+      },
+      error: (err) => {
+        console.error('Failed to update progress', err);
+      }
+    });
+  }
+  
 }
