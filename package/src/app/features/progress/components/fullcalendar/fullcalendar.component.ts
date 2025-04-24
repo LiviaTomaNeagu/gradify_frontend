@@ -46,6 +46,8 @@ import {
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TablerIconsModule } from 'angular-tabler-icons';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 const colors: any = {
   red: {
@@ -113,6 +115,68 @@ export class AppFullcalendarComponent {
   view = signal<any>('month');
   viewDate = signal<Date>(new Date());
   activeDayIsOpen = signal<boolean>(true);
+  currentUser : any;
+  readonly RoleTypeEnum = RoleTypeEnum;
+
+  
+  constructor(public dialog: MatDialog, @Inject(DOCUMENT) doc: any, private currentUserService : CurrentUserService) {
+  
+    this.currentUser = this.currentUserService.getCurrentUserInfo();
+
+      this.actions = [
+        {
+          label: '<span class="text-white link m-l-5">: Edit</span>',
+          onClick: ({ event }: { event: CalendarEvent }): void => {
+            this.handleEvent('Edit', event);
+          },
+        },
+        {
+          label: '<span class="text-danger m-l-5">Delete</span>',
+          onClick: ({ event }: { event: CalendarEvent }): void => {
+            this.events.set(
+              this.events().filter((iEvent: CalendarEvent<any>) => iEvent !== event)
+            );
+            this.handleEvent('Deleted', event);
+          },
+        },
+      ];
+    
+      this.events.set([
+        {
+          start: subDays(startOfDay(new Date()), 1),
+          end: addDays(new Date(), 1),
+          title: 'A 3 day event',
+          color: colors.red,
+          actions: this.currentUser?.role === 'ADMIN' ? this.actions : []
+        },
+        {
+          start: startOfDay(new Date()),
+          title: 'An event with no end date',
+          color: colors.blue,
+          actions: this.currentUser?.role === 'ADMIN' ? this.actions : []
+        },
+        {
+          start: subDays(endOfMonth(new Date()), 3),
+          end: addDays(endOfMonth(new Date()), 3),
+          title: 'A long event that spans 2 months',
+          color: colors.blue,
+        },
+        {
+          start: addHours(startOfDay(new Date()), 2),
+          end: new Date(),
+          title: 'A draggable and resizable event',
+          color: colors.yellow,
+          actions: this.currentUser?.role === 'ADMIN' ? this.actions : [],
+          resizable: {
+            beforeStart: true,
+            afterEnd: true,
+          },
+          draggable: true,
+        },
+      ]);
+    
+    
+  }
 
   config: MatDialogConfig = {
     disableClose: false,
@@ -131,61 +195,10 @@ export class AppFullcalendarComponent {
   };
   numTemplateOpens = 0;
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<span class="text-white link m-l-5">: Edit</span>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edit', event);
-      },
-    },
-    {
-      label: '<span class="text-danger m-l-5">Delete</span>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events.set(
-          this.events().filter((iEvent: CalendarEvent<any>) => iEvent !== event)
-        );
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
-
+  actions: CalendarEventAction[] =[];
   refresh: Subject<any> = new Subject();
 
-  events = signal<CalendarEvent[] | any>([
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.blue,
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-  ]);
-
-  constructor(public dialog: MatDialog, @Inject(DOCUMENT) doc: any) {}
+  events = signal<CalendarEvent[] | any>([]);
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate())) {
@@ -223,9 +236,21 @@ export class AppFullcalendarComponent {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.config.data = { event, action };
-    this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
+    const isStudent = this.currentUser?.role === RoleTypeEnum.STUDENT;
+    const isAdmin = this.currentUser?.role === RoleTypeEnum.ADMIN;
+  
+    const dialogMode = isStudent ? 'view' : 'edit';
+    console.log('Dialog mode:', dialogMode);
+  
+    this.config.data = {
+      event,
+      action: dialogMode
+    };
 
+    console.log('HANDLE EVENT - sending to dialog:', this.config.data);
+  
+    this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
+  
     this.dialogRef()
       .afterClosed()
       .subscribe((result: string) => {
@@ -234,6 +259,8 @@ export class AppFullcalendarComponent {
         this.refresh.next(result);
       });
   }
+  
+  
 
   addEvent(): void {
     this.dialogRef2.set(
