@@ -74,6 +74,23 @@ export class CalendarDialogComponent {
     public dialogRef: MatDialogRef<CalendarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
+
+  onSave(): void {
+    if (this.data.action === 'Edit') {
+      if (!this.data.event.color) {
+        this.data.event.color = {
+          primary: '#000000',
+          secondary: '#000000'
+        };
+      }
+  
+      console.log(this.data.event.color);
+      this.dialogRef.close(this.data.event);
+    } else {
+      this.dialogRef.close('confirm');
+    }
+  }
+  
 }
 
 @Component({
@@ -230,33 +247,43 @@ export class AppFullcalendarComponent {
   }
 
   addEvent(): void {
-  this.dialogRef2.set(
-    this.dialog.open(CalendarFormDialogComponent, {
-      panelClass: 'calendar-form-dialog',
-      autoFocus: false,
-      data: {
-        action: 'add',
-        date: new Date(),
-      },
-    })
-  );
+    this.dialogRef2.set(
+      this.dialog.open(CalendarFormDialogComponent, {
+        panelClass: 'calendar-form-dialog',
+        autoFocus: false,
+        data: {
+          action: 'add',
+          date: new Date(),
+        },
+      })
+    );
+  
+    this.dialogRef2()
+      ?.afterClosed()
+      .subscribe((res: { action: string; event: CalendarEventDTO }) => {
+        if (!res || !res.event) return;
+  
+        const newEvent = {
+          ...res.event,
+          actions: this.actions
+        };
+  
+        this.calendarService.createEvent(newEvent).subscribe(created => {
+          const formatted: CalendarEventDTO = {
+            ...created,
+          };
 
-  this.dialogRef2()
-    ?.afterClosed()
-    .subscribe((res: { action: string; event: CalendarEventDTO }) => {
-      if (!res || !res.event) return;
-
-      const newEvent = {
-        ...res.event,
-        actions: this.actions,
-      };
-
-      // Dacă event.id a venit din backend, îl păstrăm
-      this.events.set([...this.events(), newEvent]);
-      this.refresh.next(null);
-      this.dialogRef2.set(null);
-    });
+          console.log("adding now event");
+        
+          this.events.set([...this.events(), formatted]);
+          this.refresh.next(null);
+        });
+        
+  
+        this.dialogRef2.set(null);
+      });
   }
+  
 
 
   setView(view: any): void {

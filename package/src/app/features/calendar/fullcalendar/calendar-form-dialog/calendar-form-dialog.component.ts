@@ -93,13 +93,20 @@ export class CalendarFormDialogComponent {
     if (this.eventForm.invalid) return;
   
     const formValue = this.eventForm.value;
-    console.log(formValue);
+    
+    const startDate = new Date(formValue.start);
+    let endDate = new Date(formValue.end);
+
+    if (endDate < startDate) {
+      endDate = startDate;
+    }
+
   
     const eventToReturn = {
       id: formValue._id,
       title: formValue.title,
-      start: new Date(formValue.start),
-      end: new Date(formValue.end),
+      start: startDate,
+      end: endDate,
       color: {
         primary: formValue.color.primary,
         secondary: formValue.color.secondary || formValue.color.primary
