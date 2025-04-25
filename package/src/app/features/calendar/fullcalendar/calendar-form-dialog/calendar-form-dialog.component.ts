@@ -87,4 +87,43 @@ export class CalendarFormDialogComponent {
       draggable: new UntypedFormControl(true),
     });
   }
+
+  onSave(): void {
+    console.log("open save");
+    if (this.eventForm.invalid) return;
+  
+    const formValue = this.eventForm.value;
+    console.log(formValue);
+  
+    const eventToReturn = {
+      id: formValue._id,
+      title: formValue.title,
+      start: new Date(formValue.start),
+      end: new Date(formValue.end),
+      color: {
+        primary: formValue.color.primary,
+        secondary: formValue.color.secondary || formValue.color.primary
+      },
+      draggable: formValue.draggable,
+      meta: {
+        location: formValue.meta?.location || '',
+        notes: formValue.meta?.notes || ''
+      }
+    };
+
+    console.log('Event saved with color:', eventToReturn.color);
+  
+    this.dialogRef.close({
+      action: this.action(),
+      event: eventToReturn
+    });
+  }
+
+
+  get primaryColor(): UntypedFormControl {
+    return (this.eventForm.get('color') as UntypedFormGroup).get('primary') as UntypedFormControl;
+  }
+  
+  
+  
 }

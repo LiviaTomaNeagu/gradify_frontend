@@ -51,21 +51,6 @@ import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { CalendarEventDTO } from '../core/calendar.interfaces';
 import { CalendarService } from '../core/calendar.service';
 
-const colors: any = {
-  red: {
-    primary: '#fa896b',
-    secondary: '#fdede8',
-  },
-  blue: {
-    primary: '#5d87ff',
-    secondary: '#ecf2ff',
-  },
-  yellow: {
-    primary: '#ffae1f',
-    secondary: '#fef5e5',
-  },
-};
-
 @Component({
     selector: 'app-calendar-dialog',
     templateUrl: './dialog.component.html',

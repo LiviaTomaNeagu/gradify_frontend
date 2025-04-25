@@ -36,6 +36,8 @@ export class CalendarService {
       colorPrimary: event.color.primary
     };
 
+    console.log(payload);
+
     return this.http.post<any>(this.apiUrl, payload).pipe(
       map(e => ({
         id: e.id,
