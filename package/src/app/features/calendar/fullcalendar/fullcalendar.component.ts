@@ -48,6 +48,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
+import { CalendarEventDTO } from '../core/calendar.interfaces';
+import { CalendarService } from '../core/calendar.service';
 
 const colors: any = {
   red: {
@@ -108,99 +110,63 @@ export class CalendarDialogComponent {
     providers: [provideNativeDateAdapter(), CalendarDateFormatter]
 })
 export class AppFullcalendarComponent {
-  dialogRef = signal<MatDialogRef<CalendarDialogComponent> | any>(null);
-  dialogRef2 = signal<MatDialogRef<CalendarFormDialogComponent> | any>(null);
-  lastCloseResult = signal<string>('');
-  actionsAlignment = signal<string>('');
+  dialogRef = signal<MatDialogRef<CalendarDialogComponent> | null>(null);
+  dialogRef2 = signal<MatDialogRef<CalendarFormDialogComponent> | null>(null);
   view = signal<any>('month');
-  viewDate = signal<Date>(new Date());
+  viewDate = signal<any>(new Date());
   activeDayIsOpen = signal<boolean>(true);
-  currentUser : any;
+  refresh: Subject<any> = new Subject();
+  currentUser: any = this.currentUserService.getCurrentUserInfo();
   readonly RoleTypeEnum = RoleTypeEnum;
-
-  
-  constructor(public dialog: MatDialog, @Inject(DOCUMENT) doc: any, private currentUserService : CurrentUserService) {
-  
-    this.currentUser = this.currentUserService.getCurrentUserInfo();
-
-      this.actions = [
-        {
-          label: '<span class="text-white link m-l-5">: Edit</span>',
-          onClick: ({ event }: { event: CalendarEvent }): void => {
-            this.handleEvent('Edit', event);
-          },
-        },
-        {
-          label: '<span class="text-danger m-l-5">Delete</span>',
-          onClick: ({ event }: { event: CalendarEvent }): void => {
-            this.handleEvent('Deleted', event); // ✅ doar trimite către dialog
-          },
-        }
-      ];
-    
-      this.events.set([
-        {
-          start: subDays(startOfDay(new Date()), 1),
-          end: addDays(new Date(), 1),
-          title: 'A 3 day event',
-          color: colors.red,
-          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : []
-        },
-        {
-          start: startOfDay(new Date()),
-          title: 'An event with no end date',
-          color: colors.blue,
-          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : []
-        },
-        {
-          start: subDays(endOfMonth(new Date()), 3),
-          end: addDays(endOfMonth(new Date()), 3),
-          title: 'A long event that spans 2 months',
-          color: colors.blue,
-        },
-        {
-          start: addHours(startOfDay(new Date()), 2),
-          end: new Date(),
-          title: 'A draggable and resizable event',
-          color: colors.yellow,
-          actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : [],
-          resizable: {
-            beforeStart: true,
-            afterEnd: true,
-          },
-          draggable: true,
-        },
-      ]);
-    
-    
-  }
+  events = signal<CalendarEventDTO[]>([]);
+  actions: CalendarEventAction[] = [];
 
   config: MatDialogConfig = {
     disableClose: false,
-    width: '',
-    height: '',
-    position: {
-      top: '',
-      bottom: '',
-      left: '',
-      right: '',
-    },
     data: {
       action: '',
       event: [],
     },
   };
-  numTemplateOpens = 0;
 
-  actions: CalendarEventAction[] =[];
-  refresh: Subject<any> = new Subject();
+  constructor(
+    public dialog: MatDialog,
+    @Inject(DOCUMENT) private doc: any,
+    private currentUserService: CurrentUserService,
+    private calendarService: CalendarService
+  ) {
+    this.actions = [
+      {
+        label: '<span class="text-white link m-l-5">: Edit</span>',
+        onClick: ({ event }: { event: CalendarEvent }): void => {
+          this.handleEvent('Edit', event);
+        },
+      },
+      {
+        label: '<span class="text-danger m-l-5">Delete</span>',
+        onClick: ({ event }: { event: CalendarEvent }): void => {
+          this.handleEvent('Deleted', event);
+        },
+      },
+    ];
 
-  events = signal<CalendarEvent[] | any>([]);
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.calendarService.getEvents().subscribe((events) => {
+      const formatted = events.map((e) => ({
+        ...e,
+        actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : [],
+      }));
+      this.events.set(formatted);
+    });
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate())) {
       if (
-        (isSameDay(this.viewDate(), date) && this.activeDayIsOpen() === true) ||
+        (isSameDay(this.viewDate(), date) && this.activeDayIsOpen()) ||
         events.length === 0
       ) {
         this.activeDayIsOpen.set(false);
@@ -216,103 +182,99 @@ export class AppFullcalendarComponent {
     newStart,
     newEnd,
   }: CalendarEventTimesChangedEvent): void {
-    this.events.set(
-      this.events().map((iEvent: CalendarEvent<any>) => {
-        if (iEvent === event) {
-          return {
-            ...event,
-            start: newStart,
-            end: newEnd,
-          };
-        }
-        return iEvent;
-      })
-    );
-
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    const isStudent = this.currentUser?.role === RoleTypeEnum.STUDENT;
-    const isAdmin = this.currentUser?.role === RoleTypeEnum.ADMIN;
+    const castedEvent = event as CalendarEventDTO;
   
-    const dialogMode = isStudent ? 'view' : action;
-  
-    this.config.data = {
-      event,
-      action: dialogMode
+    const updatedEvent: CalendarEventDTO = {
+      ...castedEvent,
+      start: newStart,
+      end: newEnd ?? newStart,
     };
   
-    if (dialogMode === 'view') {
-      console.log('Student clicked event – view mode only, no dialog opened.');
-      return;
-    }
-
-    if(dialogMode === 'Deleted' || dialogMode === 'Edit') {
+    if (!updatedEvent.id) return; // de siguranță
   
+    this.calendarService.updateEvent(updatedEvent).subscribe(() => {
+      this.events.set(
+        this.events().map((e) => (e.id === updatedEvent.id ? updatedEvent : e))
+      );
+      this.refresh.next(null);
+    });
+  }
+  
+
+  handleEvent(action: string, event: CalendarEvent): void {
+    const castedEvent = event as CalendarEventDTO;
+  
+    const isStudent = this.currentUser?.role === RoleTypeEnum.STUDENT;
+    const dialogMode = isStudent ? 'view' : action;
+  
+    if (dialogMode === 'view') return;
+  
+    this.config.data = { action: dialogMode, event: castedEvent };
+  
+    if(dialogMode !== 'Deleted' && dialogMode !== 'Edit') 
+      return;
+
     this.dialogRef.set(this.dialog.open(CalendarDialogComponent, this.config));
   
     this.dialogRef()
-      .afterClosed()
-      .subscribe((result: string) => {
-        if (dialogMode === 'Deleted' && result === 'confirm') {
-          this.deleteEvent(event);
-        } else if (dialogMode === 'Edit' && typeof result === 'object') {
-          const updatedEvent = result as CalendarEvent;
-          updatedEvent.actions = this.actions;
-        
-          this.events.set(
-            this.events().map((e: CalendarEvent) => (e === event ? updatedEvent : e))
-          );
-        
-          this.refresh.next(result);
+      ?.afterClosed()
+      .subscribe((result: any) => {
+        if (dialogMode === 'Deleted' && result === 'confirm' && castedEvent.id) {
+          this.calendarService.deleteEvent(castedEvent.id).subscribe(() => {
+            this.events.set(this.events().filter((e) => e.id !== castedEvent.id));
+            this.refresh.next(null);
+          });
+        } else if (dialogMode === 'Edit' && result && castedEvent.id) {
+          const updatedEvent: CalendarEventDTO = {
+            ...result,
+            id: castedEvent.id,
+            actions: this.actions,
+          };
+          this.calendarService.updateEvent(updatedEvent).subscribe(() => {
+            this.events.set(
+              this.events().map((e) =>
+                e.id === updatedEvent.id ? updatedEvent : e
+              )
+            );
+            this.refresh.next(null);
+          });
         }
-    
   
         this.dialogRef.set(null);
       });
-    }
   }
-  
-  
-  
-  
 
   addEvent(): void {
-    this.dialogRef2.set(
-      this.dialog.open(CalendarFormDialogComponent, {
-        panelClass: 'calendar-form-dialog',
-        autoFocus: false, 
-        data: {
-          action: 'add',
-          date: new Date(),
-        },
-      })
-    );
-    this.dialogRef2()
-      .afterClosed()
-      .subscribe((res: { action: any; event: any }) => {
-        if (!res) {
-          return;
-        }
-        const dialogAction = res.action;
-        const responseEvent = res.event;
-        responseEvent.actions = this.actions;
-        this.events.set([...this.events(), responseEvent]);
-        this.dialogRef2.set(null);
-        this.refresh.next(res);
-      });
+  this.dialogRef2.set(
+    this.dialog.open(CalendarFormDialogComponent, {
+      panelClass: 'calendar-form-dialog',
+      autoFocus: false,
+      data: {
+        action: 'add',
+        date: new Date(),
+      },
+    })
+  );
+
+  this.dialogRef2()
+    ?.afterClosed()
+    .subscribe((res: { action: string; event: CalendarEventDTO }) => {
+      if (!res || !res.event) return;
+
+      const newEvent = {
+        ...res.event,
+        actions: this.actions,
+      };
+
+      // Dacă event.id a venit din backend, îl păstrăm
+      this.events.set([...this.events(), newEvent]);
+      this.refresh.next(null);
+      this.dialogRef2.set(null);
+    });
   }
 
-  deleteEvent(eventToDelete: CalendarEvent): void {
-    this.events.set(
-      this.events().filter(
-        (event: CalendarEvent<any>) => event !== eventToDelete
-      )
-    );
-  }
 
-  setView(view: CalendarView | any): void {
+  setView(view: any): void {
     this.view.set(view);
   }
 
@@ -324,7 +286,7 @@ export class AppFullcalendarComponent {
     this.viewDate.set(addMonths(this.viewDate(), 1));
   }
 
-  goToToday() {
+  goToToday(): void {
     this.viewDate.set(new Date());
   }
 }
