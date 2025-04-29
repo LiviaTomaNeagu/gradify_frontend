@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CalendarA11y, CalendarEvent, CalendarEventTitleFormatter, CalendarModule, CalendarUtils, DateAdapter } from 'angular-calendar';
 import { MaterialModule } from 'src/app/material.module';
-import { AppFullcalendarComponent } from '../components/fullcalendar/fullcalendar.component';
+import { AppFullcalendarComponent } from '../../calendar/fullcalendar/fullcalendar.component';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { GetMyProgressDataResponseDTO } from '../core/progress.interfaces';
 import { ProgressService } from '../core/progres.service';

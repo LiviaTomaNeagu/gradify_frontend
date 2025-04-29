@@ -1,10 +1,11 @@
 <!-- -------------------------------------------------------------- -->
-<!-- Add Event -->
+<!-- Add/Edit Event on calendar -->
 <!-- -------------------------------------------------------------- -->
 
 <div mat-dialog-content>
   <div class="d-flex align-items-center justify-content-between m-b-16">
-    <h4 class="f-s-16 f-w-600 m-b-16">Add Event</h4>
+    <h4 class="f-s-16 f-w-600 m-b-16" *ngIf="data?.action === 'Edit'">Modify event</h4>
+    <h4 class="f-s-16 f-w-600 m-b-16" *ngIf="data?.action === 'Deleted'">You are about to delete this event</h4>
     <button
       mat-icon-button
       mat-dialog-close
@@ -14,34 +15,32 @@
     </button>
   </div>
 
-  <form name="eventForm" [formGroup]="eventForm" class="event-form">
+  @if(data?.action === 'Edit') {
+  <div class="basic-form">
     <div class="row">
+      <!-- col -->
       <div class="col-12">
         <mat-form-field appearance="outline" class="w-100">
           <input
             matInput
-            name="title"
-            formControlName="title"
-            placeholder="Add Title"
-            required
+            placeholder="Edit Title"
+            [(ngModel)]="data?.event.title"
           />
         </mat-form-field>
       </div>
+      <!-- col -->
       <div class="col-12">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-100" *ngIf="data?.event?.color">
           <input
             matInput
             placeholder="Change Color"
             type="color"
-            (colorPickerChange)="
-              eventForm.patchValue({
-                color: { primary: event().color.primary }
-              })
-            "
+            [(ngModel)]="data.event.color.primary"
           />
         </mat-form-field>
+        
       </div>
-
+      <!-- col -->
       <div class="col-sm-6">
         <mat-form-field appearance="outline" class="w-100">
           <input
@@ -49,16 +48,16 @@
             [matDatepicker]="startDateDP"
             placeholder="Start Date"
             name="startDate"
-            formControlName="start"
+            [(ngModel)]="data?.event.start"
           />
           <mat-datepicker-toggle
-            class="add-event-date"
             matSuffix
             [for]="startDateDP"
           ></mat-datepicker-toggle>
           <mat-datepicker #startDateDP></mat-datepicker>
         </mat-form-field>
       </div>
+      <!-- col -->
       <div class="col-sm-6">
         <mat-form-field appearance="outline" class="w-100">
           <input
@@ -66,10 +65,9 @@
             [matDatepicker]="endDateDP"
             placeholder="End Date"
             name="endDate"
-            formControlName="end"
+            [(ngModel)]="data?.event.end"
           />
           <mat-datepicker-toggle
-            class="add-event-date"
             matSuffix
             [for]="endDateDP"
           ></mat-datepicker-toggle>
@@ -77,20 +75,14 @@
         </mat-form-field>
       </div>
     </div>
-
-    <div class="d-flex align-items-center gap-12">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="dialogRef.close({ action: 'save', event: eventForm.value })"
-        [disabled]="eventForm.invalid"
-        aria-label="SAVE"
-      >
-        Save
-      </button>
-      <button mat-button mat-dialog-close class="bg-error text-white">
-        Cancel
-      </button>
-    </div>
-  </form>
+  </div>
+  }
+  <div class="d-flex align-items-center gap-12">
+    <button mat-flat-button color="primary" mat-dialog-close="confirm" (click)="onSave()" >
+      Ok
+    </button>
+    <button mat-button mat-dialog-close class="bg-error text-white" (click)="dialogRef.close()">
+      Cancel
+    </button>
+  </div>
 </div>

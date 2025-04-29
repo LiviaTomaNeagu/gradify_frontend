@@ -58,6 +58,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/progress/progress.routes').then((m) => m.ProgressRoutes),
       },
+      {
+        path: 'calendar',
+        loadChildren: () =>
+          import('./features/calendar/calendar.routes').then((m) => m.CalendarRoutes),
+      },
     ],
   },
   {

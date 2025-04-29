@@ -13,7 +13,7 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms';
-import { EgretCalendarEvent } from '../event.model';
+import { EgretCalendarEvent } from 'src/app/features/calendar/fullcalendar/event.model';
 import { MaterialModule } from 'src/app/material.module';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -87,4 +87,50 @@ export class CalendarFormDialogComponent {
       draggable: new UntypedFormControl(true),
     });
   }
+
+  onSave(): void {
+    console.log("open save");
+    if (this.eventForm.invalid) return;
+  
+    const formValue = this.eventForm.value;
+    
+    const startDate = new Date(formValue.start);
+    let endDate = new Date(formValue.end);
+
+    if (endDate < startDate) {
+      endDate = startDate;
+    }
+
+  
+    const eventToReturn = {
+      id: formValue._id,
+      title: formValue.title,
+      start: startDate,
+      end: endDate,
+      color: {
+        primary: formValue.color.primary,
+        secondary: formValue.color.secondary || formValue.color.primary
+      },
+      draggable: formValue.draggable,
+      meta: {
+        location: formValue.meta?.location || '',
+        notes: formValue.meta?.notes || ''
+      }
+    };
+
+    console.log('Event saved with color:', eventToReturn.color);
+  
+    this.dialogRef.close({
+      action: this.action(),
+      event: eventToReturn
+    });
+  }
+
+
+  get primaryColor(): UntypedFormControl {
+    return (this.eventForm.get('color') as UntypedFormGroup).get('primary') as UntypedFormControl;
+  }
+  
+  
+  
 }
