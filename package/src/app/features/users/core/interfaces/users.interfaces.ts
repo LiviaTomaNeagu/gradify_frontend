@@ -21,7 +21,8 @@ export interface UserDTO
     completedSteps: number;
     isApproved: boolean;
     occupationId: string;
-    occupation: OccupationDTO
+    occupation: OccupationDTO;
+    avatarUrl: string;
 }
 
 export interface GetUserResponseDTO{
@@ -35,6 +36,7 @@ export interface GetUserResponseDTO{
     createdAt: Date;
     isApproved: boolean;
     studentDetails: GetStudentDetailsResponse; 
+    avatarUrl: string;
 }
 
 export interface GetStudentDetailsResponse
@@ -67,7 +69,8 @@ export interface ShortUserDto
     role: RoleTypeEnum;
     isApproved: boolean;   
     occupationId: string;
-    occupation: OccupationDTO
+    occupation: OccupationDTO;
+    avatarUrl: string;
 }
 
 export interface GetShortUsersResponseDTO

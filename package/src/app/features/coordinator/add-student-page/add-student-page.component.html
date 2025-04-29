@@ -22,8 +22,11 @@
       <mat-card class="student-card" *ngIf="selectedStudent">
         <!-- Poza de profil în partea de sus -->
         <div class="profile-pic">
-          <img [src]="'assets/images/profile/user-2.jpg'" alt="Profile Picture">
+          <img 
+            [src]="selectedStudent.avatarUrl ? selectedStudent.avatarUrl : 'assets/images/profile/user-2.jpg'" 
+            alt="Profile Picture">
         </div>
+        
       
         <mat-card-title>{{ selectedStudent.name }} {{ selectedStudent.surname }}</mat-card-title>
         <mat-card-subtitle>{{ selectedStudent.email }}</mat-card-subtitle>

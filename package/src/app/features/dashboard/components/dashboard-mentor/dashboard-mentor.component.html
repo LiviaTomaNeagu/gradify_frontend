@@ -87,7 +87,7 @@
             <ng-container matColumnDef="profile">
               <td mat-cell *matCellDef="let user">
                 <div class="d-flex align-items-center">
-                  <img [src]="getDefaultAvatar(user.name)" alt="user-avatar" width="50" class="rounded-circle" />
+                  <img [src]="user.avatarUrl || getDefaultAvatar(user.name)" alt="user-avatar" width="50" height="50" class="rounded-circle avatar-img"/>
                   <div class="m-l-16">
                     <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 f-w-600">
                       {{ user.name }} {{ user.surname }}

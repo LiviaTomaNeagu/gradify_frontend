@@ -17,9 +17,10 @@
       <ng-scrollbar class="position-relative" style="height: 100%">
         <div class="d-flex align-items-center p-24 gap-16">
           <img
-            src="assets/images/profile/user-1.jpg"
-            class="rounded-circle"
+           [src]="currentUser?.avatarUrl ? currentUser?.avatarUrl : 'assets/images/profile/user-2.jpg'" 
+            class="rounded-circle avatar-img"
             width="54"
+            height ="54"
           />
           <div class="profile-info-chat">
             <h4 class="f-s-16 f-w-600">{{currentUser?.name}} {{ currentUser?.surname }}</h4>
@@ -57,11 +58,13 @@
             >
               <span matListItemIcon>
                 <img
-                  src="{{ message.photo }}"
+                  [src]="message.photo"
                   alt=""
                   width="42"
-                  class="rounded-circle"
+                  height="42"
+                  class="rounded-circle chat-photo avatar-img"
                 />
+
               </span>
               <h3 class="f-w-600 f-s-16" matListItemTitle>
                 {{ message.from }}
@@ -96,7 +99,9 @@
           <img
             src="{{ selectedMessage()?.photo }}"
             width="40"
-            class="rounded-circle"
+            height="40"
+            alt=""
+            class="rounded-circle avatar-img"
           />
           <div class="f-s-16 f-w-600">
             {{ selectedMessage()?.from }}
@@ -121,7 +126,7 @@
               >
                 <img
                   src="{{ selectedMessage()?.photo }}"
-                  class="rounded-circle"
+                  class="rounded-circle avatar-img"
                   width="40"
                 />
                 <span class="f-s-14">{{ c.msg }}</span>

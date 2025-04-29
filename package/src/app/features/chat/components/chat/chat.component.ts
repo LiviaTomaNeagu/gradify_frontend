@@ -41,18 +41,14 @@ export class AppChatComponent implements AfterViewInit {
     this.currentUser = this.currentUserService.getCurrentUserInfo();
    }
 
-  messages = computed(() => 
-    {
-      const msgs = this.chatService.messages();
-      return msgs.map(m => {
-        if (!m.photo) {
-          const firstName = m.from.split(' ')[0];
-          m.photo = this.getDefaultAvatar(firstName);
-        }
-        return m;
-      });
-    });
-
+   messages = computed(() => {
+    const msgs = this.chatService.messages();
+    return msgs.map(m => ({
+      ...m,
+      photo: m.photo || this.getDefaultAvatar(m.from.split(' ')[0])
+    }));
+  });
+  
   filteredMessages = computed(() => {
     const term = this.searchTerm().trim().toLowerCase();
     return term
@@ -98,7 +94,7 @@ export class AppChatComponent implements AfterViewInit {
 
   selectMessage(message: Message): void {
     const firstName = message.from.split(' ')[0];
-    message.photo = this.getDefaultAvatar(firstName);
+    if(!message.photo) message.photo = this.getDefaultAvatar(firstName);
     this.selectedMessage.set(message);
     this.chatService.setSelectedMessage(message);
     console.log('Selected message:', message);
@@ -136,7 +132,7 @@ export class AppChatComponent implements AfterViewInit {
           id: u.id,
           from: `${u.name} ${u.surname}`,
           subject: 'No messages yet',
-          photo: this.getDefaultAvatar(u.name),
+          photo: u.avatarUrl || this.getDefaultAvatar(u.name),
           chat: [],
         }));
 

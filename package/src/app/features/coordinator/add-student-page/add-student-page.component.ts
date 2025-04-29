@@ -87,7 +87,9 @@ export class AddStudentPageComponent implements OnInit {
     this.searchBarState = 'top';
 
     this.coordinatorService.getStudent(student.id).subscribe(response => {
+      console.log(response)
       this.selectedStudent = response;
+      console.log(response.avatarUrl);
     });
   }
 
