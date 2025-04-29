@@ -9,7 +9,13 @@
           <mat-card-title>Change Profile</mat-card-title>
           <mat-card-subtitle class="f-s-14">Change your profile picture from here</mat-card-subtitle>
           <div class="m-t-24">
-            <img [src]="user.profileImage" class="rounded-circle" width="120" height="120"/>
+            <img 
+            [src]="user.avatarUrl || 'assets/images/profile/user-2.jpg'" 
+            class="avatar-img rounded-circle" 
+            alt="User Avatar"
+            />
+
+
             <div class="m-t-24">
               <input type="file" #fileInput hidden (change)="uploadImage($event)" accept="image/*">
               <button mat-flat-button color="primary" class="m-r-8" (click)="triggerFileInput()">Upload</button>
@@ -27,8 +33,8 @@
         <div class="col-sm-5">
           <mat-card-title>User Information</mat-card-title>
           <div class="user-info">
-            <p><strong>Full Name:</strong> {{ user.fullName }}</p>
-            <p><strong>Occupation:</strong> {{ user.occupation }}</p>
+            <p><strong>Full Name:</strong> {{ user.name }} {{user.surname}}</p>
+            <p><strong>Occupation:</strong> {{ user.occupation.name }}</p>
           </div>
         </div>
       </div>

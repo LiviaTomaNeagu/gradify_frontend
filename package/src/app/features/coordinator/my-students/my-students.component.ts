@@ -57,7 +57,7 @@ export class MyStudentsComponent implements OnInit {
     this.coordinatorService.getMyStudents(request).subscribe(response => {
       this.dataSource.data = response.users.map(student => ({
         ...student,
-        photoUrl: this.getDefaultAvatar(student.name) // Aplicăm avatar implicit
+        photoUrl: student.avatarUrl || this.getDefaultAvatar(student.name)
       }));
       this.dataSource.sort = this.sort;
       this.isLoading = false;

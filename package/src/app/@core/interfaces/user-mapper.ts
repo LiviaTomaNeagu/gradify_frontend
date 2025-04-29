@@ -14,7 +14,8 @@ export class UserMapper {
       occupation: response.occupation,
       password: '',
       createdAt: new Date(),
-      completedSteps: 0
+      completedSteps: 0,
+      avatarUrl: response.avatarUrl,
     };
   }
 
@@ -27,7 +28,8 @@ export class UserMapper {
       role: response.role,
       isApproved: response.isApproved,
       occupationId: response.occupationId,
-      occupation: response.occupation
+      occupation: response.occupation,
+      avatarUrl: response.avatarUrl,
     };
   }
 }

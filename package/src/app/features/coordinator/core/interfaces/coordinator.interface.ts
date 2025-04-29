@@ -23,5 +23,6 @@ export interface GetAvailableStudentsResponseDTO
     name: string;
     surname: string;
     email: string;
+    avatarUrl: string;
   }
   
