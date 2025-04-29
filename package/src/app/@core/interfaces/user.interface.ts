@@ -12,5 +12,6 @@ export interface CurrentUserResponseInterfaceDTO {
   isApproved: boolean;
   occupationId: string;
   occupation: OccupationDTO;
+  avatarUrl: string;
 }
 

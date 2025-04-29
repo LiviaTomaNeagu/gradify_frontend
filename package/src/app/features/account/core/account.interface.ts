@@ -19,3 +19,7 @@ export interface AddTopicRequestDTO {
   topic: Topic;
 }
   
+export interface UploadAvatarResponse
+{
+  avatarUrl: string;
+}

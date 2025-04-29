@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { MaterialModule } from 'src/app/material.module';
+import { AccountService } from '../../core/account.service';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-settings',
@@ -13,12 +16,9 @@ import { MaterialModule } from 'src/app/material.module';
 export class ProfileSettingsComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
-  user = {
-    fullName: 'John Doe',
-    occupation: 'Software Engineer',
-    profileImage: '/assets/images/profile/user-2.jpg',
-    defaultImage: '/assets/images/profile/user-2.jpg'
-  };
+  constructor(private accountService: AccountService, private currentUserService: CurrentUserService, private toastr: ToastrService) {}
+
+  user = this.currentUserService.getCurrentUserInfo()!;
 
   triggerFileInput() {
     this.fileInput.nativeElement.click();
@@ -27,16 +27,29 @@ export class ProfileSettingsComponent {
   uploadImage(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.user.profileImage = e.target.result;
-      };
-      reader.readAsDataURL(file);
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      this.accountService.postAvatar(formData).subscribe({
+        next: (response) => {
+          this.user.avatarUrl = response.avatarUrl;
+        },
+        error: (err) => {
+          console.error('Error uploading avatar:', err);
+        }
+      });
     }
   }
+  
 
   resetImage() {
-    this.user.profileImage = this.user.defaultImage;
-    this.fileInput.nativeElement.value = '';
+    this.user.avatarUrl = '/assets/images/profile/user-2.jpg';
+    this.accountService.deleteAvatar().subscribe({
+      next: () => {
+        this.fileInput.nativeElement.value = '';
+        this.toastr.success(`Profile image successfully deleted!`, 'Succes');
+      }
+    });
   }
+  
 }
