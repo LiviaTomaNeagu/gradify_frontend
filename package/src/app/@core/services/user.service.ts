@@ -43,5 +43,9 @@ export class CurrentUserService {
   resetCurrentUser(): void {
     this.currentUser$.next(null);
   }
+
+  logoutUser(): void {
+    this.userApi.logoutUser();
+  }
 }
 

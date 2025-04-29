@@ -62,7 +62,6 @@ export class MyStudentsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.isLoading = false;
     });
-    this.isLoading = false;
   }
 
   applyFilter(event: Event) {

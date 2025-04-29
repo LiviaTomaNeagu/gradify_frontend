@@ -64,11 +64,24 @@ export class UserApi {
     });
   }
 
-  /**
-   * ✅ Deconectează utilizatorul și îl redirecționează către pagina de login.
-   */
-  private logoutUser() {
-    LocalStorageHelper.removeTokensFromLocalStorage();
-    this.router.navigate([this.urls.LOGIN_PATH]);
+  logoutUser() {
+    const refreshToken = LocalStorageHelper.getRefreshToken();
+  
+    if (refreshToken) {
+      this.http.post(`${this.authPath}/logout`, { refreshToken }).subscribe({
+        next: () => {
+          LocalStorageHelper.removeTokensFromLocalStorage();
+          this.router.navigate([this.urls.LOGIN_PATH]);
+        },
+        error: () => {
+          LocalStorageHelper.removeTokensFromLocalStorage();
+          this.router.navigate([this.urls.LOGIN_PATH]);
+        }
+      });
+    } else {
+      LocalStorageHelper.removeTokensFromLocalStorage();
+      this.router.navigate([this.urls.LOGIN_PATH]);
+    }
   }
+  
 }

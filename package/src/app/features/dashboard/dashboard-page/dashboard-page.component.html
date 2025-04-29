@@ -1,6 +1,4 @@
 <div class="dashboard-container">
-    <h1>Welcome to the Dashboard</h1>
-  
     <!-- Afișează DashboardMentorPage doar dacă utilizatorul este mentor -->
     <app-dashboard-mentor *ngIf="isMentor"></app-dashboard-mentor>
     <h1 *ngIf="isCoordinator">Dashboard Coordinator</h1>
