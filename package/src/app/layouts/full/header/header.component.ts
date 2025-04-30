@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +29,7 @@ export class HeaderComponent {
   @Output() toggleCollapsed = new EventEmitter<void>();
 
   currentUser: any = null;
+  readonly RoleTypeEnum = RoleTypeEnum;
 
   constructor(private router: Router, private currentUserService: CurrentUserService) {}
 
