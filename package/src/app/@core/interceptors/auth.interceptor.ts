@@ -52,6 +52,7 @@ async function handleRequestToken(
       }
     } catch (error) {
       console.error('Refresh token failed:', error);
+      
       LocalStorageHelper.removeTokensFromLocalStorage();
       userService.resetCurrentUser();
       router.navigate([URLS.LOGIN_PATH]);
