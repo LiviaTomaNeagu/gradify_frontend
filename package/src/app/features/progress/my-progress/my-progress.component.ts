@@ -6,6 +6,7 @@ import { AppFullcalendarComponent } from '../../calendar/fullcalendar/fullcalend
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { GetMyProgressDataResponseDTO } from '../core/progress.interfaces';
 import { ProgressService } from '../core/progres.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-progress',
@@ -52,7 +53,7 @@ export class MyProgressComponent implements OnInit {
     }
   ];
 
-  constructor(private progressService: ProgressService) {} 
+  constructor(private progressService: ProgressService, private toastr: ToastrService) {} 
 
   ngOnInit(): void {
     this.progressService.getMyProgress().subscribe({
@@ -61,7 +62,8 @@ export class MyProgressComponent implements OnInit {
         console.log('Current step:', this.selectedStep);
       },
       error: (err) => {
-        console.error('Failed to fetch progress', err);
+        this.toastr.error('Failed to fetch progress!', 'Oops!');
+
       }
     });
   }
@@ -73,7 +75,7 @@ export class MyProgressComponent implements OnInit {
         console.log('Progress updated successfully');
       },
       error: (err) => {
-        console.error('Failed to update progress', err);
+        this.toastr.error('Failed to update progress!', 'Oops!');
       }
     });
   }

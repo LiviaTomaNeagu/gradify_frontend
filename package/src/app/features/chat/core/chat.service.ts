@@ -152,7 +152,7 @@ export class ChatService {
           this.messagesSignal.set(messages);
         },
         error: (err) => {
-          console.error('❌ Eroare la încărcarea mesajelor din DB:', err);
+          console.error('Eroare la încărcarea mesajelor din DB:', err);
         }
       });
   }

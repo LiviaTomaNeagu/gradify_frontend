@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { AuthService } from '../../core/services/auth.service';
 import { VerifyCodeRequestDTO } from '../../core/interfaces/register.dto';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-validate-code',
@@ -23,7 +24,7 @@ export class ValidateCodeComponent {
   errorMessage: string | null = null;
   loading: boolean = false;
 
-  constructor(private authService: AuthService , private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthService , private fb: FormBuilder, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
     console.log('ValidateCodeComponent');
     this.validateForm = this.fb.group({
       code: ['', [Validators.required, Validators.minLength(6)]]
@@ -56,7 +57,7 @@ export class ValidateCodeComponent {
           this.loading = false;
         },
         error: (err) => {
-          console.error('Code is invalid:', err);
+          this.toastr.error('Code is invalid!', 'Oops!');
           this.validateForm.get('code')?.setErrors({ invalidCode: true });
           this.loading = false;
         }

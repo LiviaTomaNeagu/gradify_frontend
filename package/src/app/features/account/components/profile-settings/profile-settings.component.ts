@@ -35,7 +35,7 @@ export class ProfileSettingsComponent {
           this.user.avatarUrl = response.avatarUrl;
         },
         error: (err) => {
-          console.error('Error uploading avatar:', err);
+          this.toastr.error('Error uploading avatar!', 'Oops!');
         }
       });
     }

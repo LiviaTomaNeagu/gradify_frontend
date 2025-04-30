@@ -5,8 +5,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/material.module';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoteService } from '../notes/note.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-notes',
@@ -44,7 +44,7 @@ export class AppNotesComponent implements OnInit {
   currentNoteTitle = signal<string>('');
   selectedColor = signal<string | null>(null);
 
-  constructor(public noteService: NoteService, private snackBar: MatSnackBar) {}
+  constructor(public noteService: NoteService, private toastr: ToastrService) {}
 
   readonly notesEffect = effect(() => {
     const notes = this.noteService.getNotes();
@@ -107,7 +107,7 @@ export class AppNotesComponent implements OnInit {
       this.selectedNote.set(null);
       this.currentNoteTitle.set('');
     }
-    this.openSnackBar('Note deleted successfully!');
+    this.toastr.success('Note deleted successfully!', 'Success!');
   }
 
   addNoteClick(): void {
@@ -117,7 +117,7 @@ export class AppNotesComponent implements OnInit {
       datef: new Date(),
     };
     this.noteService.addNote(newNote);
-    this.openSnackBar('Note added successfully!');
+    this.toastr.success('Note added successfully!', 'Success!');
   }
 
   updateNoteTitle(newTitle: string): void {
@@ -126,18 +126,5 @@ export class AppNotesComponent implements OnInit {
       currentNote.title = newTitle;
       this.noteService.updateNote(currentNote);
     }
-  }
-
-  //TODO ADD TOASTR MESSAGES HERE
-  openSnackBar(
-    message: string,
-    action: string = 'Close',
-    type: 'create' | 'delete' = 'create'
-  ): void {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
   }
 }
