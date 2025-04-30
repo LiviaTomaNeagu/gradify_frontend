@@ -6,6 +6,7 @@ import { GetQuestionDetailsResponseDTO } from '../interfaces/get-questions.dto';
 import { GetQuestionsRequestDTO } from '../interfaces/get-questions.dto';
 import { environment } from '../../../../../environments/environment';
 import { GetRelatedQuestionResponseDto, GetRelatedQuestionsRequestDto } from '../interfaces/get-related-questions.dto';
+import { AddQuestionRequestDTO } from '../interfaces/add-question.interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -39,4 +40,19 @@ export class ForumService {
     console.log('Payload:', payload);
     return this.http.post<GetRelatedQuestionResponseDto[]>(`${environment.apiUrl}/forum/get-related-questions`, payload);
   }
+
+  addQuestion(payload: AddQuestionRequestDTO, files?: File[]): Observable<any> {
+    const formData = new FormData();
+    formData.append('title', payload.title);
+    formData.append('descriptionHtml', payload.descriptionHtml);
+    formData.append('topic', payload.topic.toString());
+
+  
+    if (files) {
+      files.forEach(file => formData.append('attachments', file));
+    }
+  
+    return this.http.post(`${this.baseUrl}/add`, formData);
+  }
+  
 }

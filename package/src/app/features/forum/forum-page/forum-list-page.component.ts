@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GetQuestionsResponseDTO } from 'src/app/features/forum/core/interfaces/get-questions.dto';
 import { ForumService } from 'src/app/features/forum/core/services/forum.service';
-import { TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
+import { Topic, TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ForumCardComponent } from './components/forum-card/forum-card.component';
 import { MaterialModule } from 'src/app/material.module';
@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { ToastrService } from 'ngx-toastr';
+import { AddQuestionRequestDTO } from '../core/interfaces/add-question.interfaces';
 
 @Component({
   selector: 'app-forum',
@@ -117,9 +118,22 @@ export class ForumPageComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog result:', result);
       if (result) {
-        console.log('Question submitted:', result);
+        const payload: AddQuestionRequestDTO = {
+          title: result.title,
+          descriptionHtml: result.questionDescription,
+          topic: result.topic.key
+        };
+
+        console.log('Payload in forum ts:', payload);
+    
+        this.forumService.addQuestion(payload, result.attachedFiles).subscribe({
+          next: () => this.toastr.success('Question posted successfully!'),
+          error: () => this.toastr.error('Failed to post question.')
+        });
       }
     });
+    
   }
 }

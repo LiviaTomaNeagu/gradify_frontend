@@ -5,23 +5,42 @@
     
     <!-- Step 1: Title -->
     <mat-step [stepControl]="titleFormGroup">
-        <form [formGroup]="titleFormGroup">
+      <form [formGroup]="titleFormGroup">
         <ng-template matStepLabel>Title</ng-template>
-        
+    
+        <!-- Titlu întrebării -->
         <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Question Title</mat-label>
-            <input matInput formControlName="title" placeholder="Enter your question title">
-            <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
+          <mat-label>Question Title</mat-label>
+          <input matInput formControlName="title" placeholder="Enter your question title" />
+          <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
             Title is required
-            </mat-error>
+          </mat-error>
         </mat-form-field>
     
+        <!-- Selectare Topic -->
+        <div class="m-b-16">
+          <label class="mat-body-1 m-r-8">Select Topic:</label>
+          <mat-form-field appearance="outline" class="full-width m-t-16">
+            <mat-label>Topic</mat-label>
+            <mat-select formControlName="topic">
+              <mat-option *ngFor="let topic of topicsList" [value]="topic">
+                {{ topic.value }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="titleFormGroup.get('topic')?.hasError('required')">
+              Topic is required
+            </mat-error>
+          </mat-form-field>
+          
+        </div>
+    
+        <!-- Buton Next -->
         <mat-dialog-actions class="step-actions">
-            <button mat-button matStepperNext class="next-button" (click)="onFirstNext()">Next</button>
+          <button mat-button matStepperNext class="next-button" (click)="onFirstNext()">Next</button>
         </mat-dialog-actions>
-        </form>
+      </form>
     </mat-step>
-  
+    
   <!-- Step 2: Related Questions + Details -->
     <mat-step>
         <ng-template matStepLabel>Related questions</ng-template>
@@ -54,16 +73,64 @@
     </mat-step>
   
 
-    <!-- Step 3: Confirmation -->
-    <mat-step>
-      <ng-template matStepLabel>Confirm</ng-template>
-      <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
+    <!-- Step 3: Confirm & Describe -->
+<mat-step>
+  <ng-template matStepLabel>Confirm & Describe</ng-template>
 
-      <mat-dialog-actions class="step-actions">
-        <button mat-button class="back-button" matStepperPrevious>Back</button>
-        <button mat-flat-button class="next-button" matStepperNext>Next</button>
-      </mat-dialog-actions>      
-    </mat-step>
+  <div class="m-b-16">
+    <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
+  </div>
+
+  <!-- Description -->
+  <div class="quill-form-field">
+    <label class="mat-body-1"><strong>Description:</strong></label>
+    <div class="quill-editor-wrapper">
+      <quill-editor
+        [(ngModel)]="questionDescription"
+        [modules]="{
+          toolbar: [
+            ['bold', 'italic', 'underline'],
+            ['link', 'code-block'],
+            [{ list: 'ordered' }, { list: 'bullet' }]
+          ]
+        }"
+        placeholder="Write more details about your question here..."
+        theme="snow"
+      ></quill-editor>
+    </div>
+  </div>
+  
+  
+
+  <!-- File Upload -->
+  <div class="m-b-16">
+    <label class="mat-body-1 m-b-8 d-block"><strong>Attachments:</strong></label>
+  
+    <button mat-flat-button class="bg-success text-white file-button">
+      Choose Files
+      <input
+        type="file"
+        (change)="onFileSelected($event)"
+        multiple
+        class="hidden-file-input"
+      />
+    </button>
+  
+    <div *ngIf="attachedFiles.length > 0" class="m-t-8">
+      <ul class="file-list">
+        <li *ngFor="let file of attachedFiles">{{ file.name }}</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Action Buttons -->
+  <mat-dialog-actions class="step-actions">
+    <button mat-button class="back-button" matStepperPrevious>Back</button>
+    <button mat-flat-button color="primary" (click)="onSubmit()">Post Question</button>
+  </mat-dialog-actions>
+</mat-step>
+
+
 
   </mat-horizontal-stepper>
 </mat-dialog-content>

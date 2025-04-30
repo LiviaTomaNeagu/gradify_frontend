@@ -35,6 +35,7 @@ import { AuthInterceptor } from './@core/interceptors/auth.interceptor';
 import { GlobalInterceptor } from './@core/interceptors/global.interceptor';
 
 import { provideToastr } from 'ngx-toastr';
+import { QuillModule } from 'ngx-quill';
 
 export function HttpLoaderFactory(http: HttpClient): any {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -65,6 +66,7 @@ export const appConfig: ApplicationConfig = {
       MaterialModule,
       TablerIconsModule.pick(TablerIcons),
       NgScrollbarModule,
+      QuillModule.forRoot(),
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,

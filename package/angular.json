@@ -34,9 +34,11 @@
               "src/assets/scss/pages/_toast.scss",
               "src/assets/scss/pages/_spinner.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/angular-calendar/css/angular-calendar.css"
+              "node_modules/angular-calendar/css/angular-calendar.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
