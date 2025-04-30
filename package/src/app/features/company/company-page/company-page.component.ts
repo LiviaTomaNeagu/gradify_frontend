@@ -5,7 +5,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule } from '@angular/forms';
 import { UpdateCompanyRequestDTO } from '../core/interfaces/get-company.interface';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-company-page',
@@ -20,7 +20,7 @@ export class CompanyPageComponent implements OnInit {
   isLoading: boolean = true;
   errorMessage: string | null = null;
 
-  constructor(private companyService: CompanyService, private snackBar: MatSnackBar) {}
+  constructor(private companyService: CompanyService, private toastr:ToastrService ) {}
 
   ngOnInit(): void {
     this.fetchCompanyData();
@@ -33,7 +33,7 @@ export class CompanyPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error("Error fetching company data:", error);
+        this.toastr.error('Error fetching company data!', 'Oops!');
         this.errorMessage = "Nu s-a putut încărca profilul companiei.";
         this.isLoading = false;
       }
@@ -56,19 +56,13 @@ export class CompanyPageComponent implements OnInit {
     this.companyService.updateCompanyDetails(payload).subscribe({
       complete: () => {
         console.log("Company details successfully updated.");
-        this.showSuccessSnackBar("Company details successfully updated.");
+        this.toastr.success('Company details successfully updated!', 'Success!');
       },
       error: (error) => {
-        console.error("Error updating company details:", error);
+        this.toastr.error('Error updating company data!', 'Oops!');
       }
     });
     
   }
 
-  showSuccessSnackBar(message: string) {
-    this.snackBar.open(message, 'OK', {
-      duration: 3000,
-      panelClass: 'snackbar-success'
-    });
-  }
 }

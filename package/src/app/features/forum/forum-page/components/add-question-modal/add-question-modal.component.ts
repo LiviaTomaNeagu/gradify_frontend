@@ -8,6 +8,7 @@ import { ForumService } from '../../../core/services/forum.service';
 import { RelatedCardComponent } from '../related-card/related-card.component';
 import { CommonModule } from '@angular/common';
 import { Topic } from 'src/app/shared/enums/topic.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-question-modal',
@@ -25,7 +26,8 @@ export class AddQuestionModalComponent {
   constructor(
     public dialogRef: MatDialogRef<AddQuestionModalComponent>,
     private _formBuilder: FormBuilder,
-    private forumService: ForumService
+    private forumService: ForumService,
+    private toastr: ToastrService
   ) {
     this.titleFormGroup = this._formBuilder.group({
       title: ['', Validators.required]
@@ -56,7 +58,7 @@ export class AddQuestionModalComponent {
         console.log('Related questions loaded', questions);
       },
       error: () => {
-        console.error('Failed to load related questions');
+        this.toastr.error('Failed to load related questions!', 'Oops!');
         this.isLoadingRelatedQuestions = true;
       }
     });

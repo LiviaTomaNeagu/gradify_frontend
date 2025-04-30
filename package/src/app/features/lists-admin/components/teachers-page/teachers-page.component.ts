@@ -8,9 +8,11 @@ import { DatePipe } from '@angular/common';
 import { UsersService } from 'src/app/features/users/core/services/users.service';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-teachers-page',
@@ -32,7 +34,7 @@ export class TeachersPageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private listsService: ListsService, private datePipe: DatePipe, private usersService: UsersService, private snackBar: MatSnackBar) {}
+  constructor(private listsService: ListsService, private datePipe: DatePipe, private usersService: UsersService, private toastr: ToastrService, private dialog: MatDialog) {}
 
   
     private searchSubject = new Subject<string>();
@@ -87,6 +89,7 @@ export class TeachersPageComponent implements OnInit {
   approveTeacher(teacher: any): void {
     this.usersService.approveUser(teacher.id).subscribe(() => {
       teacher.isApproved = true;
+      this.toastr.success('User approved!', 'Success!');
     });
   }
 
@@ -95,24 +98,29 @@ export class TeachersPageComponent implements OnInit {
       this.fetchTeachers();
     });
 
-    this.snackBar.open("User declined!", 'OK', {
-      duration: 3000,
-      panelClass: 'snackbar-success'
-    });
+    this.toastr.success('User declined!', 'Success!');
+
   }
 
   deleteTeacher(teacher: any): void {
-    if(confirm('Are you sure you want to delete this teacher?')) {
-      this.usersService.declineUser(teacher.id).subscribe(() => {
-        this.fetchTeachers();
-      });
-    }
-
-    this.snackBar.open("User deleted!", 'OK', {
-      duration: 3000,
-      panelClass: 'snackbar-success'
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '400px',
+      data: {
+        title: 'Confirm Delete',
+        message: `Are you sure you want to delete ${teacher.name} ${teacher.surname}?`
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.usersService.declineUser(teacher.id).subscribe(() => {
+          this.toastr.success('User deleted!', 'Success!');
+          this.fetchTeachers();
+        });
+      }
     });
   }
+  
 
   resetPagination(): void {
     this.currentPage = 0;

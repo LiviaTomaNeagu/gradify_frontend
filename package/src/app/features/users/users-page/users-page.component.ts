@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { GetMentorsRequestDTO, GetUserResponseDTO } from '../core/interfaces/users.interfaces';
 import { MatTableModule } from '@angular/material/table';
 import {MaterialModule} from 'src/app/material.module';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-users-page',
@@ -18,7 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UsersPageComponent {
 
   users: GetUserResponseDTO[] = [];
-  constructor(private usersService: UsersService, private userService: CurrentUserService, private snackBar: MatSnackBar) {
+  constructor(private usersService: UsersService, private userService: CurrentUserService, private toastr:ToastrService) {
   }
 
   displayedColumns: string[] = ['assigned', 'email', 'actions'];
@@ -57,10 +57,7 @@ export class UsersPageComponent {
       next: () => {
         console.log("User approved");
         this.loadMentors();
-        this.snackBar.open("User approved!", 'OK', {
-          duration: 3000,
-          panelClass: 'snackbar-success'
-        });
+        this.toastr.success('User approved!', 'Success!');
       }
     });
   }
@@ -70,15 +67,9 @@ export class UsersPageComponent {
       next: () => {
         console.log("User declined");
         this.loadMentors();
-        this.snackBar.open("User declined!", 'OK', {
-          duration: 3000,
-          panelClass: 'snackbar-error'
-        });
+        this.toastr.success('User declined!', 'Success!');
       }
     });
   }
-
-  showSuccessSnackBar(message: string) {
     
-  }
 }

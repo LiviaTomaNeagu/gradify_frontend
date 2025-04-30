@@ -7,6 +7,7 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { StepsAchievedComponent } from "../components/steps-achieved/steps-achieved.component";
 import { ProfileSettingsComponent } from '../components/profile-settings/profile-settings.component';
 import { MyTopicsComponent } from '../components/my-topics/my-topics.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,7 +24,7 @@ throw new Error('Method not implemented.');
   isLoading: boolean = true;
   progressPercentage: number = 0;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.loadUserDetails();
@@ -35,8 +36,8 @@ throw new Error('Method not implemented.');
         this.userDetails = data;
         this.isLoading = false;
       },
-      (error) => {
-        console.error('Error fetching account details:', error);
+      (error) => {        
+        this.toastr.error('Error fetching account details!', 'Oops!');
         this.isLoading = false;
       }
     );

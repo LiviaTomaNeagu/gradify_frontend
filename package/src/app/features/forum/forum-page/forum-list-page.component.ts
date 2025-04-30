@@ -10,6 +10,7 @@ import { AddQuestionModalComponent } from './components/add-question-modal/add-q
 import { MatDialog } from '@angular/material/dialog';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forum',
@@ -32,7 +33,7 @@ export class ForumPageComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: CurrentUserService) {}
+  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: CurrentUserService, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.initializeTopics();
@@ -68,7 +69,7 @@ export class ForumPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load questions:', err);
+        this.toastr.error('Failed to load questions!', 'Oops!');
         this.questionsResponse = null;
       },
     });

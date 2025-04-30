@@ -23,9 +23,8 @@ export class DashboardPageComponent implements OnInit {
 
   ngOnInit() {
     const currentUser = this.currentUserService.getCurrentUserInfo();
-    this.isMentor = currentUser?.role === RoleTypeEnum.MENTOR || currentUser?.role === RoleTypeEnum.ADMIN_CORPORATE;
+    this.isMentor = currentUser?.role === RoleTypeEnum.MENTOR || currentUser?.role === RoleTypeEnum.ADMIN_CORPORATE || currentUser?.role === RoleTypeEnum.COORDINATOR;
     this.isStudent = currentUser?.role === RoleTypeEnum.STUDENT;
-    this.isCoordinator = currentUser?.role === RoleTypeEnum.COORDINATOR;
 
     if(this.isStudent) {
       this.studentService.hasDetails().subscribe(hasStudentDetails => {

@@ -11,6 +11,8 @@ import { MaterialModule } from '../../../material.module';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from 'src/app/features/auth/core/services/auth.service';
 import { LocalStorageHelper } from 'src/app/@core/helpers/local-storage.helper';
+import { CurrentUserService } from 'src/app/@core/services/user.service';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 
 @Component({
   selector: 'app-side-login',
@@ -28,7 +30,7 @@ export class AppSideLoginComponent {
   loading = false;
   errorMessage: string | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private currentUserService: CurrentUserService) {}
 
   form = new FormGroup({
     uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
@@ -55,7 +57,12 @@ export class AppSideLoginComponent {
     this.authService.login(credentials).subscribe({
       next: (response) => {
         LocalStorageHelper.saveTokensToLocalStorage(response.accessToken, response.refreshToken);
-        this.router.navigate(['/dashboard']); // Redirecționează utilizatorul după login
+        this.router.navigate(['/dashboard']);
+        if (response?.role === RoleTypeEnum.ADMIN) {
+          this.router.navigate(['/lists/students']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
       error: (err) => {
         this.errorMessage = err.error.message;  

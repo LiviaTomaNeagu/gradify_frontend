@@ -1,4 +1,10 @@
-<mat-card class="chat-app cardWithShadow overflow-hidden">
+<div class="loading-wrapper" *ngIf="isLoading">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
+<mat-card class="chat-app cardWithShadow overflow-hidden" *ngIf="!isLoading">
   <mat-sidenav-container
     [ngClass]="{
       'side-panel-opened': sidePanelOpened,

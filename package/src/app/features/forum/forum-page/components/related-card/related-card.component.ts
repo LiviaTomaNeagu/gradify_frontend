@@ -6,6 +6,7 @@ import { GetRelatedQuestionResponseDto } from '../../../core/interfaces/get-rela
 import { getTopicName, Topic, topicColors } from 'src/app/shared/enums/topic.enum';
 import { RouterModule } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-related-card',
@@ -22,7 +23,8 @@ export class RelatedCardComponent {
   isAnswerCountVisible: boolean = false;;
 
   constructor(
-    @Optional() private dialogRef: MatDialogRef<any>
+    @Optional() private dialogRef: MatDialogRef<any>,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class RelatedCardComponent {
       this.topicName = getTopicName(this.question.topic);
       this.topicColor = topicColors[this.question.topic];
     } else {
-      console.error('Question topic is not defined or invalid');
+      this.toastr.error('Question topic is not defined or invalid!', 'Oops!');
     }
 
     if (this.question.answersCount && this.question.answersCount > 0) {

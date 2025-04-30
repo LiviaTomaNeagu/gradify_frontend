@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { UserApi } from '../api/user-api.service';
 import { CurrentUserResponseInterfaceDTO } from '../interfaces/user.interface';
+import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,7 @@ export class CurrentUserService {
   currentUser$: BehaviorSubject<CurrentUserResponseInterfaceDTO | null> =
     new BehaviorSubject<CurrentUserResponseInterfaceDTO | null>(null);
 
-  constructor(private userApi: UserApi) {}
+  constructor(private userApi: UserApi, private router: Router) {}
 
   setCurrentUserInfo(user: CurrentUserResponseInterfaceDTO): void {
     this.currentUser$.next(user);
@@ -42,6 +44,10 @@ export class CurrentUserService {
 
   resetCurrentUser(): void {
     this.currentUser$.next(null);
+  }
+
+  logoutUser(): void {
+    this.userApi.logoutUser();
   }
 }
 

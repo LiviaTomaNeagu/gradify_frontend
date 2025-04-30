@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ListsService } from '../../core/services/lists.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddCompanyResponseDTO } from '../../core/interfaces/get-companies.interface';
 import { Router } from '@angular/router';
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-company',
@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 export class AddCompanyComponent {
   companyForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private listsService: ListsService, private snackBar: MatSnackBar, private router: Router) {
+  constructor(private fb: FormBuilder, private listsService: ListsService, private router: Router, private toastr: ToastrService) {
     console.log('AddCompanyComponent constructor');
     this.companyForm = this.fb.group({
       name: ['', Validators.required],
@@ -36,20 +36,14 @@ export class AddCompanyComponent {
   
       this.listsService.createCompany(companyData).subscribe({
         next: (response: AddCompanyResponseDTO) => {
-          this.snackBar.open("Company added successfully", 'OK', {
-            duration: 3000,
-            panelClass: 'snackbar-success'
-          });
+          this.toastr.success('Company added successfully', 'Success!');
   
           const companyId = response.id;
   
           this.router.navigate([`/lists/companies/${companyId}`]);
         },
         error: (err) => {
-          this.snackBar.open(`${err.error.message}`, 'OK', {
-            duration: 3000,
-            panelClass: 'snackbar-error'
-          });
+          this.toastr.error(`${err.error.message}`, 'Oops!');
         }
       });
     }

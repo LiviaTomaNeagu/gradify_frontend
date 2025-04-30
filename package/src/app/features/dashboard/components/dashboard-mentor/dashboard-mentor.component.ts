@@ -48,6 +48,7 @@ export class DashboardMentorComponent implements OnInit {
   favoriteTopics: Topic[];
   weekDaysOrder = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   totalUsersInteracted: number = 0;
+  isLoading: boolean;
 
 
   public chartOptions: any;
@@ -56,13 +57,14 @@ export class DashboardMentorComponent implements OnInit {
   constructor(private mentorService: MentorService, private userService: CurrentUserService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.getCurrentUserId();
     this.initChart(); 
   }
 
   getCurrentUserId() {
     this.userService.currentUser$.subscribe(user => {
-      if (user && (user.role === RoleTypeEnum.MENTOR || user.role === RoleTypeEnum.ADMIN_CORPORATE)) {
+      if (user && (user.role === RoleTypeEnum.MENTOR || user.role === RoleTypeEnum.ADMIN_CORPORATE || user.role === RoleTypeEnum.COORDINATOR)) {
         this.mentorId = user.id;
         this.loadMentorStats(this.mentorId);
       }
@@ -71,6 +73,7 @@ export class DashboardMentorComponent implements OnInit {
 
   loadMentorStats(mentorId: string) {
     this.mentorService.getMentorStats(mentorId).subscribe((stats: MentorResponseDTO) => {
+      console.log("Mentor stats", stats);
       this.totalAnswers = stats.totalAnswers;
       this.topUsers = stats.topUsers;
       this.latestQuestions = stats.latestQuestions;
@@ -147,6 +150,7 @@ export class DashboardMentorComponent implements OnInit {
         }
       };
     }
+    this.isLoading = false;
   }
   
 

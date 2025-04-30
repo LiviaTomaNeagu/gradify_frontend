@@ -1,6 +1,9 @@
+import { RoleTypeEnum } from "src/app/shared/enums/role-type.enum";
+
 export interface LoginResponseDTO {
     accessToken: string;
     refreshToken: string;
+    role: RoleTypeEnum;
 }
 
 export interface LoginRequestDTO {

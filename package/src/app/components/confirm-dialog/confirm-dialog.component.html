@@ -1,12 +1,12 @@
-<h5 mat-dialog-title>{{ data.title }}</h5>
-<div mat-dialog-content class="f-s-14 lh-16">
-  {{ data.message }}
-</div>
-<div mat-dialog-actions class="p-24 p-t-0">
-  <button mat-flat-button class="bg-error text-white" (click)="close(false)">
-    {{ data.cancelText || 'No' }}
+<p class="p-x-24 f-s-14 p-y-24">
+  {{ data.message || 'Are you sure you want to proceed?' }}
+</p>
+
+<mat-dialog-actions class="p-x-24 p-b-24">
+  <button mat-flat-button class="bg-error text-white" (click)="close(true)">
+    {{ data.confirmText || 'Delete' }}
   </button>
-  <button mat-flat-button mat-dialog-close cdkFocusInitial (click)="close(true)">
-    {{ data.confirmText || 'Yes' }}
+  <button mat-flat-button (click)="close(false)">
+    {{ data.cancelText || 'Cancel' }}
   </button>
-</div>
+</mat-dialog-actions>

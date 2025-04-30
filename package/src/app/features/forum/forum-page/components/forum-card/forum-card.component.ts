@@ -7,6 +7,7 @@ import { GetQuestionResponseDTO } from 'src/app/features/forum/core/interfaces/g
 import { getTopicName, Topic, topicColors } from 'src/app/shared/enums/topic.enum';
 import { DatePipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-forum-card',
@@ -21,7 +22,7 @@ export class ForumCardComponent {
   topicName: string;
   topicColor: string;
   formattedDate: string = '';
-  constructor(private datePipe: DatePipe) {}
+  constructor(private datePipe: DatePipe, private toastr: ToastrService) {}
 
 
   ngOnInit(): void {
@@ -30,7 +31,7 @@ export class ForumCardComponent {
       this.topicColor = topicColors[this.question.topic];
       this.formattedDate = this.datePipe.transform(this.question.createdAt, 'dd-MMMM-yyyy') || '';
     } else {
-      console.error('Question topic is not defined or invalid');
+      this.toastr.error('Question topic is not defined or invalid!', 'Oops!');
     }
   }
   @Input() question!: GetQuestionResponseDTO;

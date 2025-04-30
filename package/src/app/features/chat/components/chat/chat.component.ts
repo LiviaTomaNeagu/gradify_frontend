@@ -35,8 +35,10 @@ export class AppChatComponent implements AfterViewInit {
   searchTerm = signal('');
   selectedMessage = signal<Message | null>(null);
   currentUser:  CurrentUserResponseInterfaceDTO | null = null;
+  isLoading: boolean = false;
 
   constructor() { 
+    this.isLoading = true;
     this.loadExtraUsersIfNeeded();
     this.currentUser = this.currentUserService.getCurrentUserInfo();
    }
@@ -140,6 +142,7 @@ export class AppChatComponent implements AfterViewInit {
         const merged = [...baseMessages, ...newMessages];
         this.chatService.overrideMessages(merged);
       }
+      this.isLoading = false;
     });
   }
 
