@@ -11,7 +11,7 @@
     </div>
     
     <mat-card-title class="forum-title">{{ question.title }}</mat-card-title>
-    <mat-card-subtitle class="forum-content">{{ question.content }}</mat-card-subtitle>
+    <mat-card-subtitle class="forum-content" [innerHTML]="question.content"></mat-card-subtitle>
   </mat-card-content>
 
   <!-- Card Actions -->
