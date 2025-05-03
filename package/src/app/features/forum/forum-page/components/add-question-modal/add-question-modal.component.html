@@ -102,26 +102,34 @@
   
   
 
-  <!-- File Upload -->
-  <div class="m-b-16">
-    <label class="mat-body-1 m-b-8 d-block"><strong>Attachments:</strong></label>
-  
-    <button mat-flat-button class="bg-success text-white file-button">
-      Choose Files
-      <input
-        type="file"
-        (change)="onFileSelected($event)"
-        multiple
-        class="hidden-file-input"
-      />
-    </button>
-  
-    <div *ngIf="attachedFiles.length > 0" class="m-t-8">
-      <ul class="file-list">
-        <li *ngFor="let file of attachedFiles">{{ file.name }}</li>
-      </ul>
-    </div>
+<!-- Drag and Drop Upload -->
+<div
+  class="drag-drop-zone"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+>
+  <p class="drop-message">You can also <strong>drag and drop your file here</strong>.</p>
+
+  <!-- Legăm <label> de <input> -->
+    <button mat-flat-button class="bg-success text-white file-button" (click)="triggerFileInput()">Choose Files</button>
+    <input
+      #fileInput
+      type="file"
+      (change)="onFileSelected($event)"
+      multiple
+      class="hidden-file-input"
+    />
+
+
+  <div *ngIf="attachedFiles.length > 0" class="m-t-8">
+    <ul class="file-list">
+      <li *ngFor="let file of attachedFiles">{{ file.name }}</li>
+    </ul>
   </div>
+</div>
+
+
   
   <!-- Action Buttons -->
   <mat-dialog-actions class="step-actions">

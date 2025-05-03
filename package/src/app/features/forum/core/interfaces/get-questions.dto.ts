@@ -15,6 +15,7 @@ export interface GetQuestionsResponseDTO {
     name: string;
     surname: string;
     occupationName: string;
+    attachments: AttachmentsDTO[];
   }  
   
   export interface GetAnswerResponseDTO {
@@ -42,3 +43,7 @@ export interface AddAnswerRequestDTO {
   content: string;
 }
 
+export interface AttachmentsDTO {
+  name: string;
+  url: string;
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
@@ -95,12 +95,45 @@ export class AddQuestionModalComponent {
   onSecondNext(): void {
     console.log('Second next');
   }
+
+  onDragOver(event: DragEvent): void {
+    event.preventDefault();
+    const dropZone = event.currentTarget as HTMLElement;
+    dropZone.classList.add('dragover');
+  }
   
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files) {
-      this.attachedFiles = Array.from(input.files);
+  onDragLeave(event: DragEvent): void {
+    const dropZone = event.currentTarget as HTMLElement;
+    dropZone.classList.remove('dragover');
+  }
+  
+  onDrop(event: DragEvent): void {
+    event.preventDefault();
+    const dropZone = event.currentTarget as HTMLElement;
+    dropZone.classList.remove('dragover');
+  
+    if (event.dataTransfer?.files) {
+      this.handleFiles(event.dataTransfer.files);
     }
   }
+  
+  onFileSelected(event: any): void {
+    if (event.target.files) {
+      this.handleFiles(event.target.files);
+    }
+  }
+  
+  handleFiles(files: FileList): void {
+    for (let i = 0; i < files.length; i++) {
+      this.attachedFiles.push(files.item(i)!);
+    }
+  }
+  
+  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+
+  triggerFileInput(): void {
+    this.fileInput.nativeElement.click();
+  }
+
 
 }

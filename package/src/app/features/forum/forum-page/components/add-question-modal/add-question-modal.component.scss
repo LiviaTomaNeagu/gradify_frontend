@@ -135,3 +135,40 @@
     margin-top: 8px;
   }
   
+
+  .drag-drop-zone {
+    padding: 12px 16px; // mai puțin padding = zonă mai mică
+    border-radius: 12px;
+    background-color: #fff8ee;
+    text-align: center;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background-color: #fff1db;
+    }
+  
+    &.dragover {
+      background-color: #ffe6c7;
+    }
+  
+    .drop-message {
+      font-style: italic;
+      margin: 8px 0; // mai puțin spațiu sus-jos
+      color: #555;
+      font-size: 14px;
+    }
+  
+    .file-button {
+      margin-top: 8px;
+    }
+  
+    .file-list {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+  
+    .hidden-file-input {
+      display: none;
+    }
+  }
+  
