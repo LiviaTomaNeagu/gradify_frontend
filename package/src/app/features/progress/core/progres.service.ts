@@ -17,6 +17,7 @@ export class ProgressService {
   }
 
   addMyProgress(payload: AddMyProgressDataResponseDTO): Observable<void> {
+    console.log('Payload:', payload); // Log the payload to see its structure
     return this.http.post<void>(`${this.baseUrl}/add-my-progress`, payload);
   }
 }
