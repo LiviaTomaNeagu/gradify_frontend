@@ -4,6 +4,8 @@ import { GroupDTO, CreateGroupRequestDTO, DeleteGroupRequestDTO } from '../../co
 import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-groups-page',
@@ -16,7 +18,7 @@ export class GroupsPageComponent implements OnInit {
   groups: GroupDTO[] = [];
   newGroupName: string = '';
 
-  constructor(private groupsService: GroupsService) {}
+  constructor(private groupsService: GroupsService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadGroups();
@@ -44,12 +46,26 @@ export class GroupsPageComponent implements OnInit {
   }
 
   deleteGroup(index: number): void {
-    const group = this.groups[index];
-    const payload: DeleteGroupRequestDTO = { id: group.id };
-
-    this.groupsService.deleteGroup(payload).subscribe({
-      next: () => this.groups.splice(index, 1),
-      error: (err) => console.error('Failed to delete group', err)
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '350px',
+      data: {
+        message: 'Are you sure you want to delete this group?',
+        confirmText: 'Delete',
+        cancelText: 'Cancel'
+      }
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === true) {
+        const group = this.groups[index];
+        const payload: DeleteGroupRequestDTO = { id: group.id };
+  
+        this.groupsService.deleteGroup(payload).subscribe({
+          next: () => this.groups.splice(index, 1),
+          error: (err) => console.error('Failed to delete group', err)
+        });
+      }
     });
   }
+  
 }

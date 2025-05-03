@@ -5,8 +5,16 @@
             <div>
               <h4 class="card-title">Manage Student Groups</h4>
               <mat-card-subtitle>View, add or remove student groups from the system</mat-card-subtitle>
+          
+              <div class="warning-alert">
+                <mat-icon color="warn" class="warning-icon">warning</mat-icon>
+                <span class="warning-text">
+                  Deleting a group will also remove all users assigned to it!
+                </span>
+              </div>
             </div>
           </mat-card-header>
+          
           
         <mat-card-content>
           <form (ngSubmit)="addGroup()">
