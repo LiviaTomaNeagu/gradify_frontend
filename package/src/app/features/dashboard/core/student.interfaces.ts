@@ -10,7 +10,7 @@ export interface HasDetailsResponseDTO
 export interface AddStudentDetailsDTO
 {
     specialization: string;
-    group: string;
+    groupId: string;
 }
 
 export interface GetStudentDashboardDTO {

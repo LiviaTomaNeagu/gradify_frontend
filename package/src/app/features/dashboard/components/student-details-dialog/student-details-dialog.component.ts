@@ -7,6 +7,8 @@ import { MaterialModule } from 'src/app/material.module';
 import { StudentService } from '../../core/student.service';
 import { AddStudentDetailsDTO } from '../../core/student.interfaces';
 import { ToastrService } from 'ngx-toastr';
+import { GroupDTO } from 'src/app/features/lists-admin/core/interfaces/group.model';
+import { GroupsService } from 'src/app/features/lists-admin/core/services/groups.service';
 
 @Component({
   selector: 'app-student-details-dialog',
@@ -19,12 +21,14 @@ export class StudentDetailsDialogComponent {
   studentForm: FormGroup;
   specializations = Object.values(Specialization); // Dropdown cu specializările
   faculty: string = "Facultatea de Matematică și Informatică"; // Facultatea hardcodata
+  groups: GroupDTO[] = []; // Dropdown cu grupele
 
   constructor(
     private fb: FormBuilder,
     private studentService: StudentService,
     private toastr: ToastrService,
     public dialogRef: MatDialogRef<StudentDetailsDialogComponent>,
+    private groupService: GroupsService,
     @Inject(MAT_DIALOG_DATA) public data: StudentDetails
   ) {
     // Blocăm ieșirea prin tastă ESC sau clic în afara dialogului
@@ -32,8 +36,10 @@ export class StudentDetailsDialogComponent {
 
     this.studentForm = this.fb.group({
       specialization: ['', Validators.required],
-      group: ['', Validators.required]
+      group: [null, Validators.required]
     });
+
+    this.getGroups();
   }
 
   save() {
@@ -41,7 +47,7 @@ export class StudentDetailsDialogComponent {
 
       const details: AddStudentDetailsDTO = {
         specialization: this.studentForm.value.specialization,
-        group: this.studentForm.value.group
+        groupId: this.studentForm.value.group
       };
 
       this.studentService.addStudentDetails(details).subscribe(() => {
@@ -50,4 +56,16 @@ export class StudentDetailsDialogComponent {
       }); 
   }
 }
+
+  getGroups() {
+    this.groupService.getAllGroups().subscribe({
+      next: (data) => {
+        this.groups = data;
+      },
+      error: (err) => {
+        console.error('Failed to load groups', err);
+        this.toastr.error('Failed to load groups');
+      }
+    });
+  }
 }

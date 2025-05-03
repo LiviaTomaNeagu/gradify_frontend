@@ -1,0 +1,46 @@
+<div class="content">
+    <div class="container-fluid">
+      <mat-card>
+        <mat-card-header>
+            <div>
+              <h4 class="card-title">Manage Student Groups</h4>
+              <mat-card-subtitle>View, add or remove student groups from the system</mat-card-subtitle>
+          
+              <div class="warning-alert">
+                <mat-icon color="warn" class="warning-icon">warning</mat-icon>
+                <span class="warning-text">
+                  Deleting a group will also remove all users assigned to it!
+                </span>
+              </div>
+            </div>
+          </mat-card-header>
+          
+          
+        <mat-card-content>
+          <form (ngSubmit)="addGroup()">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Group Name</mat-label>
+              <input matInput [(ngModel)]="newGroupName" name="groupName" required />
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit">Add Group</button>
+          </form>
+  
+          <mat-divider class="m-t-20 m-b-20"></mat-divider>
+  
+          <h5 class="m-b-10">Existing Groups</h5>
+          <div class="group-cards-grid">
+            <mat-card class="group-card" *ngFor="let group of groups; let i = index">
+              <div class="group-card-header">
+                <span>{{ group.name }}</span>
+                <button mat-icon-button color="warn" (click)="deleteGroup(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>          
+  
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  

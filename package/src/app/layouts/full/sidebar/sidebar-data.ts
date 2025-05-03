@@ -37,6 +37,13 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.ADMIN],
   },
   {
+    displayName: 'Groups',
+    iconName: 'layout-navbar-expand',
+    bgcolor: 'warning',
+    route: '/lists/groups',
+    roles: [RoleTypeEnum.ADMIN],
+  },
+  {
     displayName: 'My Company',
     iconName: 'layout-dashboard',
     bgcolor: 'primary',
@@ -105,9 +112,5 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   },
 
-  {
-    navCap: 'Groups',
-    roles: [RoleTypeEnum.ADMIN],
-  },
 
 ];
