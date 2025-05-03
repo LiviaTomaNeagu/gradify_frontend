@@ -7,13 +7,14 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { GetMyProgressDataResponseDTO } from '../core/progress.interfaces';
 import { ProgressService } from '../core/progres.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppKanbanComponent } from "../../kanban/kanban.component";
 
 @Component({
   selector: 'app-my-progress',
   templateUrl: './my-progress.component.html',
   styleUrls: ['./my-progress.component.scss'],
   standalone: true,
-  imports: [MaterialModule, CommonModule, CalendarModule, AppFullcalendarComponent],
+  imports: [MaterialModule, CommonModule, CalendarModule, AppFullcalendarComponent, AppKanbanComponent],
   providers: [
     {
       provide: DateAdapter,

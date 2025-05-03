@@ -1,0 +1,58 @@
+<mat-dialog-content class="mat-typography">
+  <div class="d-flex align-items-center justify-content-between m-b-16">
+    <h4 class="f-s-16 f-w-600">{{ action }} Task</h4>
+    <button
+      mat-icon-button
+      mat-dialog-close
+      class="d-flex justify-content-center"
+    >
+      <i-tabler name="x" class="icon-20 d-flex"></i-tabler>
+    </button>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <mat-label class="f-w-600 m-b-8 d-block">Title</mat-label>
+      <div class="p-2 border rounded bg-light">
+        {{ local_data.title }}
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="local_data.description">
+      <mat-label class="f-w-600 m-b-8 d-block">Description</mat-label>
+      <div class="p-2 border rounded bg-light">
+        {{ local_data.description }}
+      </div>
+    </div>
+
+    <div class="col-12">
+      <mat-label class="f-w-600 m-b-8 d-block">Property</mat-label>
+      <div class="p-2 border rounded bg-light">
+        {{ local_data.taskProperty }}
+      </div>
+    </div>
+
+    <div class="col-12" *ngIf="local_data.imageUrl || action === 'Add'">
+      <mat-label class="f-w-600 m-b-8 d-block">Image URL</mat-label>
+      <div class="p-2 border rounded bg-light">
+        {{ local_data.imageUrl }}
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <img
+            [src]="local_data.imageUrl"
+            alt="Task Image"
+            style="max-width: 100%"
+            class="rounded m-t-10"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<div mat-dialog-actions>
+  <button mat-flat-button class="bg-error text-white" (click)="closeDialog()">
+    Cancel
+  </button>
+</div>
