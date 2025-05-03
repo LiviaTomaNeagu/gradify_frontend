@@ -11,7 +11,26 @@
     </div>
     
     <mat-card-title class="forum-title">{{ question.title }}</mat-card-title>
-    <mat-card-subtitle class="forum-content">{{ question.content }}</mat-card-subtitle>
+    <mat-card-subtitle class="forum-content" [innerHTML]="question.content"></mat-card-subtitle>
+    <ul class="file-list" *ngIf="question.attachments.length > 0 && !showReadMore">
+      <li *ngFor="let file of question.attachments">
+        <ng-container *ngIf="isImage(file.name); else otherFile">
+          <a [href]="file.url" target="_blank" rel="noopener">
+            <img [src]="file.url" alt="{{ file.name }}" class="preview-image" />
+          </a>
+        </ng-container>
+    
+        <ng-template #otherFile>
+          <a [href]="file.url" class="file-entry" target="_blank" rel="noopener">
+            <mat-icon class="file-icon">insert_drive_file</mat-icon>
+            {{ file.name }}
+          </a>
+        </ng-template>
+      </li>
+    </ul>
+    
+    
+    
   </mat-card-content>
 
   <!-- Card Actions -->

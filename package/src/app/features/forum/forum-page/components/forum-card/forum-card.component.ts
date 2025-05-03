@@ -36,4 +36,9 @@ export class ForumCardComponent {
   }
   @Input() question!: GetQuestionResponseDTO;
   @Input() showReadMore: boolean = false;
+
+  isImage(fileName: string): boolean {
+    return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
+  }
+  
 }
