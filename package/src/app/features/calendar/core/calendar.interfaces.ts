@@ -5,6 +5,7 @@ export interface CalendarEvent {
   colorPrimary: string;
   start: Date;
   end: Date;
+  coordinatorId: string;
 }
 
 export interface CalendarEventDTO {
@@ -16,4 +17,5 @@ export interface CalendarEventDTO {
     primary: string;
     secondary: string;
   };
+  coordinatorId: string;
 }

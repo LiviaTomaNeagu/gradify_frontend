@@ -66,6 +66,13 @@ export const navItems: NavItem[] = [
     roles: [RoleTypeEnum.COORDINATOR],
   },
   {
+    displayName: 'Calendar',
+    iconName: 'calendar',
+    bgcolor: 'primary',
+    route: '/calendar',
+    roles: [RoleTypeEnum.COORDINATOR]
+  },
+  {
     displayName: 'My Progress',
     iconName: 'rosette',
     bgcolor: 'warning',
@@ -99,14 +106,8 @@ export const navItems: NavItem[] = [
   },
 
   {
-    navCap: 'Groups & Events',
+    navCap: 'Groups',
     roles: [RoleTypeEnum.ADMIN],
   },
-  {
-    displayName: 'Calendar',
-    iconName: 'calendar',
-    bgcolor: 'primary',
-    route: '/calendar',
-    roles: [RoleTypeEnum.ADMIN],
-  },
+
 ];
