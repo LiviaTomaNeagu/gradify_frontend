@@ -1,5 +1,6 @@
 import { CalendarEventAction, CalendarEvent } from 'angular-calendar';
 import {
+  addDays,
   startOfDay,
 } from 'date-fns';
 
@@ -29,7 +30,7 @@ export class EgretCalendarEvent implements CalendarEvent {
   constructor(data: any) {
     data = data || {};
     this.start = new Date(data.start) || startOfDay(new Date());
-    this.end = new Date(data.end);
+    this.end = data.end ? addDays(new Date(data.end), 1) : addDays(startOfDay(new Date()), 1);
     this._id = data._id || '';
     this.title = data.title || '';
     this.color = {
@@ -42,7 +43,7 @@ export class EgretCalendarEvent implements CalendarEvent {
       afterEnd: (data.resizable && data.resizable.afterEnd) || true,
     };
     this.actions = data.actions || [];
-    this.allDay = data.allDay || false;
+    this.allDay = true;
     this.cssClass = data.cssClass || '';
     this.meta = {
       location: (data.meta && data.meta.location) || '',
