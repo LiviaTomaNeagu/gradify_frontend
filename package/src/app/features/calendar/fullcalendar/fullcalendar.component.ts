@@ -159,7 +159,7 @@ export class AppFullcalendarComponent {
     this.calendarService.getEvents().subscribe((events) => {
       const formatted = events.map((e) => ({
         ...e,
-        actions: this.currentUser?.role === RoleTypeEnum.ADMIN ? this.actions : [],
+        actions: this.currentUser?.role === RoleTypeEnum.COORDINATOR ? this.actions : [],
       }));
       this.events.set(formatted);
     });

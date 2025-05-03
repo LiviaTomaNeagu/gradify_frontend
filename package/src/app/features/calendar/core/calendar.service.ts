@@ -22,7 +22,8 @@ export class CalendarService {
           color: {
             primary: e.colorPrimary,
             secondary: e.colorPrimary
-          }
+          },
+          coordinatorId: e.coordinatorId
         }))
       )
     );
@@ -47,7 +48,8 @@ export class CalendarService {
         color: {
           primary: e.colorPrimary,
           secondary: e.colorPrimary
-        }
+        },
+        coordinatorId: e.coordinatorId
       }))
     );
   }
