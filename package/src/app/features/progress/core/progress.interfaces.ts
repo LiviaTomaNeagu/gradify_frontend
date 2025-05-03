@@ -1,9 +1,9 @@
 export interface GetMyProgressDataResponseDTO
 {
-    currentStep: number;
+    kanban: string;
 }
 
 export interface AddMyProgressDataResponseDTO
 {
-    currentStep: number;
+    kanban: string;
 }

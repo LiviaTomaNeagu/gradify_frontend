@@ -1,0 +1,44 @@
+.task-list-section {
+  display: flex;
+  gap: 24px;
+  flex-wrap: nowrap;
+}
+
+.task-list-container {
+  width: 258px;
+  flex-shrink: 0;
+}
+
+.connect-sorting {
+  padding: 20px;
+  border-radius: $border-radius;
+}
+
+.img-task {
+  cursor: grab;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: $border-radius;
+  box-shadow: var(--mat-sys-level2);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.empty-drop-zone {
+  min-height: 100px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 10px;
+}
