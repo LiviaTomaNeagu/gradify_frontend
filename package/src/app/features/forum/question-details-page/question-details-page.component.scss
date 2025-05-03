@@ -169,3 +169,47 @@
     }
   }
   
+  ::ng-deep .quill-form-field {
+    margin-top: 16px;
+  
+    .quill-editor-wrapper {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: white;
+  
+      .ql-toolbar.ql-snow {
+        border: none !important;
+        border-radius: 8px 8px 0 0;
+        background-color: transparent;
+  
+        button {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          border-left: none !important;
+  
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+            border-radius: 4px;
+          }
+  
+          &.ql-active {
+            background-color: rgba(0, 0, 0, 0.1) !important;
+            border-radius: 4px;
+          }
+        }
+  
+        .ql-formats {
+          border-left: none !important;
+        }
+      }
+  
+      .ql-container.ql-snow {
+        border: none !important; /* <- elimină marginea superioară */
+        border-radius: 0 0 8px 8px;
+        min-height: 150px;
+      }
+    }
+  }
+  

@@ -12,7 +12,7 @@
           <strong>{{ answer.name }} {{ answer.surname }}</strong>
           <span class="occupation">{{ answer.occupationName }}</span>
         </div>
-        <p class="answer-content">{{ answer.content }}</p>
+        <p class="answer-content" [innerHTML]="answer.content"> </p>
       </mat-card-content>
     </mat-card>
     
@@ -26,7 +26,7 @@
   </div>
 
   <!-- Formular pentru adăugarea unui răspuns -->
-  <div *ngIf="!isLoading"> 
+  <!-- <div *ngIf="!isLoading"> 
     <mat-card class="response-form">
       <mat-card-content>
         <mat-form-field appearance="outline" class="full-width">
@@ -36,7 +36,33 @@
         <button mat-raised-button color="primary" (click)="submitAnswer()">Trimite răspuns</button>
       </mat-card-content>
     </mat-card>
+  </div> -->
+
+  <div *ngIf="!isLoading">
+    <mat-card class="response-form">
+      <mat-card-content>
+        <div class="quill-form-field">
+          <label class="mat-body-1"><strong>Answer:</strong></label>
+          <div class="quill-editor-wrapper">
+            <quill-editor
+              [(ngModel)]="newAnswer"
+              [modules]="{
+                toolbar: [
+                  ['bold', 'italic', 'underline'],
+                  ['link', 'code-block'],
+                  [{ list: 'ordered' }, { list: 'bullet' }]
+                ]
+              }"
+              placeholder="Add your answer here..."
+              theme="snow"
+            ></quill-editor>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" (click)="submitAnswer()">Add answer</button>
+      </mat-card-content>
+    </mat-card>
   </div>
+  
 
   <!-- Loader -->
   <div class="spinner-container" *ngIf="isLoading">

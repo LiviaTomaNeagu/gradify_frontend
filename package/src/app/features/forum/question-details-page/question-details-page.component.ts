@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { getTopicName, topicColors } from 'src/app/shared/enums/topic.enum';
 import { ForumCardComponent } from "../forum-page/components/forum-card/forum-card.component";
 import { getMatAutocompleteMissingPanelError } from '@angular/material/autocomplete';
+import { QuillModule } from 'ngx-quill';
 
 @Component({
   selector: 'app-question-details-page',
   standalone: true,
-  imports: [CommonModule, MaterialModule, FormsModule, ForumCardComponent],
+  imports: [CommonModule, MaterialModule, FormsModule, ForumCardComponent, QuillModule],
   providers: [DatePipe],
   templateUrl: './question-details-page.component.html',
   styleUrls: ['./question-details-page.component.scss'],
