@@ -173,7 +173,4 @@ export class AddQuestionModalComponent {
     }, 0);
   }
   
-
-
-
 }

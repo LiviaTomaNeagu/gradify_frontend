@@ -12,12 +12,13 @@ import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { ToastrService } from 'ngx-toastr';
 import { AddQuestionRequestDTO } from '../core/interfaces/add-question.interfaces';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum-list-page.component.html',
   standalone: true,
-  imports: [MaterialModule, CommonModule, ForumCardComponent],
+  imports: [MaterialModule, CommonModule, ForumCardComponent, MatChipsModule],
   styleUrls: ['./forum-list-page.component.scss'],
 })
 
