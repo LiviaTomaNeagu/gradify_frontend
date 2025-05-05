@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 export class AppKanbanDialogComponent {
   action: string;
   local_data: any;
+  
 
   constructor(
     public dialogRef: MatDialogRef<AppKanbanDialogComponent>,

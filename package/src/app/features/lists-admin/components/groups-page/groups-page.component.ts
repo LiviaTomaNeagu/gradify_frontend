@@ -17,17 +17,25 @@ import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confir
 export class GroupsPageComponent implements OnInit {
   groups: GroupDTO[] = [];
   newGroupName: string = '';
+  isLoading: boolean = false;
 
   constructor(private groupsService: GroupsService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.loadGroups();
   }
 
   loadGroups(): void {
     this.groupsService.getAllGroups().subscribe({
-      next: (data) => (this.groups = data),
-      error: (err) => console.error('Failed to load groups', err)
+      next: (data) => {
+        (this.groups = data)
+        this.isLoading = false;
+      },
+      error: (err) =>{
+        console.error('Failed to load groups', err);
+        this.isLoading = false;
+      }
     });
   }
 

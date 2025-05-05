@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   Inject,
   signal,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { CommonModule, DOCUMENT, NgSwitch } from '@angular/common';
 import {
@@ -70,6 +72,7 @@ import { CalendarService } from '../core/calendar.service';
 export class CalendarDialogComponent {
   options!: UntypedFormGroup;
 
+
   constructor(
     public dialogRef: MatDialogRef<CalendarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -122,6 +125,7 @@ export class AppFullcalendarComponent {
   readonly RoleTypeEnum = RoleTypeEnum;
   events = signal<CalendarEventDTO[]>([]);
   actions: CalendarEventAction[] = [];
+  @Output() loadingComplete = new EventEmitter<void>();
 
   config: MatDialogConfig = {
     disableClose: false,
@@ -156,12 +160,14 @@ export class AppFullcalendarComponent {
   }
 
   loadEvents(): void {
+    
     this.calendarService.getEvents().subscribe((events) => {
       const formatted = events.map((e) => ({
         ...e,
         actions: this.currentUser?.role === RoleTypeEnum.COORDINATOR ? this.actions : [],
       }));
       this.events.set(formatted);
+      this.loadingComplete.emit();
     });
   }
 

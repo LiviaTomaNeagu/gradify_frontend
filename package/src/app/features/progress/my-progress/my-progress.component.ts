@@ -27,11 +27,21 @@ import { AppKanbanComponent } from "../../kanban/kanban.component";
 })
 export class MyProgressComponent {
   viewDate: Date = new Date();
+  isLoading = true;
 
   selectedStep = 0;
 
 
   constructor(private progressService: ProgressService, private toastr: ToastrService) {} 
+
+  loadedChildren = 0;
+
+  onChildLoaded() {
+    this.loadedChildren++;
+    if (this.loadedChildren === 2) {
+      this.isLoading = false;
+    }
+  }
 
   
 }

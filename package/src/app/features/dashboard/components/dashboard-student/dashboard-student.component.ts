@@ -32,12 +32,14 @@ export class DashboardStudentComponent implements OnInit {
   topMentors: ShortUserDto[] = [];
   favoriteTopics: Topic[] = [];
   thesisSteps: string[] = [];
+  isLoading:boolean = true;
 
   displayedColumns: string[] = ['profile', 'email'];
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.studentService.getStudentDashboard().subscribe((data: GetStudentDashboardDTO) => {
       this.totalQuestionsAsked = data.totalQuestionsAsked;
       this.totalMentorsAnswered = data.totalMentorsAnswered;
@@ -46,9 +48,7 @@ export class DashboardStudentComponent implements OnInit {
       this.topMentors = data.mentorInfo;
       this.favoriteTopics = data.favoriteTopics;
       this.thesisSteps = data.thesisSteps;
-
-      
-    console.log(data.mentorInfo);
+      this.isLoading = false;
     });
 
   }

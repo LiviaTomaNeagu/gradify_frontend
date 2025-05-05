@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   CdkDragDrop,
   DragDropModule,
@@ -40,6 +40,9 @@ export class AppKanbanComponent {
   onhold: Todos[] = [];
   isLoading = false;
 
+  @Output() loadingComplete = new EventEmitter<void>();
+
+
   constructor(
     public dialog: MatDialog,
     public taskService: KanbanService,
@@ -47,6 +50,7 @@ export class AppKanbanComponent {
     private toastr: ToastrService
   ) {
     this.loadTasks();
+    
   }
 
   loadTasks(): void {
@@ -82,9 +86,12 @@ export class AppKanbanComponent {
       },
       error: () => {
         this.toastr.error('Failed to load progress', 'Oops!');
+        this.loadingComplete.emit();
+
       },
       complete: () => {
         this.isLoading = false;
+        this.loadingComplete.emit();
       }
     });
   }
