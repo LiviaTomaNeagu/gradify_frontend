@@ -39,7 +39,6 @@ export class AppChatComponent implements AfterViewInit {
 
   constructor() { 
     this.isLoading = true;
-    this.loadExtraUsersIfNeeded();
     this.currentUser = this.currentUserService.getCurrentUserInfo();
    }
 
@@ -60,23 +59,31 @@ export class AppChatComponent implements AfterViewInit {
       : this.messages();
   });
 
-  ngOnInit() {
+  async ngOnInit() {
     this.selectedMessage.set(this.chatService.selectedMessage());
-
+  
     if (this.isOver()) {
       this.sidePanelOpened = false;
     }
+  
+    this.isLoading = true;
+  
+    // Așteaptă mesajele din backend
+    await this.chatService.loadMessages();
+  
+    // Acum că sunt mesajele disponibile, poți adăuga și utilizatorii fără conversații
     this.loadExtraUsersIfNeeded();
+  
+    const allMessages = this.chatService.messages();
+    if (allMessages.length > 0) {
+      const first = allMessages[0];
+      this.selectMessage(first);
+    }
+  
     this.scrollToBottom();
-
-    setTimeout(() => {
-      const allMessages = this.chatService.messages();
-      if (allMessages.length > 0) {
-        const first = allMessages[0];
-        this.selectMessage(first);
-      }
-    }, 100);
+    this.isLoading = false;
   }
+  
 
   ngAfterViewInit() {
     this.scrollToBottom();

@@ -37,7 +37,6 @@ export class ChatService {
 
   private startConnection(): void {
     const currentUser = this.currentUserService.getCurrentUserInfo();
-    this.loadMessagesFromDatabase();
 
     if(currentUser === null) return;
 
@@ -141,21 +140,23 @@ export class ChatService {
   }
   
 
-  private loadMessagesFromDatabase(): void {
+  public async loadMessages(): Promise<void> {
     const currentUser = this.currentUserService.getCurrentUserInfo();
     if (!currentUser) return;
   
-    this.http.get<GetUserConversationsResponse>(`${this.baseUrl}/get-messages`)
-      .subscribe({
-        next: (response) => {
-          const messages = mapToMessages(response);
-          this.messagesSignal.set(messages);
-        },
-        error: (err) => {
-          console.error('Eroare la încărcarea mesajelor din DB:', err);
-        }
-      });
+    try {
+      const response = await this.http
+        .get<GetUserConversationsResponse>(`${this.baseUrl}/get-messages`)
+        .pipe(first())
+        .toPromise();
+  
+      const messages = mapToMessages(response!);
+      this.messagesSignal.set(messages);
+    } catch (err) {
+      console.error('Eroare la încărcarea mesajelor din DB:', err);
+    }
   }
+  
 
   getDefaultAvatar(name: string): string {
     const avatars = [
