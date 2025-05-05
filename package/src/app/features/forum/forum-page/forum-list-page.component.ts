@@ -125,13 +125,13 @@ export class ForumPageComponent implements OnInit {
           descriptionHtml: result.questionDescription,
           topic: result.topic.key
         };
-
-        console.log('Payload in forum ts:', payload);
     
         this.forumService.addQuestion(payload, result.attachedFiles).subscribe({
           next: () => this.toastr.success('Question posted successfully!'),
           error: () => this.toastr.error('Failed to post question.')
         });
+
+        this.loadQuestions(); // Reload questions after adding a new one
       }
     });
     
