@@ -50,14 +50,17 @@ export class AppNotesComponent implements OnInit {
     const notes = this.noteService.getNotes();
     this.notes.set(notes);
   
-    const currentNote = notes[0];
-    if (currentNote) {
-      this.selectedNote.set(currentNote);
-      this.clrName.set(currentNote.color);
-      this.selectedColor.set(currentNote.color);
-      this.currentNoteTitle.set(currentNote.title);
+    if (!this.selectedNote()) {
+      const currentNote = notes[0];
+      if (currentNote) {
+        this.selectedNote.set(currentNote);
+        this.clrName.set(currentNote.color);
+        this.selectedColor.set(currentNote.color);
+        this.currentNoteTitle.set(currentNote.title);
+      }
     }
   }, { allowSignalWrites: true });
+  
   
   ngOnInit(): void {
     this.noteService.fetchNotes();

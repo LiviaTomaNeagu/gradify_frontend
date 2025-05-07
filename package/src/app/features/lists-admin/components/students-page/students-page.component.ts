@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
 
 export class StudentsPageComponent implements OnInit {
   students: MatTableDataSource<GetUserResponseDTO>;
-  displayedColumns: string[] = ['name', 'surname', 'email', 'joinedDate'];
+  displayedColumns: string[] = ['name', 'surname', 'email', 'group','joinedDate'];
   pageSize: number = 7;
   currentPage: number = 0;
   totalStudents: number = 0;
@@ -60,6 +60,7 @@ export class StudentsPageComponent implements OnInit {
     };
   
     this.listsService.getUsersByRole(payload).subscribe((response) => {
+      console.log(response.users);
       this.students = new MatTableDataSource(response.users); 
       this.totalStudents = response.totalUsers;
       this.filteredStudents = response.filteredUsers;

@@ -45,6 +45,11 @@
               <td mat-cell *matCellDef="let student"> <span class="f-s-14 text-muted">{{ student.email }}</span> </td>
             </ng-container>
 
+            <ng-container matColumnDef="group">
+              <th mat-header-cell *matHeaderCellDef class="table-header"> Group </th>
+              <td mat-cell *matCellDef="let student"> <span class="f-s-14 text-muted">{{ student.studentDetails?.group?.name }}</span> </td>
+            </ng-container>
+
             <ng-container matColumnDef="joinedDate">
               <th mat-header-cell *matHeaderCellDef class="table-header"> Joined Date </th>
               <td mat-cell *matCellDef="let student"> <span class="f-s-14 text-muted">{{ formatDate(student.createdAt) }}</span> </td>
