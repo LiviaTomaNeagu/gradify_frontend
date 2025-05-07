@@ -82,17 +82,25 @@
   display: block;
 }
 
+
 .file-entry {
   display: flex;
   align-items: center;
   gap: 6px;
   margin: 4px 0;
+  text-decoration: none;
+  color: #1976d2;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   .file-icon {
     font-size: 20px;
     color: #1976d2;
   }
 }
+
 
 
 .preview-image {
@@ -106,4 +114,10 @@
     transform: scale(1.03);
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
   }
+}
+
+.file-list {
+  list-style: none;     // 🔸 elimină bullet points
+  padding-left: 0;      // 🔸 opțional: elimină indentarea implicită
+  margin: 0;            // 🔸 opțional: resetează spațiul
 }

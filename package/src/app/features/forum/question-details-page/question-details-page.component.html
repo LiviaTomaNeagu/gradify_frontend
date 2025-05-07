@@ -1,11 +1,11 @@
 <div class="container">
   <app-breadcrumbs></app-breadcrumbs>
-  
+
     <app-forum-card *ngIf="questionAsResponse" [question]="questionAsResponse" [showReadMore]="false"></app-forum-card>
 
   <!-- Secțiunea de răspunsuri -->
   <div class="answers-container">
-    <h3 class="section-title">Răspunsuri</h3>
+    <h3 class="section-title" *ngIf="!isLoading && questionDetails?.answers?.length">Answers</h3>
 
     <!-- Lista răspunsurilor -->
     <mat-card class="answer-card" *ngFor="let answer of questionDetails?.answers">

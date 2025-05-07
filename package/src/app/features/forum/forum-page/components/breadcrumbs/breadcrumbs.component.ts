@@ -22,6 +22,10 @@ export class BreadcrumbsComponent {
     });
   }
 
+  ngOnInit(): void {
+    this.breadcrumbs = this.buildBreadcrumbs(this.route.root);
+  }
+
   private buildBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: any[] = []): any[] {
     const children: ActivatedRoute[] = route.children;
   
