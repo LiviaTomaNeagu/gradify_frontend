@@ -1,0 +1,38 @@
+<div class="wizard-container" *ngIf="!selectedQuestion">
+    <h2>Select a topic to help phrase your question</h2>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select Topic</mat-label>
+      <mat-select [(ngModel)]="selectedTopicKey" (ngModelChange)="onTopicSelected($event)">
+        <mat-option *ngFor="let topic of topicOptions" [value]="topic.key">
+          {{ topic.label }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    
+
+  
+    <div class="breadcrumbs" *ngIf="path.length > 0">
+      <span *ngFor="let step of path; let last = last">
+        {{ step }} <span *ngIf="!last"> / </span>
+      </span>
+    </div>
+  
+    <div class="option-list">
+      <button mat-stroked-button *ngFor="let level of levels" (click)="selectOption(level)">
+        {{ level }}
+      </button>
+    </div>
+  
+    <button mat-button color="warn" (click)="goBack()" *ngIf="path.length > 0">
+      ← Back
+    </button>
+  </div>
+  
+  <div class="final-question" *ngIf="selectedQuestion">
+    <h3>Suggested question:</h3>
+    <p>{{ selectedQuestion }}</p>
+    <button mat-stroked-button color="primary" (click)="reset()">Start Over</button>
+  </div>
+  

@@ -1,4 +1,25 @@
+
+
 <h2 mat-dialog-title>Add a New Question</h2>
+
+<button mat-icon-button class="close-button" (click)="onCancel()" aria-label="Close dialog">
+  <mat-icon>close</mat-icon>
+</button>
+
+<div *ngIf="showWizard === null" class="question-type-selector">
+  <h2 mat-dialog-title>How can we help?</h2>
+
+  <div class="button-group">
+    <button mat-flat-button color="primary" (click)="chooseWizard(false)">I want to ask a specific question</button>
+    <button  mat-flat-button color="warn" (click)="chooseWizard(true)">I need help structuring my question</button>
+  </div>
+</div>
+
+<div class="wizad" *ngIf="showWizard === true">
+  <app-question-wizard  (questionGenerated)="handleGeneratedQuestion($event)"></app-question-wizard>
+  </div>
+
+<div class="specific-question" *ngIf="showWizard === false">
 
 <mat-dialog-content class="mat-typography">
   <mat-horizontal-stepper #stepper [linear]="true">
@@ -143,6 +164,4 @@
   </mat-horizontal-stepper>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <button mat-button class="cancel-button" (click)="onCancel()">Cancel</button>
-</mat-dialog-actions>
+</div>

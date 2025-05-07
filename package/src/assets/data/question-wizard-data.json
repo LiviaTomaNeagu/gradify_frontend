@@ -1,0 +1,1682 @@
+{
+  "AI": {
+    "Introduction": {
+      "Basics": {
+        "Definition": "What is Artificial Intelligence?",
+        "Types": {
+          "Narrow AI": "What is Narrow AI and where is it used?",
+          "General AI": "How is General AI different from Narrow AI?",
+          "Super AI": "What does Super AI refer to?"
+        }
+      },
+      "History": {
+        "Timeline": {
+          "1950s": "When did AI research begin?",
+          "Modern Era": "What are the recent milestones in AI development?"
+        },
+        "Pioneers": {
+          "Alan Turing": "How did Alan Turing contribute to AI?",
+          "John McCarthy": "Why is John McCarthy called the father of AI?"
+        }
+      }
+    },
+    "Techniques": {
+      "Machine Learning": {
+        "Supervised Learning": {
+          "Definition": "What is supervised learning in AI?",
+          "Examples": "What are common use cases for supervised learning?"
+        },
+        "Unsupervised Learning": {
+          "Definition": "What is unsupervised learning?",
+          "Clustering": "How does clustering work in machine learning?"
+        }
+      },
+      "Neural Networks": {
+        "Structure": {
+          "Neurons": "What are artificial neurons?",
+          "Layers": "What is the role of input, hidden, and output layers?"
+        },
+        "Training": {
+          "Backpropagation": "How does backpropagation train a neural network?",
+          "Activation Functions": "What are common activation functions in deep learning?"
+        }
+      }
+    },
+    "Applications": {
+      "Healthcare": {
+        "Diagnostics": "How is AI used in medical diagnostics?",
+        "Personalized Medicine": "What role does AI play in tailoring treatments?"
+      },
+      "Finance": {
+        "Fraud Detection": "How is AI applied in fraud detection?",
+        "Algorithmic Trading": "What is algorithmic trading in AI-driven finance?"
+      },
+      "Transportation": {
+        "Self-driving Cars": {
+          "Sensors": "What types of sensors are used in autonomous vehicles?",
+          "Decision Making": "How does AI make decisions while driving?"
+        }
+      }
+    }
+  },
+  "Angular": {
+    "Getting Started": {
+      "Installation": {
+        "CLI": {
+          "Install CLI": "How do I install Angular CLI?",
+          "Version Check": "How can I check my Angular CLI version?"
+        },
+        "Create Project": {
+          "New App": "How do I create a new Angular project using CLI?",
+          "Project Structure": "What is the default structure of an Angular project?"
+        }
+      },
+      "First Component": {
+        "Generate": {
+          "Using CLI": "How do I generate a new component with the CLI?",
+          "Manual": "Can I create a component manually?"
+        },
+        "Bind Data": {
+          "Interpolation": "How does interpolation work in Angular templates?",
+          "Property Binding": "How do I bind properties to HTML elements in Angular?"
+        }
+      }
+    },
+    "Templates and Views": {
+      "Directives": {
+        "Structural": {
+          "*ngIf": {
+            "Usage": "How do I conditionally display elements using *ngIf?",
+            "With Else": "How do I use *ngIf with else blocks?"
+          },
+          "*ngFor": {
+            "Loop Arrays": "How can I loop through arrays using *ngFor?",
+            "TrackBy": "What is trackBy and when should I use it with *ngFor?"
+          }
+        },
+        "Attribute": {
+          "[ngClass]": {
+            "Toggle Classes": "How do I toggle CSS classes dynamically with [ngClass]?",
+            "Multiple Classes": "Can I apply multiple classes using [ngClass]?"
+          }
+        }
+      },
+      "Pipes": {
+        "Built-in": {
+          "date": "How do I format dates using the date pipe?",
+          "currency": "How to format currency values in Angular templates?"
+        },
+        "Custom Pipes": {
+          "Creation": "How do I create a custom pipe?",
+          "Use Cases": "When should I use a custom pipe?"
+        }
+      }
+    },
+    "Component Communication": {
+      "Input/Output": {
+        "@Input": {
+          "Pass Data": "How do I pass data from parent to child component using @Input?"
+        },
+        "@Output": {
+          "Emit Event": "How do I emit events from child to parent using @Output?"
+        }
+      },
+      "Services": {
+        "Injection": {
+          "In Component": "How do I inject a service into a component?",
+          "In Module": "Where should I provide a service, component or module?"
+        },
+        "Sharing Data": {
+          "Between Components": "How do I share data between unrelated components?"
+        }
+      }
+    }
+  },
+  "BigData": {
+    "Introduction": {
+      "Fundamentals": {
+        "What is Big Data?": "What defines Big Data and what are its characteristics?",
+        "5Vs": {
+          "Volume": "Why is volume important in Big Data?",
+          "Velocity": "What does velocity mean in Big Data?",
+          "Variety": "What types of data contribute to variety?",
+          "Veracity": "How do we ensure data veracity?",
+          "Value": "How is value extracted from Big Data?"
+        }
+      },
+      "Architecture": {
+        "Batch Processing": "What is batch processing in Big Data systems?",
+        "Stream Processing": "How does stream processing differ from batch?",
+        "Lambda Architecture": "What is the Lambda architecture and when is it used?"
+      }
+    },
+    "Technologies": {
+      "Storage Systems": {
+        "HDFS": {
+          "Overview": "What is Hadoop Distributed File System (HDFS)?",
+          "Replication": "How does replication work in HDFS?"
+        },
+        "NoSQL": {
+          "MongoDB": "How is MongoDB used in Big Data?",
+          "Cassandra": "What are the strengths of Apache Cassandra?"
+        }
+      },
+      "Processing Frameworks": {
+        "Hadoop MapReduce": {
+          "Basics": "What is MapReduce and how does it work?",
+          "Use Cases": "When should MapReduce be used?"
+        },
+        "Apache Spark": {
+          "RDDs": "What are Resilient Distributed Datasets (RDDs)?",
+          "DataFrames": "How do DataFrames simplify data processing in Spark?"
+        }
+      }
+    },
+    "Use Cases": {
+      "Retail": {
+        "Customer Analytics": "How is Big Data used to understand customer behavior?",
+        "Recommendation Engines": "How does Big Data power product recommendations?"
+      },
+      "Healthcare": {
+        "Predictive Analytics": "How is Big Data used for predicting disease outbreaks?",
+        "Patient Records": "How are large-scale patient records managed?"
+      },
+      "IoT": {
+        "Sensor Data": "How is IoT sensor data handled in Big Data pipelines?",
+        "Real-Time Insights": "How does Big Data support real-time decision making in IoT?"
+      }
+    }
+  },
+  "Blockchain": {
+    "Introduction": {
+      "Concepts": {
+        "What is Blockchain?": "What is a blockchain and how does it work?",
+        "Distributed Ledger": "What is a distributed ledger in the context of blockchain?",
+        "Consensus Mechanisms": {
+          "Proof of Work": "How does Proof of Work secure a blockchain?",
+          "Proof of Stake": "What is Proof of Stake and how is it different from PoW?"
+        }
+      },
+      "History": {
+        "Bitcoin": "How did Bitcoin introduce blockchain technology?",
+        "Ethereum": "What innovations did Ethereum bring to blockchain?"
+      }
+    },
+    "Technology": {
+      "Structure": {
+        "Blocks": "What is stored in a blockchain block?",
+        "Hashing": "How is cryptographic hashing used in blockchains?",
+        "Chaining": "How are blocks linked together in a blockchain?"
+      },
+      "Smart Contracts": {
+        "Definition": "What are smart contracts?",
+        "Execution": "How are smart contracts executed on a blockchain?",
+        "Security": "What are the common vulnerabilities in smart contracts?"
+      }
+    },
+    "Platforms": {
+      "Public Blockchains": {
+        "Ethereum": "What features make Ethereum the leading smart contract platform?",
+        "Solana": "How does Solana achieve high throughput?"
+      },
+      "Private Blockchains": {
+        "Hyperledger Fabric": "What is Hyperledger Fabric and how is it used in enterprises?",
+        "Corda": "How does R3 Corda differ from traditional blockchains?"
+      }
+    },
+    "Applications": {
+      "Finance": {
+        "Cryptocurrencies": "What are cryptocurrencies and how are they traded?",
+        "DeFi": "What is decentralized finance (DeFi)?"
+      },
+      "Supply Chain": {
+        "Tracking": "How does blockchain improve supply chain transparency?",
+        "Provenance": "What is provenance and how does blockchain help with it?"
+      },
+      "Identity Management": {
+        "Decentralized ID": "How can blockchain be used for identity verification?",
+        "Privacy": "How does blockchain support privacy-preserving identity systems?"
+      }
+    }
+  },
+  "C": {
+    "Introduction": {
+      "Basics": {
+        "What is C?": "What is the C programming language and why is it important?",
+        "History": "When was C developed and by whom?",
+        "Compiling": {
+          "GCC": "How do I compile a C program using GCC?",
+          "Errors": "How can I interpret and fix common compile-time errors?"
+        }
+      },
+      "Hello World": {
+        "Code Example": "How do I write and run a 'Hello World' program in C?",
+        "Explanation": "What does each line of the Hello World program mean?"
+      }
+    },
+    "Syntax": {
+      "Data Types": {
+        "Primitive Types": "What are the basic data types in C?",
+        "Type Modifiers": "What are type modifiers like 'short', 'long', 'unsigned'?"
+      },
+      "Control Flow": {
+        "if-else": "How do I write conditional statements in C?",
+        "Switch": "When should I use switch over if-else?",
+        "Loops": {
+          "for": "How does a for loop work in C?",
+          "while": "What is the syntax and use case for a while loop?"
+        }
+      }
+    },
+    "Functions and Scope": {
+      "Functions": {
+        "Declaration": "How do I declare and define functions in C?",
+        "Parameters": "How are parameters passed in C functions?",
+        "Recursion": "What is recursion and how is it used in C?"
+      },
+      "Scope": {
+        "Global vs Local": "What is the difference between global and local variables?",
+        "Static": "What is the purpose of the 'static' keyword in C?"
+      }
+    },
+    "Memory Management": {
+      "Pointers": {
+        "Basics": "What are pointers and how do they work?",
+        "Pointer Arithmetic": "How do you perform arithmetic on pointers in C?"
+      },
+      "Dynamic Allocation": {
+        "malloc & free": "How do you use malloc and free in C?",
+        "Memory Leaks": "What are memory leaks and how can you avoid them?"
+      },
+      "Arrays and Strings": {
+        "Arrays": "How do you declare and access arrays in C?",
+        "Strings": "How are strings represented and manipulated in C?"
+      }
+    }
+  },
+  "Cpp": {
+    "Introduction": {
+      "Overview": {
+        "What is C++?": "What is the C++ programming language and how does it extend C?",
+        "History": "Who created C++ and how has it evolved over time?"
+      },
+      "Compilation": {
+        "G++ Compiler": "How do I compile a C++ program using g++?",
+        "Linking": "What are object files and how does linking work in C++?"
+      }
+    },
+    "Object-Oriented Programming": {
+      "Classes and Objects": {
+        "Definition": "How do you define and instantiate a class in C++?",
+        "Constructors": "What are constructors and how are they used?",
+        "Destructors": "What is the purpose of destructors in C++?"
+      },
+      "Inheritance": {
+        "Single Inheritance": "How does single inheritance work in C++?",
+        "Multiple Inheritance": "How is multiple inheritance handled in C++?"
+      },
+      "Polymorphism": {
+        "Virtual Functions": "What are virtual functions and how do they enable polymorphism?",
+        "Abstract Classes": "What are abstract classes and how are they declared?"
+      }
+    },
+    "STL (Standard Template Library)": {
+      "Containers": {
+        "Vector": "How do you use std::vector in C++?",
+        "Map": "What is std::map and when should it be used?",
+        "Set": "How does std::set store and manage unique values?"
+      },
+      "Algorithms": {
+        "Sorting": "How do you sort a container using std::sort?",
+        "Searching": "What search algorithms are available in STL?"
+      },
+      "Iterators": {
+        "Basics": "What are iterators in C++ and how are they used?",
+        "Types": "What are the different types of iterators in STL?"
+      }
+    },
+    "Memory and Pointers": {
+      "Smart Pointers": {
+        "Unique Pointer": "What is a unique_ptr and when should it be used?",
+        "Shared Pointer": "How does shared_ptr manage shared ownership?"
+      },
+      "Dynamic Allocation": {
+        "new/delete": "How do new and delete work in C++?",
+        "Memory Leaks": "How can you detect and prevent memory leaks?"
+      }
+    }
+  },
+  "CSharp": {
+    "Introduction": {
+      "Overview": {
+        "What is C#?": "What is the C# programming language and what are its main features?",
+        "History": "When was C# developed and by whom?",
+        "Applications": "What types of applications can be built with C#?"
+      },
+      "Development Environment": {
+        "Visual Studio": "How do I set up a C# project in Visual Studio?",
+        "dotnet CLI": "How do I use the .NET CLI to create and run C# projects?"
+      }
+    },
+    "Language Basics": {
+      "Data Types": {
+        "Primitive Types": "What are the basic data types in C#?",
+        "Nullable Types": "What are nullable types and when are they used?"
+      },
+      "Control Structures": {
+        "Conditionals": "How do if-else and switch statements work in C#?",
+        "Loops": {
+          "for": "How is a for loop written in C#?",
+          "foreach": "What is the purpose of the foreach loop?"
+        }
+      },
+      "Methods": {
+        "Declaration": "How do you declare and call methods in C#?",
+        "Parameters": "What is the difference between ref and out parameters?"
+      }
+    },
+    "Object-Oriented Programming": {
+      "Classes and Objects": {
+        "Constructor": "How do you create constructors in C#?",
+        "Encapsulation": "How does C# support encapsulation?",
+        "Access Modifiers": "What are public, private, protected, and internal?"
+      },
+      "Inheritance and Polymorphism": {
+        "Base and Derived": "How does class inheritance work in C#?",
+        "Virtual and Override": "What are virtual and override keywords used for?",
+        "Interfaces": "How do interfaces differ from abstract classes?"
+      }
+    },
+    "Advanced Concepts": {
+      "LINQ": {
+        "Queries": "How do you perform basic LINQ queries in C#?",
+        "Filtering": "How do you use Where and Select in LINQ?"
+      },
+      "Asynchronous Programming": {
+        "async/await": "How do async and await work in C#?",
+        "Tasks": "What is the role of Task and Task<T>?"
+      },
+      "Memory Management": {
+        "Garbage Collection": "How does garbage collection work in C#?",
+        "IDisposable": "What is IDisposable and how is it used?"
+      }
+    }
+  },
+  "Cybersecurity": {
+    "Introduction": {
+      "Overview": {
+        "What is Cybersecurity?": "What does cybersecurity involve and why is it important?",
+        "Types of Threats": {
+          "Malware": "What is malware and how does it affect systems?",
+          "Phishing": "How does phishing work and how can it be prevented?",
+          "Ransomware": "What is ransomware and how do attacks typically unfold?"
+        }
+      },
+      "CIA Triad": {
+        "Confidentiality": "What does confidentiality mean in cybersecurity?",
+        "Integrity": "How is data integrity ensured?",
+        "Availability": "What are strategies to maintain availability of services?"
+      }
+    },
+    "Network Security": {
+      "Firewalls": {
+        "Function": "What is a firewall and how does it protect a network?",
+        "Types": "What are the different types of firewalls?"
+      },
+      "VPNs": {
+        "Purpose": "How does a VPN enhance security?",
+        "Use Cases": "When should a VPN be used in a corporate environment?"
+      },
+      "Intrusion Detection": {
+        "IDS vs IPS": "What is the difference between IDS and IPS?",
+        "Tools": "What tools are used for intrusion detection?"
+      }
+    },
+    "Application Security": {
+      "Secure Coding": {
+        "Input Validation": "Why is input validation critical in secure coding?",
+        "Authentication": "How do you implement secure user authentication?"
+      },
+      "Web Security": {
+        "XSS": "What is Cross-Site Scripting and how can it be prevented?",
+        "CSRF": "What is a CSRF attack and how do you protect against it?"
+      }
+    },
+    "Operational Security": {
+      "Risk Management": {
+        "Assessment": "How do you assess risk in cybersecurity?",
+        "Mitigation": "What are common strategies to mitigate risks?"
+      },
+      "Incident Response": {
+        "Preparation": "What should be included in an incident response plan?",
+        "Containment": "How do you contain a security breach quickly?"
+      },
+      "Security Policies": {
+        "Access Control": "What is the principle of least privilege?",
+        "Password Policies": "What are best practices for password security?"
+      }
+    }
+  },
+  "DataScience": {
+    "Introduction": {
+      "What is Data Science?": "What is data science and why is it important?",
+      "Data Science Process": {
+        "Data Collection": "How do you collect data for analysis?",
+        "Data Cleaning": "What are common data cleaning techniques?",
+        "Exploratory Data Analysis": "How do you perform exploratory data analysis?"
+      }
+    },
+    "Tools and Technologies": {
+      "Programming Languages": {
+        "Python": {
+          "Libraries": {
+            "Pandas": "How do I use Pandas for data manipulation?",
+            "NumPy": "What is NumPy and how does it help with numerical computations?"
+          }
+        },
+        "R": {
+          "Packages": {
+            "ggplot2": "How do I create visualizations using ggplot2?",
+            "dplyr": "What are the main functions in dplyr for data manipulation?"
+          }
+        }
+      },
+      "Databases": {
+        "SQL": {
+          "Queries": {
+            "SELECT": "How do I write a SELECT query in SQL?",
+            "JOINs": "What are different types of JOINs in SQL?"
+          }
+        },
+        "NoSQL": {
+          "MongoDB": {
+            "CRUD Operations": "How do I perform CRUD operations in MongoDB?"
+          }
+        }
+      }
+    },
+    "Machine Learning": {
+      "Supervised Learning": {
+        "Regression": {
+          "Linear Regression": "How does linear regression work?",
+          "Evaluation Metrics": {
+            "MSE": "What is Mean Squared Error and how is it calculated?",
+            "R2 Score": "What does R2 score indicate about a model?"
+          }
+        },
+        "Classification": {
+          "Logistic Regression": {
+            "Binary Classification": "How does logistic regression work for binary classification?"
+          },
+          "Decision Trees": {
+            "Gini Index": "What is Gini Index and how is it used in decision trees?"
+          }
+        }
+      }
+    }
+  },
+  "DevOps": {
+    "Introduction": {
+      "What is DevOps?": "What does DevOps mean and why is it important?",
+      "History": "How did DevOps evolve from traditional software development?"
+    },
+    "Tools and Technologies": {
+      "Version Control": {
+        "Git": {
+          "Basics": "How do I initialize a Git repository?",
+          "Branching": "How do I create and switch branches in Git?"
+        }
+      },
+      "CI/CD": {
+        "Jenkins": {
+          "Setup": "How do I set up a Jenkins pipeline?",
+          "Plugins": "What are essential plugins for Jenkins?"
+        }
+      }
+    },
+    "Cloud Computing": {
+      "AWS": {
+        "EC2": {
+          "Launch Instance": "How do I launch an EC2 instance?",
+          "Security Groups": "What are security groups in AWS?"
+        },
+        "S3": {
+          "Create Bucket": "How do I create an S3 bucket?",
+          "Upload Files": "How do I upload files to S3?"
+        }
+      },
+      "Azure": {
+        "Virtual Machines": {
+          "Create VM": "How do I create a virtual machine in Azure?",
+          "Networking": "What networking options are available in Azure?"
+        }
+      }
+    }
+  },
+  "DotNet": {
+    "Introduction": {
+      "Overview": {
+        "What is .NET?": "What is the .NET Framework and what problems does it solve?",
+        "CLR": "What is the Common Language Runtime (CLR)?",
+        "Languages": {
+          "C#": "Why is C# the most common language used with .NET?",
+          "VB.NET": "What is VB.NET and where is it still used?"
+        }
+      },
+      "Project Types": {
+        "Console App": "How do you create a console application in .NET?",
+        "Web App": "What is ASP.NET and how do you create a web project?",
+        "Class Library": "What is a class library and how is it used in .NET?"
+      }
+    },
+    "ASP.NET Core": {
+      "MVC Pattern": {
+        "Controllers": "How do you create and use a controller in ASP.NET Core?",
+        "Views": "How are Razor views used to display data?",
+        "Models": "What role do models play in MVC applications?"
+      },
+      "Routing": {
+        "Conventional Routing": "How do you define routes in Startup.cs?",
+        "Attribute Routing": "What is attribute routing and how is it applied?"
+      },
+      "Dependency Injection": {
+        "Services": "How do you register and inject services in ASP.NET Core?",
+        "Lifetimes": "What are the differences between Singleton, Scoped, and Transient?"
+      }
+    },
+    "Entity Framework": {
+      "ORM Basics": {
+        "DbContext": "What is DbContext and how is it used?",
+        "Migrations": "How do you add and apply migrations in EF Core?"
+      },
+      "LINQ Queries": {
+        "Filtering": "How do you filter data using LINQ in EF?",
+        "Projections": "What is a projection in LINQ and how is Select used?"
+      },
+      "Relationships": {
+        "One-to-Many": "How do you model a one-to-many relationship in EF?",
+        "Many-to-Many": "What is the correct way to model many-to-many in EF Core?"
+      }
+    },
+    "API Development": {
+      "RESTful Services": {
+        "Controllers": "How do you create an API controller in ASP.NET Core?",
+        "Routing & Verbs": "How are HTTP methods mapped to controller actions?"
+      },
+      "Model Binding": {
+        "FromBody & FromQuery": "What is the difference between [FromBody] and [FromQuery]?",
+        "Validation": "How do you validate request models in ASP.NET Core?"
+      },
+      "Serialization": {
+        "JSON": "How does .NET Core handle JSON serialization and deserialization?",
+        "Customization": "How do you customize JSON output in .NET?"
+      }
+    }
+  },
+  "Flutter": {
+    "Introduction": {
+      "Overview": {
+        "What is Flutter?": "What is Flutter and what types of apps can you build with it?",
+        "Dart Language": "What is Dart and why is it used in Flutter?",
+        "Advantages": "What are the advantages of using Flutter for mobile development?"
+      },
+      "Setup": {
+        "Installation": "How do you install Flutter and set up the environment?",
+        "IDE Support": "Which IDEs support Flutter development?",
+        "First App": "How do you create and run your first Flutter app?"
+      }
+    },
+    "UI Basics": {
+      "Widgets": {
+        "StatelessWidget": "What is a StatelessWidget and when should you use it?",
+        "StatefulWidget": "How does a StatefulWidget differ from StatelessWidget?",
+        "Custom Widgets": "How do you create reusable custom widgets in Flutter?"
+      },
+      "Layout": {
+        "Row and Column": "How do Row and Column help structure UI in Flutter?",
+        "Container": "What is the Container widget used for?",
+        "Padding and Margin": "How do you apply spacing in widgets?"
+      },
+      "Navigation": {
+        "Navigator": "How do you navigate between screens using Navigator?",
+        "Named Routes": "What are named routes and how do you configure them?"
+      }
+    },
+    "State Management": {
+      "Basic State": {
+        "setState": "How do you use setState to update UI?",
+        "Lifecycle": "What are the widget lifecycle methods in StatefulWidget?"
+      },
+      "Advanced Approaches": {
+        "Provider": "How does Provider manage state in Flutter apps?",
+        "Riverpod": "What is Riverpod and how is it different from Provider?",
+        "Bloc": "What is the BLoC pattern and when should you use it?"
+      }
+    },
+    "API and Data": {
+      "HTTP Requests": {
+        "http Package": "How do you make HTTP requests using the http package?",
+        "Fetching Data": "How do you fetch and display data from a REST API?"
+      },
+      "JSON Handling": {
+        "Serialization": "How do you convert JSON to Dart objects?",
+        "fromJson / toJson": "How do you implement fromJson and toJson in models?"
+      },
+      "Persistence": {
+        "Shared Preferences": "How do you store data locally using Shared Preferences?",
+        "SQLite": "How do you use SQLite for local database storage in Flutter?"
+      }
+    }
+  },
+  "Go": {
+    "Introduction": {
+      "Overview": {
+        "What is Go?": "What is the Go programming language and what are its core strengths?",
+        "History": "Who developed Go and why was it created?",
+        "Go vs Other Languages": "How does Go compare to C, Python, or Java in terms of performance and use cases?"
+      },
+      "Setup": {
+        "Installation": "How do you install Go and set up your workspace?",
+        "GOPATH & Modules": "What is the difference between GOPATH and Go modules?",
+        "First Program": "How do you write and run a basic Hello World program in Go?"
+      }
+    },
+    "Syntax and Basics": {
+      "Data Types": {
+        "Primitive Types": "What are the basic data types in Go?",
+        "Type Inference": "How does Go infer variable types?",
+        "Constants": "How are constants declared and used in Go?"
+      },
+      "Control Structures": {
+        "if-else": "How does if-else work in Go?",
+        "for Loop": "How do you write loops in Go using for?",
+        "switch": "How is switch used differently in Go compared to other languages?"
+      }
+    },
+    "Functions and Structs": {
+      "Functions": {
+        "Declaration": "How do you define and call functions in Go?",
+        "Multiple Returns": "How do you return multiple values from a function?",
+        "Named Returns": "What are named return values in Go?"
+      },
+      "Structs": {
+        "Definition": "What are structs in Go and how are they used?",
+        "Methods": "How do you define methods on structs?",
+        "Composition": "How does Go implement composition as an alternative to inheritance?"
+      }
+    },
+    "Concurrency": {
+      "Goroutines": {
+        "Basics": "What is a goroutine and how do you start one?",
+        "Communication": "How do goroutines communicate using channels?",
+        "Buffered Channels": "What is the difference between buffered and unbuffered channels?"
+      },
+      "sync Package": {
+        "WaitGroup": "How do you use WaitGroup to wait for multiple goroutines?",
+        "Mutex": "How do you protect shared data using Mutex in Go?"
+      },
+      "Select Statement": {
+        "Usage": "What is the select statement and how does it help manage concurrent operations?"
+      }
+    }
+  },
+  "IoT": {
+    "Introduction": {
+      "Overview": {
+        "What is IoT?": "What is the Internet of Things and how does it work?",
+        "Components": {
+          "Devices": "What types of devices are considered IoT devices?",
+          "Connectivity": "What are the communication protocols used in IoT?",
+          "Data Processing": "How is data collected and processed in an IoT system?"
+        }
+      },
+      "Use Cases": {
+        "Smart Home": "How is IoT applied in smart home technologies?",
+        "Healthcare": "What are examples of IoT in the medical field?",
+        "Industrial IoT": "How is IoT transforming manufacturing and logistics?"
+      }
+    },
+    "Hardware and Sensors": {
+      "Microcontrollers": {
+        "Arduino": "What is Arduino and how is it used in IoT?",
+        "ESP32": "What features make ESP32 popular for IoT projects?"
+      },
+      "Sensors and Actuators": {
+        "Types": "What are common sensors and actuators used in IoT?",
+        "Integration": "How are sensors connected and controlled via microcontrollers?"
+      },
+      "Power Supply": {
+        "Battery Management": "How do you manage power efficiently in IoT devices?",
+        "Low Power Modes": "What techniques are used for energy-saving in IoT systems?"
+      }
+    },
+    "Communication Protocols": {
+      "Wireless": {
+        "WiFi": "How is WiFi used for device connectivity?",
+        "Bluetooth": "When is Bluetooth preferred over WiFi in IoT?",
+        "Zigbee": "What are the advantages of Zigbee in smart networks?"
+      },
+      "IoT-Specific Protocols": {
+        "MQTT": "What is MQTT and why is it used in IoT?",
+        "CoAP": "How does CoAP differ from MQTT and HTTP?"
+      }
+    },
+    "Data and Cloud": {
+      "Data Handling": {
+        "Collection": "How is data gathered from distributed IoT devices?",
+        "Storage": "What databases are suited for IoT data?",
+        "Edge Computing": "What is edge computing and how does it help in IoT?"
+      },
+      "Cloud Platforms": {
+        "AWS IoT": "What services does AWS IoT offer?",
+        "Azure IoT Hub": "How does Azure IoT Hub manage devices and data?",
+        "Google Cloud IoT": "What IoT features are provided by Google Cloud?"
+      },
+      "Security": {
+        "Device Authentication": "How are devices authenticated securely?",
+        "Data Encryption": "How is data secured in transmission and at rest?"
+      }
+    }
+  },
+  "Java": {
+    "Introduction": {
+      "Overview": {
+        "What is Java?": "What is the Java programming language and what are its main features?",
+        "History": "Who developed Java and when was it released?",
+        "Java vs Other Languages": "How does Java compare to C++ or Python?"
+      },
+      "Setup": {
+        "Installation": "How do you install the Java Development Kit (JDK)?",
+        "IDE Support": "Which IDEs are commonly used for Java development?",
+        "First Program": "How do you write and run a basic Hello World program in Java?"
+      }
+    },
+    "Syntax and Basics": {
+      "Data Types": {
+        "Primitive Types": "What are the basic data types in Java?",
+        "Type Inference": "How does type inference work in Java?",
+        "Constants": "How are constants declared and used in Java?"
+      },
+      "Control Structures": {
+        "if-else": "How does if-else work in Java?",
+        "for Loop": "How do you write loops in Java using for?",
+        "switch": "How is switch used in Java?"
+      }
+    },
+    "Object-Oriented Programming": {
+      "Classes and Objects": {
+        "Constructor": "How do you create constructors in Java?",
+        "Encapsulation": "How does Java support encapsulation?",
+        "Access Modifiers": {
+          "public, private, protected, default": [
+            {"public":"What is public access modifier?"},
+            {"private":"What is private access modifier?"},
+            {"protected":"What is protected access modifier?"},
+            {"default":"What is default access modifier?"}
+          ]
+        }
+      },
+      "Inheritance and Polymorphism": {
+        "Base and Derived Classes": [
+          {"Single Inheritance":"How does single inheritance work in Java?"},
+          {"Multiple Inheritance":"Why doesn't Java support multiple inheritance?"}
+        ],
+        "@Override Annotation": [
+          {"Method Overriding":"What is method overriding?"},
+          {"@Override Annotation":"When should @Override be used?"}
+        ],
+        "@FunctionalInterface Annotation":"What is a functional interface?"
+      }
+    }
+  },
+  "JavaScript": {
+    "Introduction": {
+      "Overview": {
+        "What is JavaScript?": "What is JavaScript and where is it used?",
+        "History": "How did JavaScript evolve and who created it?",
+        "Execution": {
+          "Browsers": "How is JavaScript executed in the browser?",
+          "Node.js": "What is Node.js and how does it allow server-side JavaScript?"
+        }
+      },
+      "Variables and Types": {
+        "var, let, const": "What is the difference between var, let, and const?",
+        "Data Types": "What are the basic and complex data types in JavaScript?",
+        "Type Coercion": "How does JavaScript handle implicit type conversions?"
+      }
+    },
+    "Functions and Scope": {
+      "Function Types": {
+        "Function Declarations": "How do function declarations work in JavaScript?",
+        "Arrow Functions": "What are arrow functions and how do they differ?",
+        "Anonymous Functions": "What is an anonymous function in JavaScript?"
+      },
+      "Scope": {
+        "Global vs Local": "What is the difference between global and local scope?",
+        "Closures": "What are closures and how do they retain access to variables?"
+      },
+      "Hoisting": {
+        "Variables": "How are variables hoisted in JavaScript?",
+        "Functions": "How does function hoisting differ from variable hoisting?"
+      }
+    },
+    "Objects and Arrays": {
+      "Objects": {
+        "Definition": "How do you define and use objects in JavaScript?",
+        "this Keyword": "How does the 'this' keyword behave in different contexts?"
+      },
+      "Arrays": {
+        "Creation and Access": "How do you create and access arrays?",
+        "Array Methods": {
+          "map": "How do you use map to transform an array?",
+          "filter": "How does the filter method work?",
+          "reduce": "What does reduce do and when should you use it?"
+        }
+      }
+    },
+    "Asynchronous Programming": {
+      "Callbacks and Promises": {
+        "Callbacks": "What are callbacks and what problems do they introduce?",
+        "Promises": "How do Promises work and what problems do they solve?"
+      },
+      "Async/Await": {
+        "Basics": "How do async and await simplify asynchronous code?",
+        "Error Handling": "How do you handle errors in async/await code?"
+      },
+      "APIs": {
+        "Fetch API": "How do you make HTTP requests using fetch?",
+        "Axios": "What is Axios and how is it used in JavaScript apps?"
+      }
+    }
+  },
+  "Kotlin": {
+    "Introduction": {
+      "Overview": {
+        "What is Kotlin?": "What is Kotlin and why is it used for Android development?",
+        "Kotlin vs Java": "How does Kotlin compare to Java in Android development?",
+        "Setup": {
+          "Android Studio": "How do you set up Kotlin in Android Studio?",
+          "First App": "How do you create your first Kotlin Android app?"
+        }
+      },
+      "Syntax Basics": {
+        "Variables": "What is the difference between val and var in Kotlin?",
+        "Functions": "How do you declare functions in Kotlin?",
+        "String Templates": "What are string templates in Kotlin?"
+      }
+    },
+    "Object-Oriented Features": {
+      "Classes": {
+        "Primary Constructor": "How is a primary constructor defined in Kotlin?",
+        "Properties": "What are class properties and how are they used?"
+      },
+      "Inheritance": {
+        "Open Classes": "Why are classes final by default and how do you allow inheritance?",
+        "Override": "How do you override methods in Kotlin?"
+      },
+      "Data Classes": {
+        "Definition": "What is a data class and when should you use one?",
+        "Copy Method": "What does the copy() method do in a data class?"
+      }
+    },
+    "Android Integration": {
+      "UI Development": {
+        "XML Layouts": "How do you bind Kotlin code to XML layouts?",
+        "View Binding": "What is view binding and how do you enable it?"
+      },
+      "Activity and Lifecycle": {
+        "Activity Lifecycle": "What are the main lifecycle methods in Android?",
+        "Intents": "How do you use intents to navigate between activities?"
+      },
+      "RecyclerView": {
+        "Adapter Pattern": "How do you implement a RecyclerView adapter in Kotlin?",
+        "ViewHolder": "What is the purpose of a ViewHolder?"
+      }
+    },
+    "Coroutines and Async": {
+      "Coroutines": {
+        "Launch and async": "How do you launch coroutines in Kotlin?",
+        "Suspending Functions": "What is a suspending function and how is it used?"
+      },
+      "Error Handling": {
+        "try/catch": "How do you handle errors in coroutines?",
+        "SupervisorJob": "What is a SupervisorJob and why is it used in structured concurrency?"
+      },
+      "Flows": {
+        "Cold Streams": "What are cold streams and how do Flows behave?",
+        "Operators": "How do operators like map, filter, and collect work in Flows?"
+      }
+    }
+  },
+  "MachineLearning": {
+    "Introduction": {
+      "Overview": {
+        "What is ML?": "What is machine learning and how is it different from traditional programming?",
+        "History": "When did machine learning become popular and why?",
+        "Types of ML": {
+          "Supervised": "What is supervised learning and how does it work?",
+          "Unsupervised": "What is unsupervised learning and what are common techniques?",
+          "Reinforcement": "How does reinforcement learning operate?"
+        }
+      },
+      "Applications": {
+        "Healthcare": "How is machine learning used in medical diagnosis?",
+        "Finance": "What are ML applications in fraud detection or stock prediction?",
+        "Recommendation Systems": "How does ML power Netflix and Amazon recommendations?"
+      }
+    },
+    "Algorithms": {
+      "Supervised": {
+        "Linear Regression": "How does linear regression work in machine learning?",
+        "Decision Trees": "What are decision trees and how are they built?",
+        "SVM": "What is a Support Vector Machine and when is it effective?"
+      },
+      "Unsupervised": {
+        "K-Means Clustering": "How does K-Means algorithm group data?",
+        "Dimensionality Reduction": "What is PCA and how is it used in ML?"
+      },
+      "Reinforcement Learning": {
+        "Q-Learning": "What is Q-Learning and how does it learn optimal actions?",
+        "Environment": "What is the role of environment and reward in RL?"
+      }
+    },
+    "Tools and Frameworks": {
+      "Python Libraries": {
+        "scikit-learn": "What problems can be solved with scikit-learn?",
+        "TensorFlow": "What is TensorFlow and when should it be used?",
+        "PyTorch": "What are the main differences between PyTorch and TensorFlow?"
+      },
+      "Jupyter Notebooks": {
+        "Setup": "How do you set up Jupyter for ML projects?",
+        "Visualization": "What libraries are best for data visualization in ML?"
+      }
+    },
+    "Model Evaluation and Deployment": {
+      "Evaluation Metrics": {
+        "Accuracy vs Precision": "What is the difference between accuracy and precision?",
+        "ROC Curve": "How is an ROC curve used to assess classifiers?",
+        "Confusion Matrix": "How do you interpret a confusion matrix?"
+      },
+      "Overfitting and Underfitting": {
+        "Definitions": "What causes overfitting and underfitting?",
+        "Solutions": "How do you prevent overfitting with regularization?"
+      },
+      "Model Deployment": {
+        "Saving Models": "How do you save and load ML models?",
+        "APIs": "How can you serve ML models using REST APIs?"
+      }
+    }
+  },
+  "MobileDevelopment": {
+    "Introduction": {
+      "Overview": {
+        "What is Mobile Development?": "What does mobile app development involve?",
+        "Native vs Cross-Platform": {
+          "Native Apps": "What are native mobile apps and what are their advantages?",
+          "Cross-Platform Apps": "How do cross-platform frameworks work?"
+        },
+        "Platform Differences": {
+          "iOS vs Android": "What are key differences between iOS and Android development?",
+          "App Store vs Play Store": "How do app publishing processes differ?"
+        }
+      },
+      "Development Tools": {
+        "IDEs": {
+          "Android Studio": "What features does Android Studio provide?",
+          "Xcode": "How is Xcode used for iOS development?"
+        },
+        "Frameworks": {
+          "Flutter": "Why is Flutter a popular cross-platform tool?",
+          "React Native": "How does React Native differ from Flutter?"
+        }
+      }
+    },
+    "Frontend UI": {
+      "Design Patterns": {
+        "MVVM": "What is MVVM and how is it applied in mobile UI?",
+        "MVP": "How does the MVP pattern help in app design?"
+      },
+      "Navigation": {
+        "Stack Navigation": "How does stack-based navigation work?",
+        "Tab Navigation": "What is tab navigation and where is it used?"
+      },
+      "Responsive Design": {
+        "Layouts": "How do you create flexible layouts for different screen sizes?",
+        "Orientation Changes": "How do you handle orientation and screen rotation?"
+      }
+    },
+    "Backend Integration": {
+      "APIs": {
+        "RESTful APIs": "How do mobile apps communicate with backend APIs?",
+        "Authentication": "What methods are used for user authentication in mobile apps?"
+      },
+      "Databases": {
+        "Firebase": "What is Firebase and how is it used in mobile apps?",
+        "SQLite": "How do you use SQLite for local storage?"
+      },
+      "Notifications": {
+        "Push Notifications": "How are push notifications implemented in mobile apps?",
+        "Local Notifications": "How do local notifications work on Android and iOS?"
+      }
+    },
+    "Testing and Deployment": {
+      "Testing": {
+        "Unit Testing": "How do you write unit tests for mobile apps?",
+        "UI Testing": "What tools are used for UI testing in mobile environments?"
+      },
+      "Deployment": {
+        "App Signing": "What is app signing and why is it required?",
+        "Publishing": "How do you publish apps to the Play Store and App Store?"
+      },
+      "Monitoring": {
+        "Crash Reporting": "How can you track and report crashes in production?",
+        "Analytics": "How do you integrate user analytics in mobile apps?"
+      }
+    }
+  },
+  "Python": {
+    "Introduction": {
+      "Overview": {
+        "What is Python?": "What is Python and why is it popular for data science?",
+        "History": "When was Python created and how has it evolved?",
+        "Use Cases": {
+          "Data Science": "Why is Python a preferred language for data analysis?",
+          "Web Development": "What frameworks are used in Python web development?"
+        }
+      },
+      "Setup": {
+        "Installation": "How do you install Python on your system?",
+        "IDEs": "Which IDEs are best for Python (e.g. PyCharm, VSCode, Jupyter)?",
+        "Virtual Environments": "How do you manage Python environments using venv or conda?"
+      }
+    },
+    "Language Basics": {
+      "Syntax": {
+        "Variables": "How do you declare variables and data types in Python?",
+        "Indentation": "Why is indentation important in Python syntax?"
+      },
+      "Control Flow": {
+        "if-else": "How do you write conditional logic in Python?",
+        "Loops": "How are for and while loops structured in Python?"
+      },
+      "Functions": {
+        "Definition": "How do you define and use functions?",
+        "Arguments": "What is the difference between *args and **kwargs?"
+      }
+    },
+    "Data Science Libraries": {
+      "NumPy": {
+        "Arrays": "How do you create and manipulate arrays with NumPy?",
+        "Broadcasting": "What is broadcasting and how does it work?"
+      },
+      "Pandas": {
+        "DataFrames": "How do you use Pandas DataFrames for tabular data?",
+        "Filtering and Grouping": "How do you filter and group data in Pandas?"
+      },
+      "Matplotlib & Seaborn": {
+        "Visualization": "How do you plot data using Matplotlib?",
+        "Styling": "What customization options exist in Seaborn?"
+      }
+    },
+    "Machine Learning": {
+      "Scikit-learn": {
+        "Classification": "How do you train a classifier using scikit-learn?",
+        "Regression": "What are common regression models in scikit-learn?"
+      },
+      "TensorFlow": {
+        "Model Definition": "How do you define a neural network in TensorFlow?",
+        "Training": "How do you train and evaluate TensorFlow models?"
+      },
+      "Model Deployment": {
+        "Saving Models": "How do you save and load models in Python?",
+        "APIs": "How can you expose a model with Flask or FastAPI?"
+      }
+    }
+  },
+  "React": {
+    "Introduction": {
+      "Overview": {
+        "What is React?": "What is React and why is it popular for frontend development?",
+        "History": "Who created React and how has it evolved?",
+        "JSX": {
+          "What is JSX?": "How does JSX work in React?",
+          "JSX Rules": "What are the basic syntax rules of JSX?"
+        }
+      },
+      "Setup": {
+        "Create React App": "How do you create a new project using Create React App?",
+        "Folder Structure": "What is the default folder structure in a React project?",
+        "Development Tools": "What dev tools and extensions are useful for React development?"
+      }
+    },
+    "Components": {
+      "Function Components": {
+        "Definition": "How do you define a functional component in React?",
+        "Props": "How do you pass and access props in functional components?"
+      },
+      "Class Components": {
+        "State & Lifecycle": "How do class components handle state and lifecycle methods?",
+        "Comparison": "What is the difference between class and function components?"
+      },
+      "Hooks": {
+        "useState": "How does useState manage local component state?",
+        "useEffect": "When and how do you use useEffect for side effects?",
+        "Custom Hooks": "How do you create a reusable custom hook?"
+      }
+    },
+    "Routing and State Management": {
+      "React Router": {
+        "Setup": "How do you set up React Router in a project?",
+        "Navigation": "How do you navigate between pages using Link or useNavigate?"
+      },
+      "State Management": {
+        "useContext": "What is React Context and how do you use it?",
+        "Redux": "What is Redux and when should you use it in React?",
+        "Zustand / Recoil": "What are lightweight alternatives to Redux?"
+      }
+    },
+    "Forms and APIs": {
+      "Forms": {
+        "Controlled Components": "What are controlled form components in React?",
+        "Validation": "How do you validate forms with libraries like Formik or React Hook Form?"
+      },
+      "API Integration": {
+        "fetch & Axios": "How do you fetch data in React using fetch or Axios?",
+        "Loading State": "How do you manage loading and error states when fetching data?"
+      },
+      "Deployment": {
+        "Build": "How do you create a production build of a React app?",
+        "Hosting": "What platforms can you use to host a React app (e.g. Netlify, Vercel)?"
+      }
+    }
+  },
+  "Robotics": {
+    "Introduction": {
+      "Overview": {
+        "What is Robotics?": "What is robotics and what are its main application areas?",
+        "History": "How has the field of robotics evolved over time?",
+        "Components": {
+          "Mechanical": "What mechanical components make up a typical robot?",
+          "Electrical": "What role do electronics play in robotic systems?",
+          "Software": "How is software used to control robots?"
+        }
+      },
+      "Types of Robots": {
+        "Industrial Robots": "Where are industrial robots used and how are they controlled?",
+        "Service Robots": "What are service robots and what industries use them?",
+        "Autonomous Robots": "What defines an autonomous robot?"
+      }
+    },
+    "Sensors and Actuators": {
+      "Sensors": {
+        "Types": "What types of sensors are used in robotics (e.g., IR, ultrasonic, camera)?",
+        "Data Interpretation": "How do robots interpret sensor data?"
+      },
+      "Actuators": {
+        "Motors": "What types of motors are used in robotics (DC, stepper, servo)?",
+        "Movement Control": "How is precise movement achieved in robotic systems?"
+      },
+      "Sensor Fusion": {
+        "Definition": "What is sensor fusion and why is it important?",
+        "Applications": "Where is sensor fusion used in modern robotics?"
+      }
+    },
+    "Control Systems": {
+      "Kinematics": {
+        "Forward Kinematics": "How is forward kinematics used to calculate position?",
+        "Inverse Kinematics": "What is inverse kinematics and how is it applied in robotic arms?"
+      },
+      "PID Control": {
+        "Basics": "What is PID control and how does it regulate movement?",
+        "Tuning": "How do you tune a PID controller for stability and accuracy?"
+      },
+      "Path Planning": {
+        "Algorithms": "What algorithms are used for path planning (e.g., A*, RRT)?",
+        "Obstacle Avoidance": "How do robots avoid obstacles in real time?"
+      }
+    },
+    "Programming and Simulation": {
+      "Languages": {
+        "Python": "Why is Python commonly used in robotics?",
+        "C++": "What benefits does C++ offer for robotics programming?"
+      },
+      "Frameworks": {
+        "ROS": "What is the Robot Operating System (ROS) and how is it used?",
+        "Gazebo": "How does Gazebo help simulate robotic environments?"
+      },
+      "Real-World Deployment": {
+        "Embedded Systems": "How are embedded systems used in robot controllers?",
+        "Integration": "How do you integrate hardware, software, and control logic in a robot?"
+      }
+    }
+  },
+  "Ruby": {
+    "Introduction": {
+      "Overview": {
+        "What is Ruby?": "What is the Ruby programming language and what is it known for?",
+        "History": "Who created Ruby and what was the motivation behind it?",
+        "Philosophy": {
+          "Simplicity and Productivity": "Why is Ruby considered developer-friendly?",
+          "Everything is an Object": "What does 'everything is an object' mean in Ruby?"
+        }
+      },
+      "Setup": {
+        "Installation": "How do you install Ruby on different platforms?",
+        "IRB": "What is IRB and how do you use it for quick testing?",
+        "Gems": "What are Ruby gems and how do you install them?"
+      }
+    },
+    "Syntax and Fundamentals": {
+      "Variables and Types": {
+        "Variable Types": "How are variables declared and typed in Ruby?",
+        "Dynamic Typing": "What does dynamic typing mean in Ruby?"
+      },
+      "Control Flow": {
+        "Conditionals": "How do you use if-else and case statements in Ruby?",
+        "Loops": "What types of loops exist in Ruby (each, while, until)?"
+      },
+      "Methods and Blocks": {
+        "Defining Methods": "How do you define and call methods in Ruby?",
+        "Blocks and Yield": "What are blocks and how does yield work?"
+      }
+    },
+    "Object-Oriented Features": {
+      "Classes and Objects": {
+        "Defining Classes": "How do you define and instantiate classes in Ruby?",
+        "Instance Variables": "What are instance variables and how are they scoped?"
+      },
+      "Inheritance and Mixins": {
+        "Inheritance": "How does class inheritance work in Ruby?",
+        "Modules and Mixins": "How are modules used to mix in behavior?"
+      },
+      "Metaprogramming": {
+        "send and define_method": "How can you define methods dynamically in Ruby?",
+        "method_missing": "What is method_missing and how is it used?"
+      }
+    },
+    "Rails and Web Development": {
+      "Ruby on Rails": {
+        "What is Rails?": "What is Ruby on Rails and how does it relate to Ruby?",
+        "MVC Architecture": "How does Rails implement the MVC pattern?"
+      },
+      "Routing and Controllers": {
+        "Routes.rb": "How do you define routes in a Rails app?",
+        "Controller Actions": "What are controller actions and how do they work?"
+      },
+      "ActiveRecord": {
+        "Models": "How do you define models in Rails with ActiveRecord?",
+        "Migrations": "What are migrations and how do you use them to manage database schema?"
+      }
+    }
+  },
+  "Rust": {
+    "Introduction": {
+      "Overview": {
+        "What is Rust?": "What is the Rust programming language and what makes it unique?",
+        "Memory Safety": "How does Rust ensure memory safety without a garbage collector?",
+        "Ownership Model": {
+          "What is Ownership?": "How does Rust's ownership system work?",
+          "Borrowing and Lifetimes": "What are borrowing and lifetimes in Rust?"
+        }
+      },
+      "Getting Started": {
+        "Installation": "How do you install Rust using rustup?",
+        "Hello World": "How do you write and run your first Rust program?",
+        "Cargo": "What is Cargo and how is it used in Rust projects?"
+      }
+    },
+    "Core Language": {
+      "Variables and Types": {
+        "Immutable and Mutable": "What is the difference between immutable and mutable variables?",
+        "Primitive Types": "What are the basic types in Rust?",
+        "Shadowing": "What is variable shadowing and when is it useful?"
+      },
+      "Control Flow": {
+        "if and match": "How does pattern matching with match work in Rust?",
+        "Loops": "What loop types exist in Rust and how do they behave?"
+      },
+      "Functions and Modules": {
+        "Defining Functions": "How do you define and call functions in Rust?",
+        "Modules": "How do you organize code using modules and use statements?"
+      }
+    },
+    "Advanced Concepts": {
+      "Structs and Enums": {
+        "Defining Structs": "How do you define and instantiate structs?",
+        "Enums": "What are enums and how are they used in pattern matching?"
+      },
+      "Traits and Generics": {
+        "Traits": "What is a trait and how does it work like interfaces?",
+        "Generics": "How do you write generic functions and structs?"
+      },
+      "Error Handling": {
+        "Result and Option": "How are Result and Option used for safe error handling?",
+        "unwrap and match": "What are best practices for unwrapping or matching results?"
+      }
+    },
+    "Concurrency and Performance": {
+      "Concurrency": {
+        "Threads": "How do you create and manage threads in Rust?",
+        "Channels": "How do threads communicate using channels?",
+        "Mutex and Arc": "How do Mutex and Arc provide safe shared access?"
+      },
+      "Performance": {
+        "Zero-Cost Abstractions": "What does zero-cost abstraction mean in Rust?",
+        "Inlining and Optimization": "How does Rust optimize performance at compile time?"
+      },
+      "Memory Management": {
+        "Stack vs Heap": "How does Rust manage stack and heap memory?",
+        "Drop Trait": "What is the Drop trait and how is it used for resource cleanup?"
+      }
+    }
+  },
+  "SoftwareArchitecture": {
+    "Introduction": {
+      "Overview": {
+        "What is Software Architecture?": "What is software architecture and how does it impact system design?",
+        "Architecture vs Design": "What is the difference between architecture and design in software engineering?",
+        "Non-functional Requirements": {
+          "Scalability": "How does architecture support system scalability?",
+          "Availability": "What architectural choices improve availability?",
+          "Maintainability": "How do architecture decisions affect maintainability?"
+        }
+      },
+      "Architect Roles": {
+        "Responsibilities": "What are the key responsibilities of a software architect?",
+        "Skills Required": "What skills are essential for becoming a software architect?"
+      }
+    },
+    "Architecture Patterns": {
+      "Monolithic": {
+        "Definition": "What is a monolithic architecture?",
+        "Pros and Cons": "What are the advantages and disadvantages of monolithic systems?"
+      },
+      "Layered": {
+        "Structure": "How is a layered architecture organized?",
+        "Example": "What are common layers in a typical enterprise application?"
+      },
+      "Microservices": {
+        "Definition": "What is microservices architecture?",
+        "Communication": "How do services communicate in a microservice architecture?",
+        "Challenges": "What are common challenges in adopting microservices?"
+      },
+      "Event-Driven": {
+        "Publish-Subscribe": "What is the pub-sub model and how is it used?",
+        "Message Queues": "How do message queues help decouple services?"
+      }
+    },
+    "Architectural Concerns": {
+      "Deployment": {
+        "Containers": "How does containerization (e.g., Docker) fit into architecture?",
+        "Orchestration": "What is orchestration and how does Kubernetes help?"
+      },
+      "Scalability": {
+        "Horizontal vs Vertical": "What is the difference between horizontal and vertical scaling?",
+        "Load Balancing": "How do load balancers contribute to scalability?"
+      },
+      "Resilience": {
+        "Fault Tolerance": "How do you design for fault tolerance?",
+        "Retry and Circuit Breakers": "What are retry strategies and circuit breaker patterns?"
+      }
+    },
+    "Documentation and Tools": {
+      "Modeling": {
+        "UML": "How is UML used to document software architecture?",
+        "C4 Model": "What is the C4 model and how does it structure architectural diagrams?"
+      },
+      "Tools": {
+        "PlantUML": "How is PlantUML used for architecture diagrams?",
+        "Archimate": "What is Archimate and how is it different from UML?"
+      },
+      "Architecture Decision Records (ADR)": {
+        "Purpose": "What are ADRs and why are they useful?",
+        "Format": "What is the typical structure of an ADR?"
+      }
+    }
+  },
+  "Swift": {
+    "Introduction": {
+      "Overview": {
+        "What is Swift?": "What is the Swift programming language and why is it used for iOS development?",
+        "History": "When was Swift introduced and how does it compare to Objective-C?",
+        "Setup": {
+          "Xcode": "How do you install and set up Xcode for Swift development?",
+          "First Project": "How do you create a simple Swift iOS app?"
+        }
+      },
+      "Language Basics": {
+        "Variables and Constants": "How do you declare variables and constants in Swift?",
+        "Data Types": "What are the basic data types in Swift?",
+        "Optionals": "What are optionals and how do you safely unwrap them?"
+      }
+    },
+    "Control Flow and Functions": {
+      "Conditionals and Loops": {
+        "if-else": "How do you use conditionals in Swift?",
+        "for-in and while": "What loop constructs are available in Swift?"
+      },
+      "Functions": {
+        "Declaration": "How do you declare and call functions in Swift?",
+        "Parameters and Return Types": "How do you define parameters and return values?"
+      },
+      "Closures": {
+        "Definition": "What are closures in Swift and how are they used?",
+        "Trailing Closures": "What is the trailing closure syntax?"
+      }
+    },
+    "Object-Oriented Programming": {
+      "Classes and Structs": {
+        "Definitions": "What is the difference between classes and structs in Swift?",
+        "Initialization": "How do you create initializers for classes and structs?"
+      },
+      "Inheritance and Protocols": {
+        "Inheritance": "How do subclasses inherit from parent classes?",
+        "Protocols": "What are protocols and how do they define interfaces?"
+      },
+      "Extensions": {
+        "Use Cases": "What are extensions in Swift and when should you use them?",
+        "Computed Properties": "How do you add computed properties with extensions?"
+      }
+    },
+    "iOS Development": {
+      "UI with UIKit": {
+        "Storyboards": "What are storyboards and how do they define UI?",
+        "ViewControllers": "What is a ViewController and how is it used?",
+        "AutoLayout": "How does AutoLayout help in building responsive UIs?"
+      },
+      "SwiftUI": {
+        "Introduction": "What is SwiftUI and how is it different from UIKit?",
+        "State Management": "How do @State and @Binding work in SwiftUI?",
+        "Layouts": "How do you use VStack, HStack, and ZStack to build views?"
+      },
+      "App Lifecycle": {
+        "SceneDelegate and AppDelegate": "What are their roles in app lifecycle management?",
+        "Background Modes": "How does iOS handle background tasks?"
+      }
+    }
+  },
+  "Testing": {
+    "Introduction": {
+      "Overview": {
+        "What is Software Testing?": "What is software testing and why is it important?",
+        "Manual vs Automated": "What are the differences between manual and automated testing?",
+        "Testing Levels": {
+          "Unit Testing": "What is unit testing and what does it cover?",
+          "Integration Testing": "How is integration testing different from unit testing?",
+          "System Testing": "What is system testing and when is it performed?"
+        }
+      },
+      "Testing Strategies": {
+        "Black Box": "What is black box testing and what are its use cases?",
+        "White Box": "What is white box testing and how does it work?",
+        "Gray Box": "When is gray box testing used?"
+      }
+    },
+    "Unit Testing": {
+      "Basics": {
+        "Test Cases": "What is a test case and how is it structured?",
+        "Assertions": "What are assertions and how are they used in testing?"
+      },
+      "Frameworks": {
+        "JavaScript": "How do you use Jest or Mocha for unit testing in JS?",
+        "Python": "How do you write unit tests using unittest or pytest?",
+        "Java": "How do JUnit and TestNG support unit testing in Java?"
+      },
+      "Mocking": {
+        "Purpose": "What is mocking and why is it important in unit tests?",
+        "Tools": "Which libraries are commonly used for mocking (e.g., Mockito, unittest.mock)?"
+      }
+    },
+    "End-to-End and UI Testing": {
+      "Automation Tools": {
+        "Selenium": "How does Selenium automate browser testing?",
+        "Cypress": "What makes Cypress a modern end-to-end testing tool?",
+        "Playwright": "What is Playwright and how is it used for UI testing?"
+      },
+      "Test Design": {
+        "Test Scenarios": "How do you create effective test scenarios?",
+        "Data-Driven Testing": "What is data-driven testing and how is it implemented?"
+      },
+      "Cross-Browser Testing": {
+        "Challenges": "Why is cross-browser testing necessary?",
+        "Solutions": "What tools help test apps across multiple browsers?"
+      }
+    },
+    "Continuous Integration": {
+      "CI/CD Integration": {
+        "Automated Pipelines": "How do you integrate testing into a CI/CD pipeline?",
+        "GitHub Actions": "How can GitHub Actions be used for running tests?",
+        "Jenkins": "How is Jenkins configured for automated testing?"
+      },
+      "Test Reporting": {
+        "Coverage": "What is test coverage and how is it measured?",
+        "Reports": "How do you generate and view test result reports?"
+      },
+      "Best Practices": {
+        "Maintainable Tests": "What are characteristics of good, maintainable tests?",
+        "Flaky Tests": "What causes flaky tests and how can they be reduced?"
+      }
+    }
+  },
+  "TypeScript": {
+    "Introduction": {
+      "Overview": {
+        "What is TypeScript?": "What is TypeScript and how does it differ from JavaScript?",
+        "Benefits": "What are the key advantages of using TypeScript?",
+        "Setup": {
+          "Installation": "How do you install TypeScript and configure a project?",
+          "tsconfig.json": "What is the purpose of tsconfig.json and how is it used?"
+        }
+      },
+      "Compilation": {
+        "Type Checking": "How does the TypeScript compiler check for type errors?",
+        "Output": "How does TypeScript compile to JavaScript?"
+      }
+    },
+    "Type System": {
+      "Basic Types": {
+        "string, number, boolean": "How do you declare variables with basic types?",
+        "any, unknown": "What is the difference between any and unknown?"
+      },
+      "Complex Types": {
+        "Arrays and Tuples": "How do you type arrays and tuples in TypeScript?",
+        "Enums": "What are enums and how are they used?"
+      },
+      "Advanced Types": {
+        "Union and Intersection": "What are union and intersection types?",
+        "Literal Types": "How do you use literal types for exact value constraints?"
+      }
+    },
+    "Functions and Objects": {
+      "Function Typing": {
+        "Parameters and Return": "How do you type function parameters and return values?",
+        "Optional and Default Params": "How do you define optional and default parameters?"
+      },
+      "Object Types": {
+        "Interfaces": "What are interfaces and how do they define object structure?",
+        "Type Aliases": "When should you use type aliases vs interfaces?"
+      },
+      "Generics": {
+        "Generic Functions": "How do generics make functions reusable and type-safe?",
+        "Constraints": "What are generic constraints and why are they useful?"
+      }
+    },
+    "Integration and Tooling": {
+      "JavaScript Interop": {
+        "Using JS Libraries": "How do you use JavaScript libraries in a TypeScript project?",
+        "Declaration Files": "What are .d.ts files and how are they created?"
+      },
+      "Tooling": {
+        "Linting": "How does TSLint or ESLint help maintain code quality?",
+        "Build Tools": "How do you integrate TypeScript with Webpack or Vite?"
+      },
+      "Framework Usage": {
+        "Angular": "How is TypeScript used as the primary language in Angular?",
+        "React": "How do you type props and state in React components using TypeScript?"
+      }
+    }
+  },
+  "WebDevelopment": {
+    "Introduction": {
+      "Overview": {
+        "What is Web Development?": "What is web development and what are its core components?",
+        "Frontend vs Backend": {
+          "Frontend": "What technologies are used in frontend development?",
+          "Backend": "What is the role of backend development and common stacks?"
+        },
+        "Full-Stack Development": "What does it mean to be a full-stack developer?"
+      },
+      "Web Standards": {
+        "HTML5": "What new features does HTML5 provide?",
+        "CSS3": "How does CSS3 improve web styling and animations?",
+        "JavaScript": "Why is JavaScript essential for interactive web apps?"
+      }
+    },
+    "Frontend Trends": {
+      "Frameworks": {
+        "React": "Why is React widely used in modern frontend development?",
+        "Vue.js": "What are the strengths of Vue.js in building interfaces?",
+        "Svelte": "What makes Svelte a unique and fast frontend compiler?"
+      },
+      "Styling Approaches": {
+        "CSS-in-JS": "How does CSS-in-JS work and where is it used?",
+        "Tailwind CSS": "What is Tailwind CSS and how is it different from Bootstrap?"
+      },
+      "Tooling": {
+        "Vite": "What is Vite and how does it compare to Webpack?",
+        "ESBuild": "Why is ESBuild praised for its speed?"
+      }
+    },
+    "Backend Trends": {
+      "Languages and Frameworks": {
+        "Node.js": "What role does Node.js play in modern backend development?",
+        "Deno": "How is Deno different from Node.js?",
+        "Go": "Why is Go gaining popularity in backend systems?"
+      },
+      "APIs": {
+        "REST": "What is REST and how are RESTful APIs designed?",
+        "GraphQL": "How does GraphQL differ from REST?",
+        "tRPC": "What is tRPC and how does it eliminate boilerplate in APIs?"
+      },
+      "Databases": {
+        "SQL vs NoSQL": "When should you use SQL vs NoSQL databases?",
+        "PostgreSQL": "What makes PostgreSQL a powerful relational DB?",
+        "MongoDB": "How does MongoDB handle schema-less data?"
+      }
+    },
+    "Dev and Hosting": {
+      "Static Site Generators": {
+        "Next.js": "How does Next.js support static and dynamic rendering?",
+        "Astro": "What makes Astro efficient for content-heavy sites?"
+      },
+      "CI/CD": {
+        "GitHub Actions": "How can you automate deployments using GitHub Actions?",
+        "Netlify & Vercel": "What are the pros of using platforms like Netlify or Vercel?"
+      },
+      "Performance Optimization": {
+        "Lighthouse": "What is Lighthouse and how does it assess web performance?",
+        "Core Web Vitals": "What are Core Web Vitals and why do they matter?"
+      }
+    }
+  }
+}

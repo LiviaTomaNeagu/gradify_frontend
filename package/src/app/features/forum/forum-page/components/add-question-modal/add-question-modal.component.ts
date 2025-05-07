@@ -11,12 +11,14 @@ import { CommonModule } from '@angular/common';
 import { Topic, TopicCustomMapping } from 'src/app/shared/enums/topic.enum';
 import { ToastrService } from 'ngx-toastr';
 import { QuillModule } from 'ngx-quill';
+import { QuestionWizardComponent } from '../question-wizard/question-wizard.component';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-add-question-modal',
   templateUrl: './add-question-modal.component.html',
   standalone: true,
-  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RelatedCardComponent, QuillModule, FormsModule],
+  imports: [CommonModule, MaterialModule, ReactiveFormsModule, RelatedCardComponent, QuillModule, FormsModule, QuestionWizardComponent],
   styleUrls: ['./add-question-modal.component.scss']
 })
 export class AddQuestionModalComponent {
@@ -26,6 +28,9 @@ export class AddQuestionModalComponent {
   questionDescription = '';
   attachedFiles: File[] = [];
   topicsList: { key: number, value: string }[] = [];
+
+  @ViewChild('stepper') stepper: MatStepper;
+
 
   constructor(
     public dialogRef: MatDialogRef<AddQuestionModalComponent>,
@@ -39,6 +44,14 @@ export class AddQuestionModalComponent {
       topic: [null, Validators.required]
     });
   }
+
+  showWizard: boolean | null = null;
+  showWizardCompleted: boolean = false;
+
+  chooseWizard(useWizard: boolean) {
+    this.showWizard = useWizard;
+  }
+
 
   onFirstNext(): void {
     const title = this.titleFormGroup.value.title;
@@ -136,4 +149,28 @@ export class AddQuestionModalComponent {
   }
 
 
+  handleGeneratedQuestion(data: { title: string, topic: Topic }) {
+    console.log('Generated question data:', data);
+    this.showWizard = false;
+  
+    const titleControl = this.titleFormGroup.get('title');
+    const topicControl = this.titleFormGroup.get('topic');
+  
+    if (titleControl) {
+      titleControl.setValue(data.title);
+    }
+  
+    if (topicControl) {
+      const selectedTopicObj = this.topicsList.find(t => t.key === data.topic);
+      if (selectedTopicObj) {
+        topicControl.setValue(selectedTopicObj);
+      }
+    }
+    
+  
+    setTimeout(() => {
+      this.stepper.selectedIndex = 0;
+    }, 0);
+  }
+  
 }

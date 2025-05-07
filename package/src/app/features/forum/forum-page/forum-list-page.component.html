@@ -35,11 +35,11 @@
         </mat-menu>
       </div>
     
-      <mat-chip-grid #chipGrid aria-label="Selected topics">
-        <mat-chip-row
+      <mat-chip-set aria-label="Selected topics">
+        <mat-chip
           *ngFor="let topic of selectedTopics"
           (removed)="removeTopic(topic)"
-          [editable]="false"
+          [removable]="true"
           class="f-s-14"
         >
           {{ topic.value }}
@@ -49,8 +49,9 @@
           >
             <mat-icon>cancel</mat-icon>
           </button>
-        </mat-chip-row>
-      </mat-chip-grid>
+        </mat-chip>
+      </mat-chip-set>
+      
     </mat-card-content>
     
     <div *ngIf="!isLoading && (questionsResponse?.questions && questionsResponse?.questions?.length != 0)" class="app-forum-card">

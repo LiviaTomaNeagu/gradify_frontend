@@ -12,12 +12,13 @@ import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { ToastrService } from 'ngx-toastr';
 import { AddQuestionRequestDTO } from '../core/interfaces/add-question.interfaces';
+import { MatChipsModule } from '@angular/material/chips';
 
 @Component({
   selector: 'app-forum',
   templateUrl: './forum-list-page.component.html',
   standalone: true,
-  imports: [MaterialModule, CommonModule, ForumCardComponent],
+  imports: [MaterialModule, CommonModule, ForumCardComponent, MatChipsModule],
   styleUrls: ['./forum-list-page.component.scss'],
 })
 
@@ -125,13 +126,13 @@ export class ForumPageComponent implements OnInit {
           descriptionHtml: result.questionDescription,
           topic: result.topic.key
         };
-
-        console.log('Payload in forum ts:', payload);
     
         this.forumService.addQuestion(payload, result.attachedFiles).subscribe({
           next: () => this.toastr.success('Question posted successfully!'),
           error: () => this.toastr.error('Failed to post question.')
         });
+
+        this.loadQuestions(); // Reload questions after adding a new one
       }
     });
     
