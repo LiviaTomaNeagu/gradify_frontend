@@ -9,11 +9,12 @@ import { getTopicName, topicColors } from 'src/app/shared/enums/topic.enum';
 import { ForumCardComponent } from "../forum-page/components/forum-card/forum-card.component";
 import { getMatAutocompleteMissingPanelError } from '@angular/material/autocomplete';
 import { QuillModule } from 'ngx-quill';
+import { BreadcrumbsComponent } from '../forum-page/components/breadcrumbs/breadcrumbs.component';
 
 @Component({
   selector: 'app-question-details-page',
   standalone: true,
-  imports: [CommonModule, MaterialModule, FormsModule, ForumCardComponent, QuillModule],
+  imports: [CommonModule, MaterialModule, FormsModule, ForumCardComponent, QuillModule, BreadcrumbsComponent],
   providers: [DatePipe],
   templateUrl: './question-details-page.component.html',
   styleUrls: ['./question-details-page.component.scss'],
