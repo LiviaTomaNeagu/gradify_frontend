@@ -30,7 +30,6 @@ export class QuestionDetailsPageComponent {
 
   constructor(private datePipe: DatePipe, private forumService: ForumService, private activeRoute:ActivatedRoute){
     this.orderId = this.activeRoute.snapshot.params['id'];
-    console.log(this.orderId) 
   }
 
   ngOnInit(): void {
