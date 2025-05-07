@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-forum-card',
   standalone: true,
-  imports: [MaterialModule, MatCard, JsonPipe, CommonModule, RouterModule],
+  imports: [MaterialModule, MatCard, CommonModule, RouterModule],
   providers: [DatePipe],
   templateUrl: './forum-card.component.html',
   styleUrls: ['./forum-card.component.scss'],
