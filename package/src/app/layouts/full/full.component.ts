@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { CurrentUserResponseInterfaceDTO } from 'src/app/@core/interfaces/user.interface';
+import { NotificationService } from 'src/app/features/notifications/core/notification.service';
 
 const MOBILE_VIEW = 'screen and (max-width: 768px)';
 const TABLET_VIEW = 'screen and (min-width: 769px) and (max-width: 1024px)';
@@ -62,7 +63,7 @@ export class FullComponent implements OnInit {
     return this.isMobileScreen;
   }
 
-  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: CurrentUserService) {
+  constructor(private breakpointObserver: BreakpointObserver, private navService: NavService, private userService: CurrentUserService, private notificationService: NotificationService, private router: Router) {
 
     this.htmlElement = document.querySelector('html')!;
     this.htmlElement.classList.add('light-theme');
@@ -82,6 +83,7 @@ export class FullComponent implements OnInit {
         next: (user: CurrentUserResponseInterfaceDTO | null) => {
           if (user) {
             this.isLoading = false;
+            this.notificationService.startConnection();
           }
         },
         error: () => {
