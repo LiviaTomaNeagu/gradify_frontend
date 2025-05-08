@@ -5,7 +5,10 @@ import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { GetUserConversationsResponse, mapToMessages } from './chat.interfaces';
+import { NotificationService } from 'src/app/features/notifications/core/notification.service';
 import { first } from 'rxjs';
+import { AppNotification } from '../../notifications/core/notification.interfaces';
+import { NotificationTypeEnum } from 'src/app/shared/enums/notification-type.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +22,7 @@ export class ChatService {
 
   private readonly baseUrl = `${environment.apiUrl}/chat`;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private notificationService: NotificationService) {
     this.startConnection();
   }
 
@@ -89,6 +92,16 @@ export class ChatService {
           },
         ]);
       }
+
+        const newNotif: AppNotification = {
+            title: 'New message',
+            message: `New message from ${message.from}`,
+            timestamp: new Date(),
+            read: false,
+            type: NotificationTypeEnum.CHAT,
+            route: `/chat/chat`,
+        };
+      this.notificationService.addNotification(newNotif);
     });
       
   }

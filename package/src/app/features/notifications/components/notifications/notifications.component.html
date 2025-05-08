@@ -1,0 +1,32 @@
+<div class="notif-wrapper">
+    <div class="notif-header">
+      <h4>Notificări</h4>
+    </div>
+  
+    <mat-divider></mat-divider>
+  
+    <ng-container *ngIf="notifications().length > 0; else noNotifs">
+        <mat-list>
+            <mat-list-item *ngFor="let n of notifications()" [ngClass]="getNotificationClass(n.type)" (click)="handleClick(n)">
+              <div class="notif-grid">
+                <!-- Icon col 1 -->
+                <div class="notif-icon">
+                  <i-tabler [name]="getNotificationIcon(n.type)"></i-tabler>
+                </div>
+          
+                <!-- Mesaj col 2 -->
+                <div class="notif-message">{{ n.message }}</div>
+                <div class="notif-date">{{ n.timestamp | date:'short' }}</div>
+          
+                <!-- Bulină col 3 -->
+                <div class="notif-status" [ngClass]="{ 'read': n.read, 'unread': !n.read }"></div>
+              </div>
+            </mat-list-item>
+          </mat-list>              
+    </ng-container>
+  
+    <ng-template #noNotifs>
+      <div class="notif-empty">Nicio notificare.</div>
+    </ng-template>
+  </div>
+  

@@ -6,9 +6,23 @@
   </button>
 
 
-  <button mat-icon-button aria-label="Notifications">
-    <i-tabler class="d-flex" name="bell" matBadge="1" matBadgeColor="primary"></i-tabler>
+  <button mat-icon-button [matMenuTriggerFor]="notifMenu" aria-label="Notificări">
+    <ng-container *ngIf="unreadCount() > 0; else noBadge">
+      <i-tabler name="bell" class="d-flex"
+        [matBadge]="unreadCount()"
+        matBadgeColor="primary">
+      </i-tabler>
+    </ng-container>
+    
+    <ng-template #noBadge>
+      <i-tabler name="bell" class="d-flex"></i-tabler>
+    </ng-template> 
   </button>
+  
+  <mat-menu #notifMenu="matMenu" class="cardWithShadow" xPosition="before">
+    <app-notifications></app-notifications>
+  </mat-menu>
+  
 
 
   <span class="flex-1-auto"></span>

@@ -1,0 +1,124 @@
+
+  .notif-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 8px;
+  
+    h4 {
+      margin: 0;
+      color: #1976d2; // albastru mat-primary
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+  
+  .notif-empty {
+    text-align: center;
+    padding: 16px;
+    color: #999;
+    font-size: 14px;
+  }
+  
+  .notif-title {
+    font-weight: 600;
+    font-size: 15px;
+  }
+  
+  .notif-msg {
+    font-size: 14px;
+    color: #444;
+  }
+  
+  .notif-date {
+    font-size: 12px;
+    color: #777;
+  }
+  
+  .notif-wrapper {
+    min-width: 380px;
+    max-width: 530px;
+    padding: 12px;
+    overflow-x: hidden; 
+  }
+  
+  mat-list {
+    overflow-x: hidden;
+  }
+  
+  mat-list-item {
+    white-space: normal;
+    word-break: break-word;
+  }
+  
+  ::ng-deep .mat-mdc-menu-panel {
+    min-width: 400px !important;
+    max-width: 550px !important;
+    overflow-x: hidden;
+  }
+  
+
+  mat-list-item {
+    display: flex;
+    align-items: center;
+
+    .notif-grid {
+        display: grid;
+        grid-template-columns: 40px 1fr 16px;
+        grid-template-rows: auto auto;
+        column-gap: 10px;
+        row-gap: 4px;
+        align-items: center;
+        width: 100%;
+        }
+
+        .notif-icon {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #4BD08B;
+
+        i-tabler {
+            font-size: 28px;
+        }
+        }
+
+        .notif-message {
+        grid-column: 2;
+        grid-row: 1;
+        font-weight: 600;
+        font-size: 14px;
+        color: #222;
+        }
+
+        .notif-date {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 12px;
+        color: #888;
+        }
+
+        .notif-status {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        justify-self: end;
+        align-self: center;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+
+        &.read {
+            background-color: #ccc;
+        }
+
+        &.unread {
+            background-color: #0085DB;
+        }
+        }
+
+      
+  }
+  
+  

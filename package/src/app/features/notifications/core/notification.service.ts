@@ -4,6 +4,7 @@ import { CurrentUserService } from 'src/app/@core/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AppNotification } from './notification.interfaces';
+import { NotificationTypeEnum } from 'src/app/shared/enums/notification-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class NotificationService {
   private hubConnection!: signalR.HubConnection;
   private currentUserService = inject(CurrentUserService);
   private notificationsSignal = signal<AppNotification[]>([]);
+  private unreadCountSignal = signal<number>(0);
 
   constructor(private toastr: ToastrService) {}
 
@@ -19,10 +21,25 @@ export class NotificationService {
     return this.notificationsSignal.asReadonly();
   }
 
-  // 🔘 Marchează toate ca citite
+  public unreadCount() {
+    return this.unreadCountSignal.asReadonly();
+  }
+
+  private updateUnreadCount() {
+    const unread = this.notificationsSignal().filter(n => !n.read).length;
+    console.log("🔄 Updating unreadCount:", unread);
+    this.unreadCountSignal.set(unread);
+  }
+
+  public addUnreadCount(){
+    const currentCount = this.unreadCountSignal();
+    this.unreadCountSignal.set(currentCount + 1);
+  }
+
   public markAllAsRead(): void {
     const updated = this.notificationsSignal().map(n => ({ ...n, read: true }));
     this.notificationsSignal.set(updated);
+    this.updateUnreadCount();
   }
 
   public startConnection(): void {
@@ -43,18 +60,33 @@ export class NotificationService {
       .catch(err => console.error('❌ NotificationHub connection error:', err));
 
     this.hubConnection.on("ReceiveNotification", (data) => {
-      console.log("Notification received:", data);
-      const newNotif: AppNotification = {
-        title: data.Title,
-        message: data.Message,
-        timestamp: new Date(),
-        read: false
-      };
+        var route = undefined;
+        if(data.type === NotificationTypeEnum.FORUM && data.questionId) {
+            route = `/forum/details/${data.questionId}`;
+        } else route = `/chat/chat`;
 
-      this.notificationsSignal.set([newNotif, ...this.notificationsSignal()]);
+        console.log("Notification received:", data);
+        const newNotif: AppNotification = {
+            title: data.title,
+            message: data.message,
+            timestamp: new Date(),
+            read: false,
+            type: data.Type ?? NotificationTypeEnum.FORUM,
+            route: route,
+        };
+        
 
-      this.toastr.info(data.Message, data.Title);
+        this.notificationsSignal.set([newNotif, ...this.notificationsSignal()]);
+        this.updateUnreadCount();
+
+        this.toastr.info(newNotif.title);
     });
+  }
+
+  public addNotification(notification: AppNotification): void {
+    this.notificationsSignal.set([notification, ...this.notificationsSignal()]);
+    this.updateUnreadCount();
+    this.toastr.info(notification.title);
   }
 
   public stopConnection(): void {
