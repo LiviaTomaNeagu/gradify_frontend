@@ -1,5 +1,6 @@
 import { SubscriptionLoggable } from "rxjs/internal/testing/SubscriptionLoggable";
 import { StudentDetails } from "src/app/features/coordinator/core/interfaces/coordinator.interface";
+import { GroupDTO } from "src/app/features/lists-admin/core/interfaces/group.model";
 import { RoleTypeEnum } from "src/app/shared/enums/role-type.enum";
 
     export interface OccupationDTO{
@@ -43,7 +44,7 @@ export interface GetStudentDetailsResponse
 {
     faculty: string;
     specialization: string;
-    group: string;
+    group: GroupDTO;
     enrollmentDate: Date;
 }
 
