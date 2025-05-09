@@ -3,8 +3,15 @@ import { NotificationTypeEnum } from "src/app/shared/enums/notification-type.enu
 export interface AppNotification {
     title: string;
     message: string;
-    timestamp: Date;
+    createdAt: Date;
     read: boolean;
+    type: NotificationTypeEnum;
+    route?: string;
+  }
+
+  export interface CreateNotificationRequest {
+    title: string;
+    message: string;
     type: NotificationTypeEnum;
     route?: string;
   }

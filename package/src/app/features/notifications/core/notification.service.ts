@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { AppNotification } from './notification.interfaces';
 import { NotificationTypeEnum } from 'src/app/shared/enums/notification-type.enum';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { add } from 'date-fns';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,7 @@ export class NotificationService {
   private notificationsSignal = signal<AppNotification[]>([]);
   private unreadCountSignal = signal<number>(0);
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toastr: ToastrService, private http: HttpClient) {}
 
   public notifications(): Signal<AppNotification[]> {
     return this.notificationsSignal.asReadonly();
@@ -69,7 +72,7 @@ export class NotificationService {
         const newNotif: AppNotification = {
             title: data.title,
             message: data.message,
-            timestamp: new Date(),
+            createdAt: new Date(),
             read: false,
             type: data.Type ?? NotificationTypeEnum.FORUM,
             route: route,
@@ -84,9 +87,24 @@ export class NotificationService {
   }
 
   public addNotification(notification: AppNotification): void {
-    this.notificationsSignal.set([notification, ...this.notificationsSignal()]);
-    this.updateUnreadCount();
-    this.toastr.info(notification.title);
+    this.addNotificationToDatabase(notification).subscribe(() => {
+      this.notificationsSignal.set([notification, ...this.notificationsSignal()]);
+      this.updateUnreadCount();
+      this.toastr.info(notification.title);
+    });
+    
+  }
+
+   addNotificationToDatabase(notification: AppNotification): Observable<void> {
+    const currentUser = this.currentUserService.getCurrentUserInfo();
+    const request = {
+      title: notification.title,
+      message: notification.message,
+      type: notification.type,
+      route: notification.route,
+      userId: currentUser?.id,
+    };
+    return this.http.post<void>(`${environment.apiUrl}/notifications/create`, request);
   }
 
   public stopConnection(): void {

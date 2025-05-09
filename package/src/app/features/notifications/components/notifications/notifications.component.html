@@ -16,7 +16,7 @@
           
                 <!-- Mesaj col 2 -->
                 <div class="notif-message">{{ n.message }}</div>
-                <div class="notif-date">{{ n.timestamp | date:'short' }}</div>
+                <div class="notif-date">{{ n.createdAt | date:'short' }}</div>
           
                 <!-- Bulină col 3 -->
                 <div class="notif-status" [ngClass]="{ 'read': n.read, 'unread': !n.read }"></div>

@@ -96,7 +96,7 @@ export class ChatService {
         const newNotif: AppNotification = {
             title: 'New message',
             message: `New message from ${message.from}`,
-            timestamp: new Date(),
+            createdAt: new Date(),
             read: false,
             type: NotificationTypeEnum.CHAT,
             route: `/chat/chat`,
