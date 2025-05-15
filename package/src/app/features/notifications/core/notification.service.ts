@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AppNotification } from './notification.interfaces';
 import { NotificationTypeEnum } from 'src/app/shared/enums/notification-type.enum';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { add } from 'date-fns';
 
 @Injectable({
@@ -80,7 +80,9 @@ export class NotificationService {
         
 
         this.notificationsSignal.set([newNotif, ...this.notificationsSignal()]);
-        this.updateUnreadCount();
+        this.getUnreadCountFromServer().subscribe(count => {
+          this.unreadCountSignal.set(count);
+        });
 
         this.toastr.info(newNotif.title);
     });
@@ -89,8 +91,8 @@ export class NotificationService {
   public addNotification(notification: AppNotification): void {
     this.addNotificationToDatabase(notification).subscribe(() => {
       this.notificationsSignal.set([notification, ...this.notificationsSignal()]);
-      this.updateUnreadCount();
       this.toastr.info(notification.title);
+      this.unreadCountSignal.set(this.unreadCountSignal() + 1);
     });
     
   }
@@ -106,6 +108,42 @@ export class NotificationService {
     };
     return this.http.post<void>(`${environment.apiUrl}/notifications/create`, request);
   }
+
+  getNotifcations(): Observable<AppNotification[]> {
+    console.log("🔍 Fetching notifications from server");
+    return this.http.get<AppNotification[]>(`${environment.apiUrl}/notifications/get-notifications`);
+  }
+
+  getUnreadCountFromServer(): Observable<number> {
+  return this.http
+    .get<{ totalUnread: number }>(`${environment.apiUrl}/notifications/unread-count`)
+    .pipe(map(res => res.totalUnread));
+}
+
+  readNotification(notification: AppNotification): Observable<void> {
+    this.markAsRead(notification.id!);
+    this.unreadCountSignal.set(this.unreadCountSignal() - 1);
+    return this.http.put<void>(`${environment.apiUrl}/notifications/read/${notification.id}`, {});
+  }
+
+  public markAsRead(notificationId: string): void {
+  const updated = this.notificationsSignal().map(n => {
+    if (n.id === notificationId && !n.read) {
+      this.unreadCountSignal.set(this.unreadCountSignal() - 1);
+      return { ...n, read: true };
+    }
+    return n;
+  });
+  this.notificationsSignal.set(updated);
+}
+
+public getUnreadCount(): void {
+  this.getUnreadCountFromServer().subscribe(count => {
+    this.unreadCountSignal.set(count);
+    console.log("🔄 Unread count from server:", count);
+  }
+  );
+}
 
   public stopConnection(): void {
     this.hubConnection?.stop();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../core/notification.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
@@ -14,10 +14,22 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, MaterialModule, TablerIconsModule],
 })
-export class NotificationsComponent {
-  notifications = this.notificationService.notifications();
+export class NotificationsComponent implements OnInit {
+  notifications: AppNotification[] = [];
 
-  constructor(private notificationService: NotificationService, private router: Router) {}
+  ngOnInit() {
+    console.log('NotificationsComponent initialized');
+    this.notificationService.getNotifcations().subscribe(n => {
+      this.notifications = n;
+      this.notificationService.getUnreadCount();
+      console.log('Notifications:', this.notifications);
+    });
+  }
+
+
+  constructor(private notificationService: NotificationService, private router: Router) {
+    console.log('NotificationsComponent constructor');
+  }
 
   markAllAsRead(): void {
     this.notificationService.markAllAsRead();
@@ -34,8 +46,12 @@ export class NotificationsComponent {
   handleClick(notification: AppNotification): void {
     console.log('Notification clicked:', notification);
     notification.read = true;
+    this.notificationService.readNotification(notification).subscribe(() => {
+      console.log('Notification marked as read:', notification);
+      
     if (notification.route) {
       this.router.navigate([notification.route]);
     }
+    });
   }
 }

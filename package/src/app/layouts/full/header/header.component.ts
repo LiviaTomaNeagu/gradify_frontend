@@ -19,6 +19,7 @@ import { RoleTypeEnum } from 'src/app/shared/enums/role-type.enum';
 import { NotificationService } from 'src/app/features/notifications/core/notification.service';
 import { AppNotification } from 'src/app/features/notifications/core/notification.interfaces';
 import { NotificationsComponent } from 'src/app/features/notifications/components/notifications/notifications.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -44,15 +45,17 @@ export class HeaderComponent {
     this.unreadCount = this.notificationService.unreadCount();
 
     effect(() => {
+      this.notificationService.getUnreadCount();
       const count = this.unreadCount(); // important să fie cu ()
       console.log("📍 unreadCount changed:", count);
       this.cd.detectChanges();
     });
   }
 
-  get allNotifications(): AppNotification[] {
-    return this.notificationService.notifications()();
-  }
+  get allNotifications(): Observable<AppNotification[]> {
+  return this.notificationService.getNotifcations();
+}
+
 
   ngOnInit() {
     this.currentUserService.currentUser$.subscribe((user) => {
