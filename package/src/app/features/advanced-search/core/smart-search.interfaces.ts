@@ -13,3 +13,9 @@ export interface SmartSearchResultDto {
 export interface SmartSearchRequestDto {
   search: string;
 }
+
+export interface SmartSearchSession {
+  searchTerm: string;
+  results: SmartSearchResultDto[];
+  timestamp: number;
+}
