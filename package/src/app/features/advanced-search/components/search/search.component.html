@@ -51,10 +51,7 @@
   </p>
 </div>
 
-<div
-  class="text-center m-t-40"
-  *ngIf="loading() && results().length != 0"
->
+<div class="text-center m-t-40" *ngIf="loading() && results().length != 0">
   <img
     src="assets/images/logos/advanced-search.gif"
     alt="Searching..."
@@ -90,7 +87,8 @@
             {{ getMatchedLabel(result.matchedSource) }}:
           </p>
         </ng-container>
-        <span *ngIf="result.matchedSource !== 'title'"
+        <span
+          *ngIf="result.matchedSource !== 'title'"
           class="f-s-12"
           [innerHTML]="highlight(result.matchedSnippet, searchTerm())"
         ></span>
@@ -100,7 +98,12 @@
         <a
           mat-button
           [routerLink]="['/forum/details', result.id]"
-          [queryParams]="{ highlight: result.matchedSnippet }"
+          [queryParams]="{
+            match: result.matchedSource,
+            snippet: result.matchedSnippet,
+            search: searchTerm(),
+            page: 1
+          }"
           class="w-100"
         >
           See more

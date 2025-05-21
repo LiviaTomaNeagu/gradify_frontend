@@ -213,3 +213,12 @@
     }
   }
   
+.highlight-banner {
+  background-color: #ffede9;
+  border: 2px solid #fb977d; /* contur complet, nu doar stânga */
+  border-radius: 16px;
+  padding: 2px;
+  box-shadow: 0 2px 6px rgba(37, 83, 185, 0.1);
+  color: #fb977d;
+  font-size: 12px;
+}

@@ -1,29 +1,76 @@
 <div class="container">
   <app-breadcrumbs></app-breadcrumbs>
 
-    <app-forum-card *ngIf="questionAsResponse" [question]="questionAsResponse" [showReadMore]="false"></app-forum-card>
+  <mat-card
+    *ngIf="highlightSnippet && matchType"
+    class="highlight-banner m-b-16"
+  >
+    <mat-card-content
+    class="centered-banner-content">
+      <p class="f-s-14">
+        You can find your results for the search
+        <strong>"{{ searchQuery }}"</strong>
+        in the <strong>{{ formatMatch(matchType) }}</strong>
+        <span *ngIf="page"> (page {{ page }})</span>
+        <span *ngIf="matchType === 'document' || matchType === 'image'">
+          – {{ getContextMessage() }} </span
+        >.
+      </p>
+
+      <span
+        *ngIf="shouldShowSnippet() && matchType !== 'image'"
+        [innerHTML]="highlightSnippet"
+      ></span>
+    </mat-card-content>
+  </mat-card>
+
+  <app-forum-card
+    *ngIf="questionAsResponse"
+    [question]="questionAsResponse"
+    [showReadMore]="false"
+  ></app-forum-card>
 
   <!-- Secțiunea de răspunsuri -->
   <div class="answers-container">
-    <h3 class="section-title" *ngIf="!isLoading && questionDetails?.answers?.length">Answers</h3>
+    <h3
+      class="section-title"
+      *ngIf="!isLoading && questionDetails?.answers?.length"
+    >
+      Answers
+    </h3>
 
     <!-- Lista răspunsurilor -->
-    <mat-card class="answer-card" *ngFor="let answer of questionDetails?.answers">
+    <mat-card
+      class="answer-card"
+      *ngFor="let answer of questionDetails?.answers"
+    >
       <mat-card-content>
         <div class="answer-header">
           <strong>{{ answer.name }} {{ answer.surname }}</strong>
           <span class="occupation">{{ answer.occupationName }}</span>
         </div>
-        <p class="answer-content" [innerHTML]="answer.content"> </p>
+        <p class="answer-content" [innerHTML]="answer.content"></p>
       </mat-card-content>
     </mat-card>
-    
-    <!-- Linie de separare între răspunsuri -->
-    <div class="answer-divider" *ngIf="(questionDetails?.answers?.length ?? 0) > 1"></div>
 
+    <!-- Linie de separare între răspunsuri -->
+    <div
+      class="answer-divider"
+      *ngIf="(questionDetails?.answers?.length ?? 0) > 1"
+    ></div>
   </div>
-  <div class="empty-view" *ngIf="!isLoading && (!questionDetails?.answers || questionDetails?.answers?.length === 0)">
-    <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
+  <div
+    class="empty-view"
+    *ngIf="
+      !isLoading &&
+      (!questionDetails?.answers || questionDetails?.answers?.length === 0)
+    "
+  >
+    <img
+      src="assets/images/logos/logo-empty-state.svg"
+      alt="Empty Icon"
+      class="empty-image"
+    />
     <p class="empty-text">Be the first to answer the question</p>
   </div>
 
@@ -60,15 +107,15 @@
             ></quill-editor>
           </div>
         </div>
-        <button mat-raised-button color="primary" (click)="submitAnswer()">Add answer</button>
+        <button mat-raised-button color="primary" (click)="submitAnswer()">
+          Add answer
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
-  
 
   <!-- Loader -->
   <div class="spinner-container" *ngIf="isLoading">
     <mat-spinner></mat-spinner>
   </div>
-
 </div>
