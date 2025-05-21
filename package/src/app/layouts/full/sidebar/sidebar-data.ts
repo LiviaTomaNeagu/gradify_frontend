@@ -111,6 +111,13 @@ export const navItems: NavItem[] = [
     route: '/chat',
     roles: [RoleTypeEnum.STUDENT, RoleTypeEnum.MENTOR, RoleTypeEnum.COORDINATOR, RoleTypeEnum.ADMIN_CORPORATE],
   },
+    {
+    displayName: 'Advanced Search',
+    iconName: 'rosette',
+    bgcolor: 'primary',
+    route: '/advanced-search',
+    roles: [RoleTypeEnum.STUDENT],
+  },
 
 
 ];
