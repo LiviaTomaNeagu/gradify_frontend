@@ -8,6 +8,8 @@ export interface SmartSearchResultDto {
   matchedSource: string;
   matchedSnippet: string;
   topic: Topic;
+  page?: string;
+  fileName?: string;
 }
 
 export interface SmartSearchRequestDto {

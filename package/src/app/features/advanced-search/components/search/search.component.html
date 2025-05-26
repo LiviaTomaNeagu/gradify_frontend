@@ -95,19 +95,7 @@
       </mat-card-content>
       <mat-divider></mat-divider>
       <div class="text-center p-y-8 p-x-12">
-        <a
-          mat-button
-          [routerLink]="['/forum/details', result.id]"
-          [queryParams]="{
-            match: result.matchedSource,
-            snippet: result.matchedSnippet,
-            search: searchTerm(),
-            page: 1
-          }"
-          class="w-100"
-        >
-          See more
-        </a>
+        <a mat-button (click)="goToDetails(result)" class="w-100"> See more </a>
       </div>
     </mat-card>
   </div>

@@ -15,6 +15,7 @@ import { ForumCardComponent } from '../forum-page/components/forum-card/forum-ca
 import { getMatAutocompleteMissingPanelError } from '@angular/material/autocomplete';
 import { QuillModule } from 'ngx-quill';
 import { BreadcrumbsComponent } from '../forum-page/components/breadcrumbs/breadcrumbs.component';
+import { SmartSearchSessionService } from '../../advanced-search/core/smart-search-session.service';
 
 @Component({
   selector: 'app-question-details-page',
@@ -43,25 +44,30 @@ export class QuestionDetailsPageComponent {
   searchQuery: string | null = null;
   matchType: string | null = null;
   highlightSnippet: string | null = null;
-  page: string | null = null;
+  page: number | null = null;
+  fileName: string | null = null;
 
   constructor(
     private datePipe: DatePipe,
     private forumService: ForumService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private sessionService: SmartSearchSessionService
   ) {
     this.orderId = this.activeRoute.snapshot.params['id'];
   }
 
   ngOnInit(): void {
-    const queryParams = this.activeRoute.snapshot.queryParamMap;
-    this.matchType = queryParams.get('match');
-    this.highlightSnippet = queryParams.get('snippet');
-    this.searchQuery = queryParams.get('search');
-    this.page = queryParams.get('page');
-
+    const context = this.sessionService.getSelectedQuestionContext();
+  if (context) {
+    this.searchQuery = this.sessionService.get()?.searchTerm || '';
+    this.matchType = context.matchedSource;
+    this.highlightSnippet = context.matchedSnippet;
+    this.page = context.page || null;
+    this.fileName = context.fileName || null;
+  }
     this.getAnswersForQuestion();
   }
+
 
   getAnswersForQuestion(): void {
     this.isLoading = true;
@@ -141,9 +147,13 @@ export class QuestionDetailsPageComponent {
 getContextMessage(): string {
   switch (this.matchType) {
     case 'document':
-      return 'in the attached document (exact page not available)';
+      return 'in the attached document:';
     case 'image':
       return 'in the image below';
+    case 'content':
+      return 'in the description below';
+    case 'title':
+      return 'in the title below';
     default:
       return '';
   }

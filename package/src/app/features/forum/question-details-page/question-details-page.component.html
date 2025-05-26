@@ -10,17 +10,14 @@
       <p class="f-s-14">
         You can find your results for the search
         <strong>"{{ searchQuery }}"</strong>
-        in the <strong>{{ formatMatch(matchType) }}</strong>
-        <span *ngIf="page"> (page {{ page }})</span>
-        <span *ngIf="matchType === 'document' || matchType === 'image'">
+        <span>
           – {{ getContextMessage() }} </span
         >.
       </p>
 
-      <span
-        *ngIf="shouldShowSnippet() && matchType !== 'image'"
-        [innerHTML]="highlightSnippet"
-      ></span>
+        <span *ngIf="matchType == 'document' && fileName && page"> 
+      File: {{ fileName }} <span *ngIf="page">(Page {{ page }})</span>
+    </span>
     </mat-card-content>
   </mat-card>
 

@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,6 +15,7 @@ import { MaterialModule } from 'src/app/material.module';
 import { CommonModule } from '@angular/common';
 import { Topic, topicColors } from 'src/app/shared/enums/topic.enum';
 import { SmartSearchSessionService } from '../../core/smart-search-session.service';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-search',
@@ -44,7 +45,7 @@ export class SearchComponent {
 loading = signal<boolean>(false);
 
 
-  constructor(private smartSearchService: SmartSearchService, private sessionService: SmartSearchSessionService) {
+  constructor(private smartSearchService: SmartSearchService, private sessionService: SmartSearchSessionService, private router: Router) {
     console.log(this.results());
   }
 
@@ -104,5 +105,11 @@ getMatchedLabel(source: string): string {
     default: return '';
   }
 }
+
+goToDetails(result: any) {
+  this.sessionService.setSelectedQuestionContext(result.id, result.matchedSource, result.matchedSnippet, result.fileName, result.page);
+  this.router.navigate(['/forum/details', result.id]);
+}
+
 
 }
