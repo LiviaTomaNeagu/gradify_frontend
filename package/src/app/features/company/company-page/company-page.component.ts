@@ -6,11 +6,12 @@ import { TablerIconsModule } from 'angular-tabler-icons';
 import { FormsModule } from '@angular/forms';
 import { UpdateCompanyRequestDTO } from '../core/interfaces/get-company.interface';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-company-page',
   standalone: true,
-  imports: [MaterialModule, TablerIconsModule, FormsModule],
+  imports: [MaterialModule, TablerIconsModule, FormsModule, CommonModule],
   templateUrl: './company-page.component.html',
   styleUrls: ['./company-page.component.scss']
 })

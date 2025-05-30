@@ -1,4 +1,4 @@
-<div class="company-page-container">
+<div class="company-page-container" *ngIf="!isLoading">
 
   <!-- Left Side: Editable Company Details -->
   <mat-card class="company-card">
@@ -58,9 +58,6 @@
         </div>
       </mat-card-content>
 
-      <div class="spinner-container" *ngIf="isLoading">
-          <mat-spinner></mat-spinner>
-      </div>
 
       <div *ngIf="errorMessage" class="error-message">
           <mat-icon class="error-icon">error_outline</mat-icon>
@@ -126,4 +123,8 @@
 
   </div>
 
+</div>
+
+<div class="spinner-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
 </div>

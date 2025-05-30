@@ -18,12 +18,14 @@ import { ToastrService } from 'ngx-toastr';
 export class UsersPageComponent {
 
   users: GetUserResponseDTO[] = [];
+  isLoading: boolean = false;
   constructor(private usersService: UsersService, private userService: CurrentUserService, private toastr:ToastrService) {
   }
 
   displayedColumns: string[] = ['assigned', 'email', 'actions'];
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.loadMentors();
   }
 
@@ -44,9 +46,11 @@ export class UsersPageComponent {
         next: (response) => {
           this.users = response.users;
           console.log("Mentors", this.users);
+          this.isLoading = false;
         },
         error: (err) => {
           console.error(err);
+          this.isLoading = false;
         }
       });
     }
