@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { SmartSearchResultDto } from './smart-search.interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SmartSearchSessionService {
   private session: {
@@ -23,22 +23,27 @@ export class SmartSearchSessionService {
       ...this.session,
       searchTerm,
       results,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
   }
 
   setSelectedQuestionContext(
-  id: string,
-  matchedSource: string,
-  matchedSnippet: string,
-  fileName?: string,
-  page?: number
-): void {
-  if (this.session) {
-    this.session.selectedQuestionContext = { id, matchedSource, matchedSnippet, fileName, page };
+    id: string,
+    matchedSource: string,
+    matchedSnippet: string,
+    fileName?: string,
+    page?: number
+  ): void {
+    if (this.session) {
+      this.session.selectedQuestionContext = {
+        id,
+        matchedSource,
+        matchedSnippet,
+        fileName,
+        page,
+      };
+    }
   }
-}
-
 
   getSelectedQuestionContext() {
     return this.session?.selectedQuestionContext;
@@ -49,10 +54,14 @@ export class SmartSearchSessionService {
   }
 
   clear(): void {
-    this.session = null;
+    if (this.session) {
+      this.session.selectedQuestionContext = undefined;
+    }
   }
 
   isValid(): boolean {
-    return !!this.session && (Date.now() - this.session.timestamp < 10 * 60 * 1000);
+    return (
+      !!this.session && Date.now() - this.session.timestamp < 10 * 60 * 1000
+    );
   }
 }

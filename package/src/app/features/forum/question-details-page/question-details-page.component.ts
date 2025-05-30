@@ -58,16 +58,17 @@ export class QuestionDetailsPageComponent {
 
   ngOnInit(): void {
     const context = this.sessionService.getSelectedQuestionContext();
-  if (context) {
-    this.searchQuery = this.sessionService.get()?.searchTerm || '';
-    this.matchType = context.matchedSource;
-    this.highlightSnippet = context.matchedSnippet;
-    this.page = context.page || null;
-    this.fileName = context.fileName || null;
-  }
+    if (context) {
+      this.searchQuery = this.sessionService.get()?.searchTerm || '';
+      this.matchType = context.matchedSource;
+      this.highlightSnippet = context.matchedSnippet;
+      this.page = context.page || null;
+      this.fileName = context.fileName || null;
+      
+      this.sessionService.clear();
+    }
     this.getAnswersForQuestion();
   }
-
 
   getAnswersForQuestion(): void {
     this.isLoading = true;
@@ -141,22 +142,21 @@ export class QuestionDetailsPageComponent {
   }
 
   shouldShowSnippet(): boolean {
-  return this.matchType !== 'title' && this.matchType !== 'content';
-}
-
-getContextMessage(): string {
-  switch (this.matchType) {
-    case 'document':
-      return 'in the attached document:';
-    case 'image':
-      return 'in the image below';
-    case 'content':
-      return 'in the description below';
-    case 'title':
-      return 'in the title below';
-    default:
-      return '';
+    return this.matchType !== 'title' && this.matchType !== 'content';
   }
-}
 
+  getContextMessage(): string {
+    switch (this.matchType) {
+      case 'document':
+        return 'in the attached document:';
+      case 'image':
+        return 'in the image below';
+      case 'content':
+        return 'in the description below';
+      case 'title':
+        return 'in the title below';
+      default:
+        return '';
+    }
+  }
 }
