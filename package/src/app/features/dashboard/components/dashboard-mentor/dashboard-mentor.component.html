@@ -5,14 +5,11 @@
 </div>
 
 <div class="dashboard-layout" *ngIf="!isLoading">
-
   <!-- 🔹 First Row (Stats in Left Column, Latest Questions in Right Column) -->
   <div class="row first-row">
-
     <!-- Left Column (Total Answers + Users Interacted With) -->
     <div class="left-column">
       <div class="stats-container">
-        
         <!-- 🔹 Total Answers Card -->
         <mat-card class="stat-card full-height">
           <div class="stat-content">
@@ -36,10 +33,12 @@
           </mat-card-header>
           <mat-card-content>
             <h2>{{ totalUsersInteracted }}</h2>
-            <p>You've engaged with this many users through discussions, replies, and comments.</p>
+            <p>
+              You've engaged with this many users through discussions, replies,
+              and comments.
+            </p>
           </mat-card-content>
         </mat-card>
-
       </div>
     </div>
 
@@ -51,14 +50,17 @@
         </mat-card-header>
         <mat-card-content>
           <div class="scroll-container">
-            <app-related-card *ngFor="let question of mapLatestQuestionsToRelatedCard(latestQuestions)" [question]="question"></app-related-card>
+            <app-related-card
+              *ngFor="
+                let question of mapLatestQuestionsToRelatedCard(latestQuestions)
+              "
+              [question]="question"
+            ></app-related-card>
           </div>
         </mat-card-content>
       </mat-card>
     </div>
-
   </div>
-
 
   <!-- 🔹 Second Row (Unchanged) -->
   <div class="row second-row">
@@ -67,38 +69,60 @@
         <mat-card-title>Weekly Activity</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <apx-chart
-        *ngIf="chartOptions" 
-          [series]="chartOptions.series" 
-          [chart]="chartOptions.chart"
-          [xaxis]="chartOptions.xaxis"
-          [yaxis]="chartOptions?.yaxis"
-          [dataLabels]="chartOptions.dataLabels"
-          [tooltip]="chartOptions.tooltip"
-          [stroke]="chartOptions.stroke"
-          [legend]="chartOptions.legend"
-          [grid]="chartOptions.grid"
-          [plotOptions]="chartOptions.plotOptions">
-        </apx-chart>
+        <ng-container *ngIf="hasChartData(); else emptyState">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [xaxis]="chartOptions.xaxis"
+            [yaxis]="chartOptions?.yaxis"
+            [dataLabels]="chartOptions.dataLabels"
+            [tooltip]="chartOptions.tooltip"
+            [stroke]="chartOptions.stroke"
+            [legend]="chartOptions.legend"
+            [grid]="chartOptions.grid"
+            [plotOptions]="chartOptions.plotOptions"
+          >
+          </apx-chart>
+        </ng-container>
+
+   <ng-template #emptyState>
+  <div class="empty-state">
+    <img src="assets/images/logos/logo-empty-state.svg" alt="No data" width="150">
+    <p>No data available</p>
+  </div>
+</ng-template>
+
       </mat-card-content>
     </mat-card>
-    
+
     <mat-card class="cardWithShadow">
       <mat-card-header class="card-header">
         <mat-card-title>Users You Interacted With</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="table-responsive">
-          <table mat-table [dataSource]="getLimitedUsers(topUsers)" class="w-100">
+          <table
+            mat-table
+            [dataSource]="getLimitedUsers(topUsers)"
+            class="w-100"
+          >
             <ng-container matColumnDef="profile">
               <td mat-cell *matCellDef="let user">
                 <div class="d-flex align-items-center">
-                  <img [src]="user.avatarUrl || getDefaultAvatar(user.name)" alt="user-avatar" width="50" height="50" class="rounded-circle avatar-img"/>
+                  <img
+                    [src]="user.avatarUrl || getDefaultAvatar(user.name)"
+                    alt="user-avatar"
+                    width="50"
+                    height="50"
+                    class="rounded-circle avatar-img"
+                  />
                   <div class="m-l-16">
                     <h6 class="mat-subtitle-1 text-truncate-2 f-s-14 f-w-600">
                       {{ user.name }} {{ user.surname }}
                     </h6>
-                    <span class="f-s-14">{{ user.occupation?.name || 'N/A' }}</span>
+                    <span class="f-s-14">{{
+                      user.occupation?.name || "N/A"
+                    }}</span>
                   </div>
                 </div>
               </td>
@@ -110,7 +134,10 @@
               </td>
             </ng-container>
 
-            <tr mat-row *matRowDef="let row; columns: ['profile', 'email']"></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: ['profile', 'email']"
+            ></tr>
           </table>
         </div>
       </mat-card-content>
@@ -118,17 +145,24 @@
   </div>
 
   <!-- 🔹 Favorite Topics Section -->
-<div class="third-row">
-  <h2 class="section-title">Your Most Engaged Topics</h2>
+  <div class="third-row">
+    <h2 class="section-title">Your Most Engaged Topics</h2>
 
-  <mat-card *ngFor="let topic of getLimitedTopics(favoriteTopics)" class="tech-card" 
-            [ngStyle]="{ 'background-color': getTopicColor(topic), 'color': 'white' }">
-    <mat-card-header class="card-header">
-      <mat-card-title>{{ getTopicName(topic) }}</mat-card-title>
-    </mat-card-header>
-  </mat-card>
+    <mat-card
+      *ngFor="let topic of getLimitedTopics(favoriteTopics)"
+      class="tech-card"
+      [ngStyle]="{ 'background-color': getTopicColor(topic), color: 'white' }"
+    >
+      <mat-card-header class="card-header">
+        <mat-card-title>{{ getTopicName(topic) }}</mat-card-title>
+      </mat-card-header>
+    </mat-card>
 
-    <mat-card *ngIf="favoriteTopics.length < 5" class="tech-card discover-more" (click)="redirectToForum()">
+    <mat-card
+      *ngIf="favoriteTopics.length < 5"
+      class="tech-card discover-more"
+      (click)="redirectToForum()"
+    >
       <mat-card-header class="card-header">
         <mat-card-title>Discover More</mat-card-title>
       </mat-card-header>
@@ -137,9 +171,5 @@
         <p>Explore new topics and discussions</p>
       </mat-card-content>
     </mat-card>
-
-
-</div>
-
-
+  </div>
 </div>
