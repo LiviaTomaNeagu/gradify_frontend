@@ -63,6 +63,11 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./features/calendar/calendar.routes').then((m) => m.CalendarRoutes),
       },
+      {
+        path: 'advanced-search',
+        loadChildren: () =>
+          import('./features/advanced-search/advanced-search.routes').then((m) => m.SearchRoutes),
+      }
     ],
   },
   {
