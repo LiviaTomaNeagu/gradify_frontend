@@ -1,60 +1,59 @@
 .forum-card {
-    width: 100%; /* Make the card as wide as its container */
-    margin: 16px 0; /* Add vertical spacing between cards */
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
-  
-    .forum-card-header {
+  width: 100%; /* Make the card as wide as its container */
+  margin: 16px 0; /* Add vertical spacing between cards */
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for better appearance */
+
+  .forum-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #757575; /* Light gray for secondary text */
+  }
+
+  .forum-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 8px 0;
+    color: #333; /* Darker color for visibility */
+  }
+
+  .forum-content {
+    font-size: 16px;
+    color: #555; /* Medium gray for content text */
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .forum-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .forum-author {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #757575; /* Light gray for secondary text */
-    }
-  
-    .forum-title {
-      font-size: 20px;
-      font-weight: 600;
-      margin: 8px 0;
-      color: #333; /* Darker color for visibility */
-    }
-  
-    .forum-content {
-      font-size: 16px;
-      color: #555; /* Medium gray for content text */
-      margin-bottom: 16px;
-      line-height: 1.5;
-    }
-  
-    .forum-card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-  
-      .forum-author {
+
+      .forum-author-details {
         display: flex;
-        align-items: center;
-  
-        .forum-author-details {
-          display: flex;
-          flex-direction: column;
-  
-          .forum-author-name {
-            font-weight: 500;
-            font-size: 14px;
-            margin: 0;
-          }
-  
-          .forum-author-role {
-            font-size: 12px;
-            color: #757575; /* Light gray */
-            margin: 0;
-          }
+        flex-direction: column;
+
+        .forum-author-name {
+          font-weight: 500;
+          font-size: 14px;
+          margin: 0;
+        }
+
+        .forum-author-role {
+          font-size: 12px;
+          color: #757575; /* Light gray */
+          margin: 0;
         }
       }
-
     }
+  }
   .forum-tag {
     display: inline-block;
     padding: 4px 8px;
@@ -67,152 +66,151 @@
 }
 
 .container {
-    margin: 0 auto;
-    padding: 0px;
-  }
-  
-  .answers-container {
-    margin-top: 20px;
-  }
-  
-  .section-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-  }
-  
-  .answer-card {
-    padding: 10px 15px;
-    background: #f1f5f8; // 🔥 Albastru deschis pastel în loc de gri
-    border-left: 4px solid #1e88e5; // 🔥 Culoarea principală a aplicației (înlocuiește #3f51b5)
-    margin-bottom: 5px; // Micșorăm spațiul între carduri
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Ușor reliefat pentru un aspect modern
-  }
-  .answer-header {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 3px; // Micșorăm spațiul dintre nume și content
-  }
-  
-  .occupation {
-    display: block;
-    font-size: 12px;
-    color: gray;
-    margin-bottom: 5px;
-  }
-  
-  .answer-content {
-    font-size: 16px;
-    color: #333;
-    margin-top: 3px; // Micșorăm spațiul dintre occupation și răspuns
-  }
-  .answer-user-info {
-    font-size: 14px;
-    color: #555;
-    margin-top: 3px;
-  }
-  .answer-divider {
-    border-top: 1px solid #ddd;
-    margin: 10px 0;
-  }
-  
-  .response-form {
-    margin-top: 20px;
-    padding: 15px;
-    background: #fff3e0; // 🔥 Portocaliu foarte deschis (pastel)
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-left: 5px solid #ff9800; // 🔥 Bară laterală portocalie mai intensă pentru accent
-  }
-  
-  .full-width {
-    width: 100%;
-  }
-  
-  button {
-    margin-top: 10px;
-    background-color: #ff9800 !important; // 🔥 Portocaliu standard pentru buton
-    color: white !important;
-  }
-  
-  button:hover {
-    background-color: #f57c00 !important; // 🔥 Ușor mai închis la hover
-  }
-  
-  
-  .spinner-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+  margin: 0 auto;
+  padding: 0px;
+}
+
+.answers-container {
+  margin-top: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.answer-card {
+  padding: 10px 15px;
+  background: #f1f5f8; // 🔥 Albastru deschis pastel în loc de gri
+  border-left: 4px solid #1e88e5; // 🔥 Culoarea principală a aplicației (înlocuiește #3f51b5)
+  margin-bottom: 5px; // Micșorăm spațiul între carduri
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); // Ușor reliefat pentru un aspect modern
+}
+.answer-header {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 3px; // Micșorăm spațiul dintre nume și content
+}
+
+.occupation {
+  display: block;
+  font-size: 12px;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+.answer-content {
+  font-size: 16px;
+  color: #333;
+  margin-top: 3px; // Micșorăm spațiul dintre occupation și răspuns
+}
+.answer-user-info {
+  font-size: 14px;
+  color: #555;
+  margin-top: 3px;
+}
+.answer-divider {
+  border-top: 1px solid #ddd;
+  margin: 10px 0;
+}
+
+.response-form {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff3e0; // 🔥 Portocaliu foarte deschis (pastel)
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #ff9800; // 🔥 Bară laterală portocalie mai intensă pentru accent
+}
+
+.full-width {
+  width: 100%;
+}
+
+button {
+  margin-top: 10px;
+  background-color: #ff9800 !important; // 🔥 Portocaliu standard pentru buton
+  color: white !important;
+}
+
+button:hover {
+  background-color: #f57c00 !important; // 🔥 Ușor mai închis la hover
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.empty-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: 60rem;
+  overflow: auto;
+
+  .empty-image {
+    width: 100px; /* Ajustează dimensiunea imaginii */
+    height: auto; /* Păstrează proporțiile imaginii */
+    margin-bottom: 0.5rem; /* Adaugă spațiu între imagine și text */
   }
 
-  .empty-view {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-height: 60rem;
-    overflow: auto;
-
-    .empty-image {
-      width: 100px;          /* Ajustează dimensiunea imaginii */
-      height: auto;          /* Păstrează proporțiile imaginii */
-      margin-bottom: 0.5rem;   /* Adaugă spațiu între imagine și text */
-    }
-  
-    .empty-text {
-      font-size: 1rem;     /* Dimensiunea textului */
-      font-weight: 500;      /* Grosimea textului */
-      color: #9e9e9e;        /* Culoarea textului (ajustează în funcție de temă) */
-    }
+  .empty-text {
+    font-size: 1rem; /* Dimensiunea textului */
+    font-weight: 500; /* Grosimea textului */
+    color: #9e9e9e; /* Culoarea textului (ajustează în funcție de temă) */
   }
-  
-  ::ng-deep .quill-form-field {
-    margin-top: 16px;
-  
-    .quill-editor-wrapper {
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      overflow: hidden;
-      background-color: white;
-  
-      .ql-toolbar.ql-snow {
+}
+
+::ng-deep .quill-form-field {
+  margin-top: 16px;
+
+  .quill-editor-wrapper {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+
+    .ql-toolbar.ql-snow {
+      border: none !important;
+      border-radius: 8px 8px 0 0;
+      background-color: transparent;
+
+      button {
+        background: transparent !important;
         border: none !important;
-        border-radius: 8px 8px 0 0;
-        background-color: transparent;
-  
-        button {
-          background: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
-          border-left: none !important;
-  
-          &:hover {
-            background-color: rgba(0, 0, 0, 0.05) !important;
-            border-radius: 4px;
-          }
-  
-          &.ql-active {
-            background-color: rgba(0, 0, 0, 0.1) !important;
-            border-radius: 4px;
-          }
+        box-shadow: none !important;
+        border-left: none !important;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.05) !important;
+          border-radius: 4px;
         }
-  
-        .ql-formats {
-          border-left: none !important;
+
+        &.ql-active {
+          background-color: rgba(0, 0, 0, 0.1) !important;
+          border-radius: 4px;
         }
       }
-  
-      .ql-container.ql-snow {
-        border: none !important; /* <- elimină marginea superioară */
-        border-radius: 0 0 8px 8px;
-        min-height: 150px;
+
+      .ql-formats {
+        border-left: none !important;
       }
     }
+
+    .ql-container.ql-snow {
+      border: none !important; /* <- elimină marginea superioară */
+      border-radius: 0 0 8px 8px;
+      min-height: 150px;
+    }
   }
-  
+}
+
 .highlight-banner {
   background-color: #ffede9;
   border: 2px solid #fb977d; /* contur complet, nu doar stânga */
@@ -222,8 +220,7 @@
   color: #fb977d;
   font-size: 12px;
 
-  .f-s-14
-  {
+  .f-s-14 {
     margin: 0;
   }
 }
