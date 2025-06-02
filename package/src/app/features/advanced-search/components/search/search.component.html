@@ -84,11 +84,11 @@
         <ng-container *ngIf="result.matchedSource !== 'title'">
           <p class="f-s-12 text-start m-l-8 m-b-4">
             {{ getMatchedIcon(result.matchedSource) }}
-            {{ getMatchedLabel(result.matchedSource) }}:
+            {{ getMatchedLabel(result.matchedSource) }}
           </p>
         </ng-container>
         <span
-          *ngIf="result.matchedSource !== 'title'"
+          *ngIf="result.matchedSource == 'content'"
           class="f-s-12"
           [innerHTML]="highlight(result.matchedSnippet, searchTerm())"
         ></span>

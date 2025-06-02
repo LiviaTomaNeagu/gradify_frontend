@@ -46,7 +46,6 @@
 
         <p class="answer-content" [innerHTML]="answer.content"></p>
 
-        <!-- 🔥 Afișează fișierele atașate acestui răspuns -->
         <div *ngIf="(answer.attachments?.length ?? 0) > 0" class="answer-attachments">
           <h4>Attachments:</h4>
           <ul class="file-list">

@@ -154,7 +154,7 @@ export class QuestionDetailsPageComponent {
   getContextMessage(): string {
     switch (this.matchType) {
       case 'document':
-        return 'in the attached document:';
+        return 'in the attached document';
       case 'image':
         return 'in the image below';
       case 'content':
