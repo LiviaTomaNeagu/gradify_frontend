@@ -16,6 +16,7 @@ import { getMatAutocompleteMissingPanelError } from '@angular/material/autocompl
 import { QuillModule } from 'ngx-quill';
 import { BreadcrumbsComponent } from '../forum-page/components/breadcrumbs/breadcrumbs.component';
 import { SmartSearchSessionService } from '../../advanced-search/core/smart-search-session.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-question-details-page',
@@ -47,11 +48,14 @@ export class QuestionDetailsPageComponent {
   page: number | null = null;
   fileName: string | null = null;
 
+  attachedFiles: File[] = [];
+
   constructor(
     private datePipe: DatePipe,
     private forumService: ForumService,
     private activeRoute: ActivatedRoute,
-    private sessionService: SmartSearchSessionService
+    private sessionService: SmartSearchSessionService,
+    private toastr: ToastrService
   ) {
     this.orderId = this.activeRoute.snapshot.params['id'];
   }
@@ -64,7 +68,7 @@ export class QuestionDetailsPageComponent {
       this.highlightSnippet = context.matchedSnippet;
       this.page = context.page || null;
       this.fileName = context.fileName || null;
-      
+
       this.sessionService.clear();
     }
     this.getAnswersForQuestion();
@@ -96,22 +100,24 @@ export class QuestionDetailsPageComponent {
   submitAnswer(): void {
     this.isLoading = true;
 
-    if (!this.newAnswer.trim()) {
+    if (!this.newAnswer.trim() && this.attachedFiles.length === 0) {
       this.isLoading = false;
       return;
     }
 
-    const newAnswerRequest: AddAnswerRequestDTO = {
-      content: this.newAnswer.trim(),
-    };
-
-    this.newAnswer = '';
+    const formData = new FormData();
+    formData.append('content', this.newAnswer.trim());
+    this.attachedFiles.forEach((file) => {
+      formData.append('files', file);
+    });
 
     const questionId = this.activeRoute.snapshot.paramMap.get('id');
     if (questionId) {
-      this.forumService.addAnswer(questionId, newAnswerRequest).subscribe({
+      this.forumService.addAnswerWithFiles(questionId, formData).subscribe({
         next: () => {
           this.getAnswersForQuestion();
+          this.newAnswer = '';
+          this.attachedFiles = [];
         },
         error: () => {
           this.isLoading = false;
@@ -158,5 +164,57 @@ export class QuestionDetailsPageComponent {
       default:
         return '';
     }
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  triggerFileInput() {
+    const fileInput = document.querySelector(
+      'input[type="file"]'
+    ) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  }
+
+  onFileSelected(event: any) {
+    const files: FileList = event.target.files;
+    this.addValidFiles(files);
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.dataTransfer?.files) {
+      this.addValidFiles(event.dataTransfer.files);
+    }
+  }
+
+  addValidFiles(files: FileList) {
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.name.toLowerCase().endsWith('.pdf')) {
+        this.attachedFiles.push(file);
+      } else {
+        this.toastr.error('Only PDF files are allowed.', 'Sorry!')
+      }
+    }
+  }
+
+  removeFile(index: number) {
+    this.attachedFiles.splice(index, 1);
+  }
+
+  isImage(fileName: string): boolean {
+    return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
   }
 }

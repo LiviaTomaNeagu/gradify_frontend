@@ -30,6 +30,8 @@ export class ForumCardComponent {
       this.topicName = getTopicName(this.question.topic);
       this.topicColor = topicColors[this.question.topic];
       this.formattedDate = this.datePipe.transform(this.question.createdAt, 'dd-MMMM-yyyy') || '';
+      this.question.attachments =  this.getQuestionAttachmentsOnly();
+      console.log('Question:', this.question);
     } else {
       this.toastr.error('Question topic is not defined or invalid!', 'Oops!');
     }
@@ -40,5 +42,10 @@ export class ForumCardComponent {
   isImage(fileName: string): boolean {
     return /\.(jpg|jpeg|png|gif|webp)$/i.test(fileName);
   }
+
+  getQuestionAttachmentsOnly(): any[] {
+  return this.question.attachments?.filter(file => !file.name.includes('/') && file.name != "metadata.json") || [];
+}
+
   
 }
