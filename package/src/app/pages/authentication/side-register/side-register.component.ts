@@ -24,10 +24,10 @@ export class AppSideRegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   form = new FormGroup({
-    uname: new FormControl('', [Validators.required, Validators.minLength(6)]),
-    surname: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    uname: new FormControl('', [Validators.required, Validators.minLength(1)]),
+    surname: new FormControl('', [Validators.required, Validators.minLength(1)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
   get f() {
@@ -45,10 +45,10 @@ export class AppSideRegisterComponent {
     this.errorMessage = null;
 
     const userData = {
-      name: this.form.value.uname!,
-      surname: this.form.value.surname!,
-      email: this.form.value.email!,
-      password: this.form.value.password!,
+      name: this.form.value.uname!.trim(),
+      surname: this.form.value.surname!.trim(),
+      email: this.form.value.email!.trim(),
+      password: this.form.value.password!.trim(),
       role: toRoleTypeEnum(role), // Adăugăm rolul ales
     };
 

@@ -42,28 +42,32 @@ export class CompanyPageComponent implements OnInit {
   }
 
   saveCompanyDetails(): void {
-    console.log("Saving:", this.company);
-    const payload: UpdateCompanyRequestDTO = {
-      occupationId: this.company.id,
-      name: this.company.name,
-      address: this.company.address,
-      city: this.company.city,
-      country: this.company.country,
-      domain: this.company.domain,
-      adminName: this.company.adminName,
-      adminSurname: this.company.adminSurname
-    }
-
-    this.companyService.updateCompanyDetails(payload).subscribe({
-      complete: () => {
-        console.log("Company details successfully updated.");
-        this.toastr.success('Company details successfully updated!', 'Success!');
-      },
-      error: (error) => {
-        this.toastr.error('Error updating company data!', 'Oops!');
-      }
-    });
-    
+  if (!this.company.name?.trim() || !this.company.address?.trim() || !this.company.city?.trim()) {
+    this.toastr.error('Please fill in all required fields.', 'Validation Error');
+    return;
   }
+
+  const payload: UpdateCompanyRequestDTO = {
+    occupationId: this.company.id,
+    name: this.company.name.trim(),
+    address: this.company.address.trim(),
+    city: this.company.city.trim(),
+    country: this.company.country.trim(),
+    domain: this.company.domain?.trim(),
+    adminName: this.company.adminName.trim(),
+    adminSurname: this.company.adminSurname.trim()
+  };
+
+  this.companyService.updateCompanyDetails(payload).subscribe({
+    complete: () => {
+      console.log("Company details successfully updated.");
+      this.toastr.success('Company details successfully updated!', 'Success!');
+    },
+    error: (error) => {
+      this.toastr.error('Error updating company data!', 'Oops!');
+    }
+  });
+}
+
 
 }

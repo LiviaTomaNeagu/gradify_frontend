@@ -16,7 +16,7 @@
               <mat-icon class="info-icon text-primary">home</mat-icon>
               <mat-form-field appearance="outline">
                   <mat-label>Company Name</mat-label>
-                  <input matInput [(ngModel)]="company.name">
+                  <input matInput [(ngModel)]="company.name" required minlength="2">
               </mat-form-field>
           </div>
 
@@ -25,11 +25,11 @@
                 <mat-icon class="info-icon text-primary">person</mat-icon>
                 <mat-form-field appearance="outline">
                     <mat-label>Admin Name</mat-label>
-                    <input matInput [(ngModel)]="company.adminName">
+                    <input matInput [(ngModel)]="company.adminName" required minlength="2">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Admin Surname</mat-label>
-                    <input matInput [(ngModel)]="company.adminSurname">
+                    <input matInput [(ngModel)]="company.adminSurname" required minlength="2">
                 </mat-form-field>
             </div>
 
@@ -38,7 +38,7 @@
                 <mat-icon class="info-icon text-primary">place</mat-icon>
                 <mat-form-field appearance="outline" class="full-width">
                     <mat-label>Address</mat-label>
-                    <input matInput [(ngModel)]="company.address">
+                    <input matInput [(ngModel)]="company.address" required>
                 </mat-form-field>
             </div>
 
@@ -47,11 +47,11 @@
                 <mat-icon class="info-icon text-primary">location_city</mat-icon>
                 <mat-form-field appearance="outline">
                     <mat-label>City</mat-label>
-                    <input matInput [(ngModel)]="company.city">
+                    <input matInput [(ngModel)]="company.city" required minlength="2">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label>Country</mat-label>
-                    <input matInput [(ngModel)]="company.country">
+                    <input matInput [(ngModel)]="company.country" required minlength="2">
                 </mat-form-field>
             </div>
 

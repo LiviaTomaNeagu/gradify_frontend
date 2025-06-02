@@ -5,7 +5,7 @@
   justify-content: center;
   gap: 30px;
   padding: 20px;
-  height: calc(100vh - 109px);
+  height: calc(100vh - 130px);
 }
 
 .company-stats-container {
@@ -33,7 +33,7 @@
 
   ::ng-deep .mat-mdc-card-content
   {
-    padding: 30px 30px 0px 30px;
+    padding: 0px 30px 0px 30px;
   }
 }
 
