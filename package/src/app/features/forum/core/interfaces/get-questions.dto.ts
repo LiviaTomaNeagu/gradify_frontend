@@ -26,6 +26,7 @@ export interface GetQuestionsResponseDTO {
     name : string;
     surname : string;
     occupationName : string;
+    attachments: AttachmentsDTO[];
   }
 
   export interface GetQuestionsRequestDTO {

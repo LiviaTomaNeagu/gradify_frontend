@@ -129,13 +129,19 @@
   width: 100%;
 }
 
-button {
+.add-answer-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.add-answer {
   margin-top: 10px;
   background-color: #ff9800 !important; // 🔥 Portocaliu standard pentru buton
   color: white !important;
 }
 
-button:hover {
+.add-answer:hover {
   background-color: #f57c00 !important; // 🔥 Ușor mai închis la hover
 }
 
@@ -222,5 +228,129 @@ button:hover {
 
   .f-s-14 {
     margin: 0;
+  }
+}
+
+.file-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.custom-file-button {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 8px;
+  min-width: unset;
+  height: auto;
+  line-height: 1.2;
+  border: 1px solid #ff9800;
+  color: #ff9800;
+  background-color: transparent !important;
+  box-shadow: none;
+  margin-left: 1px;
+  display: inline-block;
+
+  &:hover {
+    text-decoration: underline;
+    background-color: rgba(
+      255,
+      152,
+      0,
+      0.05
+    ); /* Un mic efect subtil la hover */
+  }
+}
+
+.drop-message {
+  margin-bottom: 3px;
+}
+
+.file-list-container {
+  margin-top: 10px;
+}
+
+.file-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+}
+
+.remove-file-btn {
+  background: transparent;
+  border: none;
+  color: #ff9800;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    color: #f57c00;
+  }
+}
+
+.answer-attachments {
+  margin-top: 10px;
+
+  h4 {
+    margin: 0 0 6px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+  }
+
+  .file-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    a.file-entry {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      color: #1976d2;
+      font-size: 14px;
+    }
+
+    .file-icon {
+      width: auto !important;
+      height: auto !important;
+      font-size: 18px;
+    }
+
+    .preview-image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      transition: transform 0.2s ease;
+    }
+
+    .preview-image:hover {
+      transform: scale(1.05);
+    }
   }
 }

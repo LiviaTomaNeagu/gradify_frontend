@@ -5,19 +5,16 @@
     *ngIf="highlightSnippet && matchType"
     class="highlight-banner m-b-16"
   >
-    <mat-card-content
-    class="centered-banner-content">
+    <mat-card-content class="centered-banner-content">
       <p class="f-s-14">
         You can find your results for the search
         <strong>"{{ searchQuery }}"</strong>
-        <span>
-          – {{ getContextMessage() }} </span
-        >.
+        <span> – {{ getContextMessage() }} </span>.
       </p>
 
-        <span *ngIf="matchType == 'document' && fileName && page"> 
-      File: {{ fileName }} <span *ngIf="page">(Page {{ page }})</span>
-    </span>
+      <span *ngIf="matchType == 'document' && fileName && page">
+        File: {{ fileName }} <span *ngIf="page">(Page {{ page }})</span>
+      </span>
     </mat-card-content>
   </mat-card>
 
@@ -46,7 +43,37 @@
           <strong>{{ answer.name }} {{ answer.surname }}</strong>
           <span class="occupation">{{ answer.occupationName }}</span>
         </div>
+
         <p class="answer-content" [innerHTML]="answer.content"></p>
+
+        <div *ngIf="(answer.attachments?.length ?? 0) > 0" class="answer-attachments">
+          <h4>Attachments:</h4>
+          <ul class="file-list">
+            <li *ngFor="let file of answer.attachments">
+              <ng-container *ngIf="isImage(file.name); else otherFile">
+                <a [href]="file.url" target="_blank" rel="noopener">
+                  <img
+                    [src]="file.url"
+                    alt="{{ file.name }}"
+                    class="preview-image"
+                  />
+                </a>
+              </ng-container>
+
+              <ng-template #otherFile>
+                <a
+                  [href]="file.url"
+                  class="file-entry"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  <mat-icon class="file-icon">insert_drive_file</mat-icon>
+                  {{ file.name }}
+                </a>
+              </ng-template>
+            </li>
+          </ul>
+        </div>
       </mat-card-content>
     </mat-card>
 
@@ -84,32 +111,72 @@
     </mat-card>
   </div> -->
 
-  <div *ngIf="!isLoading">
-    <mat-card class="response-form">
-      <mat-card-content>
-        <div class="quill-form-field">
-          <label class="mat-body-1"><strong>Answer:</strong></label>
-          <div class="quill-editor-wrapper">
-            <quill-editor
-              [(ngModel)]="newAnswer"
-              [modules]="{
-                toolbar: [
-                  ['bold', 'italic', 'underline'],
-                  ['link', 'code-block'],
-                  [{ list: 'ordered' }, { list: 'bullet' }]
-                ]
-              }"
-              placeholder="Add your answer here..."
-              theme="snow"
-            ></quill-editor>
-          </div>
+  <mat-card class="response-form">
+    <mat-card-content>
+      <div class="quill-form-field">
+        <label class="mat-body-1"><strong>Answer:</strong></label>
+        <div class="quill-editor-wrapper">
+          <quill-editor
+            [(ngModel)]="newAnswer"
+            [modules]="{
+              toolbar: [
+                ['bold', 'italic', 'underline'],
+                ['link', 'code-block'],
+                [{ list: 'ordered' }, { list: 'bullet' }]
+              ]
+            }"
+            placeholder="Add your answer here..."
+            theme="snow"
+          ></quill-editor>
         </div>
-        <button mat-raised-button color="primary" (click)="submitAnswer()">
+      </div>
+
+      <!-- 🆕 AICI adaugi zona de drag & drop -->
+      <div
+        class="drag-drop-zone m-t-16"
+        (drop)="onDrop($event)"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+      >
+        <p class="drop-message">
+          You can also <strong>drag and drop your file here</strong>. (Accepted
+          format: <i>.pdf </i>)
+        </p>
+
+        <button
+          mat-flat-button
+          class="custom-file-button"
+          (click)="triggerFileInput()"
+        >
+          Choose Files
+        </button>
+        <input
+          #fileInput
+          type="file"
+          (change)="onFileSelected($event)"
+          multiple
+          class="hidden-file-input"
+        />
+
+        <div *ngIf="attachedFiles.length > 0" class="file-list-container">
+          <ul class="file-list">
+            <li *ngFor="let file of attachedFiles; let i = index">
+              <span>{{ file.name }}</span>
+              <button class="remove-file-btn" (click)="removeFile(i)">
+                &times;
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 🆕 Sfârșit zona drag & drop -->
+      <div class="add-answer-container">
+        <button mat-raised-button class="add-answer" (click)="submitAnswer()">
           Add answer
         </button>
-      </mat-card-content>
-    </mat-card>
-  </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 
   <!-- Loader -->
   <div class="spinner-container" *ngIf="isLoading">
