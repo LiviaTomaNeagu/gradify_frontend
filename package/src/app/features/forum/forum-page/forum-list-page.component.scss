@@ -6,7 +6,7 @@
       height: 100%;
       display: grid
   ;
-      grid-template-rows: auto minmax(0, 1fr) auto;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
 
   .forum-cards-container {
     display: flex; /* Use Flexbox for layout */

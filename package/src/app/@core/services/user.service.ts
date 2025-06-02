@@ -43,10 +43,12 @@ export class CurrentUserService {
   }
 
   resetCurrentUser(): void {
+    console.log("HERE")
     this.currentUser$.next(null);
   }
 
   logoutUser(): void {
+    console.log("Logging out user");
     this.userApi.logoutUser();
   }
 }

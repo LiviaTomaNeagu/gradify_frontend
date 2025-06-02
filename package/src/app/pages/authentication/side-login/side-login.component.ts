@@ -55,14 +55,15 @@ export class AppSideLoginComponent {
     };
 
     this.authService.login(credentials).subscribe({
-      next: (response) => {
+      next: async (response) => {
         LocalStorageHelper.saveTokensToLocalStorage(response.accessToken, response.refreshToken);
-        this.router.navigate(['/dashboard']);
+        await this.currentUserService.initializeCurrentUser();
         if (response?.role === RoleTypeEnum.ADMIN) {
           this.router.navigate(['/lists/students']);
         } else {
           this.router.navigate(['/dashboard']);
         }
+        console.log("Login successful, current user:", this.currentUserService.getCurrentUserInfo());
       },
       error: (err) => {
         this.errorMessage = err.error.message;  

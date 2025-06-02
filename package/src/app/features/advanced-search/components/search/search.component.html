@@ -61,9 +61,9 @@
   <p class="f-s-16 text-muted">Searching...</p>
 </div>
 
-<div class="row m-t-16" *ngIf="!loading()">
+<div class="search-results" *ngIf="!loading()">
   @for(result of results(); track result.id) {
-  <div class="col-sm-6 col-lg-4 m-b-16">
+  <div class="search-card">
     <mat-card class="cardWithShadow overflow-hidden">
       <div
         class="course-header text-white p-12 d-flex justify-content-between"
