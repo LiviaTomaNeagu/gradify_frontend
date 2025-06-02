@@ -99,7 +99,7 @@ loading = signal<boolean>(false);
 
 getMatchedLabel(source: string): string {
   switch (source) {
-    case 'content': return 'Description';
+    case 'content': return 'Description:';
     case 'image': return 'Image';
     case 'document': return 'Document';
     default: return '';

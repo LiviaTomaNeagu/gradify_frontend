@@ -61,9 +61,9 @@
   <p class="f-s-16 text-muted">Searching...</p>
 </div>
 
-<div class="row m-t-16" *ngIf="!loading()">
+<div class="search-results" *ngIf="!loading()">
   @for(result of results(); track result.id) {
-  <div class="col-sm-6 col-lg-4 m-b-16">
+  <div class="search-card">
     <mat-card class="cardWithShadow overflow-hidden">
       <div
         class="course-header text-white p-12 d-flex justify-content-between"
@@ -84,11 +84,11 @@
         <ng-container *ngIf="result.matchedSource !== 'title'">
           <p class="f-s-12 text-start m-l-8 m-b-4">
             {{ getMatchedIcon(result.matchedSource) }}
-            {{ getMatchedLabel(result.matchedSource) }}:
+            {{ getMatchedLabel(result.matchedSource) }}
           </p>
         </ng-container>
         <span
-          *ngIf="result.matchedSource !== 'title'"
+          *ngIf="result.matchedSource == 'content'"
           class="f-s-12"
           [innerHTML]="highlight(result.matchedSnippet, searchTerm())"
         ></span>

@@ -15,6 +15,17 @@
 }
 
 .chat-app {
+  height: 100%;
+  margin: 0 !important;
+
+  .mat-drawer-container{
+    height: 100%;
+  }
+  .mat-drawer-content{
+    ng-scrollbar{
+          height: calc(100% - 180px) !important;
+    }
+  }
   .mat-drawer {
     width: 320px;
   }

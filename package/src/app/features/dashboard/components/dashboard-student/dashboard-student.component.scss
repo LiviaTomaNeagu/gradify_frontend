@@ -1,9 +1,9 @@
 .dashboard-layout {
     display: grid;
-    grid-template-columns: 25% 25% 50%;
-    grid-template-rows: 180px 210px auto auto;
+    grid-template-columns: 24% 24% 48%;
+    grid-template-rows: 180px 210px auto;
     gap: 24px;
-    padding: 24px;
+    padding: 0 24px;
   
     // Primul rând
     .card-questions {
@@ -34,6 +34,10 @@
     .notes-area {
       grid-column: 1 / span 3;
       grid-row: 3;
+
+      ::ng-deep .mat-mdc-card{
+        margin: 0;
+      }
     }
   
     mat-card {

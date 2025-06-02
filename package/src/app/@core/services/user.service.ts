@@ -16,18 +16,20 @@ export class CurrentUserService {
 
   setCurrentUserInfo(user: CurrentUserResponseInterfaceDTO): void {
     this.currentUser$.next(user);
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   async initializeCurrentUser(): Promise<CurrentUserResponseInterfaceDTO | null> {
-    if (this.currentUser$.value) {
-      return this.currentUser$.value;
-    } else {
-      const response = await this.userApi.getCurrentUserDetails();
-      console.log("Initialize current user", response);
-      if (response === null) return null;
-      this.setCurrentUserInfo(response);
-      return response;
+    const storedUser = this.getCurrentUserInfo();
+    if (storedUser) {
+      return storedUser;
     }
+
+    const response = await this.userApi.getCurrentUserDetails();
+    console.log('Initialize current user', response);
+    if (response === null) return null;
+    this.setCurrentUserInfo(response);
+    return response;
   }
 
   updateCurrentUserName(name: string): void {
@@ -39,15 +41,30 @@ export class CurrentUserService {
   }
 
   getCurrentUserInfo(): CurrentUserResponseInterfaceDTO | null {
-    return this.currentUser$.value;
+    if (this.currentUser$.value) {
+      return this.currentUser$.value;
+    }
+
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      this.currentUser$.next(user);
+      return user;
+    }
+
+    return null;
   }
 
   resetCurrentUser(): void {
+    console.log('HERE');
     this.currentUser$.next(null);
+    localStorage.removeItem('currentUser');
   }
 
   logoutUser(): void {
+    console.log('Logging out user');
     this.userApi.logoutUser();
+    this.resetCurrentUser();
+    this.router.navigate(['/auth/login']);
   }
 }
-
