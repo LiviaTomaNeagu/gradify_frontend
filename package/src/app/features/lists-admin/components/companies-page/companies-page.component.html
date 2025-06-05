@@ -105,16 +105,16 @@
   
             </table>
           </div>
-  
-          <mat-paginator
+        </mat-card-content>
+       
+      </div>
+       <mat-paginator
             class="custom-paginator"
             [pageSize]="pageSize"
             [length]="totalCompanies"
             [pageIndex]="currentPage"
             (page)="onPageChange($event)">
           </mat-paginator>
-        </mat-card-content>
-      </div>
     </mat-card>
   </div>
   

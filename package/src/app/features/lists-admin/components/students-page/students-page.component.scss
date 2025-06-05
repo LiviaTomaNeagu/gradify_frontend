@@ -1,6 +1,5 @@
-.students-page
-{
-  height: calc(100vh - 100px);
+.students-page {
+  height: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -8,10 +7,12 @@
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   border-radius: 8px;
   overflow: hidden;
+  margin-bottom: 0;
+  height: 100%;
 }
 
 .header-container {
-  background-color: #FA896B;
+  background-color: #fa896b;
   color: white;
   padding: 20px;
   display: flex;
@@ -25,7 +26,7 @@
 }
 
 .total-students-card {
-  background-color: #0285DC; 
+  background-color: #0285dc;
   color: white;
   padding: 8px 16px;
   border-radius: 8px;
@@ -49,9 +50,8 @@
   text-align: center;
 }
 
-.total-students-card
-{
-  width:240px;
+.total-students-card {
+  width: 240px;
   margin-bottom: 0;
 }
 
@@ -83,9 +83,24 @@
 .table {
   display: flex;
   flex-direction: column;
-  align-items: stretch; 
+  align-items: stretch;
   gap: 10px;
   padding: 16px;
+  height: calc(100% - 85px);
+
+  .table-content-container{
+    height: calc(100% - 100px);
+    overflow: auto;
+    padding-top: 1rem;
+  }
+
+  ::ng-deep .mat-mdc-card-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
 }
 
 .search-container {
@@ -97,4 +112,3 @@
 .search-container mat-form-field {
   width: 38%;
 }
-
