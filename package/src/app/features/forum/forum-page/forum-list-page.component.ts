@@ -32,6 +32,7 @@ export class ForumPageComponent implements OnInit {
   totalQuestions: number = 0; 
   isLoading: boolean = false;
   isButtonVisible = false;
+  firstLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
@@ -54,7 +55,8 @@ export class ForumPageComponent implements OnInit {
   }
 
   private loadQuestions(): void {
-    this.isLoading = true;
+    if(!this.firstLoading)
+      this.isLoading = true;
 
     const selectedTopicIds = this.selectedTopics.map((topic) => topic.key);
     const payload = {
@@ -69,10 +71,13 @@ export class ForumPageComponent implements OnInit {
         this.questionsResponse = response;
         this.totalQuestions = response.totalQuestions;
         this.isLoading = false;
+        this.firstLoading = false;
       },
       error: (err) => {
         this.toastr.error('Failed to load questions!', 'Oops!');
         this.questionsResponse = null;
+        this.isLoading = false;
+        this.firstLoading = false;
       },
     });
   }

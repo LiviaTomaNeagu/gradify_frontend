@@ -1,80 +1,121 @@
 <div class="forum-page-container">
-
   <div class="forum-header">
     <p class="forum-page-title">Forum: Learn & Grow Together</p>
-    <button *ngIf="isButtonVisible" mat-flat-button color="primary" class="add-question-btn" (click)="openQuestionModal()" >
+    <button
+      *ngIf="isButtonVisible && !firstLoading"
+      mat-flat-button
+      color="primary"
+      class="add-question-btn"
+      (click)="openQuestionModal()"
+    >
       + Add Question
     </button>
   </div>
-  
-    <mat-card-content>
-    
-      <div class="search-container">
-        <mat-form-field appearance="outline" class="search-bar">
-          <mat-label>Search question</mat-label>
-          <input matInput type="text" (input)="onSearchChange($event)" placeholder="Enter text">
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-    
+
+  <div *ngIf="firstLoading" class="loading-overlay">
+    <img src="assets/images/logos/GIFGRADIFY.gif" alt="Loading..." />
+  </div>
+
+  <mat-card-content *ngIf="!firstLoading">
+    <div class="search-container">
+      <mat-form-field appearance="outline" class="search-bar">
+        <mat-label>Search question</mat-label>
+        <input
+          matInput
+          type="text"
+          (input)="onSearchChange($event)"
+          placeholder="Enter text"
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="dropdown-button"
+        [matMenuTriggerFor]="menu"
+      >
+        Select Topic
+      </button>
+      <mat-menu
+        #menu="matMenu"
+        overlayPanelClass="topic-menu"
+        yPosition="below"
+      >
         <button
-          mat-flat-button
-          color="primary"
-          class="dropdown-button"
-          [matMenuTriggerFor]="menu"
-        >
-          Select Topic
-        </button>
-        <mat-menu #menu="matMenu" overlayPanelClass="topic-menu" yPosition="below">
-          <button
-            mat-menu-item
-            *ngFor="let topic of topicsList"
-            (click)="addTopic(topic)"
-          >
-            {{ topic.value }}
-          </button>
-        </mat-menu>
-      </div>
-    
-      <mat-chip-set aria-label="Selected topics">
-        <mat-chip
-          *ngFor="let topic of selectedTopics"
-          (removed)="removeTopic(topic)"
-          [removable]="true"
-          class="f-s-14"
+          mat-menu-item
+          *ngFor="let topic of topicsList"
+          (click)="addTopic(topic)"
         >
           {{ topic.value }}
-          <button
-            matChipRemove
-            [attr.aria-label]="'Remove ' + topic.value"
-          >
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </mat-chip>
-      </mat-chip-set>
-      
-    </mat-card-content>
-    
-    <div *ngIf="!isLoading && (questionsResponse?.questions && questionsResponse?.questions?.length != 0)" class="app-forum-card">
-      <app-forum-card
-        *ngFor="let question of questionsResponse?.questions"
-        [question]="question" [showReadMore]="true"
-      ></app-forum-card>
+        </button>
+      </mat-menu>
     </div>
-    
-    <div class="spinner-container" *ngIf="isLoading">
-      <mat-spinner></mat-spinner>
-    </div>
-    
-    <div class="empty-view" *ngIf="!isLoading && (!questionsResponse?.questions || questionsResponse?.questions?.length === 0)">
-      <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
-      <p class="empty-text">No questions found. Try changing the search or adding a topic filter.</p>
-    </div>
-    
-    <mat-paginator
+
+    <mat-chip-set aria-label="Selected topics">
+      <mat-chip
+        *ngFor="let topic of selectedTopics"
+        (removed)="removeTopic(topic)"
+        [removable]="true"
+        class="f-s-14"
+      >
+        {{ topic.value }}
+        <button matChipRemove [attr.aria-label]="'Remove ' + topic.value">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-set>
+  </mat-card-content>
+
+  <div
+    *ngIf="
+      !isLoading &&
+      questionsResponse?.questions &&
+      questionsResponse?.questions?.length != 0
+    "
+    class="app-forum-card"
+  >
+    <app-forum-card
+      *ngFor="let question of questionsResponse?.questions"
+      [question]="question"
+      [showReadMore]="true"
+    ></app-forum-card>
+  </div>
+
+  <div class="spinner-container" *ngIf="isLoading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div
+    class="empty-view"
+    *ngIf="
+      !isLoading &&
+      (!questionsResponse?.questions ||
+        questionsResponse?.questions?.length === 0) &&
+      !firstLoading
+    "
+  >
+    <img
+      src="assets/images/logos/logo-empty-state.svg"
+      alt="Empty Icon"
+      class="empty-image"
+    />
+    <p class="empty-text">
+      No questions found. Try changing the search or adding a topic filter.
+    </p>
+  </div>
+
+  <mat-paginator
+    *ngIf="
+      questionsResponse?.questions &&
+      questionsResponse?.questions?.length != 0 &&
+      !firstLoading
+    "
     id="forum-page-paginator"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[5, 10, 20]"
-      [length]="totalQuestions"
-      (page)="onPageChange($event)">
-    </mat-paginator>
-    </div>
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    [length]="totalQuestions"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
