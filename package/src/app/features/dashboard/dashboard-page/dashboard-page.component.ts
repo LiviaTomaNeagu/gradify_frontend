@@ -12,7 +12,8 @@ import { DashboardStudentComponent } from "../components/dashboard-student/dashb
   selector: 'app-dashboard-page',
   standalone: true,
   imports: [CommonModule, DashboardMentorComponent, MaterialModule, DashboardStudentComponent], // Importă componenta mentorului
-  templateUrl: './dashboard-page.component.html'
+  templateUrl: './dashboard-page.component.html',
+  styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
   isMentor: boolean = false;

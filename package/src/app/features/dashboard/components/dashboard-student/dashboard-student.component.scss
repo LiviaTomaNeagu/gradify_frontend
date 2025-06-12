@@ -296,6 +296,7 @@
       flex-grow: 1;
       overflow-y: auto;
       max-height: calc(500px - 120px);
+      padding: 10px;
   
       &::-webkit-scrollbar {
         width: 8px;
