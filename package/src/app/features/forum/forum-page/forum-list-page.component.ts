@@ -21,7 +21,6 @@ import { MatChipsModule } from '@angular/material/chips';
   imports: [MaterialModule, CommonModule, ForumCardComponent, MatChipsModule],
   styleUrls: ['./forum-list-page.component.scss'],
 })
-
 export class ForumPageComponent implements OnInit {
   questionsResponse: GetQuestionsResponseDTO | null = null;
   topicsList: { key: number; value: string }[] = [];
@@ -29,14 +28,19 @@ export class ForumPageComponent implements OnInit {
   searchText: string = '';
   pageSize: number = 5;
   currentPage: number = 0;
-  totalQuestions: number = 0; 
+  totalQuestions: number = 0;
   isLoading: boolean = false;
   isButtonVisible = false;
   firstLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator | null = null;
 
-  constructor(private dialog: MatDialog,private forumService: ForumService, private userService: CurrentUserService, private toastr: ToastrService) {}
+  constructor(
+    private dialog: MatDialog,
+    private forumService: ForumService,
+    private userService: CurrentUserService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.initializeTopics();
@@ -48,15 +52,16 @@ export class ForumPageComponent implements OnInit {
   }
 
   private initializeTopics(): void {
-    this.topicsList = Object.entries(TopicCustomMapping).map(([key, value]) => ({
-      key: +key,
-      value: value,
-    }));
+    this.topicsList = Object.entries(TopicCustomMapping).map(
+      ([key, value]) => ({
+        key: +key,
+        value: value,
+      })
+    );
   }
 
   private loadQuestions(): void {
-    if(!this.firstLoading)
-      this.isLoading = true;
+    if (!this.firstLoading) this.isLoading = true;
 
     const selectedTopicIds = this.selectedTopics.map((topic) => topic.key);
     const payload = {
@@ -85,13 +90,15 @@ export class ForumPageComponent implements OnInit {
   addTopic(topic: { key: number; value: string }): void {
     if (!this.selectedTopics.find((t) => t.key === topic.key)) {
       this.selectedTopics.push(topic);
-      this.resetPagination(); 
+      this.resetPagination();
       this.loadQuestions();
     }
   }
 
   removeTopic(topic: { key: number; value: string }): void {
-    this.selectedTopics = this.selectedTopics.filter((t) => t.key !== topic.key);
+    this.selectedTopics = this.selectedTopics.filter(
+      (t) => t.key !== topic.key
+    );
     this.resetPagination();
     this.loadQuestions();
   }
@@ -120,26 +127,28 @@ export class ForumPageComponent implements OnInit {
     const dialogRef = this.dialog.open(AddQuestionModalComponent, {
       width: '700px',
       maxWidth: '90vw',
-      disableClose: true
+      disableClose: true,
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog result:', result);
       if (result) {
         const payload: AddQuestionRequestDTO = {
           title: result.title,
           descriptionHtml: result.questionDescription,
-          topic: result.topic.key
+          topic: result.topic.key,
         };
-    
+
         this.forumService.addQuestion(payload, result.attachedFiles).subscribe({
-          next: () => this.toastr.success('Question posted successfully!'),
-          error: () => this.toastr.error('Failed to post question.')
+          next: () => {
+            this.loadQuestions();
+            this.toastr.success('Question posted successfully!');
+          },
+          error: () => this.toastr.error('Failed to post question.'),
         });
 
-        this.loadQuestions(); // Reload questions after adding a new one
+        // Reload questions after adding a new one
       }
     });
-    
   }
 }
