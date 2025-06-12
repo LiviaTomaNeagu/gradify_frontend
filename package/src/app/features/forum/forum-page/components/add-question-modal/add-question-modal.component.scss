@@ -1,214 +1,207 @@
 .full-width {
-    width: 100%;
-    padding-top: 5px;
+  width: 100%;
+  padding-top: 5px;
+}
+
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.back-button {
+  background-color: #bad9f7 !important; /* Red background */
+  color: #1976d2 !important; /* White text */
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #4ea2f5 !important; /* Darker red on hover */
   }
-  
-  .step-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+}
+
+.next-button {
+  background-color: #1976d2 !important; /* Blue color */
+  color: white !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #1565c0 !important; /* Darker blue */
   }
-  
-  .back-button {
-    background-color: #bad9f7 !important; /* Red background */
-    color: #1976d2 !important; /* White text */
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-  
-    &:hover {
-      background-color: #4ea2f5 !important; /* Darker red on hover */
-    }
+}
+
+.cancel-button {
+  background-color: #fceeea !important; /* Blue color */
+  color: #e87e5d !important;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #e87e5d !important; /* Darker blue */
+    color: #fceeea !important;
   }
-  
-  .next-button {
-    background-color: #1976d2 !important; /* Blue color */
-    color: white !important;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-  
-    &:hover {
-      background-color: #1565c0 !important; /* Darker blue */
-    }
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.empty-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  max-height: 6rem;
+  overflow: hidden;
+
+  .empty-image {
+    width: 60px;
+    height: auto;
   }
 
-  .cancel-button {
-    background-color: #fceeea !important; /* Blue color */
-    color: #e87e5d !important;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-  
-    &:hover {
-      background-color: #e87e5d !important; /* Darker blue */
-      color: #fceeea !important; 
-    }
+  .empty-text {
+    font-size: 1rem;
+    font-weight: 300;
+    color: #9e9e9e;
   }
-  .loading-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-  
-  .empty-view {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    max-height: 6rem;
-    overflow: hidden;
+}
 
-    .empty-image {
-      width: 60px;
-      height: auto;
-    }
-  
-    .empty-text {
-      font-size: 1rem;
-      font-weight: 300;
-      color: #9e9e9e;
-    }
+.quill-form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.quill-editor-wrapper {
+  border: 1px solid rgba(0, 0, 0, 0.23);
+  border-radius: 4px;
+  background: #fff;
+  padding: 4px;
+  min-height: 180px;
+
+  // editor inner content
+  ::ng-deep .ql-editor {
+    min-height: 130px;
+    font-size: 14px;
+    padding: 8px;
   }
 
-
-  .quill-form-field {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 16px;
+  // toolbar spacing fix
+  ::ng-deep .ql-toolbar {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    margin-bottom: 4px;
   }
-  
-  .quill-editor-wrapper {
-    border: 1px solid rgba(0, 0, 0, 0.23);
-    border-radius: 4px;
-    background: #fff;
-    padding: 4px;
-    min-height: 180px;
-  
-    // editor inner content
-    ::ng-deep .ql-editor {
-      min-height: 130px;
-      font-size: 14px;
-      padding: 8px;
-    }
-  
-    // toolbar spacing fix
-    ::ng-deep .ql-toolbar {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      margin-bottom: 4px;
-    }
-  
-    ::ng-deep .ql-container {
-      border: none;
-    }
+
+  ::ng-deep .ql-container {
+    border: none;
   }
-  
+}
 
+.file-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
 
+.hidden-file-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file-list {
+  list-style: none;
+  padding-left: 0;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.drag-drop-zone {
+  padding: 12px 16px; // mai puțin padding = zonă mai mică
+  border-radius: 12px;
+  background-color: #fff8ee;
+  text-align: center;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #fff1db;
+  }
+
+  &.dragover {
+    background-color: #ffe6c7;
+  }
+
+  .drop-message {
+    font-style: italic;
+    margin: 8px 0; // mai puțin spațiu sus-jos
+    color: #555;
+    font-size: 14px;
+  }
 
   .file-button {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .hidden-file-input {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  
-  .file-list {
-    list-style: none;
-    padding-left: 0;
-    font-size: 13px;
     margin-top: 8px;
   }
-  
 
-  .drag-drop-zone {
-    padding: 12px 16px; // mai puțin padding = zonă mai mică
-    border-radius: 12px;
-    background-color: #fff8ee;
-    text-align: center;
-    transition: background-color 0.3s;
-  
-    &:hover {
-      background-color: #fff1db;
-    }
-  
-    &.dragover {
-      background-color: #ffe6c7;
-    }
-  
-    .drop-message {
-      font-style: italic;
-      margin: 8px 0; // mai puțin spațiu sus-jos
-      color: #555;
-      font-size: 14px;
-    }
-  
-    .file-button {
-      margin-top: 8px;
-    }
-  
-    .file-list {
-      margin-top: 8px;
-      font-size: 13px;
-    }
-  
-    .hidden-file-input {
-      display: none;
-    }
-  }
-  .close-button {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 10;
-    color: rgba(0, 0, 0, 0.54); // sau altă culoare pentru contrast
-    transition: color 0.2s ease;
-  
-    &:hover {
-      color: rgba(0, 0, 0, 0.87);
-    }
-  }
-  
-  
-
-  ::ng-deep .mat-horizontal-stepper-header .mat-step-label {
-    overflow: visible;
-    white-space: normal;
-    line-height: 1.4;
-    max-width: 100%;
-    display: inline-block;
+  .file-list {
+    margin-top: 8px;
+    font-size: 13px;
   }
 
-  .question-type-selector {
-    text-align: center;
-    padding: 32px 24px;
-  
-    .button-group {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 24px;
-  
-      button {
-        font-size: 16px;
-        padding: 12px 24px;
-      }
+  .hidden-file-input {
+    display: none;
+  }
+}
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  color: rgba(0, 0, 0, 0.54); // sau altă culoare pentru contrast
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+::ng-deep .mat-horizontal-stepper-header .mat-step-label {
+  overflow: visible;
+  white-space: normal;
+  line-height: 1.4;
+  max-width: 100%;
+  display: inline-block;
+}
+
+.question-type-selector {
+  text-align: center;
+  padding: 32px 24px;
+
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+
+    button {
+      font-size: 16px;
+      padding: 12px 24px;
     }
   }
-  
+}
+

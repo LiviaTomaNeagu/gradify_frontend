@@ -1,8 +1,11 @@
-
-
 <h2 mat-dialog-title>Add a New Question</h2>
 
-<button mat-icon-button class="close-button" (click)="onCancel()" aria-label="Close dialog">
+<button
+  mat-icon-button
+  class="close-button"
+  (click)="onCancel()"
+  aria-label="Close dialog"
+>
   <mat-icon>close</mat-icon>
 </button>
 
@@ -10,159 +13,205 @@
   <h2 mat-dialog-title>How can we help?</h2>
 
   <div class="button-group">
-    <button mat-flat-button color="primary" (click)="chooseWizard(false)">I want to ask a specific question</button>
-    <button  mat-flat-button color="warn" (click)="chooseWizard(true)">I need help structuring my question</button>
+    <button mat-flat-button color="primary" (click)="chooseWizard(false)">
+      I want to ask a specific question
+    </button>
+    <button mat-flat-button color="warn" (click)="chooseWizard(true)">
+      I need help structuring my question
+    </button>
   </div>
 </div>
 
 <div class="wizad" *ngIf="showWizard === true">
-  <app-question-wizard  (questionGenerated)="handleGeneratedQuestion($event)"></app-question-wizard>
-  </div>
-
-<div class="specific-question" *ngIf="showWizard === false">
-
-<mat-dialog-content class="mat-typography">
-  <mat-horizontal-stepper #stepper [linear]="true">
-    
-    <!-- Step 1: Title -->
-    <mat-step [stepControl]="titleFormGroup">
-      <form [formGroup]="titleFormGroup">
-        <ng-template matStepLabel>Title</ng-template>
-    
-        <!-- Titlu întrebării -->
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Question Title</mat-label>
-          <input matInput formControlName="title" placeholder="Enter your question title" />
-          <mat-error *ngIf="titleFormGroup.get('title')?.hasError('required')">
-            Title is required
-          </mat-error>
-        </mat-form-field>
-    
-        <!-- Selectare Topic -->
-        <div class="m-b-16">
-          <label class="mat-body-1 m-r-8">Select Topic:</label>
-          <mat-form-field appearance="outline" class="full-width m-t-16">
-            <mat-label>Topic</mat-label>
-            <mat-select formControlName="topic">
-              <mat-option *ngFor="let topic of topicsList" [value]="topic">
-                {{ topic.value }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="titleFormGroup.get('topic')?.hasError('required')">
-              Topic is required
-            </mat-error>
-          </mat-form-field>
-          
-        </div>
-    
-        <!-- Buton Next -->
-        <mat-dialog-actions class="step-actions">
-          <button mat-button matStepperNext class="next-button" (click)="onFirstNext()">Next</button>
-        </mat-dialog-actions>
-      </form>
-    </mat-step>
-    
-  <!-- Step 2: Related Questions + Details -->
-    <mat-step>
-        <ng-template matStepLabel>Related questions</ng-template>
-    
-        <div *ngIf="relatedQuestions.length > 0" class="related-questions-header">
-            <p>Before posting, check out these related questions. You might find something useful!</p>
-          </div>
-
-        <div *ngIf="isLoadingRelatedQuestions" class="spinner-container">
-            <mat-spinner></mat-spinner>
-        </div>
-    
-        <div *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length > 0" class="related-questions">
-            <app-related-card 
-            *ngFor="let relatedQuestion of relatedQuestions"
-            [question]="relatedQuestion"
-            [showReadMore]="true">
-            </app-related-card>
-        </div>
-
-        <div *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length === 0" class="empty-view">
-            <img src="assets/images/logos/logo-empty-state.svg" alt="Empty Icon" class="empty-image"/>
-            <p class="empty-text">No related questions found.</p>
-        </div>
-    
-        <mat-dialog-actions class="step-actions">
-            <button mat-button class="back-button" matStepperPrevious>Back</button>
-            <button mat-flat-button class="next-button" matStepperNext (click)="onSecondNext()">Still need help? Continue</button>
-        </mat-dialog-actions>          
-    </mat-step>
-  
-
-    <!-- Step 3: Confirm & Describe -->
-<mat-step>
-  <ng-template matStepLabel>Confirm & Describe</ng-template>
-
-  <div class="m-b-16">
-    <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
-  </div>
-
-  <!-- Description -->
-  <div class="quill-form-field">
-    <label class="mat-body-1"><strong>Description:</strong></label>
-    <div class="quill-editor-wrapper">
-      <quill-editor
-        [(ngModel)]="questionDescription"
-        [modules]="{
-          toolbar: [
-            ['bold', 'italic', 'underline'],
-            ['link', 'code-block'],
-            [{ list: 'ordered' }, { list: 'bullet' }]
-          ]
-        }"
-        placeholder="Write more details about your question here..."
-        theme="snow"
-      ></quill-editor>
-    </div>
-  </div>
-  
-  
-
-<!-- Drag and Drop Upload -->
-<div
-  class="drag-drop-zone"
-  (drop)="onDrop($event)"
-  (dragover)="onDragOver($event)"
-  (dragleave)="onDragLeave($event)"
->
-  <p class="drop-message">You can also <strong>drag and drop your file here</strong>. (Accepted
-          format: <i>.pdf, .jpg, .png </i>)</p>
-
-  <!-- Legăm <label> de <input> -->
-    <button mat-flat-button class="bg-success text-white file-button" (click)="triggerFileInput()">Choose Files</button>
-    <input
-      #fileInput
-      type="file"
-      (change)="onFileSelected($event)"
-      multiple
-      class="hidden-file-input"
-    />
-
-
-  <div *ngIf="attachedFiles.length > 0" class="m-t-8">
-    <ul class="file-list">
-      <li *ngFor="let file of attachedFiles">{{ file.name }}</li>
-    </ul>
-  </div>
+  <app-question-wizard
+    (questionGenerated)="handleGeneratedQuestion($event)"
+  ></app-question-wizard>
 </div>
 
+<div class="specific-question" *ngIf="showWizard === false">
+  <mat-dialog-content class="mat-typography">
+    <mat-horizontal-stepper #stepper [linear]="true">
+      <!-- Step 1: Title -->
+      <mat-step [stepControl]="titleFormGroup">
+        <form [formGroup]="titleFormGroup">
+          <ng-template matStepLabel>Title</ng-template>
 
-  
-  <!-- Action Buttons -->
-  <mat-dialog-actions class="step-actions">
-    <button mat-button class="back-button" matStepperPrevious>Back</button>
-    <button mat-flat-button color="primary" (click)="onSubmit()">Post Question</button>
-  </mat-dialog-actions>
-</mat-step>
+          <!-- Titlu întrebării -->
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Question Title</mat-label>
+            <input
+              matInput
+              formControlName="title"
+              placeholder="Enter your question title"
+            />
+            <mat-error
+              *ngIf="titleFormGroup.get('title')?.hasError('required')"
+            >
+              Title is required
+            </mat-error>
+          </mat-form-field>
 
+          <!-- Selectare Topic -->
+          <div class="m-b-16">
+            <label class="mat-body-1 m-r-8">Select Topic:</label>
+            <mat-form-field appearance="outline" class="full-width m-t-16">
+              <mat-label>Topic</mat-label>
+              <mat-select formControlName="topic">
+                <mat-option *ngFor="let topic of topicsList" [value]="topic">
+                  {{ topic.value }}
+                </mat-option>
+              </mat-select>
+              <mat-error
+                *ngIf="titleFormGroup.get('topic')?.hasError('required')"
+              >
+                Topic is required
+              </mat-error>
+            </mat-form-field>
+          </div>
 
+          <!-- Buton Next -->
+          <mat-dialog-actions class="step-actions">
+            <button
+              mat-button
+              matStepperNext
+              class="next-button"
+              (click)="onFirstNext()"
+            >
+              Next
+            </button>
+          </mat-dialog-actions>
+        </form>
+      </mat-step>
 
-  </mat-horizontal-stepper>
-</mat-dialog-content>
+      <!-- Step 2: Related Questions + Details -->
+      <mat-step>
+        <ng-template matStepLabel>Related questions</ng-template>
 
+        <div
+          *ngIf="relatedQuestions.length > 0"
+          class="related-questions-header"
+        >
+          <p>
+            Before posting, check out these related questions. You might find
+            something useful!
+          </p>
+        </div>
+
+        <div *ngIf="isLoadingRelatedQuestions" class="spinner-container">
+          <mat-spinner></mat-spinner>
+        </div>
+
+        <div
+          *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length > 0"
+          class="related-questions"
+        >
+          <app-related-card
+            *ngFor="let relatedQuestion of relatedQuestions"
+            [question]="relatedQuestion"
+            [showReadMore]="true"
+          >
+          </app-related-card>
+        </div>
+
+        <div
+          *ngIf="!isLoadingRelatedQuestions && relatedQuestions.length === 0"
+          class="empty-view"
+        >
+          <img
+            src="assets/images/logos/logo-empty-state.svg"
+            alt="Empty Icon"
+            class="empty-image"
+          />
+          <p class="empty-text">No related questions found.</p>
+        </div>
+
+        <mat-dialog-actions class="step-actions">
+          <button mat-button class="back-button" matStepperPrevious>
+            Back
+          </button>
+          <button
+            mat-flat-button
+            class="next-button"
+            matStepperNext
+            (click)="onSecondNext()"
+          >
+            Still need help? Continue
+          </button>
+        </mat-dialog-actions>
+      </mat-step>
+
+      <!-- Step 3: Confirm & Describe -->
+      <mat-step>
+        <ng-template matStepLabel>Confirm & Describe</ng-template>
+
+        <div class="m-b-16">
+          <p><strong>Title:</strong> {{ titleFormGroup.value.title }}</p>
+        </div>
+
+        <!-- Description -->
+        <div class="quill-form-field">
+          <label class="mat-body-1"><strong>Description:</strong></label>
+          <div class="quill-editor-wrapper">
+            <quill-editor
+              [(ngModel)]="questionDescription"
+              [modules]="{
+                toolbar: [
+                  ['bold', 'italic', 'underline'],
+                  ['link', 'code-block'],
+                  [{ list: 'ordered' }, { list: 'bullet' }]
+                ]
+              }"
+              placeholder="Write more details about your question here..."
+              theme="snow"
+            ></quill-editor>
+          </div>
+        </div>
+
+        <!-- Drag and Drop Upload -->
+        <div
+          class="drag-drop-zone"
+          (drop)="onDrop($event)"
+          (dragover)="onDragOver($event)"
+          (dragleave)="onDragLeave($event)"
+        >
+          <p class="drop-message">
+            You can also <strong>drag and drop your file here</strong>.
+            (Accepted format: <i>.pdf, .jpg, .png </i>)
+          </p>
+
+          <!-- Legăm <label> de <input> -->
+          <button
+            mat-flat-button
+            class="bg-success text-white file-button"
+            (click)="triggerFileInput()"
+          >
+            Choose Files
+          </button>
+          <input
+            #fileInput
+            type="file"
+            (change)="onFileSelected($event)"
+            multiple
+            class="hidden-file-input"
+          />
+
+          <div *ngIf="attachedFiles.length > 0" class="m-t-8">
+            <ul class="file-list">
+              <li *ngFor="let file of attachedFiles">{{ file.name }}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <mat-dialog-actions class="step-actions">
+          <button mat-button class="back-button" matStepperPrevious>
+            Back
+          </button>
+          <button mat-flat-button color="primary" (click)="onSubmit()">
+            Post Question
+          </button>
+        </mat-dialog-actions>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </mat-dialog-content>
 </div>

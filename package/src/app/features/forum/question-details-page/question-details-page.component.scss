@@ -148,7 +148,8 @@
 .spinner-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  height: 100%;
 }
 
 .empty-view {

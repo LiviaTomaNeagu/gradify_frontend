@@ -46,7 +46,10 @@
 
         <p class="answer-content" [innerHTML]="answer.content"></p>
 
-        <div *ngIf="(answer.attachments?.length ?? 0) > 0" class="answer-attachments">
+        <div
+          *ngIf="(answer.attachments?.length ?? 0) > 0"
+          class="answer-attachments"
+        >
           <h4>Attachments:</h4>
           <ul class="file-list">
             <li *ngFor="let file of answer.attachments">
@@ -111,7 +114,7 @@
     </mat-card>
   </div> -->
 
-  <mat-card class="response-form">
+  <mat-card class="response-form" *ngIf="!isLoading">
     <mat-card-content>
       <div class="quill-form-field">
         <label class="mat-body-1"><strong>Answer:</strong></label>
@@ -140,7 +143,7 @@
       >
         <p class="drop-message">
           You can also <strong>drag and drop your file here</strong>. (Accepted
-          format: <i>.pdf, .jpg, .png </i>)
+          format: <i>.pdf </i>)
         </p>
 
         <button
@@ -178,8 +181,9 @@
     </mat-card-content>
   </mat-card>
 
-  <!-- Loader -->
-  <div class="spinner-container" *ngIf="isLoading">
+</div>
+<div class="loading-wrapper" *ngIf="isLoading">
+  <div class="spinner-container">
     <mat-spinner></mat-spinner>
   </div>
 </div>

@@ -121,6 +121,7 @@ export class QuestionDetailsPageComponent {
         },
         error: () => {
           this.isLoading = false;
+          this.toastr.error('Failed to submit answer. Please try again.', 'Error');
         },
       });
     } else {
