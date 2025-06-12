@@ -8,18 +8,25 @@ import { CreateNoteDto, NoteDto } from './note.interfaces';
 })
 export class NoteService {
   private notes = signal<NoteDto[]>([]);
+  isLoading = signal<boolean>(true);
   private apiUrl = `${environment.apiUrl}/notes`;
 
   constructor(private http: HttpClient) {}
 
   public fetchNotes(): void {
-    this.http.get<NoteDto[]>(`${this.apiUrl}/get-notes`).subscribe((data) => {
-      console.log('Notes fetched from backend:', data);
-      this.notes.set(data);
-    });
+    this.isLoading.set(true);
+     this.http.get<NoteDto[]>(`${this.apiUrl}/get-notes`).subscribe({
+      next: (notes) => {
+        this.isLoading.set(false);
+        this.notes.set(notes);
+      },
+      error: (error) => {
+         this.isLoading.set(false);
+        console.error('Error fetching notes:', error);
+      },
+    })
   }
   
-
   public getNotes(): NoteDto[] {
     return this.notes();
   }

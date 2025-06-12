@@ -1,3 +1,11 @@
+@if(isLoading()){
+<div class="loading-wrapper" *ngIf="isLoading">
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+}@else {
+
 <mat-card class="mat-card-top notes-app cardWithShadow overflow-hidden">
   <mat-sidenav-container
     [ngClass]="{
@@ -12,7 +20,8 @@
       [opened]="!isOver()"
       (open)="sidePanelOpened.set(true)"
       (close)="sidePanelOpened.set(false)"
-      style="width: 290px" class="bg-white"
+      style="width: 290px"
+      class="bg-white"
     >
       <div class="p-16">
         <mat-form-field appearance="outline" class="w-100 hide-hint">
@@ -31,7 +40,7 @@
         class="position-relative"
         style="height: calc(100vh - 400px)"
       >
-        <h4 class=" f-s-16 f-w-600 p-x-16 m-t-16">All Notes</h4>
+        <h4 class="f-s-16 f-w-600 p-x-16 m-t-16">All Notes</h4>
 
         <mat-nav-list class="p-x-16">
           @if(notes().length > 0) { @for(note of notes(); track note.datef) {
@@ -126,3 +135,4 @@
     </ng-scrollbar>
   </mat-sidenav-container>
 </mat-card>
+}

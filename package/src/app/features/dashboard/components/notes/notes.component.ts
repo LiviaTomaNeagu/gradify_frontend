@@ -1,5 +1,5 @@
-import { Component, effect, OnInit, signal } from '@angular/core';
-import { NoteDto, CreateNoteDto } from  './note.interfaces';
+import { Component, computed, effect, OnInit, signal } from '@angular/core';
+import { NoteDto, CreateNoteDto } from './note.interfaces';
 import { CommonModule } from '@angular/common';
 import { NgScrollbarModule } from 'ngx-scrollbar';
 import { TablerIconsModule } from 'angular-tabler-icons';
@@ -20,9 +20,9 @@ import { ToastrService } from 'ngx-toastr';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-  ]
+  ],
 })
-export class AppNotesComponent implements OnInit {
+export class AppNotesComponent {
   sidePanelOpened = signal(true);
 
   notes = signal<NoteDto[]>([]);
@@ -32,6 +32,7 @@ export class AppNotesComponent implements OnInit {
   searchText = signal<string>('');
 
   clrName = signal<string>('warning');
+  isLoading = computed(() => this.noteService.isLoading());
 
   colors = [
     { colorName: 'primary' },
@@ -44,28 +45,29 @@ export class AppNotesComponent implements OnInit {
   currentNoteTitle = signal<string>('');
   selectedColor = signal<string | null>(null);
 
-  constructor(public noteService: NoteService, private toastr: ToastrService) {}
+  constructor(public noteService: NoteService, private toastr: ToastrService) {
+    effect(
+      () => {
+        const notes = this.noteService.getNotes();
+        this.notes.set(notes);
 
-  readonly notesEffect = effect(() => {
-    const notes = this.noteService.getNotes();
-    this.notes.set(notes);
-  
-    if (!this.selectedNote()) {
-      const currentNote = notes[0];
-      if (currentNote) {
-        this.selectedNote.set(currentNote);
-        this.clrName.set(currentNote.color);
-        this.selectedColor.set(currentNote.color);
-        this.currentNoteTitle.set(currentNote.title);
-      }
-    }
-  }, { allowSignalWrites: true });
-  
-  
+        if (!this.selectedNote()) {
+          const currentNote = notes[0];
+          if (currentNote) {
+            this.selectedNote.set(currentNote);
+            this.clrName.set(currentNote.color);
+            this.selectedColor.set(currentNote.color);
+            this.currentNoteTitle.set(currentNote.title);
+          }
+        }
+      },
+      { allowSignalWrites: true }
+    );
+  }
+
   ngOnInit(): void {
     this.noteService.fetchNotes();
   }
-  
 
   get currentNote(): NoteDto | null {
     return this.selectedNote();
