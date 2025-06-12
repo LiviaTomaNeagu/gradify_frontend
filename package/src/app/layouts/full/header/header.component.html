@@ -6,7 +6,7 @@
   </button>
 
 
-  <button mat-icon-button [matMenuTriggerFor]="notifMenu" aria-label="Notificări">
+  <button mat-icon-button [matMenuTriggerFor]="notifMenu" aria-label="Notificări" (menuOpened)="onNotifMenuOpen()">
     <ng-container *ngIf="unreadCount() > 0; else noBadge">
       <i-tabler name="bell" class="d-flex"
         [matBadge]="unreadCount()"
@@ -19,7 +19,7 @@
     </ng-template> 
   </button>
   
-  <mat-menu #notifMenu="matMenu" class="cardWithShadow" xPosition="before">
+  <mat-menu #notifMenu="matMenu" class="cardWithShadow" xPosition="before" (menuOpened)="onNotifMenuOpen()">
     <app-notifications></app-notifications>
   </mat-menu>
   

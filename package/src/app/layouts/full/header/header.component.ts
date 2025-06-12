@@ -24,12 +24,18 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterModule, CommonModule, NgScrollbarModule, TablerIconsModule, MaterialModule, NotificationsComponent],
+  imports: [
+    RouterModule,
+    CommonModule,
+    NgScrollbarModule,
+    TablerIconsModule,
+    MaterialModule,
+    NotificationsComponent,
+  ],
   templateUrl: './header.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent {
-
   @Input() showToggle = true;
   @Input() toggleChecked = false;
   @Output() toggleMobileNav = new EventEmitter<void>();
@@ -41,21 +47,25 @@ export class HeaderComponent {
   notificationsArray: AppNotification[] = [];
   unreadCount: Signal<number>;
 
-  constructor(private router: Router, private currentUserService: CurrentUserService, private notificationService: NotificationService, private cd: ChangeDetectorRef) {
+  constructor(
+    private router: Router,
+    private currentUserService: CurrentUserService,
+    private notificationService: NotificationService,
+    private cd: ChangeDetectorRef
+  ) {
     this.unreadCount = this.notificationService.unreadCount();
 
     effect(() => {
       this.notificationService.getUnreadCount();
       const count = this.unreadCount(); // important să fie cu ()
-      console.log("📍 unreadCount changed:", count);
+      console.log('📍 unreadCount changed:', count);
       this.cd.detectChanges();
     });
   }
 
   get allNotifications(): Observable<AppNotification[]> {
-  return this.notificationService.getNotifcations();
-}
-
+    return this.notificationService.getNotifcations();
+  }
 
   ngOnInit() {
     this.currentUserService.currentUser$.subscribe((user) => {
@@ -67,7 +77,14 @@ export class HeaderComponent {
     this.router.navigate(['/my-profile']);
   }
 
-  logout(){
+  logout() {
     this.currentUserService.logoutUser();
+  }
+  onNotifMenuOpen(): void {
+    console.log('Notification menu opened');
+    this.notificationService.getNotifcations().subscribe((n) => {
+      this.notificationService['notificationsSignal'].set(n);
+      this.notificationService.getUnreadCount();
+    });
   }
 }

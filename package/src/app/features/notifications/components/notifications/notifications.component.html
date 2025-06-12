@@ -5,9 +5,9 @@
   
     <mat-divider></mat-divider>
   
-    <ng-container *ngIf="notifications.length > 0; else noNotifs">
-        <mat-list>
-            <mat-list-item *ngFor="let n of notifications" [ngClass]="getNotificationClass(n.type)" (click)="handleClick(n)">
+    <ng-container *ngIf="notificationService.notifications()() as notifs; else noNotifs">
+  <mat-list>
+    <mat-list-item *ngFor="let n of notifs" [ngClass]="getNotificationClass(n.type)" (click)="handleClick(n)">
               <div class="notif-grid">
                 <!-- Icon col 1 -->
                 <div class="notif-icon">

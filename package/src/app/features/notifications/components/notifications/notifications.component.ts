@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, Signal } from '@angular/core';
 import { NotificationService } from '../../core/notification.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/material.module';
@@ -17,24 +17,20 @@ import { Router } from '@angular/router';
 export class NotificationsComponent implements OnInit {
   notifications: AppNotification[] = [];
 
-  ngOnInit() {
-    console.log('NotificationsComponent initialized');
-    this.notificationService.getNotifcations().subscribe(n => {
-      this.notifications = n;
-      this.notificationService.getUnreadCount();
-      console.log('Notifications:', this.notifications);
-    });
+  constructor(
+    public notificationService: NotificationService,
+    private router: Router
+  ) {
   }
 
-
-  constructor(private notificationService: NotificationService, private router: Router) {
-    console.log('NotificationsComponent constructor');
-  }
+ngOnInit(): void {
+  this.notifications = this.notificationService.notifications()();
+}
 
   markAllAsRead(): void {
     this.notificationService.markAllAsRead();
   }
-  
+
   getNotificationIcon(type: NotificationTypeEnum): string {
     return type === NotificationTypeEnum.CHAT ? 'message-circle' : 'message-2';
   }
@@ -48,10 +44,10 @@ export class NotificationsComponent implements OnInit {
     notification.read = true;
     this.notificationService.readNotification(notification).subscribe(() => {
       console.log('Notification marked as read:', notification);
-      
-    if (notification.route) {
-      this.router.navigate([notification.route]);
-    }
+
+      if (notification.route) {
+        this.router.navigate([notification.route]);
+      }
     });
   }
 }
